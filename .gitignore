@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+test-results/
+playwright-report/
+*.tsbuildinfo
+public/pdf.worker.min.mjs
+tests/fixtures/*.pdf
+tests/fixtures/*.docx
+tests/fixtures/*.json
+.local-review/
+.env
+.env.local
+.env.*.local

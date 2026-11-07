@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <!-- Fictional sample portrait for template previews only. Not a real person. -->
+  <defs>
+    <linearGradient id="backdrop" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#e8ece8"/>
+      <stop offset="1" stop-color="#c3cfc8"/>
+    </linearGradient>
+    <linearGradient id="jacket" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2d4a55"/>
+      <stop offset="1" stop-color="#1f353e"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" fill="url(#backdrop)"/>
+  <path d="M18 320 C26 258 82 228 160 226 C238 228 294 258 302 320 Z" fill="url(#jacket)"/>
+  <path d="M126 228 L160 304 L194 228 Z" fill="#f2efe7"/>
+  <path d="M152 238 L160 252 L168 238 L164 300 L160 306 L156 300 Z" fill="#b7553a"/>
+  <path d="M124 228 L160 306 L108 262 L116 238 Z" fill="#203a44"/>
+  <path d="M196 228 L160 306 L212 262 L204 238 Z" fill="#203a44"/>
+  <path d="M136 182 L184 182 L186 236 C174 250 146 250 134 236 Z" fill="#c78b66"/>
+  <path d="M106 150 C100 98 128 68 162 68 C198 68 222 96 214 150 C206 120 190 104 160 104 C130 104 114 120 106 150 Z" fill="#3b2a22"/>
+  <ellipse cx="113" cy="146" rx="9" ry="14" fill="#d49d78"/>
+  <ellipse cx="207" cy="146" rx="9" ry="14" fill="#d49d78"/>
+  <path d="M112 140 C112 104 134 84 160 84 C186 84 208 104 208 140 C208 176 186 202 160 202 C134 202 112 176 112 140 Z" fill="#e2ad89"/>
+  <path d="M160 202 C176 202 190 194 199 181 C188 190 175 195 160 195 C145 195 132 190 121 181 C130 194 144 202 160 202 Z" fill="#d39a75"/>
+  <path d="M108 142 C102 96 128 70 164 70 C200 70 222 96 214 140 C212 122 205 110 196 104 C186 112 168 116 148 112 C136 110 126 106 120 102 C113 112 109 126 108 142 Z" fill="#3b2a22"/>
+  <path d="M120 102 C132 92 150 88 170 90 C186 92 198 98 206 108 C200 96 188 86 170 84 C150 82 132 88 120 102 Z" fill="#4a362c"/>
+</svg>
