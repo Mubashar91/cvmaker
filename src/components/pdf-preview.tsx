@@ -33,7 +33,12 @@ export function PDFPreview({ cv }: { cv: CV }) {
     }, 650);
     return () => { cancelled = true; clearTimeout(timer); };
   }, [cv]);
-  if (!hasContent(cv)) return <div className="preview-empty"><FileText size={36} strokeWidth={1} /><h3>Your next chapter starts here.</h3><p>Add your details to see your CV come to life.</p><div className="ghost-line" /><div className="ghost-line short" /><div className="ghost-line" /></div>;
+  if (!hasContent(cv)) return <div className="preview-empty">
+    <div className="empty-sheet-top" aria-hidden="true"><FileText size={21} strokeWidth={1.3} /><span>A4 document</span></div>
+    <div className="empty-sheet-identity" aria-hidden="true"><span /><span /><span /></div>
+    <div className="empty-preview-message"><span className="empty-preview-icon"><FileText size={22} strokeWidth={1.5} aria-hidden="true" /></span><h3>Your CV starts here.</h3><p>Add your details and watch your document take shape. The preview updates as you type.</p></div>
+    <div className="empty-sheet-outline" aria-hidden="true">{[0, 1, 2].map(index => <div className="empty-sheet-section" key={index}><span className="skeleton-heading" /><span /><span /><span /></div>)}</div>
+  </div>;
   return <div className="pdf-pages" aria-busy={busy}>
     <div className="preview-status" role="status">{busy ? <><LoaderCircle size={14} className="spin" /> Updating preview</> : `${pages.length || "…"} ${pages.length === 1 ? "page" : "pages"} · A4`}</div>
     {error && <p className="notice error" role="alert">{error}</p>}
