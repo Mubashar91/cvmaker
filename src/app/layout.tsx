@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: { default: "Free CV Maker & Resume Builder | Folio", template: "%s | Folio" },
   description: DEFAULT_DESCRIPTION, applicationName: "Folio CV Maker", referrer: "no-referrer",
   creator: "Folio", publisher: "Folio",
-  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || "7U0t1clm8oCEUc9NGe-IxndEvE3kLOogRfeSRmT37iQ" },
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }] },
   category: "productivity", robots: { index: true, follow: true },
 };

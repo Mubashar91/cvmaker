@@ -1,5 +1,5 @@
 import type { Content, ContentText, TDocumentDefinitions } from "pdfmake/interfaces";
-import { type CV, type Entry, type EntrySection, type Section, hasEntry, sectionLabels, templateById } from "./model";
+import { type CV, type Entry, type EntrySection, type Section, hasEntry, sectionHasContent, sectionLabels, templateById } from "./model";
 
 const PAGE_WIDTH = 595.28;
 const PAGE_HEIGHT = 841.89;
@@ -108,7 +108,11 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
   const onDark = "#ffffff";
   const onDarkMuted = tint(accent, 0.74);
   const rule = "#cbd2d6";
-  const lineHeight = classic || ribbon || outline || editorial ? 1.08 : compact ? 1.1 : 1.15;
+  const gapScale = cv.density === "compact" ? .72 : cv.density === "relaxed" ? 1.35 : 1;
+  const leadingScale = cv.density === "compact" ? .96 : cv.density === "relaxed" ? 1.09 : 1;
+  const lineHeight = (classic || ribbon || outline || editorial ? 1.08 : compact ? 1.1 : 1.15) * leadingScale;
+  const visibleSections = cv.sectionOrder.filter(key => !cv.hiddenSections.includes(key) && sectionHasContent(cv, key));
+  const sectionNumber = (key: Section) => String(visibleSections.indexOf(key) + 1).padStart(2, "0");
   const sizes = {
     title: compact ? 9.9 : editorial ? 10.5 : elegant ? 11 : serif ? 11.3 : 10.3,
     secondary: compact ? 9.3 : editorial ? 10 : serif ? 10.8 : 9.5,
@@ -116,7 +120,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
   };
 
   function paragraph(text: string, ctx?: Context): ContentText {
-    return { text, margin: [0, 0, 0, compact ? 3 : 5], lineHeight, ...(ctx?.dark ? { color: onDark } : {}) };
+    return { text, margin: [0, 0, 0, (compact ? 3 : 5) * gapScale], lineHeight, ...(ctx?.dark ? { color: onDark } : {}) };
   }
 
   function descriptions(text: string, key: EntrySection, ctx: Context): Content[] {
@@ -124,8 +128,8 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     if (!lines.length) return [];
     if (key === "experience" || key === "projects" || lines.some(line => /^[•●▪*-]\s+/.test(line))) {
       return [{
-        ul: lines.map(line => ({ text: line.replace(/^[•●▪*-]\s+/, ""), margin: [0, 0, 0, compact ? 1.5 : 3], lineHeight })),
-        type: elegant ? "circle" : "disc", margin: compact ? [10, 1, 0, 3] : [12, 1, 0, 5],
+        ul: lines.map(line => ({ text: line.replace(/^[•●▪*-]\s+/, ""), margin: [0, 0, 0, (compact ? 1.5 : 3) * gapScale], lineHeight })),
+        type: elegant ? "circle" : "disc", margin: compact ? [10, 1, 0, 3 * gapScale] : [12, 1, 0, 5 * gapScale],
         ...(ctx.dark ? { color: onDark, markerColor: onDarkMuted } : bold || timeline || duo || tech || corner || portrait || atlas ? { markerColor: accent } : {}),
       } as Content];
     }
@@ -144,7 +148,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
       columns: [
         { width: "*", text: [{ text: primary, bold: true, fontSize: sizes.title }, ...(secondary.trim() ? [{ text: `  ·  ${secondary}`, color: muted, fontSize: sizes.secondary }] : [])] },
         ...(hasDates ? [{ width: "auto", text: entry.dates, fontSize: sizes.date, color: muted, alignment: "right", margin: [0, 1, 0, 0] }] : []),
-      ], columnGap: 12, margin: [0, 3, 0, 2], unbreakable,
+      ], columnGap: 12, margin: [0, 3 * gapScale, 0, 2 * gapScale], unbreakable,
     } as Content, ...descriptions(entry.description, key, ctx)];
 
     const titleColor = ctx.dark ? onDark : ink;
@@ -163,7 +167,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
         bold: (executive || bold) && !ctx.dark,
         fontSize: ctx.dark ? 9 : sizes.secondary, margin: [0, 2, 0, 0],
       } as Content] : [])],
-      margin: [0, 3, 0, 4], unbreakable,
+      margin: [0, 3 * gapScale, 0, 4 * gapScale], unbreakable,
     }, ...descriptions(entry.description, key, ctx)];
   }
 
@@ -248,7 +252,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     };
     if (editorial) return {
       columns: [
-        { width: 34, text: String(cv.sectionOrder.indexOf(key) + 1).padStart(2, "0"), font: "Tinos", fontSize: 20, color: tint(accent, .2), lineHeight: 1 },
+        { width: 34, text: sectionNumber(key), font: "Tinos", fontSize: 20, color: tint(accent, .2), lineHeight: 1 },
         { width: "*", stack: [
           { text: label, font: "Tinos", fontSize: 14, color: ink, margin: [0, 1, 0, 5] },
           { canvas: [{ type: "line", x1: 0, y1: 0, x2: ctx.width - 46, y2: 0, lineWidth: .6, lineColor: tint(accent, .55) }] },
@@ -264,7 +268,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     };
     if (creative) return {
       columns: [
-        { text: String(cv.sectionOrder.indexOf(key) + 1).padStart(2, "0"), font: "Roboto", fontSize: 8, color: accent, width: 24, margin: [0, 5, 0, 0] },
+        { text: sectionNumber(key), font: "Roboto", fontSize: 8, color: accent, width: 24, margin: [0, 5, 0, 0] },
         { text: label, font: "Tinos", fontSize: 14, italics: true, color: accent, width: "*" },
       ], margin: [0, 12, 0, 4], headlineLevel: 1,
     };
@@ -343,6 +347,10 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
 
   // Content width for single-column templates whose side margins differ from the default.
   const fullWidth = compact ? PAGE_WIDTH - 76 : tech ? PAGE_WIDTH - 84 : elegant ? PAGE_WIDTH - 112 : BODY_WIDTH;
+  function sectionSpacing(node: Content): Content {
+    if (gapScale === 1 || typeof node !== "object" || node === null || Array.isArray(node) || !("margin" in node) || !Array.isArray(node.margin) || node.margin.length !== 4) return node;
+    return { ...node, margin: [node.margin[0], node.margin[1] * gapScale, node.margin[2], node.margin[3] * gapScale] } as Content;
+  }
   function section(key: Section, ctx: Context = { width: fullWidth }): Content[] {
     const body = sectionBody(key, ctx);
     if (!body.length) return [];
@@ -350,16 +358,16 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
       columns: [
         { width: 88, text: labels[key].toUpperCase(), fontSize: 8.8, bold: true, characterSpacing: 1, color: muted, margin: [0, 4, 0, 0] },
         { width: "*", stack: body },
-      ], columnGap: 20, margin: [0, 15, 0, 4],
+      ], columnGap: 20, margin: [0, 15 * gapScale, 0, 4 * gapScale],
     }];
     if (swiss) return [
-      markHeading({ canvas: [{ type: "line", x1: 0, y1: 0, x2: BODY_WIDTH_SWISS, y2: 0, lineWidth: 2.4, lineColor: ink }], margin: [0, 16, 0, 0], headlineLevel: 1 } as Content),
+      markHeading({ canvas: [{ type: "line", x1: 0, y1: 0, x2: BODY_WIDTH_SWISS, y2: 0, lineWidth: 2.4, lineColor: ink }], margin: [0, 16 * gapScale, 0, 0], headlineLevel: 1 } as Content),
       { columns: [
         { width: SWISS_LABEL, text: sectionLabels[key], bold: true, fontSize: 11, lineHeight: 1.1, color: ink, margin: [0, 8, 0, 0] },
         { width: "*", stack: body, margin: [0, 6, 0, 0] },
       ], columnGap: 16 },
     ];
-    const head = markHeading(heading(key, ctx));
+    const head = markHeading(sectionSpacing(heading(key, ctx)));
     // Keep each heading with its first block (an entry header, a skill line, or a short
     // profile) so a heading never ends a page alone. Long profiles stay breakable.
     const [first, ...rest] = body;
@@ -377,7 +385,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     } as Content;
     const head: Content = markHeading({
       stack: [marker, { text: labels[key].toUpperCase(), bold: true, fontSize: 9.5, characterSpacing: 1.5, color: accent, margin: [TIMELINE_INDENT, 0, 0, 0] }],
-      margin: [0, 15, 0, 6], headlineLevel: 1, unbreakable: true,
+      margin: [0, 15 * gapScale, 0, 6 * gapScale], headlineLevel: 1, unbreakable: true,
     } as Content);
     if (key === "summary" || key === "skills") {
       const body = sectionBody(key, ctx);
@@ -688,7 +696,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
 
   return {
     pageSize: "A4", pageMargins: margins,
-    defaultStyle: { font: serif ? "Tinos" : "Roboto", fontSize: editorial ? 10.2 : ribbon || outline ? 9.7 : creative ? 10.5 : elegant ? 10.4 : serif ? 11 : compact ? 9.4 : tech ? 9.7 : 10, color: ink, lineHeight: 1.12 },
+    defaultStyle: { font: cv.font === "sans" ? "Roboto" : cv.font === "serif" ? "Tinos" : serif ? "Tinos" : "Roboto", fontSize: editorial ? 10.2 : ribbon || outline ? 9.7 : creative ? 10.5 : elegant ? 10.4 : serif ? 11 : compact ? 9.4 : tech ? 9.7 : 10, color: ink, lineHeight: 1.12 * leadingScale },
     info: { title: p.name ? `${p.name} — CV` : "CV", author: p.name, creator: "Folio CV Maker" },
     background: sidebar ? () => ({ canvas: [{ type: "rect", x: 0, y: 0, w: SIDEBAR_FILL, h: PAGE_HEIGHT, color: accent }] })
       : bold ? () => ({ canvas: [{ type: "rect", x: 0, y: 0, w: PAGE_WIDTH, h: 7, color: accent }] })

@@ -57,6 +57,9 @@ export interface CV {
   accent?: string;
   /** Optional circular profile photo as a PNG/JPEG data URL, prepared on the device. */
   photo?: string;
+  /** Body typography overrides; omitted values keep the template's defaults. */
+  font?: "sans" | "serif";
+  density?: "compact" | "relaxed";
   personal: { name: string; headline: string; email: string; phone: string; location: string; website: string };
   summary: string; skills: string;
   experience: Entry[]; education: Entry[]; projects: Entry[]; certifications: Entry[];
@@ -79,6 +82,8 @@ export function isPhoto(value: unknown): value is string {
 export function isCV(value: unknown): value is CV {
   if (!value || typeof value !== "object") return false;
   const cv = value as CV;
+  if (cv.font !== undefined && cv.font !== "sans" && cv.font !== "serif") return false;
+  if (cv.density !== undefined && cv.density !== "compact" && cv.density !== "relaxed") return false;
   return cv.version === 1 && templates.some(t => t.id === cv.template) && (cv.accent === undefined || (typeof cv.accent === "string" && /^#[0-9a-f]{6}$/i.test(cv.accent))) && (cv.photo === undefined || isPhoto(cv.photo)) && !!cv.personal && ["name", "headline", "email", "phone", "location", "website"].every(k => typeof cv.personal[k as keyof CV["personal"]] === "string") && typeof cv.summary === "string" && typeof cv.skills === "string" && ["experience", "education", "projects", "certifications"].every(k => Array.isArray(cv[k as EntrySection]) && cv[k as EntrySection].every(e => e && ["id", "title", "organization", "dates", "description"].every(f => typeof e[f as keyof Entry] === "string"))) && Array.isArray(cv.sectionOrder) && cv.sectionOrder.length === 6 && new Set(cv.sectionOrder).size === 6 && cv.sectionOrder.every(k => k in sectionLabels) && Array.isArray(cv.hiddenSections) && cv.hiddenSections.every(k => k in sectionLabels);
 }
 export function move<T>(items: T[], index: number, direction: number): T[] { const next = [...items]; const target = index + direction; if (target < 0 || target >= next.length) return next; [next[index], next[target]] = [next[target], next[index]]; return next; }
