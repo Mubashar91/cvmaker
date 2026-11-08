@@ -10,7 +10,7 @@ export function CVPhotoField({ photo, template, onChoose, onRemove }: {
       {photo ? <img src={photo} alt="Your CV photo" /> : <ImagePlus size={24} strokeWidth={1.4} />}
     </button>
     <div className="photo-copy"><span className="photo-label">Profile photo <small>Optional</small></span>
-      <p>{template.photo ? "A personal touch. Prepared privately on your device." : "Choose a template marked Photo to include it in your CV."}</p>
+      <p>{template.photo ? `${template.name} shows your photo. It’s cropped privately on this device.` : `${template.name} doesn’t show photos. Choose a template marked Photo to include one.`}</p>
       <div className="photo-actions"><button onClick={onChoose}><Plus size={13} />{photo ? "Replace photo" : "Add photo"}</button>{photo && <button className="danger" onClick={onRemove}><Trash2 size={13} />Remove photo</button>}</div>
       <details className="photo-guidance"><summary>Photo guidelines</summary><p>Follow the employer’s instructions and the conventions of your country and industry. Photo templates: {templates.filter(item => item.photo).map(item => item.name).join(", ")}. Your photo stays on this device.</p></details>
     </div>

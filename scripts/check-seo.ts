@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { loadImage } from "@napi-rs/canvas";
 import { templates } from "../src/lib/model";
 import { tips } from "../src/lib/tips";
+import { collectionPath, templateCollections } from "../src/lib/template-collections";
 
 function decode(value: string) {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
@@ -21,6 +22,7 @@ const routes: { path: string; image: string; schema?: string; noIndex?: boolean 
   { path: "/", image: "folio", schema: "WebApplication" },
   { path: "/templates/", image: "templates", schema: "CollectionPage" },
   ...templates.map(template => ({ path: `/templates/${template.id}/`, image: template.id, schema: "CreativeWork" })),
+  ...templateCollections.map(collection => ({ path: collectionPath(collection.slug), image: `collections/${collection.slug}`, schema: "CollectionPage" })),
   { path: "/tips/", image: "tips" },
   ...tips.map(tip => ({ path: `/tips/${tip.slug}/`, image: `guides/${tip.slug}`, schema: "Article" })),
   { path: "/privacy/", image: "folio" },
@@ -32,6 +34,7 @@ async function main() {
   const origin = canonical(home) ? new URL(canonical(home)!).origin : undefined;
   if (process.argv.includes("--require-origin")) assert(origin, "Set NEXT_PUBLIC_SITE_URL to the real public origin and rebuild before running a launch SEO check.");
   const titles = new Set<string>(), descriptions = new Set<string>();
+  const knownPaths = new Set(routes.map(route => route.path));
   for (const route of routes) {
     const html = await readFile(join("out", route.path.slice(1), "index.html"), "utf8");
     const title = decode(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? "");
@@ -61,12 +64,24 @@ async function main() {
         const collection = structured.find(item => item["@type"] === "CollectionPage");
         assert.equal(collection.mainEntity.itemListElement.length, templates.length);
       }
+      const category = templateCollections.find(collection => collectionPath(collection.slug) === route.path);
+      if (category) {
+        const collection = structured.find(item => item["@type"] === "CollectionPage");
+        assert.equal(collection.mainEntity.numberOfItems, category.templates.length, `${route.path}: incorrect collection count`);
+        assert.deepEqual(collection.mainEntity.itemListElement.map((item: { item: { url: string } }) => item.item.url), category.templates.map(id => new URL(`/templates/${id}/`, origin).href), `${route.path}: structured list differs from visible templates`);
+      }
     } else {
       assert.equal(canonical(html), undefined, `${route.path}: local build must not invent a public domain`);
       assert.equal(metadata(html, "og:url"), undefined, `${route.path}: local build must not invent a social URL`);
     }
     for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
       const image = attributes(match[0]); assert("alt" in image, `${route.path}: image is missing alternative text`);
+    }
+    for (const match of html.matchAll(/<a\b[^>]*>/gi)) {
+      const href = attributes(match[0]).href;
+      if (!href?.startsWith("/") || href.startsWith("//")) continue;
+      const pathname = new URL(href, "https://local.invalid").pathname;
+      assert(knownPaths.has(pathname), `${route.path}: internal link points to an unknown page: ${href}`);
     }
   }
   for (const image of new Set(routes.map(route => route.image))) {

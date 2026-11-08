@@ -28,13 +28,19 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 
 - Create a blank CV or import a real text-based PDF or DOCX (15 MB maximum; PDFs up to 40 pages).
 - Extract and edit contact information, profile, experience, education, skills, projects, and certifications.
-- Twenty-four free layouts, including Academic, Monogram, Horizon, Ribbon, Outline, and Editorial alongside the original eighteen. Switching keeps your content. The homepage features the six new designs; the full catalogue includes every layout.
-- Optional profile photo, cropped to a circle in the browser (never uploaded) and shown by eight photo layouts (Sidebar, Executive, Atlas, Duo, Elegant, Portrait, Monogram, Horizon); other layouts ignore it.
-- Ten print-safe accent colours, or each template’s own default. The colour is saved with drafts.
+- Forty free layouts. The newest sixteen — Linear, Aurora, Atelier, Regent, Summit, Compass, Halo, Clarity, Prism, Gazette, Heritage, Ledger, Mosaic, Tide, Edge, and Signature — are marked New and featured on the homepage; the full catalogue includes every layout. Switching keeps your content.
+- Optional profile photo, cropped to a circle in the browser (never uploaded) and shown by thirteen photo layouts (Sidebar, Executive, Atlas, Duo, Elegant, Portrait, Monogram, Horizon, Summit, Compass, Halo, Tide, Aurora); other layouts ignore it.
+- Ten print-safe accent colours, any custom colour, or each template’s own default. Custom colours are darkened just enough to keep 4.5:1 contrast on white (`readableAccent` in `src/lib/model.ts`).
+- Body typeface (template default, sans, or serif) and document spacing (compact, balanced, airy). Colour, typeface, and spacing are saved with drafts.
+- Section-by-section writing guidance and a Next button that walks through every section, then on to the design.
 - Live, paginated A4 preview rendered from the generated PDF, including all pages.
 - Add, remove, and reorder entries; reorder or hide sections. Empty sections are automatically excluded.
 - Download a selectable-text PDF without an account, advertisement, or watermark. Long paragraphs flow across pages.
 - Explicitly save one draft in browser local storage, resume it from the home page, or delete it. Download and restore portable JSON drafts.
+- Search templates by name, style, or application intent; filter by columns and style; sort by newest or name. Full-size previews support previous/next controls, arrow keys, Escape, and focus restoration.
+- Review CV checks visible content for missing names, malformed contact details, incomplete entries, dates, descriptions, long profiles, and placeholder phrases. Suggestions link directly to the relevant editor fields.
+- Read and download a plain-text CV for application forms. Hidden and empty sections are omitted, and section order is preserved.
+- Six static template collections (ATS-friendly, professional, modern, simple, student, and photo), with original guidance, curated designs, breadcrumbs, social images, and structured data.
 - CV advice articles, a privacy page, and disabled advertising slots on home/tips pages only.
 
 ## Import behavior and limits
@@ -75,8 +81,20 @@ Classic follows a traditional serif CV: a centered uppercase name, centered sect
 | Ribbon | Creative | Full-width colour section ribbons, bold name, italic professional title |
 | Outline | Simple | Framed introduction, outlined section headings, restrained typography |
 | Editorial | Creative | Oversized serif name, large chapter numbers, strong accent rule |
+| Summit | Modern | Full-width colour header (optional photo or initials) above a tinted side column with icon contact details |
+| Compass | Modern | Icon in a colour circle for every section, two-column icon contact grid, optional photo |
+| Halo | Modern | Photo or initials centred over the edge of a colour band, centred introduction and headings |
+| Clarity | Simple | Plain single column with standard headings and no graphics, for online application systems |
+| Prism | Creative | Angled colour header with a faceted edge, slanted section markers |
+| Gazette | Creative | Newspaper masthead, italic profile lede, two columns divided by a vertical rule |
+| Heritage | Traditional | Double-ruled frame on every page, spaced serif capitals, diamond ornaments |
+| Ledger | Traditional | Right-aligned section labels beside one continuous vertical rule |
+| Mosaic | Modern | Tinted contact tiles; education, skills, and certifications as equal-height tiles |
+| Tide | Creative | Two-layer wave header, optional photo, wave section markers |
+| Edge | Modern | Colour stripe down the page edge with lines reaching to the name and each heading |
+| Signature | Traditional | Large italic serif name, right-aligned contact block, italic serif section titles |
 
-Template metadata (name, style, default colour, display order) lives in `src/lib/model.ts`; layouts live in `src/lib/pdf-document.ts`. Section headings are kept with their first line of content, so a heading never ends a page on its own.
+Template metadata (name, style, default colour, display order) lives in `src/lib/model.ts`; layouts live in `src/lib/pdf-document.ts`; catalogue copy for each template page lives in `src/lib/template-details.ts`. Vector icons used by Summit and Compass are Lucide outlines (ISC licence) in `src/lib/pdf-icons.ts`. Section headings are kept with their first line of content, so a heading never ends a page on its own.
 
 The home page and template picker use real PDF renders of fictional sample content, generated by the same layout code as the editor. They contain no uploaded personal data. When changing the PDF layouts or demonstration content, refresh the committed thumbnails with:
 
@@ -127,7 +145,7 @@ npm run build
 npm run seo:check -- --require-origin
 ```
 
-The audit checks every exported page for unique titles and descriptions, a single main heading, indexing policy, preview assets, and image alternative text. With an origin configured, it also verifies canonical and social URLs, structured data, breadcrumbs, the complete sitemap, and the robots.txt sitemap reference. This follows [Google’s SEO starter guidance](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) and [sitemap guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap). Indexing and search placement are controlled by search engines.
+The audit checks every exported page for unique titles and descriptions, a single main heading, indexing policy, preview assets, and image alternative text. With an origin configured, it also verifies canonical and social URLs, structured data, breadcrumbs, the complete sitemap, internal page links, category list consistency, and the robots.txt sitemap reference. This follows [Google’s SEO starter guidance](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) and [sitemap guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap). Indexing and search placement are controlled by search engines.
 
 ## Tests
 
@@ -142,12 +160,15 @@ npm run build
 
 Playwright starts the development server automatically when port 3000 is available. Generated fixtures are illustrative and contain no real personal information. Tests cover:
 
-- PDF and DOCX upload → correct a name → switch through all 24 templates and pick an accent colour → download and parse the finished PDF.
+- PDF and DOCX upload → correct a name → switch through all 40 templates and pick an accent colour → download and parse the finished PDF.
 - All imported sections present, no sample-template content in exports, and no third-party network requests.
-- Long, multi-page CV exports across all 24 layouts, including the final paragraph.
+- Long, multi-page CV exports across all 40 layouts, including the final paragraph.
 - Image-only/corrupt-file errors and manual entry.
 - Entry reorder/removal, section hiding, empty-section omission, local draft save/resume/delete, and portable draft restore.
 - Mobile home/editor width, live preview, tips routes, and hidden ad spaces.
+- Template search/reset, layout filtering, sorting, modal keyboard navigation, and focus restoration.
+- CV review suggestions, direct field correction, hidden-content handling, and plain-text downloads.
+- All six category pages and viewport overflow at 320px, 390px, and 768px.
 
 Screenshot artifacts are written into `test-results/`. PDF.js may report optional Node.js font warnings while tests extract PDF text; browser preview uses its bundled embedded fonts.
 
@@ -164,7 +185,8 @@ npm test
 - `src/app/editor/page.tsx`: editing, imports, drafts, and download controls.
 - `src/lib/import-cv.ts`: browser file extraction and conservative parsing.
 - `src/lib/photo.ts`: on-device photo crop to a circular PNG.
-- `src/lib/pdf-document.ts`: all 24 PDF layouts, accent colours, typography, entry styling, and pagination.
+- `src/lib/pdf-document.ts`: all 40 PDF layouts, accent colours, typography, entry styling, and pagination.
+- `src/lib/pdf-icons.ts`: outline icons embedded as SVG in the PDF.
 - `src/lib/pdf.ts`: browser font loading and download generation.
 - `src/lib/pdf-fonts.ts`: embedded font registry.
 - `src/lib/template-sample.ts`: fictional content used only for template thumbnails.

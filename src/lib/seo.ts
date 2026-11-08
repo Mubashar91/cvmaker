@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { templates } from "./model";
 
 export const SITE_NAME = "Folio";
-export const CONTENT_UPDATED = "2026-11-07";
+export const CONTENT_UPDATED = "2026-11-08";
 export const DEFAULT_DESCRIPTION = `Build a professional CV online with ${templates.length} free templates. Import PDF or DOCX, edit your details, and download a PDF. No sign-up or watermarks.`;
 
 function configuredOrigin(): string | undefined {

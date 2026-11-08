@@ -1,5 +1,6 @@
 import { templates, type Template } from "./model";
 import { templateDetails } from "./template-details";
+import { collectionPath, type templateCollections } from "./template-collections";
 import { absoluteUrl, CONTENT_UPDATED, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 import type { tips } from "./tips";
 
@@ -10,7 +11,7 @@ export function websiteSchema() {
   return { "@context": "https://schema.org", "@graph": [
     organization(),
     { "@type": "WebSite", "@id": absoluteUrl("/#website"), name: SITE_NAME, url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, inLanguage: "en", publisher: { "@id": absoluteUrl("/#organization") } },
-    { "@type": "WebApplication", "@id": absoluteUrl("/#app"), name: "Folio CV Maker", url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, image: absoluteUrl("/social/folio.png"), applicationCategory: "BusinessApplication", operatingSystem: "Web browser", browserRequirements: "Requires JavaScript and a modern web browser", isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, creator: { "@id": absoluteUrl("/#organization") }, featureList: ["PDF and DOCX import", `${templates.length} professional CV templates`, "Optional profile photo", "Live PDF preview", "Ten accent colours", "Free multi-page PDF downloads", "Local browser drafts", "No account required"] },
+    { "@type": "WebApplication", "@id": absoluteUrl("/#app"), name: "Folio CV Maker", url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, image: absoluteUrl("/social/folio.png"), applicationCategory: "BusinessApplication", operatingSystem: "Web browser", browserRequirements: "Requires JavaScript and a modern web browser", isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, creator: { "@id": absoluteUrl("/#organization") }, featureList: ["PDF and DOCX import", `${templates.length} professional CV templates`, "Optional profile photo", "Live PDF preview", "Typeface and spacing controls", "Ten accent colours or your own", "Free multi-page PDF downloads", "Local browser drafts", "No account required"] },
   ] };
 }
 
@@ -37,6 +38,23 @@ export function templateCollectionSchema() {
     mainEntity: { "@type": "ItemList", name: "Free professional CV templates", numberOfItems: templates.length,
       itemListElement: templates.map((template, index) => ({ "@type": "ListItem", position: index + 1,
         item: { "@type": "CreativeWork", name: `${template.name} CV template`, url: absoluteUrl(`/templates/${template.id}/`), image: absoluteUrl(`/templates/${template.id}.webp`), description: templateDetails[template.id].description, isAccessibleForFree: true },
+      })),
+    },
+  };
+}
+
+export function categoryCollectionSchema(collection: typeof templateCollections[number]) {
+  if (!SITE_URL) return undefined;
+  const path = collectionPath(collection.slug);
+  return {
+    "@context": "https://schema.org", "@type": "CollectionPage", "@id": absoluteUrl(`${path}#page`),
+    name: collection.title, description: collection.description, url: absoluteUrl(path),
+    isPartOf: { "@id": absoluteUrl("/#website") }, inLanguage: "en", dateModified: CONTENT_UPDATED,
+    mainEntity: { "@type": "ItemList", name: collection.title, numberOfItems: collection.templates.length,
+      itemListElement: collection.templates.map((id, index) => ({ "@type": "ListItem", position: index + 1,
+        item: { "@type": "CreativeWork", name: `${templates.find(template => template.id === id)!.name} CV template`,
+          url: absoluteUrl(`/templates/${id}/`), image: absoluteUrl(`/templates/${id}.webp`),
+          description: templateDetails[id].description, isAccessibleForFree: true },
       })),
     },
   };

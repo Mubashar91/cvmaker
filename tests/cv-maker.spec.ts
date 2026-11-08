@@ -56,7 +56,8 @@ for (const ext of ["pdf", "docx"]) test(`${ext}: upload, correct a detail, switc
   expect(download.suggestedFilename()).toBe("Jordan Corrected CV.pdf");
   const result = await pdfText(downloadedPath!);
   expect(result.nonEmptyPages).toBe(result.pages);
-  for (const expected of ["Jordan Corrected", "jordan@example.com", "Example Studio", "Example University", "TypeScript", "Community Directory", "Web Accessibility Foundations"]) expect(result.text).toContain(expected);
+  // Nameplates may use uppercase; the exported text must still preserve every detail.
+  for (const expected of ["Jordan Corrected", "jordan@example.com", "Example Studio", "Example University", "TypeScript", "Community Directory", "Web Accessibility Foundations"]) expect(result.text.toLowerCase()).toContain(expected.toLowerCase());
   expect(result.text).not.toContain("Alex Morgan"); expect(result.text).not.toContain("Advertisement");
   expect(unexpectedRequests).toEqual([]);
 });

@@ -28,9 +28,25 @@ export const templates = [
   { id: "ribbon", name: "Ribbon", note: "Full-width ribbons · warm colour", color: "#963f54", style: "Creative", columns: 1, photo: false },
   { id: "outline", name: "Outline", note: "Framed header · outlined sections", color: "#343f50", style: "Simple", columns: 1, photo: false },
   { id: "editorial", name: "Editorial", note: "Oversized serif · chapter headings", color: "#8b4d36", style: "Creative", columns: 1, photo: false },
+  { id: "summit", name: "Summit", note: "Colour header · tinted side column", color: "#24476b", style: "Modern", columns: 2, photo: true },
+  { id: "compass", name: "Compass", note: "Section icons · icon contact row", color: "#1e5f8c", style: "Modern", columns: 1, photo: true },
+  { id: "halo", name: "Halo", note: "Centred photo over a colour band", color: "#9a3b5c", style: "Modern", columns: 1, photo: true },
+  { id: "clarity", name: "Clarity", note: "Plain structure · application-system safe", color: "#1f2328", style: "Simple", columns: 1, photo: false },
+  { id: "prism", name: "Prism", note: "Angled colour header · faceted edge", color: "#3d3a8c", style: "Creative", columns: 1, photo: false },
+  { id: "gazette", name: "Gazette", note: "Newspaper masthead · ruled columns", color: "#8f2d2a", style: "Creative", columns: 2, photo: false },
+  { id: "heritage", name: "Heritage", note: "Framed page · engraved serif", color: "#6a4b2f", style: "Traditional", columns: 1, photo: false },
+  { id: "ledger", name: "Ledger", note: "Labels beside a fine vertical rule", color: "#2c3e63", style: "Traditional", columns: 1, photo: false },
+  { id: "mosaic", name: "Mosaic", note: "Tinted tiles for the essentials", color: "#6b4c9a", style: "Modern", columns: 1, photo: false },
+  { id: "tide", name: "Tide", note: "Wave header · optional photo", color: "#0f6a73", style: "Creative", columns: 1, photo: true },
+  { id: "edge", name: "Edge", note: "Edge stripe · connected headings", color: "#b8432a", style: "Modern", columns: 1, photo: false },
+  { id: "signature", name: "Signature", note: "Italic serif name · calm sans body", color: "#2e5a4c", style: "Traditional", columns: 1, photo: false },
+  { id: "linear", name: "Linear", note: "Plain text hierarchy · no decoration", color: "#202b36", style: "Simple", columns: 1, photo: false },
+  { id: "aurora", name: "Aurora", note: "Layered colour arcs · optional photo", color: "#40518a", style: "Modern", columns: 1, photo: true },
+  { id: "atelier", name: "Atelier", note: "Editorial masthead · numbered chapters", color: "#8b4534", style: "Creative", columns: 1, photo: false },
+  { id: "regent", name: "Regent", note: "Serif nameplate · framed contact line", color: "#263c54", style: "Traditional", columns: 1, photo: false },
 ] as const satisfies readonly { id: string; name: string; note: string; color: string; style: TemplateStyle; columns: 1 | 2; photo: boolean }[];
 export type Template = typeof templates[number]["id"];
-export const newTemplates: readonly Template[] = ["academic", "monogram", "horizon", "ribbon", "outline", "editorial"];
+export const newTemplates: readonly Template[] = ["linear", "aurora", "atelier", "regent", "summit", "compass", "halo", "clarity", "prism", "gazette", "heritage", "ledger", "mosaic", "tide", "edge", "signature"];
 
 // Print-safe accents. Every value keeps at least 4.5:1 contrast against white,
 // so it works both as heading text and as a background behind white text.
@@ -66,9 +82,35 @@ export interface CV {
   sectionOrder: Section[]; hiddenSections: Section[];
 }
 export const DRAFT_KEY = "folio-draft-v1";
-const numberWords = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", "Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four"];
-/** The template count as a word for headlines, e.g. "Twelve". */
-export const templateCountWord = numberWords[templates.length] ?? String(templates.length);
+const units = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+function numberWord(n: number): string {
+  if (n < 20) return units[n];
+  if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 ? `-${units[n % 10].toLowerCase()}` : "");
+  return String(n);
+}
+/** The template count as a word for headlines, e.g. "Thirty-six". */
+export const templateCountWord = numberWord(templates.length);
+
+function luminance(hex: string): number {
+  const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4);
+  return .2126 * r + .7152 * g + .0722 * b;
+}
+/** Contrast ratio of a #rrggbb colour against white paper. */
+export function contrastOnWhite(hex: string): number { return 1.05 / (luminance(hex) + .05); }
+/**
+ * Darken a custom accent just enough to keep 4.5:1 against white, so it still works as
+ * small heading text and as a background behind white text. Returns lowercase #rrggbb.
+ */
+export function readableAccent(hex: string): string {
+  let value = hex.toLowerCase();
+  if (!/^#[0-9a-f]{6}$/.test(value)) return "#1f2328";
+  const base = [1, 3, 5].map(i => parseInt(value.slice(i, i + 2), 16));
+  for (let step = 1; contrastOnWhite(value) < 4.5 && step <= 20; step++) {
+    value = "#" + base.map(channel => Math.round(channel * (1 - step * .05)).toString(16).padStart(2, "0")).join("");
+  }
+  return value;
+}
 export function templateById(id: Template) { return templates.find(t => t.id === id) ?? templates[0]; }
 export function emptyEntry(): Entry { return { id: crypto.randomUUID(), title: "", organization: "", dates: "", description: "" }; }
 export function emptyCV(): CV { return { version: 1, template: "classic", personal: { name: "", headline: "", email: "", phone: "", location: "", website: "" }, summary: "", skills: "", experience: [], education: [], projects: [], certifications: [], sectionOrder: Object.keys(sectionLabels) as Section[], hiddenSections: [] }; }

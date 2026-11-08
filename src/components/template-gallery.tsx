@@ -2,9 +2,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Eye, Search, SlidersHorizontal, X } from "lucide-react";
 import { templates, templateStyles, type Template, type TemplateStyle } from "@/lib/model";
+import { matchesTemplateSearch, sortTemplates, type TemplateSort } from "@/lib/template-search";
 import { TemplateCard } from "./template-card";
+import { TemplatePreviewDialog } from "./template-preview-dialog";
 import { useCV } from "./cv-context";
 
 export type StyleFilter = "All" | TemplateStyle | "With photo";
@@ -12,27 +14,37 @@ export function matchesFilter(template: typeof templates[number], filter: StyleF
   return filter === "All" || (filter === "With photo" ? template.photo : template.style === filter);
 }
 
-export function StyleFilters({ value, onChange, label = "Filter templates by style" }: { value: StyleFilter; onChange: (value: StyleFilter) => void; label?: string }) {
+export function StyleFilters({ value, onChange, label = "Filter templates by style", available = templates }: { value: StyleFilter; onChange: (value: StyleFilter) => void; label?: string; available?: readonly typeof templates[number][] }) {
   return <div className="filter-chips" role="group" aria-label={label}>{(["All", ...templateStyles, "With photo"] as StyleFilter[]).map(style => {
-    const count = templates.filter(t => matchesFilter(t, style)).length;
+    const count = available.filter(t => matchesFilter(t, style)).length;
     return <button key={style} aria-pressed={value === style} onClick={() => onChange(style)}>{style}<span className="chip-count">{count}</span></button>;
   })}</div>;
 }
 
-export function TemplateGallery({ headingLevel = 3, onChoose, initialLimit, featured = [] }: { headingLevel?: 2 | 3; onChoose?: (template: Template) => void; initialLimit?: number; featured?: readonly Template[] }) {
+export function TemplateGallery({ headingLevel = 3, onChoose, initialLimit, featured = [], templateIds }: { headingLevel?: 2 | 3; onChoose?: (template: Template) => void; initialLimit?: number; featured?: readonly Template[]; templateIds?: readonly Template[] }) {
   const router = useRouter(); const { setCV } = useCV();
   const [style, setStyle] = useState<StyleFilter>("All");
   const [expanded, setExpanded] = useState(false);
-  const ordered = [...featured.flatMap(id => templates.filter(t => t.id === id)), ...templates.filter(t => !featured.includes(t.id))];
-  const matching = ordered.filter(t => matchesFilter(t, style));
+  const [query, setQuery] = useState("");
+  const [columns, setColumns] = useState("all");
+  const [sort, setSort] = useState<TemplateSort>("recommended");
+  const [preview, setPreview] = useState<Template | null>(null);
+  const available = templateIds ? templateIds.flatMap(id => templates.filter(t => t.id === id)) : [...templates];
+  const ordered = [...featured.flatMap(id => available.filter(t => t.id === id)), ...available.filter(t => !featured.includes(t.id))];
+  const matching = sortTemplates(ordered.filter(t => matchesFilter(t, style) && (columns === "all" || t.columns === Number(columns)) && matchesTemplateSearch(t.id, query)), sort);
   const shown = initialLimit && !expanded ? matching.slice(0, initialLimit) : matching;
   function choose(template: Template) {
+    setPreview(null);
     if (onChoose) return onChoose(template);
     setCV(current => ({ ...current, template })); router.push("/editor/");
   }
   return <div className="gallery">
-    <div className="gallery-toolbar"><StyleFilters value={style} onChange={value => { setStyle(value); setExpanded(false); }} /><span className="gallery-count" role="status">{matching.length} {matching.length === 1 ? "design" : "designs"}, all free</span></div>
-    <div className="template-grid">{shown.map(template => <article key={template.id} className="template-tile"><TemplateCard template={template} headingLevel={headingLevel} onSelect={() => choose(template.id)} /><Link href={`/templates/${template.id}/`} className="template-detail-link">About {template.name} <ArrowUpRight size={15} /></Link></article>)}</div>
+    <div className="template-discovery"><label className="template-search"><Search size={18} aria-hidden="true" /><span className="sr-only">Search CV templates</span><input type="search" value={query} placeholder="Try “ATS”, “student”, or “designer”…" onChange={event => { setQuery(event.target.value); setExpanded(false); }} />{query && <button aria-label="Clear template search" onClick={() => setQuery("")}><X size={16} /></button>}</label>
+      <div className="discovery-selects"><label><SlidersHorizontal size={15} aria-hidden="true" /><span className="sr-only">Template columns</span><select aria-label="Template columns" value={columns} onChange={event => { setColumns(event.target.value); setExpanded(false); }}><option value="all">Any layout</option><option value="1">Single column</option><option value="2">Two columns</option></select></label><label><span className="sr-only">Sort templates</span><select aria-label="Sort templates" value={sort} onChange={event => setSort(event.target.value as TemplateSort)}><option value="recommended">Recommended</option><option value="newest">Newest first</option><option value="name">Name A–Z</option></select></label></div>
+    </div>
+    <div className="gallery-toolbar"><StyleFilters value={style} onChange={value => { setStyle(value); setExpanded(false); }} available={available} /><span className="gallery-count" role="status">{matching.length} {matching.length === 1 ? "design" : "designs"}, all free</span></div>
+    {shown.length ? <div className="template-grid">{shown.map(template => <article key={template.id} className="template-tile"><TemplateCard template={template} headingLevel={headingLevel} onSelect={() => choose(template.id)} /><div className="template-tile-actions"><button className="template-quick-preview" onClick={() => setPreview(template.id)} aria-label={`Preview ${template.name} template`}><Eye size={15} />Preview</button><Link href={`/templates/${template.id}/`} className="template-detail-link">Details <ArrowUpRight size={15} /><span className="sr-only"> about {template.name}</span></Link></div></article>)}</div> : <div className="template-empty"><Search size={28} /><h3>No designs match these filters.</h3><p>Try a shorter search or explore every style.</p><button className="button outline" onClick={() => { setQuery(""); setColumns("all"); setStyle("All"); }}>Reset filters</button></div>}
     {shown.length < matching.length && <div className="gallery-more"><span>There’s a little something for every story.</span><button className="button outline" onClick={() => setExpanded(true)}>Show {matching.length - shown.length} more templates <ArrowDown size={16} /></button></div>}
+    <TemplatePreviewDialog template={preview} ids={matching.map(t => t.id)} onChange={setPreview} onChoose={choose} onClose={() => setPreview(null)} />
   </div>;
 }

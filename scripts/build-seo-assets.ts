@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createCanvas, GlobalFonts, loadImage } from "@napi-rs/canvas";
 import { templates } from "../src/lib/model";
 import { tips } from "../src/lib/tips";
+import { templateCollections } from "../src/lib/template-collections";
 
 const GREEN = "#10352b", GOLD = "#f3b53f", PAPER = "#f8f7f2";
 GlobalFonts.registerFromPath("public/fonts/tinos/Tinos-Italic.ttf", "Folio Serif");
@@ -43,10 +44,12 @@ async function socialCard(file: string, title: string, subtitle: string, templat
 
 async function main() {
   await mkdir("public/social/guides", { recursive: true });
+  await mkdir("public/social/collections", { recursive: true });
   await socialCard("folio", "Your story deserves a great CV.", `${templates.length} templates. Entirely free.`, "monogram");
   await socialCard("templates", `${templates.length} free CV templates.`, "Find a first impression that feels like you.", "horizon", "CV templates & resume layouts");
   await socialCard("tips", "A little guidance for your next chapter.", "Practical CV advice, from start to send.", undefined, "CV writing guides");
   for (const template of templates) await socialCard(template.id, `${template.name} CV template.`, "Edit online. Download your PDF for free.", template.id, `${template.style} CV template`);
+  for (const collection of templateCollections) await socialCard(`collections/${collection.slug}`, collection.title, `${collection.templates.length} designs. Free to make your own.`, collection.templates[0], "Find your CV format");
   for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By Folio`, undefined, tip.category);
   const icon = createCanvas(180, 180), ctx = icon.getContext("2d");
   ctx.fillStyle = GREEN; ctx.fillRect(0, 0, 180, 180);
@@ -55,7 +58,7 @@ async function main() {
   for (const [y, end] of [[83, 110], [102, 110], [121, 96]]) { ctx.beginPath(); ctx.moveTo(70, y); ctx.lineTo(end, y); ctx.stroke(); }
   ctx.beginPath(); ctx.moveTo(104, 34); ctx.lineTo(104, 60); ctx.lineTo(129, 60); ctx.stroke();
   await writeFile("public/apple-touch-icon.png", icon.toBuffer("image/png"));
-  console.log(`Generated ${templates.length + tips.length + 3} social cards (1200 × 630) and the 180 × 180 app icon.`);
+  console.log(`Generated ${templates.length + templateCollections.length + tips.length + 3} social cards (1200 × 630) and the 180 × 180 app icon.`);
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

@@ -6,19 +6,20 @@ import { ArrowRight, ArrowUpRight, Check, ChevronDown, Download, FileDown, FileP
 import { Header, Footer } from "./site-chrome";
 import { MiniCV } from "./template-card";
 import { TemplateGallery } from "./template-gallery";
+import { TemplateCollections } from "./template-collections";
 import { AdSlot } from "./ad-slot";
 import { useCV } from "./cv-context";
 import { accentColors, DRAFT_KEY, emptyCV, isCV, newTemplates, templateById, templateCountWord, templates, type Template } from "@/lib/model";
 import { faqs } from "@/lib/faqs";
 import { tips } from "@/lib/tips";
 
-const FAN: Template[] = ["classic", "monogram", "duo", "horizon", "bold"];
+const FAN: Template[] = ["linear", "aurora", "summit", "atelier", "regent"];
 
 export function HomePage() {
   const router = useRouter(); const input = useRef<HTMLInputElement>(null);
   const { setCV, setPendingFile } = useCV();
   const [saved, setSaved] = useState(false); const [draftError, setDraftError] = useState("");
-  const [front, setFront] = useState<Template>("monogram");
+  const [front, setFront] = useState<Template>("summit");
   const [dealt, setDealt] = useState(false);
   useEffect(() => { try { setSaved(!!localStorage.getItem(DRAFT_KEY)); } catch { /* saving remains optional */ } }, []);
   // The sheets start stacked (visible without JavaScript), then fan out once.
@@ -37,7 +38,7 @@ export function HomePage() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <h1>Your story<br />deserves <span className="hero-highlight">a great CV.</span></h1>
-          <p className="hero-lede">Thoughtfully designed templates. An effortless editor. A CV that feels like you — ready to download, completely free.</p>
+          <p className="hero-lede">Create your CV with {templates.length} thoughtfully designed templates, a live editor, and a helpful final review. A CV that feels like you — ready to download, completely free.</p>
           <div className="hero-actions"><button className="button accent large" onClick={start}><FilePlus2 size={19} />Create a new CV<ArrowRight size={18} /></button><button className="button on-dark large" onClick={() => input.current?.click()}><FileUp size={19} />Upload my existing CV</button></div>
           <input ref={input} type="file" className="sr-only" aria-label="Upload existing CV" accept=".pdf,.docx" onChange={e => { const file = e.target.files?.[0]; if (file) { setPendingFile(file); router.push("/editor/"); } }} />
           <ul className="hero-promises"><li><Check size={16} />No sign-up</li><li><Check size={16} />No watermarks</li><li><Check size={16} />PDF & DOCX import</li></ul>
@@ -68,6 +69,8 @@ export function HomePage() {
         <TemplateGallery onChoose={choose} initialLimit={6} featured={newTemplates} />
       </div>
     </section>
+
+    <section className="section collection-section"><div className="container"><div className="section-head"><div><h2>A starting point<br /><span className="editorial-type">for every next step.</span></h2><p>Your first job, a new direction, or a more senior role. Find the format that fits.</p></div></div><TemplateCollections /></div></section>
 
     <section className="how-section" id="how-it-works"><div className="container">
       <div className="section-head"><div><h2>A little less effort.<br /><span className="editorial-type">A lot more possibility.</span></h2><p>From a blank page to your next opportunity, in three simple steps.</p></div><span className="section-aside">Your experience. Beautifully put together.</span></div>
