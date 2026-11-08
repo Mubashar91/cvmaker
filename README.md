@@ -110,6 +110,18 @@ The editor uses React state in the current tab. It does not automatically persis
 
 The PDF worker, fonts, and application libraries are served locally. There are no analytics SDKs or third-party requests in the default app. An end-to-end test monitors requests during import and download. Ordinary hosting request logs may contain IP addresses and asset paths, but never CV content from this app.
 
+## Site information and publisher transparency
+
+- `/about/` introduces Muhammad Mubashar Shahzad using the professional background supplied in his CV: frontend experience, BIT education, skills, and selected project experience. It does not publish the original CV, private phone number, or street address, and does not imply employer sponsorship.
+- `/contact/` provides a real email contact and topic-specific email drafts for bugs, corrections, privacy questions, and feedback. There is no simulated form submission or promised response time.
+- `/editorial-policy/` explains the scope of the guides, fictional examples, sources, software assistance, corrections, and advertising independence. Guide bylines link to it.
+- `/privacy/` covers on-device processing, optional drafts, local downloads, page requests, contact emails, cookies, and the current disabled advertising state.
+- `/terms/` explains use of the tool, content responsibilities, backups, import limitations, and the absence of hiring or parsing guarantees.
+
+Public operator details and information-page metadata live in `src/lib/site-info.ts`. Update that file if the public contact email changes. Shared information-page presentation lives in `src/components/site-info-page.tsx` and `src/app/information.css`. All five pages have breadcrumbs, social images, canonical URLs, structured data, sitemap entries, and links from the footer. The About page includes Person structured data; the Contact page identifies the same email shown to visitors.
+
+These pages support transparency, but do not guarantee advertising approval. Before an AdSense application, publish the completed site and verify its actual navigation, contact address, original content, and current privacy practices against [Google’s site-readiness guidance](https://support.google.com/adsense/answer/7299563?hl=en).
+
 ## Advertising configuration
 
 `src/config/ads.ts` is deliberately disabled:
@@ -123,11 +135,13 @@ export const adConfig = {
 
 To prepare a provider, set a provider's isolated embed URL and enable the flag after reviewing its privacy and consent requirements. The `AdSlot` component labels the placement **Advertisement** and uses a sandboxed iframe with no referrer. It is mounted only on home/tips pages, never in the editor or PDF code. Never add CV data, drafts, identifiers, or extraction text to an embed URL or ad service. Providers that require scripts in the parent page need a separate, carefully reviewed integration; this scaffold does not inject them.
 
+The existing switch does **not** implement Google AdSense. No publisher ID, AdSense script, fabricated `ads.txt` entry, or consent popup has been added. Enabling AdSense requires the owner’s real account configuration, accurate vendor disclosures, and consent management where required. Review Google’s [advertising privacy disclosures](https://support.google.com/adsense/answer/1348695?hl=en) and [consent guidance](https://support.google.com/adsense/answer/7670013?hl=en) before loading an advertising script. The privacy page explicitly distinguishes the current site from possible future advertising.
+
 ## SEO and sharing
 
 Every public page has a unique title and description. Each template has a statically rendered detail page with layout information, intended uses, and links to other designs. The catalogue links to all templates by style. The editor is marked `noindex, follow` and excluded from the sitemap.
 
-Social previews include a 1200 × 630 image for the homepage, catalogue, guide index, every template, and every writing guide. These are generated from the actual CV previews and site typography. The app icon is also generated locally; no image service or paid API is required.
+Social previews include a 1200 × 630 image for the homepage, catalogue, guide index, every template, every writing guide, every template collection, and all five information pages. These are generated from the actual CV previews and site typography. The app icon is also generated locally; no image service or paid API is required.
 
 ```powershell
 npm run templates:preview

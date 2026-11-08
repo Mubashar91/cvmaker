@@ -5,6 +5,7 @@ import { loadImage } from "@napi-rs/canvas";
 import { templates } from "../src/lib/model";
 import { tips } from "../src/lib/tips";
 import { collectionPath, templateCollections } from "../src/lib/template-collections";
+import { informationPages, siteOperator } from "../src/lib/site-info";
 
 function decode(value: string) {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
@@ -25,7 +26,7 @@ const routes: { path: string; image: string; schema?: string; noIndex?: boolean 
   ...templateCollections.map(collection => ({ path: collectionPath(collection.slug), image: `collections/${collection.slug}`, schema: "CollectionPage" })),
   { path: "/tips/", image: "tips" },
   ...tips.map(tip => ({ path: `/tips/${tip.slug}/`, image: `guides/${tip.slug}`, schema: "Article" })),
-  { path: "/privacy/", image: "folio" },
+  ...informationPages.map(page => ({ path: page.path, image: page.path.slice(1, -1), schema: page.path === "/about/" ? "AboutPage" : page.path === "/contact/" ? "ContactPage" : "WebPage" })),
   { path: "/editor/", image: "folio", noIndex: true },
 ];
 
@@ -57,7 +58,7 @@ async function main() {
         const data = JSON.parse(match[1]); return data["@graph"] ?? [data];
       });
       if ("schema" in route) assert(structured.some(item => item["@type"] === route.schema), `${route.path}: missing ${route.schema} schema`);
-      if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") && route.path !== "/tips/") {
+      if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") && route.path !== "/tips/" || informationPages.some(page => page.path === route.path)) {
         assert(structured.some(item => item["@type"] === "BreadcrumbList"), `${route.path}: missing breadcrumbs`);
       }
       if (route.path === "/templates/") {
@@ -65,6 +66,18 @@ async function main() {
         assert.equal(collection.mainEntity.itemListElement.length, templates.length);
       }
       const category = templateCollections.find(collection => collectionPath(collection.slug) === route.path);
+      if (route.path === "/about/") {
+        const person = structured.find(item => item["@type"] === "Person");
+        assert.equal(person?.name, siteOperator.name, "About page must identify the real maintainer");
+        assert.equal(person?.jobTitle, siteOperator.role, "Maintainer role must match the supplied professional profile");
+        assert.equal(person?.alumniOf?.name, siteOperator.university, "Maintainer education must match the supplied profile");
+        assert(!person?.telephone && !person?.address, "Public profile must not expose a private phone number or address");
+      }
+      if (route.path === "/contact/") {
+        const contact = structured.find(item => item["@type"] === "ContactPage");
+        assert.equal(contact?.mainEntity?.email, siteOperator.email, "Contact schema must use the visible contact email");
+        assert(html.includes(`mailto:${siteOperator.email}`), "Contact page must have a working email link");
+      }
       if (category) {
         const collection = structured.find(item => item["@type"] === "CollectionPage");
         assert.equal(collection.mainEntity.numberOfItems, category.templates.length, `${route.path}: incorrect collection count`);

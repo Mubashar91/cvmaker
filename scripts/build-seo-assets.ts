@@ -3,6 +3,7 @@ import { createCanvas, GlobalFonts, loadImage } from "@napi-rs/canvas";
 import { templates } from "../src/lib/model";
 import { tips } from "../src/lib/tips";
 import { templateCollections } from "../src/lib/template-collections";
+import { informationPages, siteOperator } from "../src/lib/site-info";
 
 const GREEN = "#10352b", GOLD = "#f3b53f", PAPER = "#f8f7f2";
 GlobalFonts.registerFromPath("public/fonts/tinos/Tinos-Italic.ttf", "Folio Serif");
@@ -48,6 +49,11 @@ async function main() {
   await socialCard("folio", "Your story deserves a great CV.", `${templates.length} templates. Entirely free.`, "monogram");
   await socialCard("templates", `${templates.length} free CV templates.`, "Find a first impression that feels like you.", "horizon", "CV templates & resume layouts");
   await socialCard("tips", "A little guidance for your next chapter.", "Practical CV advice, from start to send.", undefined, "CV writing guides");
+  await socialCard("about", "A useful tool. A person behind it.", siteOperator.name, undefined, "About Folio");
+  await socialCard("contact", "Let’s make Folio more useful.", "Questions, corrections, and ideas are welcome.", undefined, "Contact the maintainer");
+  await socialCard("editorial-policy", "Useful guidance. Clear standards.", "How we approach our guides and corrections.", undefined, "Folio editorial standards");
+  await socialCard("privacy", "Your details. Your device. Your choice.", "Understand how your information is handled.", undefined, "Folio privacy policy");
+  await socialCard("terms", "A clear understanding.", "Your CV, your choices, and the service we provide.", undefined, "Folio terms of use");
   for (const template of templates) await socialCard(template.id, `${template.name} CV template.`, "Edit online. Download your PDF for free.", template.id, `${template.style} CV template`);
   for (const collection of templateCollections) await socialCard(`collections/${collection.slug}`, collection.title, `${collection.templates.length} designs. Free to make your own.`, collection.templates[0], "Find your CV format");
   for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By Folio`, undefined, tip.category);
@@ -58,7 +64,7 @@ async function main() {
   for (const [y, end] of [[83, 110], [102, 110], [121, 96]]) { ctx.beginPath(); ctx.moveTo(70, y); ctx.lineTo(end, y); ctx.stroke(); }
   ctx.beginPath(); ctx.moveTo(104, 34); ctx.lineTo(104, 60); ctx.lineTo(129, 60); ctx.stroke();
   await writeFile("public/apple-touch-icon.png", icon.toBuffer("image/png"));
-  console.log(`Generated ${templates.length + templateCollections.length + tips.length + 3} social cards (1200 × 630) and the 180 × 180 app icon.`);
+  console.log(`Generated ${templates.length + templateCollections.length + tips.length + informationPages.length + 3} social cards (1200 × 630) and the 180 × 180 app icon.`);
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

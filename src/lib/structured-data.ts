@@ -1,10 +1,27 @@
 import { templates, type Template } from "./model";
 import { templateDetails } from "./template-details";
 import { collectionPath, type templateCollections } from "./template-collections";
+import { informationPage, siteOperator, type InformationPath } from "./site-info";
 import { absoluteUrl, CONTENT_UPDATED, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 import type { tips } from "./tips";
 
-const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 } });
+const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 }, contactPoint: { "@type": "ContactPoint", contactType: "website support", email: siteOperator.email, url: absoluteUrl("/contact/") } });
+
+export function informationPageSchema(path: InformationPath) {
+  if (!SITE_URL) return undefined;
+  const page = informationPage(path);
+  const base = { "@context": "https://schema.org", "@type": path === "/about/" ? "AboutPage" : path === "/contact/" ? "ContactPage" : "WebPage",
+    "@id": absoluteUrl(`${path}#page`), url: absoluteUrl(path), name: page.title, description: page.description,
+    inLanguage: "en", dateModified: CONTENT_UPDATED, isPartOf: { "@id": absoluteUrl("/#website") }, publisher: organization() };
+  if (path === "/about/") return { "@context": "https://schema.org", "@graph": [
+    { ...base, mainEntity: { "@id": absoluteUrl("/about/#maintainer") }, about: { "@id": absoluteUrl("/#organization") } },
+    { "@type": "Person", "@id": absoluteUrl("/about/#maintainer"), name: siteOperator.name, jobTitle: siteOperator.role,
+      url: absoluteUrl("/about/"), description: "Frontend developer based in Pakistan and maintainer of Folio CV Maker.",
+      knowsAbout: [...siteOperator.skills], alumniOf: { "@type": "CollegeOrUniversity", name: siteOperator.university } },
+  ] };
+  if (path === "/contact/") return { ...base, mainEntity: { "@type": "ContactPoint", email: siteOperator.email, contactType: "website support", url: absoluteUrl(path) } };
+  return base;
+}
 
 export function websiteSchema() {
   if (!SITE_URL) return undefined;
