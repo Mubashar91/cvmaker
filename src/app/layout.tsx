@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: { default: "Free CV Maker & Resume Builder | Folio", template: "%s | Folio" },
   description: DEFAULT_DESCRIPTION, applicationName: "Folio CV Maker", referrer: "no-referrer",
   creator: "Folio", publisher: "Folio",
-  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || "7U0t1clm8oCEUc9NGe-IxndEvE3kLOogRfeSRmT37iQ" },
+  verification: { google: [process.env.GOOGLE_SITE_VERIFICATION || "7U0t1clm8oCEUc9NGe-IxndEvE3kLOogRfeSRmT37iQ", "HJzQh0DnLV4xtlGzepLqI8TTDgfc7PCb4HtwUyRxkS4"] },
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }] },
   category: "productivity", robots: { index: true, follow: true },
 };
@@ -19,5 +19,6 @@ export const viewport: Viewport = { themeColor: "#10352b", colorScheme: "light" 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // suppressHydrationWarning: browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes
   // to <html>/<body> before React hydrates. This only ignores attribute differences on these two tags.
-  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning><body suppressHydrationWarning><a href="#main-content" className="skip-link">Skip to content</a><CVProvider>{children}</CVProvider></body></html>;
+  // Plain <script> (not next/script): AdSense rejects the data-nscript attribute next/script adds.
+  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1973808469256982" crossOrigin="anonymous" /></head><body suppressHydrationWarning><a href="#main-content" className="skip-link">Skip to content</a><CVProvider>{children}</CVProvider></body></html>;
 }
