@@ -8,7 +8,7 @@ import { Logo } from "./logo";
 export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const links = [{ href: "/templates/", label: "Templates" }, { href: "/#how-it-works", label: "How it works" }, { href: "/tips/", label: "CV guides" }, { href: "/about/", label: "About us" }, { href: "/contact/", label: "Contact" }, { href: "/privacy/", label: "Privacy" }];
+  const links = [{ href: "/templates/", label: "Templates" }, { href: "/cv-examples/", label: "CV examples" }, { href: "/#how-it-works", label: "How it works" }, { href: "/tips/", label: "CV guides" }, { href: "/about/", label: "About us" }, { href: "/contact/", label: "Contact" }, { href: "/privacy/", label: "Privacy" }];
   return <header className="site-header"><div className="container header-inner">
     <Logo />
     <nav className="desktop-nav" aria-label="Main navigation">{links.map(link => <Link key={link.href} href={link.href} aria-current={pathname.startsWith(link.href) ? "page" : undefined}>{link.label}</Link>)}</nav>

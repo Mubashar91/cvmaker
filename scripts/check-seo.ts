@@ -6,6 +6,7 @@ import { templates } from "../src/lib/model";
 import { tips } from "../src/lib/tips";
 import { collectionPath, templateCollections } from "../src/lib/template-collections";
 import { informationPages, siteOperator } from "../src/lib/site-info";
+import { cvExamples } from "../src/lib/cv-examples";
 
 function decode(value: string) {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
@@ -24,6 +25,8 @@ const routes: { path: string; image: string; schema?: string; noIndex?: boolean 
   { path: "/templates/", image: "templates", schema: "CollectionPage" },
   ...templates.map(template => ({ path: `/templates/${template.id}/`, image: template.id, schema: "CreativeWork" })),
   ...templateCollections.map(collection => ({ path: collectionPath(collection.slug), image: `collections/${collection.slug}`, schema: "CollectionPage" })),
+  { path: "/cv-examples/", image: "cv-examples", schema: "CollectionPage" },
+  ...cvExamples.map(example => ({ path: `/cv-examples/${example.slug}/`, image: `examples/${example.slug}`, schema: "Article" })),
   { path: "/tips/", image: "tips" },
   ...tips.map(tip => ({ path: `/tips/${tip.slug}/`, image: `guides/${tip.slug}`, schema: "Article" })),
   ...informationPages.map(page => ({ path: page.path, image: page.path.slice(1, -1), schema: page.path === "/about/" ? "AboutPage" : page.path === "/contact/" ? "ContactPage" : "WebPage" })),
@@ -58,7 +61,7 @@ async function main() {
         const data = JSON.parse(match[1]); return data["@graph"] ?? [data];
       });
       if ("schema" in route) assert(structured.some(item => item["@type"] === route.schema), `${route.path}: missing ${route.schema} schema`);
-      if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") && route.path !== "/tips/" || informationPages.some(page => page.path === route.path)) {
+      if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") && route.path !== "/tips/" || route.path.startsWith("/cv-examples/") || informationPages.some(page => page.path === route.path)) {
         assert(structured.some(item => item["@type"] === "BreadcrumbList"), `${route.path}: missing breadcrumbs`);
       }
       if (route.path === "/templates/") {
@@ -104,6 +107,10 @@ async function main() {
   for (const template of templates) {
     const image = await loadImage(await readFile(`out/templates/${template.id}.webp`));
     assert(image.width >= 900 && image.height >= 1300, `${template.id}: missing full-size CV preview`);
+  }
+  for (const example of cvExamples) {
+    const image = await loadImage(await readFile(`out/examples/${example.slug}.webp`));
+    assert(image.width >= 900 && image.height >= 1300, `${example.slug}: missing full-size CV example preview`);
   }
   const icon = await loadImage(await readFile("out/apple-touch-icon.png"));
   assert.equal(icon.width, 180); assert.equal(icon.height, 180);

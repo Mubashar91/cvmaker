@@ -13,6 +13,7 @@
     "test:fixtures": "tsx scripts/create-fixtures.ts",
     "test:pdf": "tsx scripts/check-pdf-output.ts",
     "templates:preview": "tsx scripts/build-template-previews.ts",
+    "examples:preview": "tsx scripts/build-example-previews.ts",
     "seo:assets": "tsx scripts/build-seo-assets.ts",
     "seo:check": "tsx scripts/check-seo.ts"
   },

@@ -192,3 +192,19 @@
   .template-detail-copy .template-detail-description { font-size: 19px; }
   .catalog-privacy { align-items: flex-start; text-align: left; }
 }
+
+/* CV examples */
+.related-template-grid.example-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.example-meta { margin-top: 0; color: var(--ink-3); }
+.example-meta a { display: inline-flex; align-items: center; gap: 7px; color: inherit; }
+.example-meta a:hover { color: var(--green-hover); }
+.example-meta svg { color: var(--green); }
+.skill-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.related-guides .related-guides-secondary { margin-top: 56px; }
+@media (max-width: 980px) {
+  .related-template-grid.example-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .related-template-grid.example-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skill-columns { grid-template-columns: 1fr; }
+}

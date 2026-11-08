@@ -4,6 +4,9 @@ import { collectionPath, type templateCollections } from "./template-collections
 import { informationPage, siteOperator, type InformationPath } from "./site-info";
 import { absoluteUrl, CONTENT_UPDATED, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 import type { tips } from "./tips";
+import type { CVExample } from "./cv-examples";
+
+export const CV_EXAMPLES_DESCRIPTION = "Free CV examples for real jobs, from nurse and teacher to software developer. Each has profile examples, bullet points, skills, and a template to edit.";
 
 const sameAs = () => (siteOperator.profiles.length ? { sameAs: [...siteOperator.profiles] } : {});
 const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 }, contactPoint: { "@type": "ContactPoint", contactType: "website support", email: siteOperator.email, url: absoluteUrl("/contact/") }, founder: { "@id": absoluteUrl("/about/#maintainer") } });
@@ -86,5 +89,31 @@ export function articleSchema(tip: typeof tips[number]) {
     author: person(), publisher: organization(), dateModified: CONTENT_UPDATED, inLanguage: "en",
     mainEntityOfPage: absoluteUrl(`/tips/${tip.slug}/`), image: absoluteUrl(`/social/guides/${tip.slug}.png`),
     articleSection: tip.category, wordCount: [tip.intro, ...tip.sections.flatMap(section => [...section.paragraphs, ...(section.bullets ?? []), section.example ?? ""]), tip.takeaway].join(" ").split(/\s+/).length,
+  };
+}
+
+export function cvExamplesCollectionSchema(examples: CVExample[]) {
+  if (!SITE_URL) return undefined;
+  return {
+    "@context": "https://schema.org", "@type": "CollectionPage", "@id": absoluteUrl("/cv-examples/#page"),
+    name: "CV examples by job", url: absoluteUrl("/cv-examples/"), description: CV_EXAMPLES_DESCRIPTION,
+    isPartOf: { "@id": absoluteUrl("/#website") }, inLanguage: "en", dateModified: CONTENT_UPDATED,
+    mainEntity: { "@type": "ItemList", name: "CV examples by job", numberOfItems: examples.length,
+      itemListElement: examples.map((example, index) => ({ "@type": "ListItem", position: index + 1,
+        item: { "@type": "Article", headline: `${example.job} CV example`, url: absoluteUrl(`/cv-examples/${example.slug}/`), image: absoluteUrl(`/examples/${example.slug}.webp`) },
+      })),
+    },
+  };
+}
+
+export function cvExampleSchema(example: CVExample) {
+  if (!SITE_URL) return undefined;
+  const path = `/cv-examples/${example.slug}/`;
+  return {
+    "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`${path}#article`),
+    headline: `${example.job} CV example`, description: example.description, url: absoluteUrl(path),
+    author: person(), publisher: organization(), dateModified: CONTENT_UPDATED, inLanguage: "en",
+    mainEntityOfPage: absoluteUrl(path), image: absoluteUrl(`/examples/${example.slug}.webp`),
+    articleSection: "CV examples", about: { "@type": "Occupation", name: example.job },
   };
 }
