@@ -5,7 +5,9 @@ import { informationPage, siteOperator, type InformationPath } from "./site-info
 import { absoluteUrl, CONTENT_UPDATED, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 import type { tips } from "./tips";
 
-const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 }, contactPoint: { "@type": "ContactPoint", contactType: "website support", email: siteOperator.email, url: absoluteUrl("/contact/") } });
+const sameAs = () => (siteOperator.profiles.length ? { sameAs: [...siteOperator.profiles] } : {});
+const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 }, contactPoint: { "@type": "ContactPoint", contactType: "website support", email: siteOperator.email, url: absoluteUrl("/contact/") }, founder: { "@id": absoluteUrl("/about/#maintainer") } });
+const person = () => ({ "@type": "Person", "@id": absoluteUrl("/about/#maintainer"), name: siteOperator.name, jobTitle: siteOperator.role, url: absoluteUrl("/about/"), ...sameAs() });
 
 export function informationPageSchema(path: InformationPath) {
   if (!SITE_URL) return undefined;
@@ -15,9 +17,8 @@ export function informationPageSchema(path: InformationPath) {
     inLanguage: "en", dateModified: CONTENT_UPDATED, isPartOf: { "@id": absoluteUrl("/#website") }, publisher: organization() };
   if (path === "/about/") return { "@context": "https://schema.org", "@graph": [
     { ...base, mainEntity: { "@id": absoluteUrl("/about/#maintainer") }, about: { "@id": absoluteUrl("/#organization") } },
-    { "@type": "Person", "@id": absoluteUrl("/about/#maintainer"), name: siteOperator.name, jobTitle: siteOperator.role,
-      url: absoluteUrl("/about/"), description: "Frontend developer based in Pakistan and maintainer of Folio CV Maker.",
-      knowsAbout: [...siteOperator.skills], alumniOf: { "@type": "CollegeOrUniversity", name: siteOperator.university } },
+    { ...person(), description: "Frontend developer based in Pakistan, maintainer of Folio CV Maker, and author of its CV writing guides.",
+      knowsAbout: [...siteOperator.skills, "CV writing", "Résumé design"], alumniOf: { "@type": "CollegeOrUniversity", name: siteOperator.university } },
   ] };
   if (path === "/contact/") return { ...base, mainEntity: { "@type": "ContactPoint", email: siteOperator.email, contactType: "website support", url: absoluteUrl(path) } };
   return base;
@@ -82,7 +83,7 @@ export function articleSchema(tip: typeof tips[number]) {
   return {
     "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`/tips/${tip.slug}/#article`),
     headline: tip.title, description: tip.description, url: absoluteUrl(`/tips/${tip.slug}/`),
-    author: organization(), publisher: organization(), dateModified: CONTENT_UPDATED, inLanguage: "en",
+    author: person(), publisher: organization(), dateModified: CONTENT_UPDATED, inLanguage: "en",
     mainEntityOfPage: absoluteUrl(`/tips/${tip.slug}/`), image: absoluteUrl(`/social/guides/${tip.slug}.png`),
     articleSection: tip.category, wordCount: [tip.intro, ...tip.sections.flatMap(section => [...section.paragraphs, ...(section.bullets ?? []), section.example ?? ""]), tip.takeaway].join(" ").split(/\s+/).length,
   };

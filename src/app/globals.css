@@ -101,6 +101,7 @@ input, textarea { caret-color: var(--green); }
 .hero { background: var(--desk); color: var(--on-desk); overflow: clip; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; padding-top: 72px; padding-bottom: 76px; }
 .hero h1 { font-size: clamp(3.2rem, 5.8vw, 5.25rem); font-stretch: 100%; font-weight: 640; line-height: 1.02; letter-spacing: -.05em; word-spacing: .025em; text-wrap: initial; }
+.hero-kicker { display: block; margin-bottom: 18px; font-size: 15px; font-weight: 560; line-height: 1.4; letter-spacing: .06em; word-spacing: normal; text-transform: uppercase; color: var(--on-desk-muted); }
 .hero-highlight { display: block; margin-top: 4px; color: var(--marigold); font-family: Georgia, "Times New Roman", serif; font-size: 1.16em; font-style: italic; font-weight: 400; letter-spacing: -.055em; }
 .hero-lede { max-width: 28rem; margin-top: 28px; font-size: 18px; line-height: 1.75; color: var(--on-desk-muted); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }

@@ -56,7 +56,7 @@ async function main() {
   await socialCard("terms", "A clear understanding.", "Your CV, your choices, and the service we provide.", undefined, "Folio terms of use");
   for (const template of templates) await socialCard(template.id, `${template.name} CV template.`, "Edit online. Download your PDF for free.", template.id, `${template.style} CV template`);
   for (const collection of templateCollections) await socialCard(`collections/${collection.slug}`, collection.title, `${collection.templates.length} designs. Free to make your own.`, collection.templates[0], "Find your CV format");
-  for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By Folio`, undefined, tip.category);
+  for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By ${siteOperator.name}`, undefined, tip.category);
   const icon = createCanvas(180, 180), ctx = icon.getContext("2d");
   ctx.fillStyle = GREEN; ctx.fillRect(0, 0, 180, 180);
   ctx.fillStyle = GOLD; ctx.beginPath(); ctx.moveTo(53, 34); ctx.lineTo(104, 34); ctx.lineTo(129, 60); ctx.lineTo(129, 146); ctx.lineTo(53, 146); ctx.closePath(); ctx.fill();

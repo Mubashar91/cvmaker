@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { templates } from "./model";
+import { siteOperator } from "./site-info";
 
 export const SITE_NAME = "Folio";
 export const CONTENT_UPDATED = "2026-11-08";
@@ -33,9 +34,9 @@ export function pageMetadata({ title, description, path, image = "/social/folio.
     robots: { index: !noIndex, follow: true, googleBot: { index: !noIndex, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
     openGraph: {
       type: article ? "article" : "website", title: pageTitle, description,
-      siteName: SITE_NAME, locale: "en_US", url: canonical,
+      siteName: SITE_NAME, locale: "en_GB", url: canonical,
       images: socialImage ? [{ url: socialImage, width: 1200, height: 630, type: "image/png", alt: `${title} — Folio free CV maker` }] : [],
-      ...(article ? { modifiedTime: CONTENT_UPDATED, authors: [SITE_NAME] } : {}),
+      ...(article ? { modifiedTime: CONTENT_UPDATED, authors: [siteOperator.name] } : {}),
     },
     twitter: { card: "summary_large_image", title: pageTitle, description, images: socialImage ? [socialImage] : [] },
   };

@@ -37,7 +37,7 @@ export function HomePage() {
     <section className="hero">
       <div className="container hero-grid">
         <div className="hero-copy">
-          <h1>Your story<br />deserves <span className="hero-highlight">a great CV.</span></h1>
+          <h1><span className="hero-kicker">Free CV maker · no sign-up</span> Your story<br />deserves <span className="hero-highlight">a great CV.</span></h1>
           <p className="hero-lede">Create your CV with {templates.length} thoughtfully designed templates, a live editor, and a helpful final review. A CV that feels like you — ready to download, completely free.</p>
           <div className="hero-actions"><button className="button accent large" onClick={start}><FilePlus2 size={19} />Create a new CV<ArrowRight size={18} /></button><button className="button on-dark large" onClick={() => input.current?.click()}><FileUp size={19} />Upload my existing CV</button></div>
           <input ref={input} type="file" className="sr-only" aria-label="Upload existing CV" accept=".pdf,.docx" onChange={e => { const file = e.target.files?.[0]; if (file) { setPendingFile(file); router.push("/editor/"); } }} />

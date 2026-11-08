@@ -9,6 +9,9 @@ export const siteOperator = {
   university: "University of Education, Lahore",
   educationDates: "2021–2024",
   skills: ["React", "Vue.js", "JavaScript", "TypeScript", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Webflow"],
+  // Public profile URLs (LinkedIn, GitHub, portfolio). Used as schema.org `sameAs` so search engines
+  // can connect the guides' author to the same person elsewhere. Add full https:// URLs only.
+  profiles: [] as readonly string[],
 } as const;
 
 export const informationPages = [

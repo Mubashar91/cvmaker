@@ -150,7 +150,7 @@ npm run build
 npm run seo:check
 ```
 
-Production builds use `https://freecvmaker.online`, configured through `NEXT_PUBLIC_SITE_URL` in `.env.production`. This enables absolute canonical URLs, Open Graph URLs, sitemap entries, image sitemap entries, and URL-based WebSite, WebApplication, template, collection, Article, and breadcrumb structured data for that domain. Development keeps public URLs unset unless you override them. To change the production address, update `.env.production` or the hosting environment variable and rebuild. Use a complete origin without a path.
+Production builds use `https://www.freecvmaker.online` (the host Vercel serves; the bare domain redirects to it), configured through `NEXT_PUBLIC_SITE_URL` in `.env.production`. This enables absolute canonical URLs, Open Graph URLs, sitemap entries, image sitemap entries, and URL-based WebSite, WebApplication, template, collection, Article, and breadcrumb structured data for that domain. Development keeps public URLs unset unless you override them. To change the production address, update `.env.production` or the hosting environment variable and rebuild. Use a complete origin without a path.
 
 Optionally set `GOOGLE_SITE_VERIFICATION` to the content value of your Search Console HTML verification tag. After deploying, run the strict launch check and submit the real `/sitemap.xml` address in Search Console:
 

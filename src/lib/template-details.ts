@@ -1,4 +1,4 @@
-import type { Template } from "./model";
+import type { Template, templates } from "./model";
 
 export const templateDetails: Record<Template, {
   category: string; heading: string; description: string; bestFor: string;
@@ -125,21 +125,21 @@ export const templateDetails: Record<Template, {
   },
   swiss: {
     category: "Typographic & structured", heading: "Strong type. A strict grid. Nothing extra.",
-    description: "Create a CV with the free Swiss template: a large name, heavy section rules, and labels in a left column, inspired by international typographic style. Download a PDF.",
+    description: "Create a CV with the free Swiss template: a large name, heavy section rules, and left-column labels in the international typographic style. Download a PDF.",
     bestFor: "Applicants in design, architecture, engineering, or any field where a disciplined, highly structured document makes the right impression.",
     layout: "A large name ends in a single coloured full stop. Contact details sit in a labelled row. Each section starts with a heavy black rule, with its title in a left column and your details aligned on the right.",
     features: ["Large typographic name", "Heavy rule above every section", "Labelled contact grid", "One small colour accent"],
   },
   tech: {
     category: "Skills-forward", heading: "Let your skills be seen at a glance.",
-    description: "Use the free Tech CV template: skills appear as clear tags, with crisp entries and accent-coloured employers. Ideal for developers and technical roles. Download a PDF.",
+    description: "Use the free Tech CV template: skills as clear tags, crisp entries, and accent-coloured employers. Ideal for developers and technical roles. Download a PDF.",
     bestFor: "Developers, engineers, analysts, and other technical applicants whose tools and skills are a key part of the story.",
     layout: "A compact header leads into sections with small uppercase titles. Each skill becomes its own tag, grouped by category when you write “Category: skill, skill”. Entries show the title, an accent-coloured organisation, and dates on the right.",
     features: ["Skills shown as tags", "Category labels for skill groups", "Accent-coloured organisations", "Compact, scannable sections"],
   },
   portrait: {
     category: "Personal & warm", heading: "Put a face to the name.",
-    description: "Create a friendly CV with the free Portrait template: a round photo or initials beside your name, dotted section leaders, and a two-column contact block. Download a PDF.",
+    description: "Create a friendly CV with the free Portrait template: a round photo or initials beside your name, dotted section leaders, and a two-column contact block.",
     bestFor: "Applicants in countries and industries where a photo is customary, and client-facing roles where a personal, approachable first impression matters.",
     layout: "A large round photo — or your initials in a colour circle — sits beside your name, title, and contact details. Sections open with a small ring, a spaced uppercase title, and a dotted leader across the page.",
     features: ["Large round photo or initials", "Dotted section leaders", "Two-column contact block", "Warm single-column body"],
@@ -195,35 +195,35 @@ export const templateDetails: Record<Template, {
   },
   summit: {
     category: "Structured & confident", heading: "A strong header, with everything in reach.",
-    description: "Create a CV with the free Summit template: a full-width colour header with an optional photo, and a tinted side column for contact details, skills, and education. Download a PDF.",
+    description: "Create a CV with the free Summit template: a full-width colour header, an optional photo, and a tinted side column for contacts, skills, and education.",
     bestFor: "Experienced applicants who want a confident, modern document with supporting details visible at a glance — business, technology, sales, and management roles.",
     layout: "A solid colour band across the top holds your optional photo or initials beside your name and title. Below it, a softly tinted column carries contact details with small icons, education, skills, and certifications, while your profile, experience, and projects fill the main column.",
     features: ["Full-width colour header", "Optional photo or initials", "Tinted side column with icon contact details", "Experience-led main column"],
   },
   compass: {
     category: "Clear & navigable", heading: "Help every reader find their way.",
-    description: "Use the free Compass CV template: each section opens with a small icon, and contact details sit in a tidy icon grid beside an optional photo. Download a clean PDF.",
+    description: "Use the free Compass CV template: each section opens with a small icon, and contact details sit in a tidy icon grid beside an optional photo. Download a PDF.",
     bestFor: "Applicants who want a friendly, modern CV that is quick to scan, especially for client-facing, technology, operations, and early-career roles.",
     layout: "Your name and title sit beside an optional round photo, with email, phone, location, and website in a two-column icon grid. Each section begins with a coloured circle holding a simple icon — a briefcase for experience, a cap for education — followed by a fine rule.",
     features: ["Icons for every section", "Two-column icon contact grid", "Optional round photo", "Clean single-column body"],
   },
   halo: {
     category: "Personal & balanced", heading: "Put yourself at the centre.",
-    description: "Make a CV with the free Halo template: a colour band with your photo or initials centred over its edge, a centred introduction, and a calm single column. Download a PDF.",
+    description: "Make a CV with the free Halo template: your photo or initials centred over a colour band, a centred introduction, and a calm single column. Download a PDF.",
     bestFor: "Applicants in places and industries where a photo is customary, and anyone in a people-facing role who wants a warm, memorable first impression.",
     layout: "A band of colour runs across the top of the first page. Your round photo — or your initials — sits centred over its lower edge in a white ring. Your name, title, and contact details are centred below, and each section heading is centred above a fine rule with a small dot.",
     features: ["Centred photo over a colour band", "Initials when you don’t add a photo", "Centred introduction", "Symmetrical section headings"],
   },
   clarity: {
     category: "Plain & dependable", heading: "Nothing between your experience and the reader.",
-    description: "Use the free Clarity CV template: one column, standard section names, and no graphics or side panels — a dependable choice for online application systems. Download a PDF.",
+    description: "Use the free Clarity CV template: one column, standard section names, and no graphics or side panels. A dependable choice for online application systems.",
     bestFor: "Online applications, recruitment portals, and conservative industries, or anyone who wants the most straightforward possible structure.",
     layout: "A plain name, title, and contact line sit above a single rule. Sections use familiar names — Professional summary, Work experience, Education — in one column, with no tables, icons, photos, or side panels. Text stays selectable in reading order.",
     features: ["Single column, top to bottom", "Standard section names", "No graphics, panels, or photos", "Selectable text in reading order"],
   },
   prism: {
     category: "Dynamic & modern", heading: "A sharp angle on a first impression.",
-    description: "Stand out with the free Prism CV template: an angled colour header with a faceted edge, white lettering, and crisp section markers. Choose your colour and download a PDF.",
+    description: "Stand out with the free Prism CV template: an angled colour header with a faceted edge, white lettering, and crisp section markers. Download a free PDF.",
     bestFor: "Applicants in marketing, design, technology, and start-ups who want an energetic first page with a clear, conventional body.",
     layout: "Your name and title sit in white on an angled colour header that slopes from left to right, with a lighter facet along its edge. Contact details follow below, and each section begins with a slanted colour marker and a fine rule. Later pages carry a slim angled strip.",
     features: ["Angled colour header", "Faceted lighter edge", "Slanted section markers", "Slim angled strip on later pages"],
@@ -244,21 +244,21 @@ export const templateDetails: Record<Template, {
   },
   ledger: {
     category: "Orderly & European", heading: "Every detail in its proper column.",
-    description: "Use the free Ledger CV template: section labels sit right-aligned beside one continuous vertical rule, in the orderly style common across Europe. Download a PDF.",
+    description: "Use the free Ledger CV template: right-aligned section labels beside one continuous vertical rule, in the orderly style common across Europe. Download a PDF.",
     bestFor: "Applicants in Europe and international organisations, and anyone who likes a clear, form-like structure that is easy to compare and scan.",
     layout: "One fine vertical rule runs from your name to your final entry. Section labels sit right-aligned to its left; your introduction, labelled contact details, and every entry align to its right. Dates stay on the right edge of each entry.",
     features: ["Continuous vertical rule", "Right-aligned section labels", "Labelled contact details", "Clean sans-serif typography"],
   },
   mosaic: {
     category: "Modern & modular", heading: "Your essentials, neatly arranged.",
-    description: "Make a CV with the free Mosaic template: contact details, education, skills, and certifications in tinted tiles beside a clear experience column. Download a PDF.",
+    description: "Make a CV with the free Mosaic template: contact details, education, skills, and certifications in tinted tiles beside a clear experience column.",
     bestFor: "Applicants in technology, product, design, and business roles who want a contemporary, well-organised page that is quick to scan.",
     layout: "Your contact details sit in a row of tinted tiles below your name. Education, skills, and certifications share a row of equal-height tiles, placed where the first of them appears in your section order. Experience and projects run full width with small tiled markers.",
     features: ["Tinted contact tiles", "Equal-height tiles for key details", "Follows your section order", "Full-width experience"],
   },
   tide: {
     category: "Fresh & flowing", heading: "A softer shape for a strong story.",
-    description: "Create a CV with the free Tide template: a two-layer wave header, an optional photo, and section titles marked with a small wave. Choose your colour and download a PDF.",
+    description: "Create a CV with the free Tide template: a two-layer wave header, an optional photo, and section titles marked with a small wave. Download a free PDF.",
     bestFor: "Applicants in education, healthcare, hospitality, wellbeing, and creative work who want a friendly, contemporary first impression.",
     layout: "Two overlapping waves of colour form the header, with your name and title in white and an optional round photo on the right. Contact details follow, and each section title carries a small wave and a fine rule. Later pages keep a slim wave at the top.",
     features: ["Two-layer wave header", "Optional round photo", "Wave section markers", "Slim wave on later pages"],
@@ -272,7 +272,7 @@ export const templateDetails: Record<Template, {
   },
   signature: {
     category: "Refined & personal", heading: "A name that reads like a signature.",
-    description: "Make a CV with the free Signature template: an italic serif name, a right-aligned contact block, and italic section titles over a calm sans-serif body. Download a PDF.",
+    description: "Make a CV with the free Signature template: an italic serif name, right-aligned contact block, and italic section titles over a calm sans-serif body.",
     bestFor: "Applicants who want an elegant, personal CV that still feels modern — client-facing, creative, hospitality, and senior support roles.",
     layout: "Your name is set in a large italic serif, with your title in spaced capitals and your contact details right-aligned beside it. A fine rule follows. Section titles repeat the italic serif above light rules, and the body uses a clean sans-serif with italic dates.",
     features: ["Large italic serif name", "Right-aligned contact block", "Italic serif section titles", "Clean sans-serif body"],
@@ -285,3 +285,21 @@ export const templateDetails: Record<Template, {
     features: ["Clear academic section bands", "Centered heading and contact details", "Readable sans-serif body", "Flexible education and project placement"],
   },
 };
+
+// Practical notes that follow from each layout's structure, photo support, and style,
+// so every template page explains when that particular design is a good fit.
+export function templateGuidance(template: typeof templates[number]): string[] {
+  const reading = template.columns === 2
+    ? `${template.name} uses two columns, which makes supporting details quick to scan. Some applicant tracking systems read columns in an unexpected order, so if you are uploading to an online portal, compare it with a single-column template such as Clarity or Linear.`
+    : `${template.name} keeps one reading order from top to bottom, so a recruiter and an online application system meet your sections in the same sequence.`;
+  const tone = {
+    Traditional: "Its traditional styling suits conservative fields such as law, finance, the public sector, and academia, where a familiar format is often expected.",
+    Modern: "Its modern styling suits most office, technology, and client-facing roles, where a clear hierarchy matters more than ornament.",
+    Creative: "Its creative styling works best when design sense is part of the job, or when you send your CV directly to a person. For formal sectors, a quieter template may be the safer choice.",
+    Simple: "Its simple styling keeps attention on your content and prints clearly in black and white.",
+  }[template.style];
+  const photo = template.photo
+    ? "The profile photo is optional. CVs for jobs in the UK, Ireland, the US, and Canada usually leave it out, while a photo is more common in parts of continental Europe, the Middle East, and Asia. Follow the employer’s guidance when it is given."
+    : `${template.name} does not show a photo, which matches the usual expectation for CVs in the UK, Ireland, the US, and Canada.`;
+  return [reading, tone, photo];
+}
