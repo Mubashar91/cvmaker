@@ -11,7 +11,7 @@ export function Header() {
   const links = [{ href: "/templates/", label: "Templates" }, { href: "/cv-examples/", label: "CV examples" }, { href: "/cover-letter-maker/", label: "Cover letter" }, { href: "/tools/", label: "Free tools" }, { href: "/tips/", label: "CV guides" }, { href: "/about/", label: "About us" }, { href: "/contact/", label: "Contact" }];
   const mobileOnly = [{ href: "/privacy/", label: "Privacy" }];
   // Tool pages sit at the top level; keep "Free tools" marked while on any of them.
-  const toolPaths = ["/resume-keyword-checker/", "/resume-summary-builder/", "/resume-objective-generator/", "/resume-skills/"];
+  const toolPaths = ["/resume-keyword-checker/", "/resume-summary-builder/", "/resume-objective-generator/", "/resume-bullet-point-generator/", "/resume-skills/"];
   const current = (href: string) => pathname.startsWith(href) || (href === "/tools/" && toolPaths.some(path => pathname.startsWith(path)));
   return <header className="site-header"><div className="container header-inner">
     <Logo />

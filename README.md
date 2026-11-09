@@ -41,7 +41,7 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 - Review CV checks visible content for missing names, malformed contact details, incomplete entries, dates, descriptions, long profiles, and placeholder phrases. Suggestions link directly to the relevant editor fields.
 - Read and download a plain-text CV for application forms. Hidden and empty sections are omitted, and section order is preserved.
 - Six static template collections (ATS-friendly, professional, modern, simple, student, and photo), with original guidance, curated designs, breadcrumbs, social images, and structured data.
-- Seventeen CV and resume guides (writing, projects, part-time and internship CVs, cover letters, ATS, and country conventions for the UK, US, Canada, and Australia), with images from real renders, FAQs, related guides, and a link to the most useful tool.
+- Thirty-seven CV and resume guides, including 20 keyword-focused blog posts on free tools, writing examples, students and graduates, professions, and country applications. Each has a real-render image, FAQs, related reading, and a relevant tool; sourced AI and country posts also include references.
 - Sixteen job-specific CV examples, including student, data analyst, graphic designer, and frontend developer.
 - Free browser tools (no AI, no server): a cover letter maker (three templates, three layouts, A4 or US Letter PDF, copy, print, optional browser save), a resume keyword checker (job description vs CV, reads PDF/DOCX on the device), a resume summary builder, a resume objective generator, and skills suggestions for 22 jobs. Summary, objective, and skills results can be added to the CV open in the editor.
 - A student landing page (`/cv-maker-for-students/`) that opens the editor with the Student template and an education-first section order.
@@ -142,6 +142,8 @@ To prepare a provider, set a provider's isolated embed URL and enable the flag a
 The existing switch does **not** implement Google AdSense. No publisher ID, AdSense script, fabricated `ads.txt` entry, or consent popup has been added. Enabling AdSense requires the owner’s real account configuration, accurate vendor disclosures, and consent management where required. Review Google’s [advertising privacy disclosures](https://support.google.com/adsense/answer/1348695?hl=en) and [consent guidance](https://support.google.com/adsense/answer/7670013?hl=en) before loading an advertising script. The privacy page explicitly distinguishes the current site from possible future advertising.
 
 ## SEO and sharing
+
+The long-tail keyword clusters, existing content destinations, new first-job page and bullet point tool, deferred AI targets, and measurement workflow are documented in [SEO-STRATEGY.md](SEO-STRATEGY.md).
 
 Every public page has a unique title and description. Each template has a statically rendered detail page with layout information, intended uses, and links to other designs. The catalogue links to all templates by style. The editor is marked `noindex, follow` and excluded from the sitemap.
 

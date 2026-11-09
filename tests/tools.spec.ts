@@ -7,7 +7,7 @@ import { buildObjectives, buildSummaries, emptySummary } from "../src/lib/statem
 import { composeBody, emptyLetter, hasPrompts, letterText } from "../src/lib/cover-letter";
 import { addSkill, hasSkill, professions } from "../src/lib/skills-library";
 import { cvPlainText } from "../src/lib/cv-review";
-import { tips } from "../src/lib/tips";
+import { guideGroups, tips } from "../src/lib/tips";
 import { plainText } from "../src/lib/rich-text";
 
 async function pdfText(filePath: string) {
@@ -83,10 +83,17 @@ test("skill helpers group skills by line and never duplicate them", () => {
 });
 
 test("every guide has unique sections and readable text without link markup", () => {
+  const indexedSlugs = guideGroups.flatMap(group => [...group.slugs]);
+  expect(new Set(indexedSlugs).size).toBe(indexedSlugs.length);
+  expect([...indexedSlugs].sort()).toEqual(tips.map(tip => tip.slug).sort());
+  expect(new Set(tips.map(tip => tip.slug)).size).toBe(tips.length);
   for (const tip of tips) {
     expect(new Set(tip.sections.map(section => section.id)).size).toBe(tip.sections.length);
     expect(plainText(tip.intro)).not.toMatch(/\]\(/);
     expect(tip.words).toBeGreaterThan(400);
+    expect(new Set(tip.sections.map(section => section.id))).not.toContain("faq");
+    expect(new Set(tip.sections.map(section => section.id))).not.toContain("sources");
+    for (const source of tip.sources || []) expect(new URL(source.url).protocol).toBe("https:");
   }
 });
 

@@ -64,6 +64,7 @@ async function main() {
   for (const example of cvExamples) await socialCard(`examples/${example.slug}`, `${example.job} CV example.`, "Fictional example · free to edit", `public/examples/${example.slug}.webp`, example.category);
   await socialCard("tools", "Free CV and resume tools.", "Cover letters, keywords, summaries, and skills.", undefined, "Free tools · No AI · No sign-up");
   await socialCard("cv-maker-for-students", "Free CV maker for students.", "Education first. No experience needed.", "public/examples/student.webp", "Students & graduates");
+  await socialCard("cv-with-no-experience", "Your first CV starts here.", "Projects, training, and everyday contributions.", "clarity", "Free resume builder · No experience");
   for (const item of tools) await socialCard(`tools/${item.path.slice(1, -1)}`, `${item.name}.`, "Free, private, and runs in your browser.", item.path === "/cover-letter-maker/" ? "public/cover-letters/classic.webp" : undefined, "Free CV tool");
   for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By ${siteOperator.name}`, undefined, tip.category);
   const icon = createCanvas(180, 180), ctx = icon.getContext("2d");
@@ -73,7 +74,7 @@ async function main() {
   for (const [y, end] of [[83, 110], [102, 110], [121, 96]]) { ctx.beginPath(); ctx.moveTo(70, y); ctx.lineTo(end, y); ctx.stroke(); }
   ctx.beginPath(); ctx.moveTo(104, 34); ctx.lineTo(104, 60); ctx.lineTo(129, 60); ctx.stroke();
   await writeFile("public/apple-touch-icon.png", icon.toBuffer("image/png"));
-  console.log(`Generated ${templates.length + templateCollections.length + tips.length + informationPages.length + cvExamples.length + tools.length + 6} social cards (1200 × 630) and the 180 × 180 app icon.`);
+  console.log(`Generated ${templates.length + templateCollections.length + tips.length + informationPages.length + cvExamples.length + tools.length + 7} social cards (1200 × 630) and the 180 × 180 app icon.`);
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

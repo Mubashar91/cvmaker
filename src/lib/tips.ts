@@ -2,6 +2,10 @@ import type { Guide } from "./guide-types";
 import { countryGuides } from "./guides-country";
 import { applicationGuides } from "./guides-applications";
 import { earlyCareerGuides } from "./guides-early-career";
+import { freeToolGuides } from "./guides-free-tools";
+import { writingExampleGuides } from "./guides-writing-examples";
+import { careerBlogGuides } from "./guides-career-blogs";
+import { countryBlogGuides } from "./guides-country-blogs";
 import { plainText } from "./rich-text";
 export type { Guide, GuideSection } from "./guide-types";
 
@@ -54,7 +58,7 @@ const coreGuides: Guide[] = [
     description: "Present work experience clearly with relevant responsibilities, honest achievements, action-led bullet points, and consistent job details.",
     category: "Experience & achievements",
     image: { kind: "example", id: "project-manager", alt: "Project manager CV example where each role lists achievements as short, action-led bullet points with dates aligned to the right", caption: "A fictional project manager CV from our CV examples, in the Edge template." },
-    tool: { href: "/cv-examples/", label: "Browse CV examples", text: "See how experience is written in complete, fictional CVs for real jobs, then edit one for free." },
+    tool: { href: "/resume-bullet-point-generator/", label: "Build an experience bullet point", text: "Combine an action, task, and optional result from your own experience, then edit and copy the line." },
     intro: "The experience section should help a reader understand the work you did and the contribution you made. A clear description is more useful than an impressive-sounding list of responsibilities.",
     sections: [
       { id: "organize-the-basics", heading: "Make each role easy to identify", paragraphs: [
@@ -118,7 +122,7 @@ const coreGuides: Guide[] = [
         "Avoid filling the space with qualities every applicant claims. One concrete detail, such as a project you finished or a responsibility you held, tells the reader more than several adjectives.",
       ], example: "Business studies student looking for a part-time retail or customer service role. Experienced in handling payments and helping visitors through weekend volunteering at a community café, and comfortable working as part of a busy team." },
       { id: "arrange-your-first-cv", heading: "Make the order work for your story", paragraphs: [
-        "Try placing education and projects before work experience when they are more relevant. The Student template gives you clear section bands, and you can reorder the sections in the editor. Hide sections that do not add anything useful.",
+        "Try placing education and projects before work experience when they are more relevant. The Student template gives you clear section bands, and you can reorder the sections in the editor. Hide sections that do not add anything useful. The [free resume builder for no experience](/cv-with-no-experience/) starts with education and projects near the top, even if you are not a student.",
       ], bullets: ["Use an email address you check regularly.", "Add a short profile focused on the opportunity.", "Include portfolio or project links only when they work.", "Download the PDF and read every page before applying."] },
     ],
     takeaway: "You do not need to make your experience sound bigger. Show the real things you have learned, done, and contributed.",
@@ -233,7 +237,7 @@ const coreGuides: Guide[] = [
 export function guideText(guide: Guide): string {
   return plainText([guide.intro, ...guide.sections.flatMap(section => [...section.paragraphs, ...(section.bullets || []), section.example || "", ...(section.subsections || []).flatMap(sub => [sub.heading, ...sub.paragraphs, ...(sub.bullets || [])]), ...(section.table ? section.table.rows.flat() : [])]), ...(guide.faqs || []).flatMap(faq => [faq.question, faq.answer]), guide.takeaway].join(" "));
 }
-const guides = [...coreGuides, ...earlyCareerGuides, ...applicationGuides, ...countryGuides];
+const guides = [...coreGuides, ...earlyCareerGuides, ...applicationGuides, ...countryGuides, ...freeToolGuides, ...writingExampleGuides, ...careerBlogGuides, ...countryBlogGuides];
 export const tips = guides.map(guide => {
   const words = guideText(guide).split(/\s+/).filter(Boolean).length;
   return { ...guide, words, readTime: Math.max(2, Math.ceil(words / 200)) };
@@ -242,10 +246,12 @@ export type Tip = typeof tips[number];
 
 /** How the guide index is organised. Every guide appears in exactly one group. */
 export const guideGroups = [
-  { id: "writing", heading: "Writing your CV", text: "Profiles, experience, projects, length, and layout.", slugs: ["write-a-clear-profile", "describe-your-experience", "projects-on-a-cv", "keep-it-focused", "choose-your-template"] },
-  { id: "first-jobs", heading: "Students and first jobs", text: "Your first CV, part-time work, and internships.", slugs: ["your-first-cv", "part-time-job-cv", "internship-cv"] },
+  { id: "free-tools", heading: "Free CV tools and downloads", text: "No-signup CVs, free PDF downloads, AI options, and keyword matching.", slugs: freeToolGuides.map(guide => guide.slug) },
+  { id: "writing", heading: "Writing your CV", text: "Profiles, summaries, bullet points, projects, skills, and layout.", slugs: ["write-a-clear-profile", "describe-your-experience", "projects-on-a-cv", "keep-it-focused", "choose-your-template", ...writingExampleGuides.map(guide => guide.slug)] },
+  { id: "first-jobs", heading: "Students and first jobs", text: "School, university, graduation, part-time work, and internships.", slugs: ["your-first-cv", "part-time-job-cv", "internship-cv", "high-school-student-resume", "fresh-graduate-cv-checklist"] },
+  { id: "professions", heading: "Writing for your profession", text: "Focused guidance for software, teaching, customer service, and data analysis.", slugs: ["software-engineer-resume-projects", "teacher-cv-personal-statement", "customer-service-resume-skills", "data-analyst-resume-projects"] },
   { id: "applying", heading: "Cover letters, ATS, and sending", text: "Everything between a finished CV and a sent application.", slugs: ["how-to-write-a-cover-letter", "ats-friendly-cv", "common-cv-mistakes", "before-you-send"] },
-  { id: "countries", heading: "CVs and resumes by country", text: "Local conventions for the UK, US, Canada, and Australia.", slugs: ["resume-vs-cv", "uk-cv-format", "us-resume-format", "canadian-resume-format", "australian-resume-format"] },
+  { id: "countries", heading: "CVs and resumes by country", text: "Local formats and first applications in the UK, US, Canada, and Australia.", slugs: ["resume-vs-cv", "uk-cv-format", "us-resume-format", "canadian-resume-format", "australian-resume-format", ...countryBlogGuides.map(guide => guide.slug)] },
 ] as const;
 
 /** Related reading: the same index group first, then the rest. */

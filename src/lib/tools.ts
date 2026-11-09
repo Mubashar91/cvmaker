@@ -26,6 +26,12 @@ export const tools = [
     summary: "Write a short career objective for an internship, a first job, or a change of direction.",
   },
   {
+    path: "/resume-bullet-point-generator/", name: "Resume bullet point builder", icon: "list",
+    title: "Free Resume Bullet Point Generator — No Sign-Up",
+    description: "Build resume bullet points from your own actions, tasks, and results. Edit and copy each line for work, projects, or volunteering. Free, with no sign-up or AI.",
+    summary: "Turn an action, a task, and an optional result into an editable CV bullet point using your own facts.",
+  },
+  {
     path: "/resume-skills/", name: "Skills for your resume", icon: "list",
     title: "Skills to Put on a Resume — Free Ideas for 22 Jobs",
     description: "Find skills to put on your resume for 22 jobs, from software developer to nurse. Choose hard skills, tools, and strengths, then add them to your CV for free.",
@@ -39,11 +45,17 @@ export function tool(path: ToolPath) { return tools.find(item => item.path === p
 export const toolsHub = {
   path: "/tools/", label: "Free tools",
   title: "Free CV & Resume Tools for Job Applications",
-  description: "Free tools for every part of a job application: a cover letter maker, resume keyword checker, summary builder, objective generator, and skill ideas.",
+  description: "Free job application tools: a cover letter maker, resume keyword checker, summary builder, objective generator, bullet point builder, and skill ideas.",
 };
 
 export const studentPage = {
   path: "/cv-maker-for-students/", label: "CV maker for students",
   title: "Free CV Maker for Students & Graduates",
   description: "A free student resume builder and CV maker: start from an education-first layout, follow clear guidance, and download a PDF, even with no work experience.",
+};
+
+export const noExperiencePage = {
+  path: "/cv-with-no-experience/", label: "CV with no experience",
+  title: "Free Resume Builder With No Experience — First Job CV",
+  description: "Create a CV with no work experience for free. Use projects, volunteering, and everyday responsibilities to show your skills, then download a PDF without sign-up.",
 };

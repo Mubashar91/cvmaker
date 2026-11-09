@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function Tip({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const tip = tips.find(t => t.slug === slug); if (!tip) notFound();
   const related = relatedGuides(slug);
-  const toc = [...tip.sections.map(section => ({ id: section.id, heading: section.heading })), ...(tip.faqs?.length ? [{ id: "faq", heading: "Frequently asked questions" }] : [])];
+  const toc = [...tip.sections.map(section => ({ id: section.id, heading: section.heading })), ...(tip.faqs?.length ? [{ id: "faq", heading: "Frequently asked questions" }] : []), ...(tip.sources?.length ? [{ id: "sources", heading: "Sources and further reading" }] : [])];
   return <><Header /><main id="main-content"><StructuredData data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "CV guides", path: "/tips/" }, { name: tip.title, path: `/tips/${slug}/` }])} /><StructuredData data={articleSchema(tip)} />{tip.faqs && <StructuredData data={faqSchema(tip.faqs)} />}
     <section className="page-hero article-hero"><div className="container"><Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "CV guides", href: "/tips/" }, { name: tip.title }]} /><span className="article-category">{tip.category}</span><h1>{tip.title}</h1><div className="article-meta"><Link href="/about/" rel="author"><FileText size={15} />By {siteOperator.name}</Link><span><Clock3 size={15} />{tip.readTime} min read</span>{tip.published && tip.published !== CONTENT_UPDATED ? <><span><CalendarDays size={15} />Published <time dateTime={tip.published}>{formatDate(tip.published)}</time></span><span>Updated <time dateTime={CONTENT_UPDATED}>{CONTENT_UPDATED_LABEL}</time></span></> : <span><CalendarDays size={15} />{tip.published ? "Published" : "Updated"} <time dateTime={CONTENT_UPDATED}>{CONTENT_UPDATED_LABEL}</time></span>}</div></div></section>
     <div className="guide-layout container section"><nav className="guide-toc" aria-label="On this page"><h2>In this guide</h2>{toc.map(item => <a key={item.id} href={`#${item.id}`}>{item.heading}</a>)}</nav><article className="article">
@@ -35,6 +35,7 @@ export default async function Tip({ params }: { params: Promise<{ slug: string }
       </section>)}
       <aside className="callout"><p>{tip.takeaway}</p></aside>
       {tip.faqs && <section id="faq" className="article-faq"><h2>Frequently asked questions</h2><FaqList faqs={tip.faqs} /></section>}
+      {tip.sources?.length && <section id="sources"><h2>Sources and further reading</h2><ul>{tip.sources.map(source => <li key={source.url}><a href={source.url}>{source.title}</a></li>)}</ul></section>}
       {tip.tool && <aside className="article-tool"><div><span>Free tool</span><p><RichText text={tip.tool.text} /></p></div><Link href={tip.tool.href} className="button dark">{tip.tool.label}<ArrowRight size={16} /></Link></aside>}
       <div className="article-cta"><span>A fresh page for your next chapter.</span><StartCVButton>Open the free editor</StartCVButton></div>
     </article></div><AdSlot placement="tips" />

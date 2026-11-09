@@ -58,7 +58,7 @@ export default function StudentCVMakerPage() {
     <section className="section student-structure"><div className="container advice-grid"><h2>The best CV format for students with no experience.</h2><div>
       <p>Use a reverse-chronological CV with your education near the top. Employers reading a student CV look for evidence of how you work, and your course, projects, and activities are where that evidence lives. Once you have a relevant job or placement, it can move above education.</p>
       <ol className="student-order">{["Name and contact details", "A short profile or objective", "Education", "Projects", "Work experience, including part-time and volunteering", "Skills and languages", "Certificates, awards, or interests"].map((item, index) => <li key={item}><span className="step-number">{index + 1}</span>{item}</li>)}</ol>
-      <p>Keep it to one page and use a simple layout with standard headings. See how it comes together in the <Link href={`/cv-examples/${example.slug}/`}>student CV example</Link>.</p>
+      <p>Keep it to one page and use a simple layout with standard headings. See how it comes together in the <Link href={`/cv-examples/${example.slug}/`}>student CV example</Link>. Not currently studying? Use the <Link href="/cv-with-no-experience/">first-job CV builder</Link> to start with projects, training, and other responsibilities.</p>
     </div></div></section>
 
     <section className="section student-evidence"><div className="container"><div className="section-head"><div><h2>A CV with no experience still has evidence.</h2><p>Everything below counts. Describe each one with what you did and what came of it.</p></div><Link href="/tips/your-first-cv/" className="text-link">Read the first CV guide <ArrowUpRight size={16} /></Link></div>

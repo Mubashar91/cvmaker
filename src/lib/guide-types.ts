@@ -16,4 +16,6 @@ export interface Guide {
   tool?: { href: string; label: string; text: string };
   /** ISO date the guide was first published, when known. */
   published?: string;
+  /** Primary references for factual guidance, shown with the article. */
+  sources?: { title: string; url: string }[];
 }

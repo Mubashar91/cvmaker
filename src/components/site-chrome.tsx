@@ -4,7 +4,7 @@ import { Logo } from "./logo";
 import { templates } from "@/lib/model";
 import { collectionPath, templateCollections } from "@/lib/template-collections";
 import { informationPages, siteOperator } from "@/lib/site-info";
-import { studentPage, toolsHub } from "@/lib/tools";
+import { noExperiencePage, studentPage, toolsHub } from "@/lib/tools";
 export { Logo } from "./logo";
 export { Header } from "./header";
 
@@ -13,6 +13,7 @@ const footerColumns = [
   { heading: "CV maker", links: [
     { href: "/editor/", label: "Create your CV" },
     { href: studentPage.path, label: "CV maker for students" },
+    { href: noExperiencePage.path, label: "CV with no experience" },
     { href: "/templates/", label: "CV templates" },
     { href: "/cv-examples/", label: "CV examples by job" },
     { href: "/#how-it-works", label: "How it works" },
@@ -22,6 +23,7 @@ const footerColumns = [
     { href: "/resume-keyword-checker/", label: "Keyword checker" },
     { href: "/resume-summary-builder/", label: "Summary builder" },
     { href: "/resume-objective-generator/", label: "Objective generator" },
+    { href: "/resume-bullet-point-generator/", label: "Bullet point builder" },
     { href: "/resume-skills/", label: "Skills for your resume" },
   ], more: { href: toolsHub.path, label: "All free tools" } },
   { heading: "CV guides", links: [

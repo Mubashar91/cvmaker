@@ -38,7 +38,7 @@ export function HomePage() {
         <li className="step">
           <div className="step-vignette" aria-hidden="true"><div className="vig-drop"><FileUp size={22} /><strong>my-cv.pdf</strong><span>Read on this device</span></div><div className="vig-found"><Check size={14} />Name, experience, education and skills found</div></div>
           <h3><span className="step-number">1</span>Start with your story</h3>
-          <p>Create a blank CV or import your existing PDF or DOCX. Review the extracted details and fill in what matters.</p>
+          <p>Create a blank CV or import your existing PDF or DOCX. Review the extracted details and fill in what matters. Applying for your first job? <Link href="/cv-with-no-experience/">Build a CV with no experience</Link> using projects and responsibilities.</p>
         </li>
         <li className="step">
           <div className="step-vignette" aria-hidden="true"><div className="vig-field"><span>Professional title</span><div className="vig-input">Frontend Developer<i /></div></div><div className="vig-swatches">{accentColors.slice(0, 7).map((c, i) => <span key={c.value} className={i === 2 ? "is-on" : undefined} style={{ background: c.value }} />)}</div></div>

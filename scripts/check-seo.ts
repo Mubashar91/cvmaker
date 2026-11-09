@@ -7,7 +7,7 @@ import { tips } from "../src/lib/tips";
 import { collectionPath, templateCollections } from "../src/lib/template-collections";
 import { informationPages, siteOperator } from "../src/lib/site-info";
 import { cvExamples } from "../src/lib/cv-examples";
-import { studentPage, tools, toolsHub } from "../src/lib/tools";
+import { noExperiencePage, studentPage, tools, toolsHub } from "../src/lib/tools";
 
 function decode(value: string) {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
@@ -24,6 +24,7 @@ function canonical(html: string) {
 const routes: { path: string; image: string; schema?: string; noIndex?: boolean }[] = [
   { path: "/", image: "folio", schema: "WebApplication" },
   { path: studentPage.path, image: "cv-maker-for-students", schema: "FAQPage" },
+  { path: noExperiencePage.path, image: "cv-with-no-experience", schema: "FAQPage" },
   { path: toolsHub.path, image: "tools", schema: "CollectionPage" },
   ...tools.map(item => ({ path: item.path, image: `tools/${item.path.slice(1, -1)}`, schema: "WebApplication" })),
   { path: "/templates/", image: "templates", schema: "CollectionPage" },
@@ -65,7 +66,7 @@ async function main() {
         const data = JSON.parse(match[1]); return data["@graph"] ?? [data];
       });
       if ("schema" in route) assert(structured.some(item => item["@type"] === route.schema), `${route.path}: missing ${route.schema} schema`);
-      if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") || route.path.startsWith("/cv-examples/") || route.path === toolsHub.path || route.path === studentPage.path || tools.some(item => item.path === route.path) || informationPages.some(page => page.path === route.path)) {
+      if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") || route.path.startsWith("/cv-examples/") || route.path === toolsHub.path || route.path === studentPage.path || route.path === noExperiencePage.path || tools.some(item => item.path === route.path) || informationPages.some(page => page.path === route.path)) {
         assert(structured.some(item => item["@type"] === "BreadcrumbList"), `${route.path}: missing breadcrumbs`);
       }
       if (route.path === "/templates/") {
