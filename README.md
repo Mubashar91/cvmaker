@@ -27,12 +27,12 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 ## What works
 
 - Create a blank CV or import a real text-based PDF or DOCX (15 MB maximum; PDFs up to 40 pages).
-- Extract and edit contact information, profile, experience, education, skills, projects, and certifications.
+- Extract and edit contact information, profile, experience, education, skills, languages, projects, certifications, and one renamable extra section (Interests, Volunteering, Awards, References, Referees…). Imports recognise Languages, Interests, Awards, Volunteering, and References/Referees headings.
 - Forty free layouts. The newest sixteen — Linear, Aurora, Atelier, Regent, Summit, Compass, Halo, Clarity, Prism, Gazette, Heritage, Ledger, Mosaic, Tide, Edge, and Signature — are marked New and featured on the homepage; the full catalogue includes every layout. Switching keeps your content.
 - Optional profile photo, cropped to a circle in the browser (never uploaded) and shown by thirteen photo layouts (Sidebar, Executive, Atlas, Duo, Elegant, Portrait, Monogram, Horizon, Summit, Compass, Halo, Tide, Aurora); other layouts ignore it.
 - Ten print-safe accent colours, any custom colour, or each template’s own default. Custom colours are darkened just enough to keep 4.5:1 contrast on white (`readableAccent` in `src/lib/model.ts`).
 - Body typeface (template default, sans, or serif) and document spacing (compact, balanced, airy). Colour, typeface, and spacing are saved with drafts.
-- Section-by-section writing guidance and a Next button that walks through every section, then on to the design.
+- Section-by-section writing guidance and a Next button that walks through every section, then on to the design. Per-section placeholders, a profile word count, gentle email/phone/link checks after a field is left (never blocking), a language adder with plain proficiency levels, and predefined skill ideas for 22 professions (guessed from the professional title).
 - Live, paginated A4 preview rendered from the generated PDF, including all pages.
 - Add, remove, and reorder entries; reorder or hide sections. Empty sections are automatically excluded.
 - Download a selectable-text PDF without an account, advertisement, or watermark. Long paragraphs flow across pages.
@@ -41,7 +41,11 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 - Review CV checks visible content for missing names, malformed contact details, incomplete entries, dates, descriptions, long profiles, and placeholder phrases. Suggestions link directly to the relevant editor fields.
 - Read and download a plain-text CV for application forms. Hidden and empty sections are omitted, and section order is preserved.
 - Six static template collections (ATS-friendly, professional, modern, simple, student, and photo), with original guidance, curated designs, breadcrumbs, social images, and structured data.
-- CV advice articles, a privacy page, and disabled advertising slots on home/tips pages only.
+- Fourteen CV and resume guides (writing, cover letters, ATS, and country conventions for the UK, US, Canada, and Australia), with images from real renders, FAQs, related guides, and a link to the most useful tool.
+- Sixteen job-specific CV examples, including student, data analyst, graphic designer, and frontend developer.
+- Free browser tools (no AI, no server): a cover letter maker (three templates, three layouts, A4 or US Letter PDF, copy, print, optional browser save), a resume keyword checker (job description vs CV, reads PDF/DOCX on the device), a resume summary builder, a resume objective generator, and skills suggestions for 22 jobs. Summary, objective, and skills results can be added to the CV open in the editor.
+- A student landing page (`/cv-maker-for-students/`) that opens the editor with the Student template and an education-first section order.
+- A privacy page, and disabled advertising slots on home/tips pages only.
 
 ## Import behavior and limits
 
@@ -106,7 +110,7 @@ Full sample PDFs are also written to the ignored `.local-review/templates/` dire
 
 ## Privacy and drafts
 
-The editor uses React state in the current tab. It does not automatically persist personal information. `Save draft` writes `folio-draft-v1` to local storage; `Delete saved draft` removes it without clearing the open CV. Browser reloads discard unsaved edits. A downloaded JSON or PDF is a separate local file, and must be deleted using the device's file manager.
+The editor uses React state in the current tab. It does not automatically persist personal information. Drafts saved before the Languages and Additional information sections existed are upgraded when opened (`upgradeCV` / `parseCV` in `src/lib/model.ts`); both sections start empty. The header shows “Unsaved changes” after edits to a saved draft. `Save draft` writes `folio-draft-v1` to local storage; `Delete saved draft` removes it without clearing the open CV. Browser reloads discard unsaved edits. A downloaded JSON or PDF is a separate local file, and must be deleted using the device's file manager.
 
 The PDF worker, fonts, and application libraries are served locally. There are no analytics SDKs or third-party requests in the default app. An end-to-end test monitors requests during import and download. Ordinary hosting request logs may contain IP addresses and asset paths, but never CV content from this app.
 
@@ -208,3 +212,9 @@ npm test
 - `src/lib/model.ts`: shared CV schema, template list, accent colours, and draft validation.
 - `src/app/globals.css`, `templates.css`, `editor.css`: the site design (self-hosted Archivo variable font from `@fontsource-variable/archivo`).
 - `src/config/ads.ts`: disabled provider configuration.
+- `src/lib/tips.ts`, `guides-applications.ts`, `guides-country.ts`, `guide-types.ts`: guide content. Text may contain internal links as `[text](/path/)` (`src/lib/rich-text.ts`).
+- `src/lib/tools.ts`: the free tools registry used by navigation, the homepage, and the tools hub.
+- `src/lib/cover-letter.ts`, `cover-letter-pdf.ts`: cover letter templates and PDF layouts. `npm run letters:preview` renders `public/cover-letters/*.webp`.
+- `src/lib/keyword-match.ts`, `statements.ts`, `skills-library.ts`: keyword comparison, summary/objective sentence patterns, and predefined skills.
+- `src/lib/pdf-engine.ts`: shared pdfmake loader, so the cover letter page does not load the 40 CV layouts.
+- `src/components/tool-page.tsx`, `tool-fields.tsx`: shared tool page layout and form controls. `src/app/tools.css`: tools, guides index, student page, and editor additions.

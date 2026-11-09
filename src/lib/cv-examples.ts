@@ -1,16 +1,19 @@
-import { emptyCV, type CV, type Entry, type Template } from "./model";
+import { emptyCV, type CV, type Entry, type Section, type Template } from "./model";
 
 // Job-specific CV examples. Every person, employer, school, and figure in these CVs is fictional
 // and exists only to show how a strong CV for the role can read. Phone numbers use Ofcom's
-// reserved drama range and email addresses use example.com, so nothing reaches a real person.
+// reserved drama range, and email addresses and websites use reserved example domains,
+// so nothing reaches a real person.
 type EntryData = Omit<Entry, "id">;
 const entry = (title: string, organization: string, dates: string, lines: string[] = []): EntryData => ({ title, organization, dates, description: lines.join("\n") });
 
 export interface CVExample {
   slug: string; job: string; category: string; template: Template;
   seoTitle: string; description: string; intro: string;
-  person: { name: string; headline: string; location: string; phone: string };
-  summary: string; skills: string;
+  person: { name: string; headline: string; location: string; phone: string; website?: string };
+  summary: string; skills: string; languages?: string; additional?: { title: string; text: string };
+  /** Section order when it differs from the default, e.g. education first for students. */
+  sectionOrder?: Section[];
   experience: EntryData[]; education: EntryData[]; projects?: EntryData[]; certifications?: EntryData[];
   profiles: { label: string; text: string }[];
   bullets: string[];
@@ -104,7 +107,7 @@ export const cvExamples: CVExample[] = [
   },
   {
     slug: "software-developer", job: "Software developer", category: "Technology", template: "tech",
-    seoTitle: "Software Developer CV Example — Free Template",
+    seoTitle: "Software Developer CV Example & Resume Template",
     description: "A software developer CV example with a grouped tech stack, results-led bullet points, and a clear profile. Edit it free and download a PDF.",
     intro: "Engineering managers scan a developer CV for three things: the technologies you use, what you built with them, and how your work helped the team or product. This example groups skills by area and describes each role through shipped work.",
     person: { name: "Sam Okafor", headline: "Software Developer", location: "Manchester, United Kingdom", phone: "+44 7700 900103" },
@@ -145,7 +148,7 @@ export const cvExamples: CVExample[] = [
   },
   {
     slug: "customer-service", job: "Customer service", category: "Customer service", template: "modern",
-    seoTitle: "Customer Service CV Example — Free Template",
+    seoTitle: "Customer Service CV Example & Resume Template",
     description: "A customer service CV example with a profile, achievement-led bullet points, and key skills. Adapt it for call centre, retail, or online support roles.",
     intro: "Customer service managers look for evidence that you stay patient, solve problems, and meet service targets. This example uses specific measures, such as satisfaction scores and resolution rates, to turn everyday tasks into achievements.",
     person: { name: "Chloe Bennett", headline: "Customer Service Advisor", location: "Glasgow, United Kingdom", phone: "+44 7700 900104" },
@@ -501,6 +504,175 @@ export const cvExamples: CVExample[] = [
     ],
     guides: ["before-you-send", "write-a-clear-profile"],
   },
+  {
+    slug: "student", job: "Student", category: "Students & graduates", template: "student",
+    seoTitle: "Student CV Example — Free Template for No Experience",
+    description: "A student CV example for school leavers, students, and graduates with little work experience. See profiles, bullet points, and skills, then edit it free.",
+    intro: "A student CV has to work with what you have: education, part-time work, projects, and activities. This example leads with a degree, then uses a part-time job, a society role, and a university project as real evidence of reliability, organisation, and teamwork.",
+    person: { name: "Ellie Harper", headline: "Business Management Student", location: "Sheffield, United Kingdom", phone: "+44 7700 900113" },
+    sectionOrder: ["summary", "education", "experience", "projects", "skills", "languages", "certifications", "additional"],
+    summary: "Final-year Business Management student with experience from a retail job, a society committee role, and a charity consultancy project. Organised, reliable, and comfortable with customers. Looking for a graduate role in operations or marketing from July 2027.",
+    education: [
+      entry("BA (Hons) Business Management", "Northbridge University", "2024 – 2027 (expected)", ["On track for a 2:1. Modules include marketing analytics, operations management, and business finance."]),
+      entry("A levels: Economics (A), Business (A), English Literature (B)", "Riverside Sixth Form College", "2022 – 2024"),
+    ],
+    experience: [
+      entry("Sales Assistant (part-time)", "Fernway Home Store", "2023 – Present", ["Serve up to 80 customers on a Saturday shift, handling payments, returns, and click-and-collect orders.", "Trusted to open the store and cash up at the end of the day.", "Trained three new part-time colleagues on the till and stock procedures."]),
+      entry("Treasurer (volunteer)", "University Hiking Society", "2025 – 2026", ["Managed a £6,000 annual budget and booked transport for 12 trips."]),
+    ],
+    projects: [entry("Consultancy project: volunteer recruitment", "Sheffield Food Network (university module)", "2026", ["With a team of four, surveyed 45 volunteers and recommended changes to the sign-up process; the trustees adopted two."])],
+    skills: "Skills: Customer service, budgeting, research, presentations\nTools: Excel, PowerPoint, Canva, Google Analytics",
+    languages: "English: Native\nSpanish: Conversational (B1)",
+    profiles: [
+      { label: "First-year student looking for part-time work", text: "First-year Sports Science student looking for weekend and holiday work. Experienced in customer service from two summers at a family-run café, where I took orders, handled payments, and kept the counter running at busy times. Reliable, punctual, and happy to learn." },
+      { label: "Graduate applying for a graduate scheme", text: "Recent History graduate (2:1) with strong research and writing skills, developed through a dissertation based on archive work. Led a 20-member debating society and organised its first inter-university competition. Applying for graduate schemes in public policy and communications." },
+      { label: "School leaver with no work experience", text: "School leaver with A levels in Maths, Chemistry, and Biology, looking for an apprenticeship in laboratory science. Completed a week of work experience at a hospital pathology lab and volunteer at a local youth club. Careful, organised, and keen to learn on the job." },
+    ],
+    bullets: [
+      "Served up to 80 customers on busy Saturday shifts, keeping queues moving at the tills.",
+      "Trained three new part-time colleagues on till procedures and stock replenishment.",
+      "Managed a £6,000 society budget and kept spending within plan for the full year.",
+      "Surveyed 45 charity volunteers and presented recommendations that the trustees adopted.",
+      "Organised 12 society trips, booking transport and coordinating up to 40 attendees.",
+      "Researched and wrote a 10,000-word dissertation using interviews with six shop owners.",
+      "Built a sales tracker in Excel for a group project, used to compare five pricing scenarios.",
+      "Volunteered weekly at a food bank, sorting donations and helping visitors.",
+    ],
+    skillGroups: [
+      { label: "Transferable skills", items: ["Customer service", "Teamwork from group projects", "Budgeting and handling money", "Research and report writing", "Presentations", "Time management alongside study"] },
+      { label: "Practical skills", items: ["Microsoft Excel and PowerPoint", "Google Workspace", "Canva", "Social media for a club or society", "A second language"] },
+    ],
+    tips: [
+      { heading: "Lead with your education", text: "When your degree, A levels, or course is your strongest evidence, put it first. Add a grade or predicted grade if it helps, and two or three relevant modules or a dissertation topic." },
+      { heading: "Count every kind of experience", text: "Part-time jobs, volunteering, society roles, sports, and group projects all show employers how you work. Describe them with the same care as a full-time job: what you did and what changed." },
+      { heading: "Use small numbers honestly", text: "“Served up to 80 customers on a shift” or “managed a £6,000 budget” gives a reader scale. Use figures you can explain, even if they seem modest." },
+      { heading: "Keep it to one page", text: "A student CV rarely needs more than one page. Cut anything that does not support the application, and save longer detail for a cover letter or interview." },
+    ],
+    guides: ["your-first-cv", "write-a-clear-profile"],
+  },
+  {
+    slug: "data-analyst", job: "Data analyst", category: "Technology", template: "horizon",
+    seoTitle: "Data Analyst CV Example & Resume Template — Free",
+    description: "A data analyst CV example with SQL, Power BI, and Python skills, results-led bullet points, and three profile examples. Edit it free and download a PDF.",
+    intro: "Hiring managers for data roles want to see the tools you use and, above all, what your analysis changed. This example names the technical stack clearly, then describes each role through the decisions and time savings the work made possible.",
+    person: { name: "Nadia Hassan", headline: "Data Analyst", location: "Cambridge, United Kingdom", phone: "+44 7700 900114" },
+    summary: "Data analyst with four years of experience turning sales and customer data into reports that teams use to make decisions. Strong in SQL, Power BI, and Python, with a habit of checking data quality before anyone sees a number. Enjoys explaining findings to non-technical colleagues.",
+    experience: [
+      entry("Data Analyst", "Fenbridge Retail Group", "2023 – Present", ["Build and maintain Power BI dashboards for sales, stock, and customer teams across 40 stores.", "Write SQL queries against a cloud data warehouse to answer weekly questions from managers.", "Automated a monthly stock report in Python, saving the finance team two days each month.", "Analysed a loyalty scheme trial and recommended changes adopted in the national roll-out."]),
+      entry("Junior Data Analyst", "Clearwater Insurance", "2021 – 2023", ["Cleaned and reconciled claims data from three legacy systems for monthly reporting.", "Built Excel models to track contact-centre performance against service targets.", "Documented data definitions so that teams reported the same figures."]),
+    ],
+    education: [entry("BSc (Hons) Mathematics", "Northbridge University", "2017 – 2021")],
+    certifications: [entry("Microsoft Certified: Power BI Data Analyst Associate", "Microsoft", "2023")],
+    skills: "Analysis: SQL, Python (pandas), Excel, A/B testing, statistics\nVisualisation: Power BI, Tableau, dashboard design\nData: Data cleaning, data modelling, BigQuery, dbt",
+    profiles: [
+      { label: "Senior data analyst", text: "Senior data analyst with eight years in e-commerce, leading a team of three. Owns the company’s core performance metrics and the dashboards the leadership team reviews each week. Experienced in experiment design and in turning analysis into product decisions." },
+      { label: "Graduate data analyst", text: "Statistics graduate with a placement year in a bank’s reporting team, where I automated a weekly report in Python. Final-year project: predicting bike-share demand from weather data. Comfortable with SQL, Excel, and Power BI, and keen to learn from an experienced analytics team." },
+      { label: "Moving into data from finance", text: "Management accountant moving into data analysis after five years of budgeting and variance reporting. Recently completed a SQL and Python course and rebuilt my team’s monthly reporting in Power BI. Brings a strong eye for reconciling figures and explaining them to managers." },
+    ],
+    bullets: [
+      "Built a Power BI sales dashboard used weekly by 40 store managers, replacing six separate spreadsheets.",
+      "Automated a monthly stock report in Python, saving the finance team two days of manual work each month.",
+      "Wrote SQL queries to analyse a loyalty scheme trial, leading to changes adopted in the national roll-out.",
+      "Designed and analysed A/B tests on email campaigns, reporting results with clear confidence ranges.",
+      "Reconciled claims data from three legacy systems, fixing errors that had inflated monthly totals.",
+      "Created shared data definitions so finance and operations reported the same figures.",
+      "Presented quarterly findings to directors in plain language, with one recommendation per slide.",
+      "Trained eight colleagues to use self-service dashboards instead of requesting ad hoc reports.",
+    ],
+    skillGroups: [
+      { label: "Technical skills", items: ["SQL", "Python (pandas)", "Power BI or Tableau", "Advanced Excel", "Data cleaning and modelling", "A/B testing and statistics", "Cloud data warehouses such as BigQuery"] },
+      { label: "Working skills", items: ["Explaining data to non-technical audiences", "Attention to detail", "Prioritising stakeholder requests", "Curiosity", "Documentation"] },
+    ],
+    tips: [
+      { heading: "Lead with the decision, not the dashboard", text: "A dashboard is only interesting because of what people did with it. Say who used your analysis and what changed: time saved, a decision made, or an error found." },
+      { heading: "Name your tools precisely", text: "Recruiters often search for specific tools such as SQL, Power BI, Tableau, or Python. List the ones you use confidently, and mention the libraries or platforms where they matter." },
+      { heading: "Show that you care about data quality", text: "Cleaning, reconciling, and documenting data is a large part of the job. One bullet about catching errors or defining metrics shows you can be trusted with the numbers." },
+      { heading: "Link to a portfolio if you have one", text: "A short write-up of one analysis, with the question, the method, and the result, can say more than a list of skills. Keep company data confidential." },
+    ],
+    guides: ["describe-your-experience", "ats-friendly-cv"],
+  },
+  {
+    slug: "graphic-designer", job: "Graphic designer", category: "Marketing & creative", template: "atelier",
+    seoTitle: "Graphic Designer CV Example — Free Resume Template",
+    description: "A graphic designer CV example with brand, packaging, and campaign work, a portfolio link, and design software skills. Edit it free and download a PDF.",
+    intro: "A designer’s CV is read alongside a portfolio, so its job is to give context: the kinds of clients, the scope of each project, and how you work with others. This example keeps the layout distinctive but readable, and lets the portfolio carry the visuals.",
+    person: { name: "Sofia Marques", headline: "Graphic Designer", location: "Liverpool, United Kingdom", phone: "+44 7700 900115", website: "sofiamarques.example" },
+    summary: "Graphic designer with six years of experience creating brand identities, packaging, and campaign artwork for consumer brands. Confident from first sketch to print-ready files, and comfortable presenting ideas to clients. Portfolio includes work for food, retail, and charity clients.",
+    experience: [
+      entry("Graphic Designer", "Northlight Studio", "2022 – Present", ["Lead design on brand identity projects for small and mid-sized consumer brands, from concept to guidelines.", "Designed packaging for a range of 12 snack products, managing print proofs with the manufacturer.", "Create social and display artwork for campaigns, adapting layouts to more than 20 formats.", "Present concepts to clients and turn feedback into clear revisions."]),
+      entry("Junior Designer", "Pressmark Print & Design", "2019 – 2022", ["Prepared print-ready files for brochures, signage, and exhibition stands.", "Produced menus, posters, and leaflets for local hospitality clients.", "Checked colour proofs and fixed prepress issues before files went to print."]),
+    ],
+    education: [entry("BA (Hons) Graphic Design", "Northbridge School of Art", "2016 – 2019")],
+    projects: [entry("Rebrand for a community theatre", "Volunteer project", "2024", ["Designed a new logo, poster system, and website graphics for a volunteer-run theatre."])],
+    skills: "Design: Brand identity, typography, layout, packaging, illustration\nSoftware: Adobe Illustrator, Photoshop, InDesign, Figma, After Effects\nProduction: Print production, prepress, digital formats",
+    profiles: [
+      { label: "Senior or lead designer", text: "Senior designer with ten years in agency and in-house teams, leading brand work for national retail and hospitality clients. Manages a team of three designers, sets creative direction, and presents to client leadership. Known for clear briefs and well-organised design systems." },
+      { label: "Graduate designer", text: "Graphic design graduate with a portfolio of identity, editorial, and packaging projects, including a live brief for a local brewery. Confident in Illustrator, InDesign, and Figma, and keen to join a studio where I can learn print production from experienced designers." },
+      { label: "Freelance designer moving in-house", text: "Freelance designer with five years of experience working directly with small businesses on logos, websites, and marketing materials. Used to managing my own projects and deadlines, and now looking to bring that independence to an in-house brand team." },
+    ],
+    bullets: [
+      "Led a brand identity for a regional bakery chain, from workshops to a 40-page brand guideline.",
+      "Designed packaging for 12 snack products, approving print proofs with the manufacturer on time for launch.",
+      "Adapted a campaign’s key artwork to more than 20 social, display, and print formats.",
+      "Presented three concepts per project to clients and turned feedback into focused revisions.",
+      "Built a shared Figma library of templates that cut the time to produce social posts.",
+      "Prepared print-ready files for exhibition stands, checking bleeds, colour profiles, and fonts.",
+      "Worked with copywriters and marketers to plan layouts that put the main message first.",
+      "Mentored a placement student through their first client project.",
+    ],
+    skillGroups: [
+      { label: "Design skills", items: ["Brand identity", "Typography and layout", "Packaging design", "Illustration", "Print production and prepress", "Digital and social formats"] },
+      { label: "Working skills", items: ["Presenting concepts", "Taking and applying feedback", "Understanding a brief", "Managing deadlines", "Collaboration with copy and marketing"] },
+    ],
+    tips: [
+      { heading: "Put your portfolio link at the top", text: "Most design employers will look at your portfolio before reading the CV in detail. Add the link to your contact details, check it works, and lead with work relevant to the role." },
+      { heading: "Describe scope and outcome", text: "For each project, say what you designed, for whom, and what happened next: a launch, a campaign, or a measurable result if you have one. It gives your portfolio pieces context." },
+      { heading: "Let the CV show taste without hiding information", text: "A considered layout helps, but recruiters and application systems still need to read it. Keep headings clear and text selectable; save the experimental work for your portfolio." },
+      { heading: "Tailor for studio or in-house roles", text: "Studios look for range and client handling. In-house teams look for brand consistency and working with marketing. Adjust your profile and bullets for each." },
+    ],
+    guides: ["choose-your-template", "describe-your-experience"],
+  },
+  {
+    slug: "frontend-developer", job: "Frontend developer", category: "Technology", template: "monogram",
+    seoTitle: "Frontend Developer CV Example — Free Resume Template",
+    description: "A frontend developer CV example with React, TypeScript, accessibility, and performance results, plus three profile examples. Edit it free and download a PDF.",
+    intro: "A frontend CV should show the stack you build with and the quality of what you ship: accessible, fast, well-tested interfaces. This example pairs a grouped skills section with bullets that name concrete improvements in performance and accessibility.",
+    person: { name: "Arjun Mehta", headline: "Frontend Developer", location: "Reading, United Kingdom", phone: "+44 7700 900116", website: "arjunmehta.example" },
+    summary: "Frontend developer with four years of experience building accessible, responsive interfaces in React and TypeScript. Works closely with designers to turn Figma files into reusable components, and cares about performance and keyboard accessibility. Currently maintaining the design system for a SaaS product.",
+    experience: [
+      entry("Frontend Developer", "Lumen Analytics", "2023 – Present", ["Maintain a React and TypeScript design system used by three product teams.", "Improved Largest Contentful Paint on the main dashboard from 4.1 s to 1.9 s by splitting code and optimising images.", "Fixed keyboard and screen reader issues across key journeys to meet WCAG 2.2 AA.", "Write component tests with Vitest and end-to-end tests with Playwright."]),
+      entry("Junior Web Developer", "Brightside Digital", "2021 – 2023", ["Built responsive marketing sites and landing pages for agency clients.", "Converted Figma designs into semantic HTML, CSS, and JavaScript.", "Integrated headless CMS content and REST APIs into Next.js sites."]),
+    ],
+    education: [entry("BSc (Hons) Computer Science", "Northbridge University", "2018 – 2021")],
+    projects: [entry("Colour contrast helper", "Open-source project", "2025", ["Built a small web app that suggests accessible colour pairs for text and backgrounds."])],
+    skills: "Frontend: React, TypeScript, JavaScript, Next.js, HTML, CSS, Tailwind CSS\nQuality: Accessibility (WCAG), Vitest, Playwright, web performance\nTools: Git, Figma, Storybook, GitHub Actions",
+    profiles: [
+      { label: "Senior frontend developer", text: "Senior frontend engineer with eight years of experience leading the web platform for a fintech product. Set up the team’s design system, testing strategy, and performance budgets, and mentors four developers. Comfortable owning architecture decisions with product and design." },
+      { label: "Junior frontend developer", text: "Junior frontend developer with a year of agency experience building responsive sites in React and Next.js. Strong HTML and CSS foundations, with a growing interest in accessibility testing. Looking for a team with thorough code reviews and a design system to learn from." },
+      { label: "Designer moving into frontend", text: "UI designer moving into frontend development after five years in product design. Builds my own prototypes in React and TypeScript and recently shipped a component library for a side project. Brings a strong eye for detail and fluent collaboration with designers." },
+    ],
+    bullets: [
+      "Cut Largest Contentful Paint on the main dashboard from 4.1 s to 1.9 s through code splitting and image optimisation.",
+      "Maintained a React design system of 60 components used by three product teams.",
+      "Brought sign-up and checkout journeys up to WCAG 2.2 AA, testing with keyboard and screen reader.",
+      "Added Playwright end-to-end tests for critical journeys, catching regressions before release.",
+      "Converted Figma designs into reusable, documented components in Storybook.",
+      "Migrated a legacy CSS codebase to Tailwind CSS page by page, without visual regressions.",
+      "Integrated a headless CMS so marketers could publish landing pages without developer help.",
+      "Reviewed pull requests and paired with junior developers on accessibility fixes.",
+    ],
+    skillGroups: [
+      { label: "Technical skills", items: ["React and Next.js", "TypeScript and JavaScript", "Semantic HTML and modern CSS", "Web accessibility (WCAG)", "Web performance", "Testing with Vitest, Jest, or Playwright", "Design systems and Storybook"] },
+      { label: "Working skills", items: ["Collaboration with designers", "Code review", "Explaining technical trade-offs", "Attention to detail", "User empathy"] },
+    ],
+    tips: [
+      { heading: "Show quality, not just features", text: "Frontend roles reward care: accessible, fast, well-tested interfaces. Bullets about performance metrics, accessibility fixes, and test coverage set you apart from a list of frameworks." },
+      { heading: "Use real numbers for performance", text: "Metrics such as Largest Contentful Paint or bundle size are easy to measure and easy to understand. Give before-and-after figures you can explain." },
+      { heading: "Link to live work and code", text: "A portfolio, a GitHub profile, or a deployed project helps reviewers see your work. Make sure the links work and the best projects are easy to find." },
+      { heading: "Mirror the stack in the advert", text: "If the job lists React, TypeScript, and Next.js, use those exact names where they are true for you. The resume keyword checker can show any gaps." },
+    ],
+    guides: ["describe-your-experience", "ats-friendly-cv"],
+  },
 ];
 
 export function cvExample(slug: string) { return cvExamples.find(example => example.slug === slug); }
@@ -516,8 +688,10 @@ export function exampleCV(example: CVExample): CV {
   const cv = emptyCV();
   const [first, ...rest] = example.person.name.toLowerCase().split(" ");
   cv.template = example.template;
-  cv.personal = { name: example.person.name, headline: example.person.headline, email: `${first}.${rest.join("")}@example.com`, phone: example.person.phone, location: example.person.location, website: "" };
-  cv.summary = example.summary; cv.skills = example.skills;
+  cv.personal = { name: example.person.name, headline: example.person.headline, email: `${first}.${rest.join("")}@example.com`, phone: example.person.phone, location: example.person.location, website: example.person.website ?? "" };
+  cv.summary = example.summary; cv.skills = example.skills; cv.languages = example.languages ?? "";
+  if (example.additional) { cv.additional = example.additional.text; cv.additionalTitle = example.additional.title; }
+  if (example.sectionOrder) cv.sectionOrder = [...example.sectionOrder];
   const withIds = (section: string, entries: EntryData[] = []) => entries.map((item, index) => ({ id: `${example.slug}-${section}-${index + 1}`, ...item }));
   cv.experience = withIds("experience", example.experience); cv.education = withIds("education", example.education);
   cv.projects = withIds("projects", example.projects); cv.certifications = withIds("certifications", example.certifications);

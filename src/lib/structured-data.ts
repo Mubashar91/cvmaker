@@ -5,6 +5,34 @@ import { informationPage, siteOperator, type InformationPath } from "./site-info
 import { absoluteUrl, CONTENT_UPDATED, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 import type { tips } from "./tips";
 import type { CVExample } from "./cv-examples";
+import { plainText } from "./rich-text";
+
+/** Only for questions and answers that are visible on the same page. */
+export function faqSchema(faqs: readonly { question: string; answer: string }[]) {
+  if (!SITE_URL || !faqs.length) return undefined;
+  return { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(faq => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: plainText(faq.answer) } })) };
+}
+
+/** A free browser tool page: the tool runs on the page itself. */
+export function toolSchema({ path, name, description, featureList }: { path: string; name: string; description: string; featureList: string[] }) {
+  if (!SITE_URL) return undefined;
+  return {
+    "@context": "https://schema.org", "@type": "WebApplication", "@id": absoluteUrl(`${path}#app`), name, url: absoluteUrl(path), description,
+    applicationCategory: "BusinessApplication", operatingSystem: "Web browser", browserRequirements: "Requires JavaScript and a modern web browser",
+    isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, featureList, inLanguage: "en",
+    isPartOf: { "@id": absoluteUrl("/#website") }, creator: { "@id": absoluteUrl("/#organization") },
+  };
+}
+
+/** A hub page that lists other pages on the site. */
+export function collectionPageSchema({ path, name, description, items }: { path: string; name: string; description: string; items: { name: string; path: string }[] }) {
+  if (!SITE_URL) return undefined;
+  return {
+    "@context": "https://schema.org", "@type": "CollectionPage", "@id": absoluteUrl(`${path}#page`), name, url: absoluteUrl(path), description,
+    isPartOf: { "@id": absoluteUrl("/#website") }, inLanguage: "en", dateModified: CONTENT_UPDATED,
+    mainEntity: { "@type": "ItemList", numberOfItems: items.length, itemListElement: items.map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.name, url: absoluteUrl(item.path) })) },
+  };
+}
 
 export const CV_EXAMPLES_DESCRIPTION = "Free CV examples for real jobs, from nurse and teacher to software developer. Each has profile examples, bullet points, skills, and a template to edit.";
 
@@ -32,7 +60,7 @@ export function websiteSchema() {
   return { "@context": "https://schema.org", "@graph": [
     organization(),
     { "@type": "WebSite", "@id": absoluteUrl("/#website"), name: SITE_NAME, url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, inLanguage: "en", publisher: { "@id": absoluteUrl("/#organization") } },
-    { "@type": "WebApplication", "@id": absoluteUrl("/#app"), name: "Folio CV Maker", url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, image: absoluteUrl("/social/folio.png"), applicationCategory: "BusinessApplication", operatingSystem: "Web browser", browserRequirements: "Requires JavaScript and a modern web browser", isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, creator: { "@id": absoluteUrl("/#organization") }, featureList: ["PDF and DOCX import", `${templates.length} professional CV templates`, "Optional profile photo", "Live PDF preview", "Typeface and spacing controls", "Ten accent colours or your own", "Free multi-page PDF downloads", "Local browser drafts", "No account required"] },
+    { "@type": "WebApplication", "@id": absoluteUrl("/#app"), name: "Folio CV Maker", url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, image: absoluteUrl("/social/folio.png"), applicationCategory: "BusinessApplication", operatingSystem: "Web browser", browserRequirements: "Requires JavaScript and a modern web browser", isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, creator: { "@id": absoluteUrl("/#organization") }, featureList: ["PDF and DOCX import", `${templates.length} professional CV templates`, "Optional profile photo", "Live PDF preview", "Typeface and spacing controls", "Ten accent colours or your own", "Languages and custom sections", "CV review checks and plain-text export", "Free multi-page PDF downloads", "Local browser drafts", "Free cover letter maker", "Resume keyword checker", "No account required"] },
   ] };
 }
 
@@ -86,9 +114,9 @@ export function articleSchema(tip: typeof tips[number]) {
   return {
     "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`/tips/${tip.slug}/#article`),
     headline: tip.title, description: tip.description, url: absoluteUrl(`/tips/${tip.slug}/`),
-    author: person(), publisher: organization(), dateModified: CONTENT_UPDATED, inLanguage: "en",
+    author: person(), publisher: organization(), ...(tip.published ? { datePublished: tip.published } : {}), dateModified: CONTENT_UPDATED, inLanguage: "en",
     mainEntityOfPage: absoluteUrl(`/tips/${tip.slug}/`), image: absoluteUrl(`/social/guides/${tip.slug}.png`),
-    articleSection: tip.category, wordCount: [tip.intro, ...tip.sections.flatMap(section => [...section.paragraphs, ...(section.bullets ?? []), section.example ?? ""]), tip.takeaway].join(" ").split(/\s+/).length,
+    articleSection: tip.category, wordCount: tip.words,
   };
 }
 

@@ -1,8 +1,7 @@
-import { hasEntry, sectionHasContent, sectionLabels, type CV, type EntrySection, type Section } from "./model";
+import { entrySections, hasEntry, isTextSection, sectionHasContent, sectionTitle, type CV, type Section } from "./model";
 
 export type ReviewSection = "personal" | Section;
 export interface CVCheck { id: string; title: string; detail: string; passed: boolean; section: ReviewSection }
-const entrySections: EntrySection[] = ["experience", "education", "projects", "certifications"];
 
 /** The visible content only, in the user's section order. Useful for application text fields. */
 export function cvPlainText(cv: CV): string {
@@ -10,11 +9,11 @@ export function cvPlainText(cv: CV): string {
   const blocks = [[cv.personal.name, cv.personal.headline, contact.join(" | ")].filter(value => value.trim()).join("\n")];
   for (const key of cv.sectionOrder) {
     if (cv.hiddenSections.includes(key) || !sectionHasContent(cv, key)) continue;
-    const body = key === "summary" ? cv.summary.trim() : key === "skills" ? cv.skills.trim() : cv[key].filter(hasEntry).map(entry => [
+    const body = isTextSection(key) ? cv[key].trim() : cv[key].filter(hasEntry).map(entry => [
       [entry.title, entry.organization, entry.dates].filter(value => value.trim()).join(" | "),
       entry.description.trim(),
     ].filter(Boolean).join("\n")).join("\n\n");
-    blocks.push(`${sectionLabels[key].toUpperCase()}\n${body}`);
+    blocks.push(`${sectionTitle(cv, key).toUpperCase()}\n${body}`);
   }
   return blocks.filter(Boolean).join("\n\n");
 }

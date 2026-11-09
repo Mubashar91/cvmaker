@@ -10,3 +10,9 @@ const EXAMPLE_PREVIEW_VERSION = "1";
 export function examplePreview(slug: string): string {
   return `/examples/${slug}.webp?v=${EXAMPLE_PREVIEW_VERSION}`;
 }
+
+// Bump when the cover letter layout renders in public/cover-letters are regenerated.
+const LETTER_PREVIEW_VERSION = "1";
+export function letterPreview(layout: string): string {
+  return `/cover-letters/${layout}.webp?v=${LETTER_PREVIEW_VERSION}`;
+}

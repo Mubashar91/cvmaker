@@ -3,9 +3,12 @@ import { templates } from "./model";
 import { siteOperator } from "./site-info";
 
 export const SITE_NAME = "Folio";
-export const CONTENT_UPDATED = "2026-11-08";
-export const CONTENT_UPDATED_LABEL = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${CONTENT_UPDATED}T00:00:00Z`));
-export const DEFAULT_DESCRIPTION = `Build a professional CV online with ${templates.length} free templates. Import PDF or DOCX, edit your details, and download a PDF. No sign-up or watermarks.`;
+export const CONTENT_UPDATED = "2026-11-09";
+const dateLabel = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+/** "9 November 2026" for an ISO date. */
+export function formatDate(iso: string): string { return dateLabel.format(new Date(`${iso}T00:00:00Z`)); }
+export const CONTENT_UPDATED_LABEL = formatDate(CONTENT_UPDATED);
+export const DEFAULT_DESCRIPTION = `Create a professional CV online for free with ${templates.length} templates. Import a PDF or DOCX, edit your details, and download a PDF. No sign-up, no watermark.`;
 
 function configuredOrigin(): string | undefined {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();

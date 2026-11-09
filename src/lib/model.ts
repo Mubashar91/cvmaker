@@ -63,9 +63,20 @@ export const accentColors = [
   { name: "Bronze", value: "#86663a" },
 ] as const;
 
-export const sectionLabels = { summary: "Profile", experience: "Work experience", education: "Education", skills: "Skills", projects: "Projects", certifications: "Certifications" };
+// Order is the default section order for a new CV.
+export const sectionLabels = { summary: "Profile", experience: "Work experience", education: "Education", skills: "Skills", languages: "Languages", projects: "Projects", certifications: "Certifications", additional: "Additional information" };
 export type Section = keyof typeof sectionLabels;
-export type EntrySection = Exclude<Section, "summary" | "skills">;
+/** Sections written as free text (one line or group per line) rather than as entries. */
+export type TextSection = "summary" | "skills" | "languages" | "additional";
+export const textSections: readonly TextSection[] = ["summary", "skills", "languages", "additional"];
+export type EntrySection = Exclude<Section, TextSection>;
+export const entrySections: readonly EntrySection[] = ["experience", "education", "projects", "certifications"];
+export function isTextSection(key: Section): key is TextSection { return (textSections as readonly Section[]).includes(key); }
+/** Visible heading for a section. "Additional information" can be renamed, e.g. to Interests or Referees. */
+export function sectionTitle(cv: Pick<CV, "additionalTitle">, key: Section): string {
+  return key === "additional" ? cv.additionalTitle?.trim() || sectionLabels.additional : sectionLabels[key];
+}
+export const MAX_SECTION_TITLE = 40;
 export interface Entry { id: string; title: string; organization: string; dates: string; description: string }
 export interface CV {
   version: 1; template: Template;
@@ -78,6 +89,12 @@ export interface CV {
   density?: "compact" | "relaxed";
   personal: { name: string; headline: string; email: string; phone: string; location: string; website: string };
   summary: string; skills: string;
+  /** One language per line, e.g. "French — professional working proficiency". */
+  languages: string;
+  /** Free-form extra section (interests, awards, volunteering, referees…). */
+  additional: string;
+  /** Optional custom heading for `additional`. */
+  additionalTitle?: string;
   experience: Entry[]; education: Entry[]; projects: Entry[]; certifications: Entry[];
   sectionOrder: Section[]; hiddenSections: Section[];
 }
@@ -113,10 +130,11 @@ export function readableAccent(hex: string): string {
 }
 export function templateById(id: Template) { return templates.find(t => t.id === id) ?? templates[0]; }
 export function emptyEntry(): Entry { return { id: crypto.randomUUID(), title: "", organization: "", dates: "", description: "" }; }
-export function emptyCV(): CV { return { version: 1, template: "classic", personal: { name: "", headline: "", email: "", phone: "", location: "", website: "" }, summary: "", skills: "", experience: [], education: [], projects: [], certifications: [], sectionOrder: Object.keys(sectionLabels) as Section[], hiddenSections: [] }; }
+const SECTION_KEYS = Object.keys(sectionLabels) as Section[];
+export function emptyCV(): CV { return { version: 1, template: "classic", personal: { name: "", headline: "", email: "", phone: "", location: "", website: "" }, summary: "", skills: "", languages: "", additional: "", experience: [], education: [], projects: [], certifications: [], sectionOrder: [...SECTION_KEYS], hiddenSections: [] }; }
 export function hasEntry(entry: Entry) { return [entry.title, entry.organization, entry.dates, entry.description].some(v => v.trim()); }
-export function hasContent(cv: CV) { return Object.values(cv.personal).some(v => v.trim()) || Boolean(cv.summary.trim() || cv.skills.trim()) || [cv.experience, cv.education, cv.projects, cv.certifications].some(es => es.some(hasEntry)); }
-export function sectionHasContent(cv: CV, key: Section) { return key === "summary" ? !!cv.summary.trim() : key === "skills" ? !!cv.skills.trim() : cv[key].some(hasEntry); }
+export function hasContent(cv: CV) { return Object.values(cv.personal).some(v => v.trim()) || textSections.some(key => !!cv[key].trim()) || entrySections.some(key => cv[key].some(hasEntry)); }
+export function sectionHasContent(cv: CV, key: Section) { return isTextSection(key) ? !!cv[key].trim() : cv[key].some(hasEntry); }
 export const MAX_PHOTO_LENGTH = 3_000_000;
 export function isPhoto(value: unknown): value is string {
   return typeof value === "string" && value.length < MAX_PHOTO_LENGTH && /^data:image\/(png|jpeg);base64,[A-Za-z0-9+/]+={0,2}$/.test(value);
@@ -126,6 +144,23 @@ export function isCV(value: unknown): value is CV {
   const cv = value as CV;
   if (cv.font !== undefined && cv.font !== "sans" && cv.font !== "serif") return false;
   if (cv.density !== undefined && cv.density !== "compact" && cv.density !== "relaxed") return false;
-  return cv.version === 1 && templates.some(t => t.id === cv.template) && (cv.accent === undefined || (typeof cv.accent === "string" && /^#[0-9a-f]{6}$/i.test(cv.accent))) && (cv.photo === undefined || isPhoto(cv.photo)) && !!cv.personal && ["name", "headline", "email", "phone", "location", "website"].every(k => typeof cv.personal[k as keyof CV["personal"]] === "string") && typeof cv.summary === "string" && typeof cv.skills === "string" && ["experience", "education", "projects", "certifications"].every(k => Array.isArray(cv[k as EntrySection]) && cv[k as EntrySection].every(e => e && ["id", "title", "organization", "dates", "description"].every(f => typeof e[f as keyof Entry] === "string"))) && Array.isArray(cv.sectionOrder) && cv.sectionOrder.length === 6 && new Set(cv.sectionOrder).size === 6 && cv.sectionOrder.every(k => k in sectionLabels) && Array.isArray(cv.hiddenSections) && cv.hiddenSections.every(k => k in sectionLabels);
+  if (cv.additionalTitle !== undefined && (typeof cv.additionalTitle !== "string" || cv.additionalTitle.length > MAX_SECTION_TITLE)) return false;
+  return cv.version === 1 && templates.some(t => t.id === cv.template) && (cv.accent === undefined || (typeof cv.accent === "string" && /^#[0-9a-f]{6}$/i.test(cv.accent))) && (cv.photo === undefined || isPhoto(cv.photo)) && !!cv.personal && ["name", "headline", "email", "phone", "location", "website"].every(k => typeof cv.personal[k as keyof CV["personal"]] === "string") && textSections.every(k => typeof cv[k] === "string") && entrySections.every(k => Array.isArray(cv[k]) && cv[k].every(e => e && ["id", "title", "organization", "dates", "description"].every(f => typeof e[f as keyof Entry] === "string"))) && Array.isArray(cv.sectionOrder) && cv.sectionOrder.length === SECTION_KEYS.length && new Set(cv.sectionOrder).size === SECTION_KEYS.length && cv.sectionOrder.every(k => k in sectionLabels) && Array.isArray(cv.hiddenSections) && cv.hiddenSections.every(k => k in sectionLabels);
 }
+/**
+ * Drafts saved before the Languages and Additional information sections existed have six
+ * sections. They gain both, empty: Languages after Skills, Additional information last.
+ * Anything else is returned unchanged for `isCV` to judge.
+ */
+export function upgradeCV(value: unknown): unknown {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return value;
+  const draft = value as Record<string, unknown>;
+  if (!Array.isArray(draft.sectionOrder) || draft.sectionOrder.length !== 6) return value;
+  const order: unknown[] = [...draft.sectionOrder];
+  if (!order.includes("languages")) { const skills = order.indexOf("skills"); order.splice(skills >= 0 ? skills + 1 : order.length, 0, "languages"); }
+  if (!order.includes("additional")) order.push("additional");
+  return { ...draft, languages: draft.languages ?? "", additional: draft.additional ?? "", sectionOrder: order };
+}
+/** A validated CV from stored or uploaded JSON, upgrading older drafts; otherwise null. */
+export function parseCV(value: unknown): CV | null { const cv = upgradeCV(value); return isCV(cv) ? cv : null; }
 export function move<T>(items: T[], index: number, direction: number): T[] { const next = [...items]; const target = index + direction; if (target < 0 || target >= next.length) return next; [next[index], next[target]] = [next[target], next[index]]; return next; }

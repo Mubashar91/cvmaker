@@ -5,6 +5,7 @@ import { tips } from "../src/lib/tips";
 import { templateCollections } from "../src/lib/template-collections";
 import { informationPages, siteOperator } from "../src/lib/site-info";
 import { cvExamples } from "../src/lib/cv-examples";
+import { tools } from "../src/lib/tools";
 
 const GREEN = "#10352b", GOLD = "#f3b53f", PAPER = "#f8f7f2";
 GlobalFonts.registerFromPath("public/fonts/tinos/Tinos-Italic.ttf", "Folio Serif");
@@ -48,7 +49,8 @@ async function main() {
   await mkdir("public/social/guides", { recursive: true });
   await mkdir("public/social/collections", { recursive: true });
   await mkdir("public/social/examples", { recursive: true });
-  await socialCard("folio", "Your story deserves a great CV.", `${templates.length} templates. Entirely free.`, "monogram");
+  await mkdir("public/social/tools", { recursive: true });
+  await socialCard("folio", "Create a professional CV for free.", `${templates.length} templates. Free PDF download.`, "monogram");
   await socialCard("templates", `${templates.length} free CV templates.`, "Find a first impression that feels like you.", "horizon", "CV templates & resume layouts");
   await socialCard("tips", "A little guidance for your next chapter.", "Practical CV advice, from start to send.", undefined, "CV writing guides");
   await socialCard("about", "A useful tool. A person behind it.", siteOperator.name, undefined, "About Folio");
@@ -60,6 +62,9 @@ async function main() {
   for (const collection of templateCollections) await socialCard(`collections/${collection.slug}`, collection.title, `${collection.templates.length} designs. Free to make your own.`, collection.templates[0], "Find your CV format");
   await socialCard("cv-examples", "CV examples for real jobs.", "Complete examples you can edit for free.", "public/examples/nurse.webp", "CV examples by job");
   for (const example of cvExamples) await socialCard(`examples/${example.slug}`, `${example.job} CV example.`, "Fictional example · free to edit", `public/examples/${example.slug}.webp`, example.category);
+  await socialCard("tools", "Free CV and resume tools.", "Cover letters, keywords, summaries, and skills.", undefined, "Free tools · No AI · No sign-up");
+  await socialCard("cv-maker-for-students", "Free CV maker for students.", "Education first. No experience needed.", "public/examples/student.webp", "Students & graduates");
+  for (const item of tools) await socialCard(`tools/${item.path.slice(1, -1)}`, `${item.name}.`, "Free, private, and runs in your browser.", item.path === "/cover-letter-maker/" ? "public/cover-letters/classic.webp" : undefined, "Free CV tool");
   for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By ${siteOperator.name}`, undefined, tip.category);
   const icon = createCanvas(180, 180), ctx = icon.getContext("2d");
   ctx.fillStyle = GREEN; ctx.fillRect(0, 0, 180, 180);
@@ -68,7 +73,7 @@ async function main() {
   for (const [y, end] of [[83, 110], [102, 110], [121, 96]]) { ctx.beginPath(); ctx.moveTo(70, y); ctx.lineTo(end, y); ctx.stroke(); }
   ctx.beginPath(); ctx.moveTo(104, 34); ctx.lineTo(104, 60); ctx.lineTo(129, 60); ctx.stroke();
   await writeFile("public/apple-touch-icon.png", icon.toBuffer("image/png"));
-  console.log(`Generated ${templates.length + templateCollections.length + tips.length + informationPages.length + cvExamples.length + 4} social cards (1200 × 630) and the 180 × 180 app icon.`);
+  console.log(`Generated ${templates.length + templateCollections.length + tips.length + informationPages.length + cvExamples.length + tools.length + 6} social cards (1200 × 630) and the 180 × 180 app icon.`);
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

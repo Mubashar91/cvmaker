@@ -57,7 +57,7 @@ export const templateCollections: readonly TemplateCollection[] = [
     checklist: ["Remove repeated or irrelevant information.", "Use a familiar heading for each section.", "Check that the body text remains comfortable to read.", "Leave enough space to distinguish one role from the next."],
   },
   {
-    slug: "student", name: "Student & first job", title: "Free Student CV Templates for Your First Job",
+    slug: "student", name: "Student & first job", title: "Free Student & Graduate CV Templates",
     description: "Build your first CV with free student templates. Put education, coursework, projects, and volunteering first, even without paid experience. Download a PDF.",
     intro: "You can write a useful first CV before your first paid role. Start with your education and the things you have made, learned, organised, or supported. These templates give early-career applicants a clear structure without pretending to have a longer work history.",
     templates: ["student", "linear", "clarity", "academic", "compact", "aurora"],

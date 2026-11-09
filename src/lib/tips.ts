@@ -1,16 +1,22 @@
-export interface GuideSection {
-  id: string; heading: string; paragraphs: string[]; bullets?: string[]; example?: string;
-}
-export interface Guide {
-  slug: string; title: string; seoTitle: string; description: string; category: string;
-  intro: string; sections: GuideSection[]; takeaway: string;
-}
-const guides: Guide[] = [
+import type { Guide } from "./guide-types";
+import { countryGuides } from "./guides-country";
+import { applicationGuides } from "./guides-applications";
+import { plainText } from "./rich-text";
+export type { Guide, GuideSection } from "./guide-types";
+
+const coreGuides: Guide[] = [
   {
     slug: "write-a-clear-profile", title: "Write a CV profile that sounds like you",
-    seoTitle: "How to Write a CV Profile — Tips & Examples",
+    seoTitle: "How to Write a CV Profile or Resume Summary",
     description: "Write a clear, honest CV profile with practical tips on structure, relevant strengths, and tailoring your summary to the role.",
     category: "Profile & positioning",
+    image: { kind: "example", id: "marketing-executive", alt: "Marketing executive CV example with a short, specific profile under the name and contact details", caption: "A fictional marketing executive CV from our CV examples, in the Creative template." },
+    tool: { href: "/resume-summary-builder/", label: "Try the summary builder", text: "Enter a few details and get three editable profile drafts built from your own words." },
+    faqs: [
+      { question: "Is a CV profile the same as a resume summary?", answer: "Yes. UK CVs usually call it a profile or personal statement; US and Canadian resumes call it a professional summary. A resume objective is a variation that focuses on the role you want, and suits students and career changers." },
+      { question: "How long should a CV profile be?", answer: "Two to four sentences, or about 40 to 90 words. If it runs longer, it is probably repeating your experience section." },
+      { question: "Should I write my profile in the first person?", answer: "Most CV profiles leave the pronoun out entirely and start with the role or an action, such as “Customer support lead with five years…”. Avoid the third person, which can sound distant on a document you wrote yourself." },
+    ],
     intro: "Your profile is a short introduction to the person behind the experience. A few specific, honest sentences help a reader understand what you do, what you bring, and why the opportunity makes sense for you.",
     sections: [
       { id: "what-to-include", heading: "Start with the essentials", paragraphs: [
@@ -43,9 +49,11 @@ const guides: Guide[] = [
   },
   {
     slug: "describe-your-experience", title: "How to describe work experience on your CV",
-    seoTitle: "How to Describe Work Experience on a CV",
+    seoTitle: "How to Write Work Experience on a CV (With Examples)",
     description: "Present work experience clearly with relevant responsibilities, honest achievements, action-led bullet points, and consistent job details.",
     category: "Experience & achievements",
+    image: { kind: "example", id: "project-manager", alt: "Project manager CV example where each role lists achievements as short, action-led bullet points with dates aligned to the right", caption: "A fictional project manager CV from our CV examples, in the Edge template." },
+    tool: { href: "/cv-examples/", label: "Browse CV examples", text: "See how experience is written in complete, fictional CVs for real jobs, then edit one for free." },
     intro: "The experience section should help a reader understand the work you did and the contribution you made. A clear description is more useful than an impressive-sounding list of responsibilities.",
     sections: [
       { id: "organize-the-basics", heading: "Make each role easy to identify", paragraphs: [
@@ -76,9 +84,16 @@ const guides: Guide[] = [
   },
   {
     slug: "your-first-cv", title: "Build your first CV, even without work experience",
-    seoTitle: "How to Make Your First CV With No Experience",
+    seoTitle: "How to Write a CV With No Experience",
     description: "Create your first CV using education, projects, skills, volunteering, and part-time work. Practical guidance for students and graduates.",
     category: "Students & first applications",
+    image: { kind: "example", id: "student", alt: "Student CV example with education first, followed by projects, a part-time job, and volunteering", caption: "A fictional student CV from our CV examples, in the Student template." },
+    tool: { href: "/cv-maker-for-students/", label: "Open the student CV maker", text: "Start with an education-first layout made for students, school leavers, and graduates." },
+    faqs: [
+      { question: "What do I put on a CV if I have no experience?", answer: "Lead with education, then add projects, volunteering, part-time or casual work, and activities such as clubs or societies. Each one can show skills an employer wants, such as reliability, teamwork, or organisation." },
+      { question: "Should a student CV be one page?", answer: "One page is usually enough for a student or school leaver. Two pages is fine once you have several relevant projects or roles, but never stretch the content to fill space." },
+      { question: "Is a resume objective useful with no experience?", answer: "Yes. A short objective that names the role you want and what you bring can help when you have little work history. Try the [resume objective generator](/resume-objective-generator/) for a first draft." },
+    ],
     intro: "A first CV is not an empty version of an experienced person's document. It is a clear account of what you know, what you have tried, and the experience you can bring to a first opportunity.",
     sections: [
       { id: "sections-to-include", heading: "Know which sections a first CV needs", paragraphs: [
@@ -112,6 +127,8 @@ const guides: Guide[] = [
     seoTitle: "How to Choose a Professional CV Template",
     description: "Compare traditional, modern, minimal, creative, and student CV layouts. Choose a template that makes your experience clear and easy to follow.",
     category: "Templates & presentation",
+    image: { kind: "template", id: "summit", alt: "Summit CV template with a full-width colour header above a tinted side column for contact details, education, and skills", caption: "Summit template, fictional sample content. One of 40 free layouts in the editor." },
+    tool: { href: "/templates/", label: "Compare all templates", text: "Preview every free template at full size and switch between them without retyping." },
     intro: "A good CV template supports the information on the page. Start with readability and the application requirements, then choose a visual style you feel comfortable sending.",
     sections: [
       { id: "start-with-the-role", heading: "Read the application instructions first", paragraphs: [
@@ -142,9 +159,11 @@ const guides: Guide[] = [
   },
   {
     slug: "keep-it-focused", title: "How long should a CV be? Make every line count",
-    seoTitle: "How Long Should a CV Be? Keep It Relevant",
+    seoTitle: "How Long Should a CV or Resume Be? Keep It Relevant",
     description: "Decide what belongs in your CV, choose a useful length, remove repetition, and give relevant experience room to breathe.",
     category: "Structure & clarity",
+    image: { kind: "template", id: "compact", alt: "Compact CV template: a dense single-column layout that puts the job title and employer on one line to fit more on a page", caption: "Compact template, fictional sample content." },
+    tool: { href: "/editor/", label: "See your page count live", text: "The editor’s live preview shows every page as it will download, so you can trim with confidence." },
     intro: "A useful CV gives the right information enough room. Editing is less about reaching a magic page count and more about helping the reader understand your fit for the opportunity.",
     sections: [
       { id: "choose-a-useful-length", heading: "Use the space your experience needs", paragraphs: [
@@ -178,6 +197,8 @@ const guides: Guide[] = [
     seoTitle: "CV Checklist — What to Check Before Applying",
     description: "Use this final CV checklist to review contact details, dates, spelling, links, page breaks, and the PDF you send to an employer.",
     category: "Final checks & applications",
+    image: { kind: "example", id: "nurse", alt: "Nurse CV example with registration details in the profile and certifications listed with their dates", caption: "A fictional nurse CV from our CV examples, in the Professional template." },
+    tool: { href: "/resume-keyword-checker/", label: "Compare your CV with the advert", text: "Before you send, check which terms from the job description your CV already covers." },
     intro: "A short, deliberate review helps you catch the details that are easy to miss while writing. Give the finished document a fresh read before you attach it to an application.",
     sections: [
       { id: "check-your-details", heading: "Make sure someone can reach you", paragraphs: [
@@ -207,8 +228,27 @@ const guides: Guide[] = [
     takeaway: "Check the details, open the downloaded file, and keep the version you send. A careful final review is part of a professional application.",
   },
 ];
-export const tips = guides.map(guide => ({
-  ...guide,
-  readTime: Math.max(2, Math.ceil([guide.intro, ...guide.sections.flatMap(section => [...section.paragraphs, ...(section.bullets || []), section.example || ""]), guide.takeaway].join(" ").split(/\s+/).length / 200)),
-  paragraphs: guide.sections.flatMap(section => section.paragraphs),
-}));
+/** Every word a reader sees in the guide body, without link markup. */
+export function guideText(guide: Guide): string {
+  return plainText([guide.intro, ...guide.sections.flatMap(section => [...section.paragraphs, ...(section.bullets || []), section.example || "", ...(section.subsections || []).flatMap(sub => [sub.heading, ...sub.paragraphs, ...(sub.bullets || [])]), ...(section.table ? section.table.rows.flat() : [])]), ...(guide.faqs || []).flatMap(faq => [faq.question, faq.answer]), guide.takeaway].join(" "));
+}
+const guides = [...coreGuides, ...applicationGuides, ...countryGuides];
+export const tips = guides.map(guide => {
+  const words = guideText(guide).split(/\s+/).filter(Boolean).length;
+  return { ...guide, words, readTime: Math.max(2, Math.ceil(words / 200)) };
+});
+export type Tip = typeof tips[number];
+
+/** How the guide index is organised. Every guide appears in exactly one group. */
+export const guideGroups = [
+  { id: "writing", heading: "Writing your CV", text: "Profiles, experience, length, and your first CV.", slugs: ["write-a-clear-profile", "describe-your-experience", "your-first-cv", "keep-it-focused", "choose-your-template"] },
+  { id: "applying", heading: "Cover letters, ATS, and sending", text: "Everything between a finished CV and a sent application.", slugs: ["how-to-write-a-cover-letter", "ats-friendly-cv", "common-cv-mistakes", "before-you-send"] },
+  { id: "countries", heading: "CVs and resumes by country", text: "Local conventions for the UK, US, Canada, and Australia.", slugs: ["resume-vs-cv", "uk-cv-format", "us-resume-format", "canadian-resume-format", "australian-resume-format"] },
+] as const;
+
+/** Related reading: the same index group first, then the rest. */
+export function relatedGuides(slug: string, count = 3): Tip[] {
+  const group = guideGroups.find(item => (item.slugs as readonly string[]).includes(slug));
+  const same = tips.filter(tip => tip.slug !== slug && (group?.slugs as readonly string[] | undefined)?.includes(tip.slug));
+  return [...same, ...tips.filter(tip => tip.slug !== slug && !same.includes(tip))].slice(0, count);
+}

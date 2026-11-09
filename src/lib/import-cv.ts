@@ -1,4 +1,4 @@
-import { emptyCV, emptyEntry, type CV, type Entry, type EntrySection, type Section } from "./model";
+import { emptyCV, emptyEntry, entrySections, MAX_SECTION_TITLE, type CV, type Entry, type Section } from "./model";
 
 const headings: Record<string, Section> = {
   summary: "summary", profile: "summary", "personal profile": "summary", "professional profile": "summary", "professional summary": "summary", "career objective": "summary", objective: "summary", "about me": "summary",
@@ -7,6 +7,8 @@ const headings: Record<string, Section> = {
   skills: "skills", "technical skills": "skills", "key skills": "skills", competencies: "skills", "core competencies": "skills",
   projects: "projects", "selected projects": "projects", "personal projects": "projects",
   certifications: "certifications", certificates: "certifications", "certifications and licenses": "certifications", "licenses and certifications": "certifications",
+  languages: "languages", "language skills": "languages", "language proficiency": "languages",
+  interests: "additional", hobbies: "additional", "hobbies and interests": "additional", "interests and hobbies": "additional", awards: "additional", "honours and awards": "additional", "honors and awards": "additional", achievements: "additional", volunteering: "additional", "volunteer work": "additional", references: "additional", referees: "additional", "additional information": "additional", "other information": "additional",
 };
 const clean = (s: string) => s.replace(/^[\s•●▪·]+/, "").trim();
 function heading(line: string) { return headings[line.toLowerCase().replace(/[：:]$/, "").replace(/&/g, "and").trim()]; }
@@ -42,10 +44,13 @@ function entries(lines: string[]) {
 export function parseCVText(text: string): { cv: CV; notes: string[] } {
   const cv = emptyCV(); const notes: string[] = [];
   const sections: Partial<Record<Section, string[]>> = {}; const header: string[] = []; const unassigned: string[] = [];
+  // Several headings (Interests, Awards, Referees…) share the additional section; keep each group's own heading.
+  const additional: { title: string; lines: string[] }[] = [];
   let current: Section | undefined;
   for (const line of text.replace(/\r\n?/g, "\n").split("\n")) {
     const matched = heading(line.trim());
-    if (matched) { current = matched; sections[current] ??= []; }
+    if (matched) { current = matched; sections[current] ??= []; if (matched === "additional") additional.push({ title: line.trim().replace(/[：:]$/, ""), lines: [] }); }
+    else if (current === "additional") additional.at(-1)!.lines.push(line);
     else if (current) sections[current]!.push(line);
     else header.push(line);
   }
@@ -64,7 +69,11 @@ export function parseCVText(text: string): { cv: CV; notes: string[] } {
   }
   cv.summary = (sections.summary || []).join("\n").trim();
   cv.skills = (sections.skills || []).map(clean).filter(Boolean).join("\n");
-  for (const key of ["experience", "education", "projects", "certifications"] as EntrySection[]) cv[key] = entries(sections[key] || []);
+  cv.languages = (sections.languages || []).map(clean).filter(Boolean).join("\n");
+  const groups = additional.map(group => ({ ...group, lines: group.lines.map(clean).filter(Boolean) })).filter(group => group.lines.length);
+  if (groups.length === 1) { cv.additionalTitle = groups[0].title.slice(0, MAX_SECTION_TITLE); cv.additional = groups[0].lines.join("\n"); }
+  else if (groups.length > 1) cv.additional = groups.map(group => `${group.title}: ${group.lines.join("; ")}`).join("\n");
+  for (const key of entrySections) cv[key] = entries(sections[key] || []);
   if (unassigned.length) notes.push("Some header text could not be confidently assigned. Check the extracted text below and copy any missing details into the form.");
   if (!Object.keys(sections).length) notes.push("Section headings were not recognized. Your extracted text is available below; use it to fill in the form.");
   notes.push("Extraction is a starting point. Review every field, especially dates and entry boundaries. Missing details have been left blank.");

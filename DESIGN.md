@@ -41,7 +41,12 @@ The self-hosted interface family is **Archivo Variable** (`@fontsource-variable/
 - **Setting options** (`.setting-option`, `CVDesignControls`): three-up option buttons with a live sample (Aa in the PDF faces, spacing bars). Pressed = green inset ring on paper ground; on phones they become compact centred tiles.
 - **Custom colour swatch** (`.swatch.is-custom`): dashed outline with a pipette until used, then it shows the chosen colour. A one-line note appears when the colour had to be darkened for print.
 - **Next step** (`.next-step`): a green `dark` button at the foot of each content section; marigold stays reserved for Download.
-- No eyebrow/kicker labels above headings.
+- **Tool workspace** (`.tool-workspace`): numbered white form steps on the paper ground, with a sticky green output panel (preview, drafts, results) on the right; stacked below 980px. Actions in the panel use the on-desk button styles; marigold stays for Download.
+- **Choice cards** (`ChoiceGroup`): radio options as cards; selected = green border on a pale green fill with a check. Layout choices show real renders.
+- **Letter sheet** (`.letter-sheet` + `.letter-page`): an HTML page that mirrors the cover letter PDF layouts; the sheet is the size container so margins and type scale with it.
+- **Tool and guide cards**: paper cards with a green icon tile or a real CV render, a category label, and one clear link line. Guide index groups cards by topic under a featured guide.
+- **Skill chips**: pill buttons; pressed = green outline on pale green. Used in the editor and the skills tool.
+- The homepage hero keeps one small uppercase line inside the H1 for the primary keywords; no other eyebrow/kicker labels above headings.
 
 ## Motion
 

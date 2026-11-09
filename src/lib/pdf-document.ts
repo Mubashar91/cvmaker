@@ -1,5 +1,5 @@
 import type { Content, ContentText, TDocumentDefinitions } from "pdfmake/interfaces";
-import { type CV, type Entry, type EntrySection, type Section, hasEntry, sectionHasContent, sectionLabels, templateById } from "./model";
+import { type CV, type Entry, type EntrySection, type Section, hasEntry, isTextSection, sectionHasContent, sectionTitle, templateById } from "./model";
 import { type IconName, iconSVG } from "./pdf-icons";
 
 const PAGE_WIDTH = 595.28;
@@ -8,7 +8,8 @@ const MARGIN = 48;
 const BODY_WIDTH = PAGE_WIDTH - MARGIN * 2;
 const labels: Record<Section, string> = {
   summary: "Professional summary", experience: "Work experience", education: "Education",
-  skills: "Skills", projects: "Projects", certifications: "Certifications",
+  skills: "Skills", languages: "Languages", projects: "Projects", certifications: "Certifications",
+  additional: "Additional information",
 };
 
 /** Mix two #rrggbb colours. `amount` is the share of `target` (0–1). */
@@ -147,6 +148,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
   const gapScale = (cv.density === "compact" ? .72 : cv.density === "relaxed" ? 1.35 : 1) * (atelier || regent ? .88 : 1);
   const leadingScale = cv.density === "compact" ? .96 : cv.density === "relaxed" ? 1.09 : 1;
   const lineHeight = (classic || ribbon || outline || editorial ? 1.08 : compact || gazette || heritage ? 1.1 : 1.15) * leadingScale;
+  const labelFor = (key: Section) => key === "additional" ? sectionTitle(cv, key) : labels[key];
   const visibleSections = cv.sectionOrder.filter(key => !cv.hiddenSections.includes(key) && sectionHasContent(cv, key));
   const sectionNumber = (key: Section) => String(visibleSections.indexOf(key) + 1).padStart(2, "0");
   const sizes = {
@@ -246,7 +248,8 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     if (cv.hiddenSections.includes(key)) return [];
     if (key === "summary") return cv.summary.trim() ? [paragraph(cv.summary, ctx)] : [];
     if (key === "skills" && tech) return skillTags(ctx.width);
-    if (key === "skills") return cv.skills.split(/\n+/).filter(line => line.trim()).map(line => {
+    // Skills, languages, and additional information: one line or "Label: details" group per line.
+    if (key === "skills" || key === "languages" || key === "additional") return cv[key].split(/\n+/).filter(line => line.trim()).map(line => {
       const category = line.match(/^([^:]{1,32}:)\s*(.*)$/);
       if (!category || /^https?:/i.test(line)) return paragraph(line, ctx);
       if (ctx.narrow && ctx.dark) return { ...paragraph(line, ctx), text: [{ text: `${category[1].slice(0, -1).toUpperCase()}\n`, fontSize: 7.4, characterSpacing: 0.9, color: onDarkMuted, bold: true }, { text: category[2] }], margin: [0, 0, 0, 7] };
@@ -295,7 +298,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
   }
 
   function heading(key: Section, ctx: Context): Content {
-    const label = labels[key];
+    const label = labelFor(key);
     if (linear) return { text: label.toUpperCase(), fontSize: 10.5, bold: true, color: ink, margin: [0, 15, 0, 6], headlineLevel: 1, unbreakable: true };
     if (aurora) return {
       columns: [
@@ -530,14 +533,14 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     if (!body.length) return [];
     if (minimal) return [{
       columns: [
-        { width: 88, text: labels[key].toUpperCase(), fontSize: 8.8, bold: true, characterSpacing: 1, color: muted, margin: [0, 4, 0, 0] },
+        { width: 88, text: labelFor(key).toUpperCase(), fontSize: 8.8, bold: true, characterSpacing: 1, color: muted, margin: [0, 4, 0, 0] },
         { width: "*", stack: body },
       ], columnGap: 20, margin: [0, 15 * gapScale, 0, 4 * gapScale],
     }];
     if (swiss) return [
       markHeading({ canvas: [{ type: "line", x1: 0, y1: 0, x2: BODY_WIDTH_SWISS, y2: 0, lineWidth: 2.4, lineColor: ink }], margin: [0, 16 * gapScale, 0, 0], headlineLevel: 1 } as Content),
       { columns: [
-        { width: SWISS_LABEL, text: sectionLabels[key], bold: true, fontSize: 11, lineHeight: 1.1, color: ink, margin: [0, 8, 0, 0] },
+        { width: SWISS_LABEL, text: sectionTitle(cv, key), bold: true, fontSize: 11, lineHeight: 1.1, color: ink, margin: [0, 8, 0, 0] },
         { width: "*", stack: body, margin: [0, 6, 0, 0] },
       ], columnGap: 16 },
     ];
@@ -558,10 +561,10 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
       relativePosition: { x: 0, y: 0 },
     } as Content;
     const head: Content = markHeading({
-      stack: [marker, { text: labels[key].toUpperCase(), bold: true, fontSize: 9.5, characterSpacing: 1.5, color: accent, margin: [TIMELINE_INDENT, 0, 0, 0] }],
+      stack: [marker, { text: labelFor(key).toUpperCase(), bold: true, fontSize: 9.5, characterSpacing: 1.5, color: accent, margin: [TIMELINE_INDENT, 0, 0, 0] }],
       margin: [0, 15 * gapScale, 0, 6 * gapScale], headlineLevel: 1, unbreakable: true,
     } as Content);
-    if (key === "summary" || key === "skills") {
+    if (isTextSection(key)) {
       const body = sectionBody(key, ctx);
       return body.length ? [head, { stack: body, margin: [TIMELINE_INDENT, 0, 0, 0] }] : [];
     }
@@ -967,7 +970,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
   const content: Content[] = [...header];
   if (modern) {
     const leftKeys: Section[] = ["experience", "projects"];
-    const rightKeys: Section[] = ["education", "skills", "certifications"];
+    const rightKeys: Section[] = ["education", "skills", "languages", "certifications"];
     const leftWidth = 320;
     const rightWidth = BODY_WIDTH - leftWidth - 25;
     const left = cv.sectionOrder.filter(key => leftKeys.includes(key)).flatMap(key => section(key, { width: leftWidth }));
@@ -976,7 +979,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     if (left.length && right.length) content.push({ columns: [{ width: leftWidth, stack: left }, { width: rightWidth, stack: right }], columnGap: 25 });
     else content.push(...cv.sectionOrder.filter(key => key !== "summary").flatMap(key => section(key)));
   } else if (sidebar) {
-    const sideKeys: Section[] = ["education", "skills", "certifications"];
+    const sideKeys: Section[] = ["education", "skills", "languages", "certifications"];
     const mainWidth = PAGE_WIDTH - SIDEBAR.left - SIDEBAR.width - SIDEBAR.gap - SIDEBAR.right;
     const sideCtx: Context = { dark: true, narrow: true, width: SIDEBAR.width };
     const letters = initials(p.name);
@@ -1002,7 +1005,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     ];
     content.push({ columns: [{ width: SIDEBAR.width, stack: side }, { width: "*", stack: main }], columnGap: SIDEBAR.gap });
   } else if (atlas) {
-    const sideKeys: Section[] = ["education", "skills", "certifications"];
+    const sideKeys: Section[] = ["education", "skills", "languages", "certifications"];
     const mainWidth = PAGE_WIDTH - ATLAS.left - ATLAS.width - ATLAS.gap - ATLAS.right;
     const sideCtx: Context = { panel: true, narrow: true, width: ATLAS.width };
     const contactRows = ([["Email", p.email], ["Phone", p.phone], ["Location", p.location], ["Website", p.website]] as const).filter(([, value]) => value.trim());
@@ -1026,7 +1029,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     ];
     content.push({ columns: [{ width: "*", stack: main }, { width: ATLAS.width, stack: side }], columnGap: ATLAS.gap });
   } else if (summit) {
-    const sideKeys: Section[] = ["education", "skills", "certifications"];
+    const sideKeys: Section[] = ["education", "skills", "languages", "certifications"];
     const mainWidth = PAGE_WIDTH - SUMMIT.left - SUMMIT.width - SUMMIT.gap - SUMMIT.right;
     const sideCtx: Context = { panel: true, narrow: true, width: SUMMIT.width };
     const side: Content[] = [
@@ -1037,7 +1040,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     content.push({ columns: [{ width: SUMMIT.width, stack: side }, { width: "*", stack: main }], columnGap: SUMMIT.gap });
   } else if (gazette) {
     // A newspaper front page: the profile as a full-width lede, then two ruled columns.
-    const rightKeys: Section[] = ["education", "skills", "certifications"];
+    const rightKeys: Section[] = ["education", "skills", "languages", "certifications"];
     const leftWidth = 300, gap = 14;
     const rightWidth = fullWidth - leftWidth - gap * 2 - .5;
     if (!cv.hiddenSections.includes("summary") && cv.summary.trim()) content.push({ text: cv.summary.trim(), font: "Tinos", italics: true, fontSize: 11.8, lineHeight: 1.2 * leadingScale, color: ink, margin: [0, 11 * gapScale, 0, 2 * gapScale] });
@@ -1063,11 +1066,11 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
     if (intro.length) rows.push([{ text: "" }, { stack: intro, margin: [0, 0, 0, 2] }]);
     for (const key of cv.sectionOrder) {
       if (cv.hiddenSections.includes(key) || !sectionHasContent(cv, key)) continue;
-      const textual = key === "summary" || key === "skills";
+      const textual = isTextSection(key);
       const blocks: Content[] = textual ? [{ stack: sectionBody(key, ctx) }] : cv[key].filter(hasEntry).map(entry => ({ stack: entryContent(entry, key, ctx) }));
       starts.add(rows.length);
       blocks.forEach((block, i) => rows.push([i === 0 ? {
-        text: sectionLabels[key], alignment: "right", bold: true, fontSize: 9.6, color: accent, lineHeight: 1.2, margin: [0, textual ? .4 : 3 * gapScale + .8, 0, 0],
+        text: sectionTitle(cv, key), alignment: "right", bold: true, fontSize: 9.6, color: accent, lineHeight: 1.2, margin: [0, textual ? .4 : 3 * gapScale + .8, 0, 0],
       } : { text: "" }, block]));
     }
     if (rows.length) content.push({
@@ -1092,7 +1095,7 @@ export function buildDocument(cv: CV): TDocumentDefinitions {
       content.push({
         table: { widths: tiles.map(() => "*"), body: [tiles.map(tileKey => ({
           stack: [
-            { text: labels[tileKey].toUpperCase(), bold: true, fontSize: 8.4, characterSpacing: 1.4, color: accent, margin: [0, 0, 0, 5] },
+            { text: labelFor(tileKey).toUpperCase(), bold: true, fontSize: 8.4, characterSpacing: 1.4, color: accent, margin: [0, 0, 0, 5] },
             ...sectionBody(tileKey, { panel: true, narrow: true, width: inner }),
           ], fillColor: tint(accent, .91), margin: [pad, 11, pad, 8],
         }))] },
