@@ -37,7 +37,7 @@ export function pageMetadata({ title, description, path, image = "/social/folio.
     robots: { index: !noIndex, follow: true, googleBot: { index: !noIndex, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
     openGraph: {
       type: article ? "article" : "website", title: pageTitle, description,
-      siteName: SITE_NAME, locale: "en_GB", url: canonical,
+      siteName: "Folio Free CV Maker", locale: "en_GB", url: canonical,
       images: socialImage ? [{ url: socialImage, width: 1200, height: 630, type: "image/png", alt: `${title} — Folio free CV maker` }] : [],
       ...(article ? { modifiedTime: CONTENT_UPDATED, authors: [siteOperator.name] } : {}),
     },

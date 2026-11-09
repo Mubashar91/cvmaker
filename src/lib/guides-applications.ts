@@ -37,6 +37,16 @@ export const applicationGuides: Guide[] = [
         "Pick two or three requirements from the job description and give an example for each: what you did, how you did it, and what changed. This is where you go beyond your CV, explaining the context behind a result or why a project matters for this job.",
         "Use the employer’s terminology for skills you genuinely have. The [resume keyword checker](/resume-keyword-checker/) shows which terms from the advert your application already covers.",
       ] },
+      { id: "no-experience", heading: "A cover letter with no experience", paragraphs: [
+        "If this is your first job, an internship, or a move into a new field, the letter matters even more, because it explains what your CV cannot show on its own. Lead with your motivation for this specific role, then give evidence from study, projects, volunteering, part-time work, or activities.",
+        "Do not apologise for a lack of experience. Describe what you have done and what it taught you, and connect it to what the employer needs. One specific example is worth more than a list of qualities.",
+      ], bullets: [
+        "Name the role and say why this employer interests you.",
+        "Give one or two examples from your course, a project, volunteering, or a part-time job.",
+        "Connect each example to a requirement in the advert.",
+        "Mention your availability, such as a graduation date or start date, if it matters.",
+        "Choose the student or graduate template in the [cover letter maker](/cover-letter-maker/) for a first draft written for early-career applicants.",
+      ] },
       { id: "closing-paragraph", heading: "Close with confidence", paragraphs: [
         "Summarise why you are interested in the role, mention your availability if it matters, and thank the reader. A sentence such as “I would welcome the chance to discuss how I could help your team” is enough. You do not need to demand an interview or repeat your contact details in the paragraph.",
       ] },
@@ -54,6 +64,7 @@ export const applicationGuides: Guide[] = [
     ],
     faqs: [
       { question: "How long should a cover letter be?", answer: "One page at most: usually three to five short paragraphs, or about 250 to 400 words." },
+      { question: "How do I write a cover letter with no experience?", answer: "Focus on why you want this role and what you can already offer. Use examples from your studies, projects, volunteering, or part-time work, and link each one to the advert. See the section on [writing a cover letter with no experience](/tips/how-to-write-a-cover-letter/#no-experience) above." },
       { question: "Do I need a cover letter if it is optional?", answer: "Not always, but a short, tailored letter can help, especially if you are changing careers, applying for your first job, or explaining a gap." },
       { question: "Should my cover letter match my CV?", answer: "Yes. Use the same name, contact details, and a similar typeface, so the documents look like a set. The [free cover letter maker](/cover-letter-maker/) can reuse the details from the CV open in your editor." },
       { question: "Can I put my cover letter in the body of an email?", answer: "Yes, if the employer asks you to apply by email. Write a shorter version in the message and attach your CV, or attach both as PDFs if the advert asks for a separate letter." },

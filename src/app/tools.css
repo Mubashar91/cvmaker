@@ -342,4 +342,6 @@
   .footer-top { grid-template-columns: 1fr; }
   .footer-templates { grid-template-columns: repeat(2, max-content); }
   .match-rate strong { font-size: 38px; }
+  /* Long, generated labels (e.g. "Edit the software developer example") wrap instead of overflowing. */
+  .article-cta .button, .article-tool .button, .template-detail-copy .button { max-width: 100%; white-space: normal; text-align: left; }
 }

@@ -41,7 +41,7 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 - Review CV checks visible content for missing names, malformed contact details, incomplete entries, dates, descriptions, long profiles, and placeholder phrases. Suggestions link directly to the relevant editor fields.
 - Read and download a plain-text CV for application forms. Hidden and empty sections are omitted, and section order is preserved.
 - Six static template collections (ATS-friendly, professional, modern, simple, student, and photo), with original guidance, curated designs, breadcrumbs, social images, and structured data.
-- Fourteen CV and resume guides (writing, cover letters, ATS, and country conventions for the UK, US, Canada, and Australia), with images from real renders, FAQs, related guides, and a link to the most useful tool.
+- Seventeen CV and resume guides (writing, projects, part-time and internship CVs, cover letters, ATS, and country conventions for the UK, US, Canada, and Australia), with images from real renders, FAQs, related guides, and a link to the most useful tool.
 - Sixteen job-specific CV examples, including student, data analyst, graphic designer, and frontend developer.
 - Free browser tools (no AI, no server): a cover letter maker (three templates, three layouts, A4 or US Letter PDF, copy, print, optional browser save), a resume keyword checker (job description vs CV, reads PDF/DOCX on the device), a resume summary builder, a resume objective generator, and skills suggestions for 22 jobs. Summary, objective, and skills results can be added to the CV open in the editor.
 - A student landing page (`/cv-maker-for-students/`) that opens the editor with the Student template and an education-first section order.
@@ -212,7 +212,7 @@ npm test
 - `src/lib/model.ts`: shared CV schema, template list, accent colours, and draft validation.
 - `src/app/globals.css`, `templates.css`, `editor.css`: the site design (self-hosted Archivo variable font from `@fontsource-variable/archivo`).
 - `src/config/ads.ts`: disabled provider configuration.
-- `src/lib/tips.ts`, `guides-applications.ts`, `guides-country.ts`, `guide-types.ts`: guide content. Text may contain internal links as `[text](/path/)` (`src/lib/rich-text.ts`).
+- `src/lib/tips.ts`, `guides-early-career.ts`, `guides-applications.ts`, `guides-country.ts`, `guide-types.ts`: guide content. Text may contain internal links as `[text](/path/)` (`src/lib/rich-text.ts`).
 - `src/lib/tools.ts`: the free tools registry used by navigation, the homepage, and the tools hub.
 - `src/lib/cover-letter.ts`, `cover-letter-pdf.ts`: cover letter templates and PDF layouts. `npm run letters:preview` renders `public/cover-letters/*.webp`.
 - `src/lib/keyword-match.ts`, `statements.ts`, `skills-library.ts`: keyword comparison, summary/objective sentence patterns, and predefined skills.

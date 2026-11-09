@@ -107,9 +107,9 @@ export const cvExamples: CVExample[] = [
   },
   {
     slug: "software-developer", job: "Software developer", category: "Technology", template: "tech",
-    seoTitle: "Software Developer CV Example & Resume Template",
-    description: "A software developer CV example with a grouped tech stack, results-led bullet points, and a clear profile. Edit it free and download a PDF.",
-    intro: "Engineering managers scan a developer CV for three things: the technologies you use, what you built with them, and how your work helped the team or product. This example groups skills by area and describes each role through shipped work.",
+    seoTitle: "Software Developer & Software Engineer CV Example",
+    description: "A software developer and software engineer CV example with a grouped tech stack, results-led bullet points, and a clear profile. Edit it free as a resume or CV.",
+    intro: "Whether the role is called software developer or software engineer, engineering managers scan the CV for three things: the technologies you use, what you built with them, and how your work helped the team or product. This example groups skills by area and describes each role through shipped work.",
     person: { name: "Sam Okafor", headline: "Software Developer", location: "Manchester, United Kingdom", phone: "+44 7700 900103" },
     summary: "Software developer with five years of experience building web applications in TypeScript, React, and Node.js. Turns unclear requirements into reliable features, writes tests that catch real problems, and enjoys improving performance. Currently building a platform used by thousands of small businesses.",
     experience: [

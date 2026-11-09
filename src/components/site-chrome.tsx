@@ -17,6 +17,7 @@ const footerGuides = [
   { href: "/tips/australian-resume-format/", label: "Australian resume format" },
   { href: "/tips/how-to-write-a-cover-letter/", label: "How to write a cover letter" },
   { href: "/tips/ats-friendly-cv/", label: "ATS-friendly CV tips" },
+  { href: "/tips/internship-cv/", label: "Internship CV guide" },
 ];
 
 export function Footer() {

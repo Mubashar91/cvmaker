@@ -37,7 +37,7 @@ export function collectionPageSchema({ path, name, description, items }: { path:
 export const CV_EXAMPLES_DESCRIPTION = "Free CV examples for real jobs, from nurse and teacher to software developer. Each has profile examples, bullet points, skills, and a template to edit.";
 
 const sameAs = () => (siteOperator.profiles.length ? { sameAs: [...siteOperator.profiles] } : {});
-const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 }, contactPoint: { "@type": "ContactPoint", contactType: "website support", email: siteOperator.email, url: absoluteUrl("/contact/") }, founder: { "@id": absoluteUrl("/about/#maintainer") } });
+const organization = () => ({ "@type": "Organization", "@id": absoluteUrl("/#organization"), name: SITE_NAME, alternateName: "Folio Free CV Maker", url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/apple-touch-icon.png"), width: 180, height: 180 }, contactPoint: { "@type": "ContactPoint", contactType: "website support", email: siteOperator.email, url: absoluteUrl("/contact/") }, founder: { "@id": absoluteUrl("/about/#maintainer") } });
 const person = () => ({ "@type": "Person", "@id": absoluteUrl("/about/#maintainer"), name: siteOperator.name, jobTitle: siteOperator.role, url: absoluteUrl("/about/"), ...sameAs() });
 
 export function informationPageSchema(path: InformationPath) {
@@ -59,7 +59,8 @@ export function websiteSchema() {
   if (!SITE_URL) return undefined;
   return { "@context": "https://schema.org", "@graph": [
     organization(),
-    { "@type": "WebSite", "@id": absoluteUrl("/#website"), name: SITE_NAME, url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, inLanguage: "en", publisher: { "@id": absoluteUrl("/#organization") } },
+    // The brand is Folio; the domain and primary search phrase are "Free CV Maker". alternateName ties them together.
+    { "@type": "WebSite", "@id": absoluteUrl("/#website"), name: SITE_NAME, alternateName: ["Folio Free CV Maker", "Free CV Maker", "freecvmaker.online"], url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, inLanguage: "en", publisher: { "@id": absoluteUrl("/#organization") } },
     { "@type": "WebApplication", "@id": absoluteUrl("/#app"), name: "Folio CV Maker", url: absoluteUrl("/"), description: DEFAULT_DESCRIPTION, image: absoluteUrl("/social/folio.png"), applicationCategory: "BusinessApplication", operatingSystem: "Web browser", browserRequirements: "Requires JavaScript and a modern web browser", isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, creator: { "@id": absoluteUrl("/#organization") }, featureList: ["PDF and DOCX import", `${templates.length} professional CV templates`, "Optional profile photo", "Live PDF preview", "Typeface and spacing controls", "Ten accent colours or your own", "Languages and custom sections", "CV review checks and plain-text export", "Free multi-page PDF downloads", "Local browser drafts", "Free cover letter maker", "Resume keyword checker", "No account required"] },
   ] };
 }

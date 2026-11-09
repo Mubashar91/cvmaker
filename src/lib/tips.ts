@@ -1,6 +1,7 @@
 import type { Guide } from "./guide-types";
 import { countryGuides } from "./guides-country";
 import { applicationGuides } from "./guides-applications";
+import { earlyCareerGuides } from "./guides-early-career";
 import { plainText } from "./rich-text";
 export type { Guide, GuideSection } from "./guide-types";
 
@@ -232,7 +233,7 @@ const coreGuides: Guide[] = [
 export function guideText(guide: Guide): string {
   return plainText([guide.intro, ...guide.sections.flatMap(section => [...section.paragraphs, ...(section.bullets || []), section.example || "", ...(section.subsections || []).flatMap(sub => [sub.heading, ...sub.paragraphs, ...(sub.bullets || [])]), ...(section.table ? section.table.rows.flat() : [])]), ...(guide.faqs || []).flatMap(faq => [faq.question, faq.answer]), guide.takeaway].join(" "));
 }
-const guides = [...coreGuides, ...applicationGuides, ...countryGuides];
+const guides = [...coreGuides, ...earlyCareerGuides, ...applicationGuides, ...countryGuides];
 export const tips = guides.map(guide => {
   const words = guideText(guide).split(/\s+/).filter(Boolean).length;
   return { ...guide, words, readTime: Math.max(2, Math.ceil(words / 200)) };
@@ -241,7 +242,8 @@ export type Tip = typeof tips[number];
 
 /** How the guide index is organised. Every guide appears in exactly one group. */
 export const guideGroups = [
-  { id: "writing", heading: "Writing your CV", text: "Profiles, experience, length, and your first CV.", slugs: ["write-a-clear-profile", "describe-your-experience", "your-first-cv", "keep-it-focused", "choose-your-template"] },
+  { id: "writing", heading: "Writing your CV", text: "Profiles, experience, projects, length, and layout.", slugs: ["write-a-clear-profile", "describe-your-experience", "projects-on-a-cv", "keep-it-focused", "choose-your-template"] },
+  { id: "first-jobs", heading: "Students and first jobs", text: "Your first CV, part-time work, and internships.", slugs: ["your-first-cv", "part-time-job-cv", "internship-cv"] },
   { id: "applying", heading: "Cover letters, ATS, and sending", text: "Everything between a finished CV and a sent application.", slugs: ["how-to-write-a-cover-letter", "ats-friendly-cv", "common-cv-mistakes", "before-you-send"] },
   { id: "countries", heading: "CVs and resumes by country", text: "Local conventions for the UK, US, Canada, and Australia.", slugs: ["resume-vs-cv", "uk-cv-format", "us-resume-format", "canadian-resume-format", "australian-resume-format"] },
 ] as const;
