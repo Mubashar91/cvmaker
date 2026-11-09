@@ -4,13 +4,13 @@ export const tools = [
   {
     path: "/cover-letter-maker/", name: "Cover letter maker", icon: "mail",
     title: "Free Cover Letter Maker — Professional Templates & PDF",
-    description: "Create a cover letter online for free. Fill in your details, choose a professional layout, edit every line, then copy, print, or download a PDF. No sign-up.",
+    description: "Create a cover letter online for free, with no sign-up. Our cover letter builder turns your details into a professional letter to edit and download as a PDF.",
     summary: "Turn your details into a tailored letter, edit every line, then copy, print, or download it as a PDF.",
   },
   {
     path: "/resume-keyword-checker/", name: "Resume keyword checker", icon: "search",
     title: "Free Resume Keyword Checker — Compare Your CV to a Job",
-    description: "Check your resume against a job description for free. See matching and missing keywords in seconds. It runs in your browser, so nothing is uploaded or stored.",
+    description: "Check your resume against a job description for free. See matching and missing keywords and how to check ATS compatibility. Nothing is uploaded.",
     summary: "Compare your CV with a job description and see which keywords you cover and which are missing.",
   },
   {
@@ -45,5 +45,5 @@ export const toolsHub = {
 export const studentPage = {
   path: "/cv-maker-for-students/", label: "CV maker for students",
   title: "Free CV Maker for Students & Graduates",
-  description: "Make a student CV or graduate resume for free, even with no work experience. Start from an education-first layout, follow clear guidance, and download a PDF.",
+  description: "A free student resume builder and CV maker: start from an education-first layout, follow clear guidance, and download a PDF, even with no work experience.",
 };

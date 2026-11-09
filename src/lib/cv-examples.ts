@@ -108,7 +108,7 @@ export const cvExamples: CVExample[] = [
   {
     slug: "software-developer", job: "Software developer", category: "Technology", template: "tech",
     seoTitle: "Software Developer & Software Engineer CV Example",
-    description: "A software developer and software engineer CV example with a grouped tech stack, results-led bullet points, and a clear profile. Edit it free as a resume or CV.",
+    description: "A software developer and software engineer CV example with a grouped tech stack and results-led bullet points. Edit it in the free resume builder.",
     intro: "Whether the role is called software developer or software engineer, engineering managers scan the CV for three things: the technologies you use, what you built with them, and how your work helped the team or product. This example groups skills by area and describes each role through shipped work.",
     person: { name: "Sam Okafor", headline: "Software Developer", location: "Manchester, United Kingdom", phone: "+44 7700 900103" },
     summary: "Software developer with five years of experience building web applications in TypeScript, React, and Node.js. Turns unclear requirements into reliable features, writes tests that catch real problems, and enjoys improving performance. Currently building a platform used by thousands of small businesses.",
@@ -149,7 +149,7 @@ export const cvExamples: CVExample[] = [
   {
     slug: "customer-service", job: "Customer service", category: "Customer service", template: "modern",
     seoTitle: "Customer Service CV Example & Resume Template",
-    description: "A customer service CV example with a profile, achievement-led bullet points, and key skills. Adapt it for call centre, retail, or online support roles.",
+    description: "A customer service CV example with achievement-led bullet points and key skills. Edit it in the free resume builder for call centre, retail, or support roles.",
     intro: "Customer service managers look for evidence that you stay patient, solve problems, and meet service targets. This example uses specific measures, such as satisfaction scores and resolution rates, to turn everyday tasks into achievements.",
     person: { name: "Chloe Bennett", headline: "Customer Service Advisor", location: "Glasgow, United Kingdom", phone: "+44 7700 900104" },
     summary: "Customer service advisor with four years of experience in contact centre and live chat support. Resolves billing and account queries on first contact, stays calm with frustrated customers, and consistently meets quality and response targets. Looking to move into a team leader role.",
@@ -266,8 +266,8 @@ export const cvExamples: CVExample[] = [
   },
   {
     slug: "administrator", job: "Administrator", category: "Office & admin", template: "ledger",
-    seoTitle: "Administrator CV Example — Free Template & Tips",
-    description: "An administrator CV example with an organised profile, office experience, and in-demand skills. Use it for admin assistant or office roles and download a PDF.",
+    seoTitle: "Administrative Assistant & Administrator CV Example",
+    description: "An administrative assistant and administrator CV example with an organised profile, office experience, and in-demand skills. Edit it free as a template.",
     intro: "Administrators keep an organisation running, so hiring managers look for organisation, accuracy, and confidence with systems. This example shows the range of tasks you handle and how you made processes faster or more reliable.",
     person: { name: "Hannah Kowalski", headline: "Office Administrator", location: "Nottingham, United Kingdom", phone: "+44 7700 900107" },
     summary: "Office administrator with five years of experience supporting busy teams in property and legal services. Manages diaries, invoices, and records accurately, keeps office systems running smoothly, and finds simple ways to save colleagues time. Advanced Microsoft 365 user.",
@@ -506,8 +506,8 @@ export const cvExamples: CVExample[] = [
   },
   {
     slug: "student", job: "Student", category: "Students & graduates", template: "student",
-    seoTitle: "Student CV Example — Free Template for No Experience",
-    description: "A student CV example for school leavers, students, and graduates with little work experience. See profiles, bullet points, and skills, then edit it free.",
+    seoTitle: "Student & Graduate CV Example (No Experience Needed)",
+    description: "A student and graduate CV example for school leavers, students, and fresh graduates with little work experience. See profiles, bullet points, and skills.",
     intro: "A student CV has to work with what you have: education, part-time work, projects, and activities. This example leads with a degree, then uses a part-time job, a society role, and a university project as real evidence of reliability, organisation, and teamwork.",
     person: { name: "Ellie Harper", headline: "Business Management Student", location: "Sheffield, United Kingdom", phone: "+44 7700 900113" },
     sectionOrder: ["summary", "education", "experience", "projects", "skills", "languages", "certifications", "additional"],
@@ -634,9 +634,9 @@ export const cvExamples: CVExample[] = [
   },
   {
     slug: "frontend-developer", job: "Frontend developer", category: "Technology", template: "monogram",
-    seoTitle: "Frontend Developer CV Example — Free Resume Template",
-    description: "A frontend developer CV example with React, TypeScript, accessibility, and performance results, plus three profile examples. Edit it free and download a PDF.",
-    intro: "A frontend CV should show the stack you build with and the quality of what you ship: accessible, fast, well-tested interfaces. This example pairs a grouped skills section with bullets that name concrete improvements in performance and accessibility.",
+    seoTitle: "Frontend & Web Developer CV Example — Free Template",
+    description: "A frontend and web developer CV example with React, TypeScript, accessibility, and performance results, plus three profile examples. Edit it free.",
+    intro: "A frontend or web developer CV should show the stack you build with and the quality of what you ship: accessible, fast, well-tested interfaces. This example pairs a grouped skills section with bullets that name concrete improvements in performance and accessibility.",
     person: { name: "Arjun Mehta", headline: "Frontend Developer", location: "Reading, United Kingdom", phone: "+44 7700 900116", website: "arjunmehta.example" },
     summary: "Frontend developer with four years of experience building accessible, responsive interfaces in React and TypeScript. Works closely with designers to turn Figma files into reusable components, and cares about performance and keyboard accessibility. Currently maintaining the design system for a SaaS product.",
     experience: [

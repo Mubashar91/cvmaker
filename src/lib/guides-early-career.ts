@@ -61,7 +61,7 @@ export const earlyCareerGuides: Guide[] = [
   {
     slug: "internship-cv", title: "How to write a CV for an internship", published: "2026-11-09",
     seoTitle: "How to Write an Internship CV (With Examples)",
-    description: "Write an internship CV that works with little experience: the best structure, a short objective, coursework and projects as evidence, and tips by field.",
+    description: "Write an internship CV or resume that works with little experience: the best structure, a short objective, coursework and projects, and tips by field.",
     category: "Students & first applications",
     intro: "An internship CV is read differently from a CV for an experienced role. Recruiters know you are early in your career, so they look for potential: a genuine interest in the field, evidence that you can learn quickly, and the basic skills to contribute from the first week. Your education, projects, and activities are where that evidence lives.",
     image: { kind: "template", id: "student", alt: "Student CV template with clear section bands and a centred serif name, a single-column layout suited to internship applications", caption: "Student template, fictional sample content." },

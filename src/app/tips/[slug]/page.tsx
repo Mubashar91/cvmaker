@@ -35,7 +35,7 @@ export default async function Tip({ params }: { params: Promise<{ slug: string }
       </section>)}
       <aside className="callout"><p>{tip.takeaway}</p></aside>
       {tip.faqs && <section id="faq" className="article-faq"><h2>Frequently asked questions</h2><FaqList faqs={tip.faqs} /></section>}
-      {tip.tool && <aside className="article-tool"><div><span>Free tool</span><p>{tip.tool.text}</p></div><Link href={tip.tool.href} className="button dark">{tip.tool.label}<ArrowRight size={16} /></Link></aside>}
+      {tip.tool && <aside className="article-tool"><div><span>Free tool</span><p><RichText text={tip.tool.text} /></p></div><Link href={tip.tool.href} className="button dark">{tip.tool.label}<ArrowRight size={16} /></Link></aside>}
       <div className="article-cta"><span>A fresh page for your next chapter.</span><StartCVButton>Open the free editor</StartCVButton></div>
     </article></div><AdSlot placement="tips" />
     <section className="related-guides"><div className="container"><h2>Related guides.</h2><ul className="guide-list">{related.map(guide => <li key={guide.slug}><Link href={`/tips/${guide.slug}/`} className="guide-row"><span className="guide-meta"><span>{guide.category}</span><span>{guide.readTime} min read</span></span><h3>{guide.title}</h3><p>{guide.description}</p><ArrowUpRight className="guide-arrow" size={22} /></Link></li>)}</ul></div></section></main><Footer /></>;

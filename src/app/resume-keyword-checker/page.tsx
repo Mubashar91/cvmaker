@@ -8,7 +8,7 @@ export const metadata = pageMetadata({ title: page.title, description: page.desc
 
 export default function KeywordCheckerPage() {
   return <ToolPage path={page.path} heading="Free resume keyword checker."
-    intro="Compare your resume or CV with a job description and see which keywords you already cover and which are missing. It runs entirely in your browser, so your CV and the advert are never uploaded."
+    intro="This free resume keyword matching tool compares your resume or CV with a job description and shows which keywords you already cover and which are missing. It runs entirely in your browser, so your CV and the advert are never uploaded."
     points={["Results as you type", "Reads PDF and DOCX files", "No sign-up", "Nothing uploaded"]}
     featureList={["Keyword and phrase extraction from job descriptions", "Matching and missing keywords with counts", "Share of key terms found", "Reads text from PDF and DOCX files on your device", "Uses the CV open in Folio’s editor"]}
     guide={[
@@ -20,6 +20,16 @@ export default function KeywordCheckerPage() {
       { id: "keywords-and-ats", heading: "Keywords and applicant tracking systems", paragraphs: [
         "Many employers use an applicant tracking system (ATS) to manage applications, and recruiters often search it for specific skills, tools, or qualifications. Using the advert’s own wording for things you can genuinely do makes your CV easier to find and easier to read.",
         "No outside tool can see how a particular employer’s system is set up, so this checker does not give an “ATS score”. For format advice that applies to most systems, read [how to make your CV ATS-friendly](/tips/ats-friendly-cv/), and compare the [ATS-friendly templates](/templates/category/ats-friendly/).",
+      ] },
+      { id: "check-ats-compatibility", heading: "How to check your resume’s ATS compatibility", paragraphs: [
+        "No free tool can run your resume through a particular employer’s applicant tracking system. You can still check the things that most often cause problems, in a few minutes, and keywords are only one of them.",
+        "Folio’s [ATS-friendly templates](/templates/category/ats-friendly/) cover the layout side, and the [ATS-friendly CV guide](/tips/ats-friendly-cv/) explains each point in more detail.",
+      ], bullets: [
+        "Copy and paste test: select all the text in your PDF and paste it into a plain text editor. If it reads in a sensible order, it can be parsed.",
+        "Use standard section headings such as Work experience, Education, and Skills.",
+        "Keep your name and contact details in the body of the page, not only in a header.",
+        "Send the file type the employer asks for, such as Word instead of PDF.",
+        "Compare keywords with this checker, and add missing terms only where they are true for you.",
       ] },
       { id: "use-your-results", heading: "How to use your results", paragraphs: ["Work through the missing terms from the top: the list is ordered by how prominent each term is in the advert."], bullets: [
         "Add a missing term only if it is true for you, ideally inside an experience bullet that shows how you used it.",

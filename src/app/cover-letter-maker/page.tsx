@@ -46,6 +46,7 @@ export default function CoverLetterMakerPage() {
     ]}
     faqs={[
       { question: "Is the cover letter maker really free?", answer: "Yes. Writing, editing, copying, printing, and downloading your letter as a PDF are all free, with no account, trial, or watermark." },
+      { question: "Is this a cover letter generator?", answer: "It works like a cover letter generator, without AI. It fills predefined letter templates with your details, so every sentence comes from a fixed template or from your own words. You can edit the result line by line, and no sign-up is needed." },
       { question: "Does the cover letter maker use AI?", answer: "No. It combines your details with predefined paragraph templates using simple text formatting in your browser. Nothing is sent to an AI service, and you can edit every line." },
       { question: "Can I download my cover letter as a PDF or Word file?", answer: "You can download a PDF with selectable text in A4 or US Letter size, print it, or copy the text into Word, an email, or an online application form." },
       { question: "Is my cover letter saved or uploaded?", answer: "Nothing is uploaded. The letter stays in this tab unless you choose “Save in this browser”, which keeps a copy on this device only. You can delete it at any time." },

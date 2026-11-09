@@ -8,7 +8,7 @@ const dateLabel = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "lon
 /** "9 November 2026" for an ISO date. */
 export function formatDate(iso: string): string { return dateLabel.format(new Date(`${iso}T00:00:00Z`)); }
 export const CONTENT_UPDATED_LABEL = formatDate(CONTENT_UPDATED);
-export const DEFAULT_DESCRIPTION = `Create a professional CV online for free with ${templates.length} templates. Import a PDF or DOCX, edit your details, and download a PDF. No sign-up, no watermark.`;
+export const DEFAULT_DESCRIPTION = `Create a professional CV online for free with ${templates.length} templates. Import a PDF or DOCX, edit your details, and download a PDF. No sign-up, payment, or watermark.`;
 
 function configuredOrigin(): string | undefined {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();

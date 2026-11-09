@@ -58,11 +58,11 @@ export const countryGuides: Guide[] = [
   {
     slug: "uk-cv-format", title: "How to write a CV for jobs in the UK", published: "2026-11-09",
     seoTitle: "UK CV Format: How to Write a CV for Jobs in the UK",
-    description: "Write a CV for UK jobs: the standard British CV format, what to include and leave out, length, right-to-work details, and student CVs with GCSEs and A levels.",
+    description: "Write a CV for UK jobs: the standard British CV format and a free template, what to leave out, length, right to work, and student CVs with GCSEs and A levels.",
     category: "Applying by country",
     intro: "A UK CV is a short, factual document, usually two A4 pages, that introduces your experience and makes it easy for an employer to shortlist you. British conventions are simple once you know them: no photo, no personal details beyond how to contact you, and a clear focus on evidence.",
     image: { kind: "example", id: "teacher", alt: "UK teacher CV example with QTS in the professional title, a short personal statement, and teaching roles listed most recent first", caption: "A fictional UK teacher CV from our CV examples, in the Classic template." },
-    tool: { href: "/editor/", label: "Start your UK CV", text: "Two A4 pages, British spelling, and no photo needed. Build your UK CV in the free editor." },
+    tool: { href: "/editor/", label: "Use the free UK CV maker", text: "Two A4 pages, British spelling, and no photo needed. Build your UK CV for free, with no sign-up or watermark." },
     sections: [
       { id: "uk-cv-structure", heading: "The standard UK CV structure", paragraphs: [
         "Most UK CVs follow the same order. Start with your name and contact details, followed by a personal statement, also called a profile. Then list your work experience, most recent first, followed by education, skills, and any other relevant sections such as certifications, volunteering, or languages.",
@@ -86,9 +86,13 @@ export const countryGuides: Guide[] = [
         "If your education or recent experience abroad might lead an employer to wonder whether you need a visa, a short line can answer the question early, for example “Full right to work in the UK” in your contact details or personal statement.",
         "If you need sponsorship, check whether the employer is a licensed sponsor before applying, and answer the application form’s questions accurately.",
       ] },
-      { id: "school-leavers-and-students", heading: "UK CVs for school leavers and students", paragraphs: [
+      { id: "school-leavers-and-students", heading: "UK CV format for students and school leavers", paragraphs: [
         "School leavers can list GCSEs and A levels, or Scottish Highers, BTECs, or T Levels, with grades, most recent first. If you have many GCSEs, summarise them on one line, for example “9 GCSEs at grades 9–5, including English and Maths”. University students and graduates can give their degree title, institution, dates, and expected or achieved classification, such as a 2:1.",
         "Part-time jobs, volunteering, the Duke of Edinburgh’s Award, sports clubs, and society roles all count as evidence. Our guide to [writing your first CV with no experience](/tips/your-first-cv/) shows how to describe them, and the [CV maker for students](/cv-maker-for-students/) starts you with an education-first layout.",
+      ] },
+      { id: "uk-cv-template", heading: "A free UK CV template to start from", paragraphs: [
+        "Any clear layout without a photo suits UK applications. In Folio’s free CV maker, the [Classic](/templates/classic/) and [Professional](/templates/professional/) templates give a traditional British look, and [Clarity](/templates/clarity/) keeps everything in one plain column for online application systems. All of them download as A4 PDFs, the standard size for UK jobs.",
+        "Start in the [free CV maker](/editor/), leave the photo out, and use British spelling. You can switch templates at any time without retyping, so it is easy to compare a traditional British CV template with a more modern one.",
       ] },
       { id: "application-forms", heading: "Application forms and supporting statements", paragraphs: [
         "Many UK public sector employers, including the NHS, local councils, and the civil service, use online application forms instead of, or as well as, a CV. These often include a supporting statement where you explain how you meet each point of the person specification. The civil service may also ask for examples against the behaviours in its Success Profiles framework.",
@@ -109,11 +113,11 @@ export const countryGuides: Guide[] = [
   {
     slug: "us-resume-format", title: "How to write an American resume", published: "2026-11-09",
     seoTitle: "US Resume Format: How to Write an American Resume",
-    description: "How to write a resume for jobs in the United States: the standard US resume format, ideal length, what to leave out, and tips for international applicants.",
+    description: "How to write a resume for US jobs: the American resume format and a free template, length, what to leave out, and tips for students and international applicants.",
     category: "Applying by country",
     intro: "An American resume is a concise, achievement-focused summary of your experience, usually one page early in your career and up to two pages for most experienced candidates. US recruiters expect quick evidence of results, a clean reverse-chronological layout, and no personal details beyond how to reach you.",
     image: { kind: "template", id: "clarity", alt: "Clarity CV template: a plain single-column layout with standard headings and no graphics, suited to US resume conventions", caption: "Clarity template, fictional sample content. Plain structure, no graphics, standard headings." },
-    tool: { href: "/resume-keyword-checker/", label: "Check your resume against a job", text: "US job adverts are often detailed and keyword-heavy. Compare your resume with the description to see what you already cover." },
+    tool: { href: "/editor/", label: "Build your US resume free", text: "A free resume builder for US jobs: one clear page, no photo, no sign-up, and no watermark. Then compare it with the job in the [resume keyword checker](/resume-keyword-checker/)." },
     sections: [
       { id: "us-resume-structure", heading: "The standard US resume format", paragraphs: [
         "The reverse-chronological resume is the most common format in the United States. It starts with your contact details and a short professional summary, then lists work experience from most recent to oldest, followed by education and skills.",
@@ -129,6 +133,10 @@ export const countryGuides: Guide[] = [
         "One page is the usual expectation for students, recent graduates, and people with a few years of experience. Two pages are common for experienced professionals. Federal government jobs advertised on USAJOBS have their own resume requirements, including what each role must show, so follow the job announcement exactly.",
         "The standard paper size in the US is Letter (8.5 × 11 inches) rather than A4. Folio currently downloads CVs as A4 PDFs. Most resumes are read on screen, where the difference is rarely noticeable, but if an employer asks for Letter size or you plan to print, check the layout first.",
       ] },
+      { id: "us-resume-for-students", heading: "US resume format for students", paragraphs: [
+        "Students and recent graduates in the US usually use a one-page resume with education near the top. List your school, your degree or expected degree, and your graduation month and year. Add your GPA if it is strong, followed by relevant coursework, honors, or a capstone project.",
+        "Campus jobs, internships, research assistant roles, volunteering, and leadership in student organizations all count as experience. Describe them with the same action-and-result bullets as any job. Our guides to [writing an internship CV](/tips/internship-cv/) and [describing projects](/tips/projects-on-a-cv/) show how.",
+      ], bullets: ["One page, with education first.", "Expected graduation month and year.", "GPA only when it strengthens the application.", "Relevant coursework, projects, or a capstone.", "Campus jobs, internships, and student organizations."] },
       { id: "achievements", heading: "Lead with achievements and numbers", paragraphs: [
         "US resumes tend to be direct about results. Start each bullet with a strong verb, say what you did, and add the outcome: how much, how many, how fast, or what changed. Use figures you can explain in an interview, and describe your share of team results honestly.",
         "If you cannot measure a result, describe its scope instead: the size of the team, the number of customers, the budget you managed, or the systems you worked with. Our guide to [describing work experience](/tips/describe-your-experience/) has more examples.",
@@ -140,6 +148,10 @@ export const countryGuides: Guide[] = [
       { id: "international-applicants", heading: "Applying from outside the US", paragraphs: [
         "If you are applying from another country, convert your document to US conventions: American spelling, one or two pages, and job titles a US reader will recognise, while staying accurate to the role you held. Give context for employers that a US reader may not know, for example “Northbridge Bank, a national retail bank with 3,000 staff”, and describe qualifications in terms of their closest US equivalent.",
         "Be clear about work authorization. If you are a US citizen or permanent resident, or already hold a visa that allows you to work, you can say so briefly. If you will need sponsorship, answer the employer’s questions accurately in the application form.",
+      ] },
+      { id: "us-resume-template", heading: "A free American resume template", paragraphs: [
+        "For US jobs, choose a simple layout that fits on one page. [Clarity](/templates/clarity/) and [Linear](/templates/linear/) use plain, single-column structures that read well on screen and in applicant tracking systems, and [Compact](/templates/compact/) fits more onto one page. Leave the photo out.",
+        "Build your resume in the [free CV maker](/editor/), which works as a free resume builder for US jobs with no sign-up or watermark. It downloads A4 PDFs; most US applications are read on screen, but check the layout if an employer asks for Letter size.",
       ] },
       { id: "summary-or-objective", heading: "Professional summary or resume objective?", paragraphs: [
         "A professional summary works best when you have relevant experience to sum up. A resume objective, which states the role you want and what you bring to it, is more useful for students, recent graduates, and career changers. Either way, keep it short and specific to the job.",
@@ -157,7 +169,7 @@ export const countryGuides: Guide[] = [
   {
     slug: "canadian-resume-format", title: "How to write a Canadian resume", published: "2026-11-09",
     seoTitle: "Canadian Resume Format: How to Write a Resume for Canada",
-    description: "Write a resume for jobs in Canada: Canadian resume format and length, what to leave out, bilingual skills, and advice for newcomers with international experience.",
+    description: "Write a resume for jobs in Canada: the Canadian resume format, length, and a free template, what to leave out, bilingual skills, and advice for newcomers.",
     category: "Applying by country",
     intro: "A Canadian resume is a focused, one- or two-page document that shows your experience and results in reverse chronological order. Its conventions are close to the American resume, with a few Canadian details: no personal information such as age or a photo, consistent Canadian spelling, and room for language skills and volunteer work.",
     image: { kind: "template", id: "professional", alt: "Professional CV template: a formal single-column layout with serif headings and fine rules, suited to a Canadian resume", caption: "Professional template, fictional sample content." },
@@ -188,7 +200,11 @@ export const countryGuides: Guide[] = [
         { heading: "Translate your qualifications", paragraphs: ["If you have had your education assessed, for example through an educational credential assessment, give the Canadian equivalent next to your qualification. For regulated professions such as nursing, engineering, or teaching, state where you are in the provincial licensing process."] },
         { heading: "Show local connections where you have them", paragraphs: ["Canadian volunteering, courses, and bridging programs all help an employer picture you in the role. If you have an open work permit or permanent residence, you can mention it briefly in your summary or contact details."] },
       ] },
-      { id: "no-experience", heading: "A Canadian resume with no experience", paragraphs: [
+      { id: "canadian-resume-template", heading: "A free Canadian resume template", paragraphs: [
+        "A clean, single-column layout suits Canadian applications, including for newcomers adapting an international CV. [Linear](/templates/linear/), [Clarity](/templates/clarity/), and [Professional](/templates/professional/) keep the structure plain and leave out the photo.",
+        "Use the [free CV maker](/editor/) as a Canadian resume builder: add your English and French levels in the Languages section, and rename the extra section to Volunteering for Canadian volunteer work. It downloads A4 PDFs, which display normally on screen; check the layout if an employer asks for Letter size.",
+      ] },
+      { id: "no-experience", heading: "A resume for jobs in Canada with no experience", paragraphs: [
         "If you are a student or new to the Canadian job market, lead with education, projects, volunteer work, and transferable skills. Part-time jobs, co-op placements, and community involvement all count.",
         "Our guide to [writing your first CV](/tips/your-first-cv/) explains how to describe them, and the [CV maker for students](/cv-maker-for-students/) starts you with an education-first layout.",
       ] },
@@ -204,7 +220,7 @@ export const countryGuides: Guide[] = [
   {
     slug: "australian-resume-format", title: "How to create an Australian resume", published: "2026-11-09",
     seoTitle: "Australian Resume Format & Writing Guide",
-    description: "Write a resume for Australian jobs: the standard format and length, referees, work rights, key selection criteria, licences, and student resumes.",
+    description: "Write a resume for Australian jobs: the standard format and a free template, length, referees, work rights, selection criteria, licences, and tips for students.",
     category: "Applying by country",
     intro: "Australian resumes tend to be a little longer and more detailed than American ones. Two to three pages is common, referees often appear at the end, and employers appreciate a clear statement of your work rights. The essentials are the same everywhere: relevant experience, clear results, and a layout that is easy to scan.",
     image: { kind: "template", id: "regent", alt: "Regent CV template: a single-column layout with a serif nameplate and a framed contact line", caption: "Regent template, fictional sample content." },
@@ -238,8 +254,12 @@ export const countryGuides: Guide[] = [
       { id: "licences-and-checks", heading: "Include licences and checks relevant to the role", paragraphs: [
         "Many Australian jobs require specific licences or checks. List the ones you hold and any expiry dates, for example a driver licence, a forklift licence, a Working with Children Check, a National Police Check, a construction White Card, or a Responsible Service of Alcohol (RSA) certificate for hospitality work. Folio’s Certifications section is the right place for them.",
       ] },
-      { id: "no-experience", heading: "An Australian resume with no experience", paragraphs: [
-        "Students and school leavers can lead with education, then part-time and casual work, volunteering, and school or university activities. Casual roles in retail and hospitality are valuable evidence of reliability and customer service.",
+      { id: "australian-resume-template", heading: "A free Australian resume template", paragraphs: [
+        "Australian resumes have room for more detail, so a layout with clear section headings helps a reader find your key skills and referees quickly. [Professional](/templates/professional/), [Regent](/templates/regent/), and [Clarity](/templates/clarity/) work well, and all download as A4 PDFs, the standard size in Australia.",
+        "In the [free CV maker](/editor/), use the Certifications section for licences and checks, and rename the Additional information section to Referees. It works as a free Australian resume builder, with no sign-up or watermark.",
+      ] },
+      { id: "no-experience", heading: "A resume for Australian jobs with no experience", paragraphs: [
+        "The Australian CV format for students follows the same structure with education first, then part-time and casual work, volunteering, and school or university activities. Casual roles in retail and hospitality are valuable evidence of reliability and customer service.",
         "See [how to write your first CV](/tips/your-first-cv/), and start with an education-first layout in the [CV maker for students](/cv-maker-for-students/).",
       ] },
     ],

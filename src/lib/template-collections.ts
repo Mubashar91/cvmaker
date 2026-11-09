@@ -9,7 +9,7 @@ interface TemplateCollection {
 
 export const templateCollections: readonly TemplateCollection[] = [
   {
-    slug: "ats-friendly", name: "ATS-friendly", title: "Free ATS-Friendly CV Templates",
+    slug: "ats-friendly", name: "ATS-friendly", title: "Free ATS-Friendly CV & Resume Templates",
     description: "Choose a plain, single-column CV for online applications. Compare free templates with standard headings and selectable PDF text, then edit and download.",
     intro: "When an employer uses an applicant tracking system, a straightforward document is a sensible starting point. These templates keep your contact details and experience in one reading order, use familiar headings, and export real, selectable text.",
     templates: ["linear", "clarity", "compact", "professional", "classic", "student"],
@@ -58,7 +58,7 @@ export const templateCollections: readonly TemplateCollection[] = [
   },
   {
     slug: "student", name: "Student & first job", title: "Free Student & Graduate CV Templates",
-    description: "Build your first CV with free student templates. Put education, coursework, projects, and volunteering first, even without paid experience. Download a PDF.",
+    description: "Simple, free student CV templates for school leavers and fresh graduates. Put education, projects, and volunteering first, even without paid experience.",
     intro: "You can write a useful first CV before your first paid role. Start with your education and the things you have made, learned, organised, or supported. These templates give early-career applicants a clear structure without pretending to have a longer work history.",
     templates: ["student", "linear", "clarity", "academic", "compact", "aurora"],
     advice: [
