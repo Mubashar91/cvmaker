@@ -293,17 +293,12 @@
 .student-example-grid .student-tools { margin-top: 22px; font-size: 15.5px; }
 .student-faq { padding-top: 96px; }
 
-/* ---------- Footer: five columns ---------- */
-.footer-top { grid-template-columns: 1.15fr .9fr .95fr 1fr 1.55fr; gap: 36px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1180px) {
   .tool-grid, .tool-grid.is-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .guide-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .country-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .footer-top { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .footer-brand { grid-column: 1 / -1; }
-  .footer-templates { grid-column: 1 / -1; grid-template-columns: repeat(4, max-content); }
 }
 @media (max-width: 980px) {
   .tool-workspace { grid-template-columns: 1fr; }
@@ -315,8 +310,6 @@
   .evidence-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skills-library-grid { grid-template-columns: 1fr; }
   .student-example-grid { grid-template-columns: minmax(0, 1fr) 220px; gap: 36px; }
-  .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .footer-templates { grid-template-columns: repeat(3, max-content); }
 }
 @media (max-width: 640px) {
   .tool-section { padding: 20px 0 48px; }
@@ -339,9 +332,49 @@
   .student-example-grid { grid-template-columns: 1fr; }
   .student-example-grid .related-template { max-width: 240px; }
   .student-faq { padding-top: 56px; }
-  .footer-top { grid-template-columns: 1fr; }
-  .footer-templates { grid-template-columns: repeat(2, max-content); }
   .match-rate strong { font-size: 38px; }
   /* Long, generated labels (e.g. "Edit the software developer example") wrap instead of overflowing. */
   .article-cta .button, .article-tool .button, .template-detail-copy .button { max-width: 100%; white-space: normal; text-align: left; }
+}
+
+/* ---------- Footer ----------
+   Brand and trust points, four short link columns, and one bottom bar for policies.
+   Breakpoints repeat here so they override the older footer rules in globals.css. */
+.site-footer { padding-top: 72px; }
+.footer-top { grid-template-columns: minmax(0, 1.4fr) repeat(4, minmax(0, 1fr)); gap: 40px 32px; padding-bottom: 56px; }
+.footer-brand > p { max-width: 19rem; }
+.footer-trust { display: flex; flex-direction: column; gap: 9px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.4; color: var(--on-desk); }
+.footer-trust li { display: flex; align-items: center; gap: 9px; }
+.footer-trust svg { flex-shrink: 0; color: var(--marigold); }
+.footer-maintainer { display: inline-block; margin-top: 16px; padding: 6px 0; }
+.footer-column { gap: 4px; min-width: 0; }
+.footer-column h2 { margin-bottom: 10px; }
+.footer-column > a { display: inline-flex; align-items: center; min-height: 32px; padding: 3px 0; line-height: 1.35; }
+.footer-column > .footer-more { gap: 6px; margin-top: 6px; color: var(--marigold); font-weight: 600; }
+.footer-column > .footer-more svg { transition: transform .25s var(--ease-out); }
+.footer-column > .footer-more:hover { color: var(--marigold-hover); }
+.footer-column > .footer-more:hover svg { transform: translateX(3px); }
+.footer-bottom { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 10px 32px; padding-top: 20px; padding-bottom: 28px; }
+.footer-bottom .footer-information { padding: 0; border: 0; gap: 4px 24px; }
+.footer-bottom .footer-information a { display: inline-flex; align-items: center; min-height: 32px; }
+.footer-bottom > span { font-size: 13.5px; }
+@media (max-width: 1180px) {
+  .footer-top { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 28px; }
+  .footer-brand { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 40px; align-items: start; }
+  .footer-brand > .logo, .footer-brand > p, .footer-brand > .footer-maintainer { grid-column: 1; }
+  .footer-brand > .footer-trust { grid-column: 2; grid-row: 1 / span 3; margin-top: 4px; }
+}
+@media (max-width: 860px) {
+  .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .site-footer { padding-top: 52px; }
+  .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 20px; padding-bottom: 40px; }
+  .footer-brand { display: block; }
+  .footer-brand > .footer-trust { margin-top: 20px; }
+  .footer-column > a { min-height: 36px; font-size: 15px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+@media (max-width: 360px) {
+  .footer-top { grid-template-columns: 1fr; }
 }
