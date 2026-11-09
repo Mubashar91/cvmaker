@@ -1,8 +1,10 @@
 import type { Guide } from "./guide-types";
+import { BLOG_SOURCES_CHECKED, guideSources as sources } from "./guide-sources";
 
 export const freeToolGuides: Guide[] = [
   {
     slug: "free-cv-maker-without-signup", title: "How to make a CV for free without signing up", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.storage, sources.ukCV],
     seoTitle: "Free CV Maker Without Signup: Create and Save Your CV",
     description: "Create a CV without registration, keep an editable copy, and download a free PDF. A practical walkthrough of templates, local drafts, and final checks.",
     category: "Free CV tools",
@@ -22,13 +24,13 @@ export const freeToolGuides: Guide[] = [
         "A plain design such as Clarity gives you an easy place to start. Write your profile, experience, and education before spending time adjusting colours. You can switch between the [free templates](/templates/) without retyping your details.",
         "Read the preview as a stranger would. Check whether the role, employer, and dates are easy to tell apart and whether a long paragraph should become two shorter points. Use the built-in review to find incomplete entries, then review the wording yourself.",
       ] },
-      { id: "keep-editable-copy", heading: "Save an editable copy before closing the tab", paragraphs: [
+      { id: "keep-editable-copy", heading: "Save an editable copy before closing the tab", sourceUrls: [sources.storage.url], paragraphs: [
         "Without an account, there is no online profile to sign back into. Folio keeps current edits in the tab until you choose to save a browser draft. That saved draft belongs to this browser on this device; another computer will not automatically have it.",
-        "Download a portable JSON draft if you want a separate editable backup. Keep it somewhere private and restore it in the editor when needed. The PDF is the version to send, while the draft is the version to keep for future changes. Clearing browser storage can remove a browser draft.",
+        "Browser storage has limits: MDN explains that private-browsing storage is cleared when the last private tab closes, and browser settings can prevent storage altogether. Download a portable JSON draft for a separate editable copy, especially on shared or temporary devices. Keep the file private and restore it when needed; the PDF is the version to send.",
       ], bullets: ["Save a browser draft deliberately.", "Download a portable draft for a separate backup.", "Keep a named PDF for each application."] },
-      { id: "download-and-check", heading: "Download the actual PDF and open it", paragraphs: [
+      { id: "download-and-check", heading: "Download the actual PDF and open it", sourceUrls: [sources.ukCV.url], paragraphs: [
         "Review every preview page, then download and open the PDF. Check links, spelling, contact details, and the final lines on each page. Folio exports an A4 PDF without a watermark or payment step. Follow a different file-format requirement if the employer gives one.",
-        "For a fuller final review, use the [CV checklist](/tips/before-you-send/). Making the document without signup is convenient, but a careful saved copy is what makes the work reusable for your next application.",
+        "The National Careers Service recommends consistent presentation and another reader's spelling and grammar check. Use that review alongside the [CV checklist](/tips/before-you-send/). Registration-free editing does not remove the need to proofread or save a reusable source file.",
       ] },
     ],
     faqs: [
@@ -39,6 +41,7 @@ export const freeToolGuides: Guide[] = [
   },
   {
     slug: "free-resume-builder-without-payment", title: "What to check in a free resume builder before you start", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.trials, sources.storage],
     seoTitle: "Free Resume Builder Without Payment: A Practical Checklist",
     description: "Check PDF downloads, watermarks, template access, subscriptions, and editable backups before choosing a free resume builder. Includes Folio's actual limits.",
     category: "Free CV tools",
@@ -50,17 +53,17 @@ export const freeToolGuides: Guide[] = [
         "Start with a small test document rather than your complete CV. Add a name and one entry, view the preview, and find the download action. Confirm the offered file type and whether the finished file needs payment, registration, or a subscription. Judge the workflow you can actually complete.",
         "In Folio, editing and A4 PDF downloads are free. The downloaded CV has selectable text and no watermark. The editor imports PDF and DOCX files, but it does not export an editable Word document. That distinction matters if a particular application asks for DOCX.",
       ] },
-      { id: "read-the-access-details", heading: "Separate template access from extra services", paragraphs: [
-        "Check whether the design you selected is included, whether changing the layout keeps your content, and whether any advertised writing assistance has a separate limit. These are questions to ask of a service, rather than assumptions about any named competitor.",
+      { id: "read-the-access-details", heading: "Separate a free download from a free trial", sourceUrls: [sources.trials.url], paragraphs: [
+        "The US Federal Trade Commission advises checking a trial's length, cancellation process, and terms before signing up. Apply that checklist when a resume service requests a card: identify whether you are buying one download, starting a trial, or accepting recurring access. This is a general checking method, not a claim about a particular competing builder.",
         "All Folio layouts and the existing browser tools are free. Its summary, objective, cover letter, and bullet helpers use predefined patterns or your own words. They do not call an AI service. If you specifically need AI rewriting, read [AI CV makers versus template builders](/tips/ai-cv-maker-vs-template-builder/) before choosing a workflow.",
       ] },
       { id: "look-beyond-price", heading: "Check how your information is handled", paragraphs: [
         "A zero price does not explain where information goes or how long it remains available. Look for an explanation of imports, drafts, account storage, and third-party processing. Use a fictional test entry while exploring an unfamiliar tool, then decide whether its data handling fits your needs.",
         "Folio reads CV imports, edits content, and generates PDFs in your browser. A draft is saved only when you choose to save one. Read the [privacy page](/privacy/) for the full explanation, including website requests and other services on the page. Keep downloaded drafts private because they contain your information.",
       ] },
-      { id: "check-editing-and-backups", heading: "Keep a route back to your editable work", paragraphs: [
+      { id: "check-editing-and-backups", heading: "Keep a route back to your editable work", sourceUrls: [sources.storage.url], paragraphs: [
         "Look for a way to change a date or tailor a bullet after the first download. A polished PDF is useful for sending, but an editable source saves you recreating the whole document. Find out whether a draft follows an account, a browser, or a downloaded file.",
-        "With Folio, save in the current browser or download a portable JSON draft. A browser draft does not sync between devices. Download the draft before changing computers or clearing storage, and keep the PDF you actually submitted beside your application notes.",
+        "With Folio, save in the current browser or download a portable JSON draft. MDN documents that local storage belongs to a website origin, and private-session storage is temporary. Do not assume that saving on one browser, device, or site address makes the draft available everywhere. Keep a portable draft and the PDF you actually submitted.",
       ] },
       { id: "make-a-decision", heading: "Use a short decision checklist", paragraphs: [
         "Choose the builder that supports your next real application. If the employer accepts PDF, check the downloaded PDF. If it requires Word or an application form, plan that step before writing everything in a tool that cannot provide the requested format.",
@@ -75,6 +78,7 @@ export const freeToolGuides: Guide[] = [
   },
   {
     slug: "cv-pdf-download-checklist", title: "How to download a CV as a PDF and check it properly", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.pdfAccessibility, sources.parsing],
     seoTitle: "Free CV PDF Download: Export and File-Checking Guide",
     description: "Download your CV as a free PDF, check text selection and page breaks, choose a clear filename, and keep the editable draft for your next application.",
     category: "Free CV tools",
@@ -90,9 +94,9 @@ export const freeToolGuides: Guide[] = [
         "Scroll through the full preview at a readable size. Look for a short final page, an unusually dense paragraph, or a heading that seems separated from its explanation. Check that hidden sections really should be hidden and that imported entries have not been put in the wrong section.",
         "Shorten repeated wording before changing spacing. If you try another template, review its page count again because the same text can occupy different space. Read [how to keep a CV focused](/tips/keep-it-focused/) if a few leftover lines are creating an unnecessary extra page.",
       ] },
-      { id: "open-the-file", heading: "Open the downloaded file outside the editor", paragraphs: [
+      { id: "open-the-file", heading: "Check text extraction and reading order separately", sourceUrls: [sources.pdfAccessibility.url, sources.parsing.url], paragraphs: [
         "Download the PDF and open it in a PDF viewer. Confirm that the name, email address, dates, and links are correct in that file. Select a paragraph and copy it into a plain text note to inspect the wording and reading order. This is a practical check, not proof of compatibility with every hiring system.",
-        "The downloaded Folio PDF contains text rather than a screenshot of the page. If an imported source was a scan, you still need to enter its content manually; saving an image as PDF does not create an editable CV. Use the [ATS formatting guide](/tips/ats-friendly-cv/) for a broader layout review.",
+        "Copying text is only a basic check. Adobe's accessibility guidance also covers document tags and logical reading order; text selection alone does not establish accessibility. Greenhouse separately documents parsing difficulties with complex layouts. Folio exports selectable text, but this guide does not certify its PDFs as accessible or guarantee parsing in an employer's system.",
       ] },
       { id: "name-and-store", heading: "Name the file so you can recognise the application", paragraphs: [
         "Use the filename the employer requests. Otherwise, a short name such as Alex-Morgan-CV.pdf is easy to recognise. For your own records, put each application in a separate folder with the advert, cover letter, and submission date. Avoid relying on a growing stack of files named final or latest.",
@@ -105,12 +109,13 @@ export const freeToolGuides: Guide[] = [
     ],
     faqs: [
       { question: "Does Folio add a watermark to the PDF?", answer: "No. The downloaded CV has no watermark, and downloading does not require an account or payment." },
-      { question: "Can I turn the finished PDF back into a draft?", answer: "You can import a text-based PDF and review the extracted fields, but keeping a portable JSON draft preserves the editable Folio data more directly." },
+      { question: "Does selecting PDF text prove ATS compatibility or accessibility?", answer: "No. It checks that text can be selected. Reading order, document structure, and the particular system still matter. Keep a portable JSON draft if you want the original editable Folio data." },
     ],
     takeaway: "Follow the requested format, inspect the actual downloaded PDF, and keep the editable draft as well as the version you send.",
   },
   {
     slug: "ai-cv-maker-vs-template-builder", title: "AI CV maker or template builder: which help do you need?", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED,
     seoTitle: "Free AI CV Maker vs Template Builder: What to Check",
     description: "Understand AI writing, fixed sentence patterns, and CV layout tools. Check factual accuracy, privacy, downloads, and employer instructions before choosing.",
     category: "Free CV tools",
@@ -126,9 +131,9 @@ export const freeToolGuides: Guide[] = [
         "List your real job titles, dates, tools, tasks, and outcomes. Separate measured results from rough impressions. If you do not know a figure, leave it out. This gives you a reference when a polished sentence sounds stronger than the experience you can explain.",
         "With any writing workflow, check each statement against that fact sheet. Do not accept a claim that you led a team when you contributed to one, or a percentage improvement with no source. A clear description of a small contribution is more useful than an impressive invention.",
       ] },
-      { id: "review-ai-output", heading: "Review generated wording as a draft", paragraphs: [
+      { id: "review-ai-output", heading: "Use AI for feedback while checking every new claim", sourceUrls: [sources.aiRisk.url, sources.aiResume.url], paragraphs: [
         "NIST's generative AI risk profile identifies confidently incorrect output and data privacy as risks. For CV writing, the practical response is to verify every claim and consider what information a service receives before using it. A fluent paragraph is not evidence that its facts are correct.",
-        "Read the employer's instructions about assistance and authorship. Keep the application in language you can explain at interview. If wording changes your meaning or introduces experience you did not provide, remove it. You remain responsible for what you submit, regardless of which tool helped prepare it.",
+        "MIT's careers guidance suggests using AI to analyse weak bullets and wording gaps, while checking that edits preserve your experience and voice. Ask for feedback on an existing fact-based draft, then inspect each suggested change. Read the employer's assistance rules and the service's current data controls before sharing personal information; a feature name alone does not establish its retention policy.",
       ] },
       { id: "check-product-limits", heading: "Check downloads, data handling, and limits", paragraphs: [
         "Before entering a full CV, find the export format, free-use limits, signup requirements, and explanation of data handling. Do not assume all products using the same label follow the same practices. A small fictional test document lets you inspect the workflow before adding personal details.",
@@ -143,11 +148,12 @@ export const freeToolGuides: Guide[] = [
       { question: "Is Folio an AI resume builder?", answer: "No. It is a free browser CV editor with predefined writing patterns and local text tools. It does not call an AI service." },
       { question: "Can a generated summary be used without editing?", answer: "Review it first. Confirm the facts, remove generic or exaggerated wording, and follow the employer's instructions about assistance." },
     ],
-    sources: [{ title: "NIST: Generative Artificial Intelligence Profile, AI 600-1", url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" }],
+    sources: [sources.aiRisk, sources.aiResume],
     takeaway: "Choose help for the task you have, keep a record of the facts, and review every sentence before it becomes part of your application.",
   },
   {
     slug: "tailor-resume-to-job-description", title: "How to match your resume to a job description honestly", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.parsing, sources.mitResume],
     seoTitle: "Resume Keyword Matching: Tailor Your CV to a Job Description",
     description: "Compare a resume with a job description, separate requirements from keywords, and edit your profile and bullets without copying or inventing experience.",
     category: "Free CV tools",
@@ -155,17 +161,18 @@ export const freeToolGuides: Guide[] = [
     image: { kind: "example", id: "data-analyst", alt: "Fictional data analyst CV with SQL, reporting, and project evidence", caption: "Data analyst CV example with fictional employers and achievements." },
     tool: { href: "/resume-keyword-checker/", label: "Compare your CV with an advert", text: "See matching and missing terms, then decide which changes your experience supports." },
     sections: [
-      { id: "read-for-requirements", heading: "Read the advert before running a comparison", paragraphs: [
+      { id: "read-for-requirements", heading: "Read the advert before running a comparison", sourceUrls: [sources.mitResume.url], paragraphs: [
         "Separate the role's tasks, essential requirements, desirable experience, and application instructions. Repeated words can be informative, but a qualification mentioned once may still be essential. Keep the full advert nearby so you do not lose the surrounding meaning when reviewing a list of terms.",
-        "Create a note with three columns: what the employer asks for, your evidence, and where that evidence appears. Leave an honest blank where you do not have it. That is a clearer starting point than adding every repeated word to the skills section.",
+        "MIT recommends using the position description to select relevant experience, including projects where appropriate. Our practical way to do that is a three-column note: requirement, your evidence, and its location in the CV. Leave an honest blank where evidence is missing; this worksheet is a writing aid, not a hiring-system score.",
       ] },
       { id: "build-evidence-map", heading: "Map requirements to real examples", paragraphs: [
         "For each requirement, choose a project, task, or responsibility that shows what you can do. Name the setting and your own contribution. If a role asks for customer communication, evidence could come from paid support work, volunteering, or a relevant placement; the source should remain clear.",
         "Do not relabel a short course as professional experience. You can still mention that course, describe the exercises you completed, and explain what you practised. The distinction helps a recruiter judge the level of experience without having to guess.",
       ], example: "Requirement: Excel reporting.\n\nEvidence: Maintained a weekly volunteer rota using Excel filters and formulas.\n\nCV wording: Maintained an Excel rota for a volunteer group, checking availability and flagging uncovered shifts.", exampleLabel: "Fictional requirement-to-evidence example" },
-      { id: "use-matching-tool", heading: "Use keyword matching as a wording check", paragraphs: [
+      { id: "use-matching-tool", heading: "Separate wording matches from file parsing", sourceUrls: [sources.parsing.url], paragraphs: [
         "Paste the advert and your CV into the [free resume keyword checker](/resume-keyword-checker/), or read a text-based PDF or DOCX on your device. Inspect the matched and missing terms, then return to the advert to understand the important ones in context.",
         "Folio uses plain text rules and a predefined skills library. It can miss synonyms and cannot judge the strength of an example. Its percentage is a share of extracted terms found in the CV, not an employer's ATS score or a prediction of selection.",
+        "Greenhouse describes parsing as filling candidate fields from an uploaded resume. Its help page says a failed parse can leave the file attached while details need manual entry. That is a different issue from missing keywords and does not, by itself, establish rejection. Check any fields the application has filled from your file.",
       ] },
       { id: "edit-with-purpose", heading: "Change the parts that explain your fit", paragraphs: [
         "Start with the profile, your most relevant experience bullets, and the skills list. Use the employer's spelling of a tool or qualification when it accurately names the same thing. Explain an unfamiliar acronym once instead of scattering both versions throughout the page.",

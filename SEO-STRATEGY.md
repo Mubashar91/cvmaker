@@ -36,6 +36,8 @@ The supplied keyword list is a set of research candidates. Search volume, diffic
 
 These 20 original posts extend the existing `/tips/` collection. They target distinct informational tasks and link to the existing tool or landing page for the creation task.
 
+All 20 were revised after an editorial research pass using primary sources. Their section citations, source lists, and check dates are recorded in the content; [BLOG-RESEARCH.md](BLOG-RESEARCH.md) maps the findings to the revisions. Keyword demand and difficulty remain unverified.
+
 | Blog path under `/tips/` | Keyword intent |
 | --- | --- |
 | `free-cv-maker-without-signup/` | Free CV creation without registration |

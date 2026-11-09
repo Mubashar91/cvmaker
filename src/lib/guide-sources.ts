@@ -1,0 +1,30 @@
+/** Sources opened or read through the publisher's indexed page during the editorial research pass. */
+export const BLOG_SOURCES_CHECKED = "2026-11-09";
+
+export const guideSources = {
+  storage: { title: "MDN: Browser local storage and private browsing", url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" },
+  trials: { title: "US Federal Trade Commission: Free trials and subscriptions", url: "https://consumer.ftc.gov/articles/getting-and-out-free-trials-auto-renewals-and-negative-option-subscriptions" },
+  pdfAccessibility: { title: "Adobe: Creating accessible PDFs", url: "https://helpx.adobe.com/acrobat/using/creating-accessible-pdfs.html" },
+  aiRisk: { title: "NIST: Generative Artificial Intelligence Profile, AI 600-1", url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" },
+  aiResume: { title: "MIT CAPD: Using AI for your resume and CV", url: "https://capd.mit.edu/resources/using-ai-for-your-resume-and-cv/" },
+  parsing: { title: "Greenhouse Support: Unsuccessful resume parse", url: "https://support.greenhouse.io/hc/en-us/articles/200989175-Unsuccessful-resume-parse" },
+  mitResume: { title: "MIT CAPD: Resumes", url: "https://capd.mit.edu/resources/resumes/" },
+  lseCV: { title: "LSE Careers: CVs, profiles, and application structure", url: "https://info.lse.ac.uk/current-students/careers/information-and-resources/application-process/cvs" },
+  coverLetter: { title: "National Careers Service: How to write a cover letter", url: "https://nationalcareers.service.gov.uk/careers-advice/covering-letter" },
+  harvardTemplate: { title: "Harvard MCS: Bullet point resume template", url: "https://cdn-careerservices.fas.harvard.edu/wp-content/uploads/sites/161/2024/07/resume-bullets.pdf" },
+  resumeFormat: { title: "CareerOneStop Resume Guide: Formatting and saving", url: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
+  skills: { title: "National Careers Service: Understand and develop your skills", url: "https://nationalcareers.service.gov.uk/careers-advice/identifying-skills-and-upskilling" },
+  schoolResume: { title: "Victoria Youth Central: School resume with no paid work experience", url: "https://www.youthcentral.vic.gov.au/sites/default/files/documents/2024-01/YouthCentral_Resume-VCE-No-Work-Exp.pdf" },
+  firstJob: { title: "Victoria Youth Central: Getting your first job", url: "https://www.youthcentral.vic.gov.au/jobs/getting-job/ultimate-guide-first-job" },
+  softwareRole: { title: "National Careers Service: Software developer role", url: "https://nationalcareers.service.gov.uk/job-profiles/software-developer" },
+  teacherRole: { title: "National Careers Service: Primary school teacher role", url: "https://nationalcareers.service.gov.uk/job-profiles/primary-school-teacher" },
+  supportingStatement: { title: "University of Manchester: Supporting statements for job applications", url: "https://www.careers.manchester.ac.uk/applicationsinterviews/af/statement/" },
+  serviceRole: { title: "National Careers Service: Customer service assistant role", url: "https://nationalcareers.service.gov.uk/job-profiles/customer-service-assistant" },
+  dataRole: { title: "National Careers Service: Data analyst-statistician role", url: "https://nationalcareers.service.gov.uk/job-profiles/data-analyst-statistician" },
+  ukCV: { title: "National Careers Service: How to write a CV", url: "https://nationalcareers.service.gov.uk/careers-advice/cv-sections" },
+  canadaResume: { title: "Government of Canada Job Bank: How to write a good resume", url: "https://www.jobbank.gc.ca/findajob/resources/write-good-resume" },
+  canadaNewcomers: { title: "Government of Canada Job Bank: Job search and credential recognition for newcomers", url: "https://www.jobbank.gc.ca/landing-newcomers-seekers.xhtml" },
+  canadaEmployers: { title: "Government of Canada Job Bank: Recruiting newcomers", url: "https://www.jobbank.gc.ca/hiring/newcomers" },
+  toronto: { title: "City of Toronto: Job application tips for its hiring process", url: "https://jobs.toronto.ca/jobsatcity/content/Job-Application-Tips/?locale=en_US" },
+  australia: { title: "Study Australia: The international student's guide to writing a great resume", url: "https://www.studyaustralia.gov.au/en/tools-and-resources/tips-and-advice-for-students/the-international-student-s-guide-to-writing-a-great-resume--" },
+} as const;

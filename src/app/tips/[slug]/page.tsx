@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import { ArrowRight, ArrowUpRight, CalendarDays, Clock3, FileText } from "lucide-react";
 import { Header, Footer } from "@/components/site-chrome";
@@ -32,10 +33,14 @@ export default async function Tip({ params }: { params: Promise<{ slug: string }
         {section.subsections?.map(sub => <div className="article-subsection" key={sub.heading}><h3>{sub.heading}</h3>{sub.paragraphs.map(paragraph => <p key={paragraph}><RichText text={paragraph} /></p>)}{sub.bullets && <ul>{sub.bullets.map(point => <li key={point}><RichText text={point} /></li>)}</ul>}</div>)}
         {section.example && <aside className="article-example"><span>{section.exampleLabel ?? "Illustrative example"}</span>{section.example.split(/\n{2,}/).map(paragraph => <p key={paragraph}>{paragraph}</p>)}</aside>}
         {section.bullets && <ul>{section.bullets.map(point => <li key={point}><RichText text={point} /></li>)}</ul>}
+        {section.sourceUrls?.length ? <p className="article-section-sources"><small>Sources: {section.sourceUrls.map((url, index) => {
+          const source = tip.sources?.find(item => item.url === url);
+          return source ? <Fragment key={url}>{index > 0 && "; "}<a href={source.url}>{source.title}</a></Fragment> : null;
+        })}</small></p> : null}
       </section>)}
       <aside className="callout"><p>{tip.takeaway}</p></aside>
       {tip.faqs && <section id="faq" className="article-faq"><h2>Frequently asked questions</h2><FaqList faqs={tip.faqs} /></section>}
-      {tip.sources?.length && <section id="sources"><h2>Sources and further reading</h2><ul>{tip.sources.map(source => <li key={source.url}><a href={source.url}>{source.title}</a></li>)}</ul></section>}
+      {tip.sources?.length && <section id="sources"><h2>Sources and further reading</h2>{tip.sourcesChecked && <p>Sources checked on <time dateTime={tip.sourcesChecked}>{formatDate(tip.sourcesChecked)}</time>. Examples are fictional; practical suggestions are Folio's own application of the guidance.</p>}<ul>{tip.sources.map(source => <li key={source.url}><a href={source.url}>{source.title}</a></li>)}</ul></section>}
       {tip.tool && <aside className="article-tool"><div><span>Free tool</span><p><RichText text={tip.tool.text} /></p></div><Link href={tip.tool.href} className="button dark">{tip.tool.label}<ArrowRight size={16} /></Link></aside>}
       <div className="article-cta"><span>A fresh page for your next chapter.</span><StartCVButton>Open the free editor</StartCVButton></div>
     </article></div><AdSlot placement="tips" />

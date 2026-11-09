@@ -5,6 +5,8 @@ export interface GuideSection {
   example?: string; exampleLabel?: string;
   subsections?: GuideSubsection[];
   table?: { caption: string; head: string[]; rows: string[][] };
+  /** URLs from the article's source list supporting this section. */
+  sourceUrls?: string[];
 }
 export interface Guide {
   slug: string; title: string; seoTitle: string; description: string; category: string;
@@ -18,4 +20,6 @@ export interface Guide {
   published?: string;
   /** Primary references for factual guidance, shown with the article. */
   sources?: { title: string; url: string }[];
+  /** Date this article's external references were checked; does not imply third-party review. */
+  sourcesChecked?: string;
 }

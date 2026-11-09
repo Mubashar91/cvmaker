@@ -1,8 +1,10 @@
 import type { Guide } from "./guide-types";
+import { BLOG_SOURCES_CHECKED, guideSources as sources } from "./guide-sources";
 
 export const writingExampleGuides: Guide[] = [
   {
     slug: "resume-summary-examples-for-students", title: "Resume summary examples for students without job experience", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.lseCV, sources.mitResume],
     seoTitle: "Student Resume Summary Examples With No Experience",
     description: "Write a student resume summary using your course, projects, activities, and target role. Includes three fictional examples and a practical editing checklist.",
     category: "Profiles & writing examples",
@@ -10,13 +12,13 @@ export const writingExampleGuides: Guide[] = [
     image: { kind: "example", id: "student", alt: "Student CV with an introductory profile followed by education and projects", caption: "Student CV example using fictional details." },
     tool: { href: "/resume-summary-builder/", label: "Build your student summary", text: "Choose the early-career option and enter your own course, skills, and project details." },
     sections: [
-      { id: "choose-an-introduction", heading: "Choose between a summary and an objective", paragraphs: [
-        "A summary introduces the background you bring; an objective places more emphasis on the opportunity you want. For a student, the difference is often small. Both can mention your course, one relevant activity, and the type of role you are pursuing. You do not need both paragraphs on the same page.",
+      { id: "choose-an-introduction", heading: "Decide whether an introduction adds useful information", sourceUrls: [sources.lseCV.url], paragraphs: [
+        "A summary is optional. LSE Careers treats a profile as useful when it highlights specific, relevant evidence, and advises against generic self-descriptions. If the opening would only repeat your degree title or say that you are hardworking, you can omit it and start with your strongest section.",
         "If you have a clear target such as a summer internship, the [resume objective generator](/resume-objective-generator/) can help you name it directly. If you want to foreground relevant project work, begin with the summary. Keep the result short enough to leave space for the evidence below.",
       ] },
-      { id: "use-your-course", heading: "Use your course as context, then add evidence", paragraphs: [
+      { id: "use-your-course", heading: "Use your course as context, then add evidence", sourceUrls: [sources.mitResume.url], paragraphs: [
         "A course title explains what you are learning, but it does not tell the whole story. Choose one project, tool, or recurring responsibility that relates to the role. Replace broad claims such as excellent teamwork with a small example of collaborating on a piece of work.",
-        "Do not copy the full education section into the summary. Mention the relevant focus here and keep module names, grades, and dates in the section below. If your degree is unfinished, describe yourself as a student rather than a graduate.",
+        "MIT's resume guidance includes class and personal projects among possible experience. Choose a project that supports the vacancy, then explain your own role. Keep module lists and dates in Education. If the degree is unfinished, say student rather than graduate, and do not describe a learning project as paid work.",
       ], example: "Second-year Computer Science student interested in a software development internship. Built a small booking application for a group project using JavaScript and SQL, and documented the setup so classmates could run it locally.", exampleLabel: "Fictional university student summary" },
       { id: "show-activities", heading: "Use activities when they provide the stronger example", paragraphs: [
         "For a first job in retail, hospitality, or administration, a school activity or regular volunteer role may connect more clearly than a long list of subjects. Explain what you did and how often. The reader should be able to imagine the responsibility, rather than infer it from a title.",
@@ -34,11 +36,13 @@ export const writingExampleGuides: Guide[] = [
     faqs: [
       { question: "Can a student use a resume summary without paid work?", answer: "Yes. Introduce your course or current situation and support it with relevant projects, activities, volunteering, or responsibilities." },
       { question: "Should I include both a summary and an objective?", answer: "Usually one short introduction is enough. Choose the version that best explains your background and the role you want." },
+      { question: "Is a summary required on a student resume?", answer: "No. Omit it if it only repeats the rest of the page. Include it when it adds a useful, specific introduction to your relevant evidence." },
     ],
     takeaway: "Introduce your current situation, name a relevant example, and keep the summary consistent with the evidence in the rest of your CV.",
   },
   {
     slug: "career-change-resume-summary", title: "How to write a resume summary for a career change", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.lseCV, sources.skills],
     seoTitle: "Career Change Resume Summary: Examples and Writing Steps",
     description: "Connect your previous work to a new role with an honest career-change summary. Includes transferable-skill examples, training language, and editing steps.",
     category: "Profiles & writing examples",
@@ -46,8 +50,8 @@ export const writingExampleGuides: Guide[] = [
     image: { kind: "example", id: "administrator", alt: "Administrator CV example showing organised records, coordination, and office tools", caption: "Fictional administrator example illustrating transferable experience." },
     tool: { href: "/resume-summary-builder/", label: "Start a career-change summary", text: "Choose career change and enter your previous role, new direction, and relevant preparation." },
     sections: [
-      { id: "name-the-connection", heading: "Start with the connection between the roles", paragraphs: [
-        "Write down what the new role actually involves before deciding which past experience to highlight. Customer interviews, scheduling, record keeping, troubleshooting, and explaining complex information can appear in different occupations. Use the activity as the connection rather than assuming a generic phrase such as transferable skills explains it.",
+      { id: "name-the-connection", heading: "Start with the connection between the roles", sourceUrls: [sources.skills.url], paragraphs: [
+        "The National Careers Service recommends comparing job descriptions with skills from work, education, and daily life. Start there: identify a task in the new role, then record where you have practised it. Keep a genuine connection separate from a skill you are interested in but have not yet developed.",
         "Select one or two connections you can show in the CV. A short opening that identifies those links helps the reader understand why an application from another field is relevant. It does not need to retell your whole career or explain every reason you want to leave it.",
       ] },
       { id: "state-current-background", heading: "Keep your current background visible", paragraphs: [
@@ -62,8 +66,8 @@ export const writingExampleGuides: Guide[] = [
         "Read several relevant adverts and identify the tasks you recognise from your own work. Replace an internal label with a clear explanation if an outside reader would not know it. Keep official job titles accurate, then use the descriptions to show the overlap.",
         "The [resume keyword checker](/resume-keyword-checker/) can identify wording differences, but it does not judge whether your experience is equivalent. Add a term only when your example supports it. Be particularly careful with qualifications, specialist responsibilities, and claims of independent practice.",
       ] },
-      { id: "support-the-opening", heading: "Make the rest of the CV support the summary", paragraphs: [
-        "Move relevant projects or recent training above less relevant detail when that helps the story. Edit past-job bullets to explain the contribution that matters to the target role. Keep dates and employment history clear so a change of emphasis does not create a misleading picture.",
+      { id: "support-the-opening", heading: "Keep the work history clear while changing the emphasis", sourceUrls: [sources.lseCV.url], paragraphs: [
+        "LSE describes skills-based structures as one possible approach to a career change, rather than a requirement. You can also retain a chronological history and put a relevant project or training section earlier. Whichever structure you choose, make employers, roles, dates, and the origin of each example easy to find.",
         "Use the [summary builder](/resume-summary-builder/) to assemble a first draft, then review it beside the [CV profile guide](/tips/write-a-clear-profile/). If you need more space to explain the motivation for the change, put that connection in a tailored [cover letter](/cover-letter-maker/) instead of stretching the profile.",
       ] },
     ],
@@ -75,6 +79,7 @@ export const writingExampleGuides: Guide[] = [
   },
   {
     slug: "cover-letter-with-no-experience", title: "How to write a cover letter with no work experience", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.coverLetter, sources.supportingStatement],
     seoTitle: "Cover Letter With No Experience: First-Job Example",
     description: "Write a first-job cover letter using study, volunteering, and projects. Includes a fictional example, paragraph structure, and free editing and PDF tools.",
     category: "Profiles & writing examples",
@@ -82,12 +87,12 @@ export const writingExampleGuides: Guide[] = [
     image: { kind: "letter", id: "classic", alt: "Classic cover letter layout with sender details, date, greeting, body, and sign-off", caption: "Classic cover letter layout with fictional demonstration text." },
     tool: { href: "/cover-letter-maker/", label: "Draft your first cover letter", text: "Build an editable letter from your own details, then copy or download it as a PDF." },
     sections: [
-      { id: "read-the-request", heading: "Work out what the application asks for", paragraphs: [
-        "Read the advert for the role title, contact name, required format, and any specific questions. A supporting statement with selection criteria is a different task from a short letter. Follow the request rather than using a general template unchanged.",
+      { id: "read-the-request", heading: "Work out what the application asks for", sourceUrls: [sources.coverLetter.url, sources.supportingStatement.url], paragraphs: [
+        "The National Careers Service describes a cover letter as a short introduction, usually three to five paragraphs. Manchester's application guidance treats a supporting statement as a fuller response to the role's criteria. Check which task the advert asks for, including its length limit; a short letter does not replace required form answers.",
         "Make a note of two requirements you can support through study, activities, projects, or volunteering. If the role is customer-facing, choose evidence involving people. If it involves organised records, choose a task where you managed information carefully. You need a connection, not a complete employment history.",
       ] },
-      { id: "open-directly", heading: "Name the role and give a specific reason for applying", paragraphs: [
-        "Begin with the job title and a reason connected to the work. Avoid claiming that you have always dreamed of an organisation you have just discovered. A genuine interest in the setting, task, or learning opportunity is enough when you explain it plainly.",
+      { id: "open-directly", heading: "Name the role and give a researched reason for applying", sourceUrls: [sources.coverLetter.url], paragraphs: [
+        "The National Careers Service recommends researching the employer and naming the vacancy, including its reference if supplied. Read the employer's own description of its work and choose a detail you can connect to your interest. State that connection in your own words instead of copying its mission statement.",
         "Mention your current situation if it gives useful context: a school leaver seeking weekend work, a student applying for an internship, or someone returning to work after training. Keep the opening focused so there is room for your example.",
       ] },
       { id: "show-one-example", heading: "Use one example to support a relevant strength", paragraphs: [
@@ -111,6 +116,7 @@ export const writingExampleGuides: Guide[] = [
   },
   {
     slug: "resume-action-verbs-and-bullet-points", title: "Resume action verbs: turn a task into a useful bullet point", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.harvardTemplate, sources.aiResume],
     seoTitle: "Resume Action Verbs and Bullet Point Examples",
     description: "Choose accurate action verbs, keep tense consistent, and add context to resume bullet points. Includes before-and-after examples without invented achievements.",
     category: "Profiles & writing examples",
@@ -118,8 +124,8 @@ export const writingExampleGuides: Guide[] = [
     image: { kind: "example", id: "project-manager", alt: "Project manager CV with short action-led experience descriptions", caption: "Project manager example with fictional responsibilities and outcomes." },
     tool: { href: "/resume-bullet-point-generator/", label: "Build an action-led bullet", text: "Combine your action, task, and optional context or result, then edit and copy the line." },
     sections: [
-      { id: "choose-accurate-verbs", heading: "Choose the verb that describes your own part", paragraphs: [
-        "Use built if you built something, tested if you tested it, and assisted if you supported someone else's work. The goal is precision rather than finding the most forceful word. A contribution can be valuable without suggesting that you owned the entire project.",
+      { id: "choose-accurate-verbs", heading: "Choose the verb that describes your own part", sourceUrls: [sources.harvardTemplate.url], paragraphs: [
+        "Harvard's bullet-point template starts each description with an action and adds details about the contribution, with numbers where possible. It also treats bullets as phrases, so you do not need to begin each with I. Choose an accurate verb: assisted is the right word if you supported the work rather than leading it.",
         "Write down the activity in ordinary language first. Then remove an opening such as responsible for or duties included if it delays the useful information. Keep the actual task visible instead of replacing it with a broad phrase such as drove excellence.",
       ], table: { caption: "Choose verbs by the work you performed", head: ["Kind of contribution", "Possible verbs", "Detail to add"], rows: [["Created something", "Built, drafted, designed", "What you produced and for whom"], ["Checked quality", "Tested, reviewed, verified", "What you checked and how"], ["Helped people", "Explained, assisted, resolved", "The situation and your response"], ["Organised work", "Scheduled, recorded, coordinated", "The frequency, scope, or users"]] } },
       { id: "keep-tense-consistent", heading: "Match the tense to when the work happened", paragraphs: [
@@ -130,8 +136,8 @@ export const writingExampleGuides: Guide[] = [
         "Useful context includes a tool, an audience, a frequency, a type of problem, or a real measure of scale. You do not need every detail in every bullet. Choose the one that explains why this task belongs in the application.",
         "If you lack a measured result, describe the purpose or completion of the work. A working form, an accurate rota, or a documented procedure can be worth mentioning without a fabricated efficiency percentage. Keep any number consistent with your records and your level of responsibility.",
       ], example: "Before: Responsible for reports.\n\nAfter: Prepared a weekly Excel stock report for the shop manager, highlighting discrepancies for follow-up.\n\nBefore: Helped with website.\n\nAfter: Tested the booking form on mobile and documented validation issues for the developer.", exampleLabel: "Fictional before-and-after bullet points" },
-      { id: "remove-repeated-lines", heading: "Make each bullet contribute something different", paragraphs: [
-        "Check whether several lines tell the same story. If three bullets all say that you worked with colleagues, keep the strongest example and use the remaining space for another relevant contribution. A shorter list of distinct points is easier to assess than a long list of similar claims.",
+      { id: "remove-repeated-lines", heading: "Cut unhelpful repetition without deleting relevant evidence", sourceUrls: [sources.aiResume.url], paragraphs: [
+        "MIT's guidance notes that repeated evidence can be appropriate for a core requirement. Do not delete every mention of teamwork or analysis merely because it appears twice. Remove lines that add no new context, and keep distinct examples when they show the depth or variety of a skill the vacancy needs.",
         "Read the [work experience guide](/tips/describe-your-experience/) for organising a whole role and browse [profession examples](/cv-examples/) for complete documents. Use the examples for structure, not as a source of achievements to copy into your own history.",
       ] },
       { id: "test-final-line", heading: "Check the finished line before using it", paragraphs: [
@@ -147,6 +153,7 @@ export const writingExampleGuides: Guide[] = [
   },
   {
     slug: "skills-for-a-first-job-resume", title: "Skills to put on a first-job resume, with evidence", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.skills, sources.firstJob],
     seoTitle: "Skills for a First-Job Resume With No Experience",
     description: "Choose first-job resume skills from real projects, activities, and responsibilities. Includes practical examples and ways to describe your level honestly.",
     category: "Profiles & writing examples",
@@ -154,12 +161,12 @@ export const writingExampleGuides: Guide[] = [
     image: { kind: "example", id: "retail-assistant", alt: "Retail assistant CV showing customer service and practical workplace skills", caption: "Retail assistant example using fictional details." },
     tool: { href: "/resume-skills/", label: "Explore skills by job", text: "Browse skill ideas for different roles and select only those you can support with an example." },
     sections: [
-      { id: "start-with-activities", heading: "Find skills by listing things you have done", paragraphs: [
-        "Write a short list of activities from the last year or two. Include coursework, practical projects, regular volunteering, clubs, events, and responsibilities that involved planning or helping people. Describe the action before assigning a skill label to it.",
+      { id: "start-with-activities", heading: "Find skills by listing things you have done", sourceUrls: [sources.skills.url, sources.firstJob.url], paragraphs: [
+        "The National Careers Service suggests reflecting on education, work, and daily life to identify skills. Victoria's Youth Central also points first-time applicants towards community activity, volunteering, and school projects. Our exercise is to list activities first, then write the actions you performed before choosing a skill label.",
         "For example, recording equipment loans can involve accurate records; preparing slides for a group presentation can involve clear written communication. The useful evidence is the actual task. Keep its setting visible so the reader understands whether it was coursework, employment, or another activity.",
       ] },
-      { id: "separate-skill-types", heading: "Distinguish practical tools from ways of working", paragraphs: [
-        "Practical skills include using a spreadsheet, editing an image, speaking a language, or operating a tool you have been trained to use. Ways of working include planning tasks, explaining information, and collaborating. Both can be relevant, but broad personal qualities need examples to carry meaning.",
+      { id: "separate-skill-types", heading: "Distinguish practical tools from ways of working", sourceUrls: [sources.skills.url], paragraphs: [
+        "The National Careers Service distinguishes specific or hard skills from transferable skills such as communication and problem solving. Both can matter. For your CV, describe a practical task you can carry out and connect a transferable skill to an example; a category label on its own says little about your level.",
         "Be specific about your level. Creating a table in Excel is different from building a complex forecasting model. If a skill is still developing, name what you can do rather than applying an expert label. Keep formal certificates accurate and do not imply you hold one because you have studied the topic informally.",
       ], table: { caption: "From an activity to a supportable skill", head: ["Activity", "Skill you might describe", "Evidence to include"], rows: [["Recorded club attendance", "Spreadsheet records", "The sheet you maintained and checks you made"], ["Helped visitors at an event", "Visitor communication", "Questions answered and directions provided"], ["Built a course website", "HTML and CSS", "The pages and features you completed"], ["Planned practice sessions", "Scheduling", "How you coordinated times and shared updates"]] } },
       { id: "choose-for-the-role", heading: "Select skills that help with the advertised work", paragraphs: [

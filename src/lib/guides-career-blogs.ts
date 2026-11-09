@@ -1,8 +1,10 @@
 import type { Guide } from "./guide-types";
+import { BLOG_SOURCES_CHECKED, guideSources as sources } from "./guide-sources";
 
 export const careerBlogGuides: Guide[] = [
   {
     slug: "high-school-student-resume", title: "A first resume for high school students: what to include", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.schoolResume, sources.skills],
     seoTitle: "High School Student Resume With No Experience: Free Guide",
     description: "Build a high school student resume using education, activities, volunteering, and practical skills. Includes a fictional entry and free template guidance.",
     category: "Students & first applications",
@@ -10,8 +12,8 @@ export const careerBlogGuides: Guide[] = [
     image: { kind: "template", id: "student", alt: "Student CV template with distinct education and activity sections", caption: "Student template with fictional demonstration details." },
     tool: { href: "/cv-maker-for-students/", label: "Start a student resume", text: "Begin with education first, add your activities, and preview a free A4 PDF." },
     sections: [
-      { id: "choose-your-evidence", heading: "Start with school and activities, not an empty job history", paragraphs: [
-        "List your current school, expected completion date, and relevant subjects or training. Then note activities that involved a real responsibility: a club role, tutoring, a community event, a creative project, or helping with practical tasks. Choose items that connect to the work you want.",
+      { id: "choose-your-evidence", heading: "Use evidence from school, placements, and activities", sourceUrls: [sources.schoolResume.url], paragraphs: [
+        "Victoria's Youth Central publishes a school-leaver resume specifically for applicants without paid work. It includes volunteer activity and placements, illustrating that no paid experience does not mean no experience. Use that principle while adapting qualification names and conventions to your own country; the example is not a universal school-resume format.",
         "If you have no paid employment, do not fill the space with a sentence saying so. Use headings such as Projects, Activities, or Volunteering to describe what you do have. Keep the setting clear so a school assignment is not mistaken for paid work.",
       ] },
       { id: "write-an-introduction", heading: "Write a short introduction for the particular job", paragraphs: [
@@ -22,8 +24,8 @@ export const careerBlogGuides: Guide[] = [
         "Use an understandable title, the group or setting, and dates. Add one or two lines about your contribution. Describe the task you completed rather than simply naming a quality such as leadership. A reader should understand what the activity involved without knowing your school.",
         "Keep numbers and outcomes modest and accurate. If you helped with an event, explain your part rather than taking credit for the whole event's success. Use a [resume bullet point structure](/tips/resume-action-verbs-and-bullet-points/) to make the description direct.",
       ], example: "Library club volunteer | School library | September–November 2026\n\nPrepared book displays for weekly reading sessions and recorded returned books in the club spreadsheet. Helped younger students find the reading list for each session.", exampleLabel: "Fictional school activity entry" },
-      { id: "choose-skills", heading: "Include practical skills you can demonstrate", paragraphs: [
-        "Mention relevant tools, languages, or practical abilities with an honest description of what you can do. A short list supported by activities is more useful than a long list copied from an advert. If you are learning something, describe the tasks you have practised rather than calling yourself advanced.",
+      { id: "choose-skills", heading: "Include practical skills you can demonstrate", sourceUrls: [sources.skills.url], paragraphs: [
+        "The National Careers Service recommends reflecting on skills from education and daily life, then checking what a job needs. Ask a teacher or someone who knows your activities to help identify an example you overlooked. Describe what you can do with a tool or language, keeping ongoing learning separate from confident independent use.",
         "Read [skills for a first-job resume](/tips/skills-for-a-first-job-resume/) for a method of turning activities into evidence. Keep private identity details and other people's contact information out of a general resume; provide information through the employer's requested process when appropriate.",
       ] },
       { id: "review-first-resume", heading: "Check the finished document with someone you trust", paragraphs: [
@@ -39,6 +41,7 @@ export const careerBlogGuides: Guide[] = [
   },
   {
     slug: "fresh-graduate-cv-checklist", title: "A fresh graduate CV checklist: turn your degree into evidence", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.harvardTemplate, sources.lseCV],
     seoTitle: "Fresh Graduate CV Format and Application Checklist",
     description: "Organise a fresh graduate CV around your degree, dissertation, placements, projects, and practical skills. Includes a fictional project entry and review checklist.",
     category: "Students & first applications",
@@ -50,16 +53,16 @@ export const careerBlogGuides: Guide[] = [
         "Read the vacancy and identify the work the graduate will be expected to do. Build your first draft around a small set of relevant requirements, not everything you studied. Keep a fuller record separately so tailoring one application does not mean losing useful details for another.",
         "Write a short profile that names your field and a relevant example. Avoid broad promises about being a future leader when a concrete project would be clearer. The [student summary guide](/tips/resume-summary-examples-for-students/) offers structures you can adapt with graduate-level evidence.",
       ] },
-      { id: "education-detail", heading: "Make the education section specific and accurate", paragraphs: [
+      { id: "education-detail", heading: "Select academic details instead of reproducing a transcript", sourceUrls: [sources.harvardTemplate.url], paragraphs: [
         "Include the qualification, institution, and completion date. State a final grade or classification only when it is confirmed and useful; clearly label a predicted result or unfinished course. Select relevant modules rather than turning the section into a transcript.",
-        "Choose a dissertation or major assignment if it demonstrates a method, tool, or subject that matters to the vacancy. Explain the question you explored and the work you performed. If the project deserves several lines, give it a separate Projects entry rather than crowding the qualification heading.",
+        "Harvard's resume template marks GPA, thesis, and relevant coursework as optional. Use that as a selection prompt: include an item when it helps explain your fit or the employer asks for it. A relevant dissertation can have its own Projects entry; there is no universal requirement to list every mark or module.",
       ] },
       { id: "show-project-work", heading: "Explain what you did in a project", paragraphs: [
         "Describe the project setting, your contribution, the method or tools, and what you produced. Distinguish an individual dissertation from a group assignment. A completed report or tested prototype can be a clear result even when there was no commercial customer or financial outcome.",
         "Use only figures you can support. Do not turn a classroom exercise into client work or imply that a university grade proves workplace performance. Read [how to describe projects](/tips/projects-on-a-cv/) for a fuller method of choosing the details.",
       ], example: "Final-year project: Campus transport survey\n\nDesigned a student travel questionnaire, cleaned the anonymous responses in Excel, and compared travel times by transport type. Presented the findings in a written report with charts and a discussion of sampling limits.", exampleLabel: "Fictional graduate project entry" },
-      { id: "use-other-work", heading: "Keep relevant evidence from part-time and volunteer roles", paragraphs: [
-        "A part-time job can show communication, reliability, accurate records, or handling competing tasks. Explain those contributions in their real setting. Do not remove all paid work just because its job title differs from your target graduate role.",
+      { id: "use-other-work", heading: "Keep useful evidence from part-time and volunteer roles", sourceUrls: [sources.lseCV.url], paragraphs: [
+        "LSE highlights part-time work and extracurricular responsibilities as potentially useful graduate evidence. Select examples that explain your own contribution and how a skill transfers to the vacancy. Do not remove a role solely because its title differs from the graduate job, or give every past role the same amount of space.",
         "Balance the space according to relevance. A directly related placement may deserve more detail than an older casual role, while an unrelated role can stay as a short entry. Keep dates consistent and state whether a placement was a short assignment rather than implying a longer period.",
       ] },
       { id: "final-graduate-review", heading: "Review the whole application as a set", paragraphs: [
@@ -75,6 +78,7 @@ export const careerBlogGuides: Guide[] = [
   },
   {
     slug: "software-engineer-resume-projects", title: "How to describe projects on a software engineer resume", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.softwareRole, sources.mitResume],
     seoTitle: "Software Engineer Resume Projects: Examples and Free Template",
     description: "Write software project entries that explain your contribution, technical choices, testing, and limits. Includes fictional examples and a free editable CV.",
     category: "CVs by profession",
@@ -82,13 +86,13 @@ export const careerBlogGuides: Guide[] = [
     image: { kind: "example", id: "software-developer", alt: "Software developer CV example with technical skills and development experience", caption: "Software developer CV example with fictional people and projects." },
     tool: { href: "/cv-examples/software-developer/", label: "Edit a software developer CV", text: "Use a complete fictional example for structure, then replace its content with your own experience." },
     sections: [
-      { id: "select-projects", heading: "Select projects for the target role", paragraphs: [
-        "Read the vacancy for the type of work involved: user interfaces, APIs, data processing, testing, or another area. Choose projects where you can explain a relevant contribution. A small finished application with a clear purpose can provide a better discussion than a large unfinished repository.",
+      { id: "select-projects", heading: "Choose evidence for the development work in the vacancy", sourceUrls: [sources.softwareRole.url], paragraphs: [
+        "The National Careers Service describes development work as more than coding: it includes discussing requirements, testing, recording changes, and maintaining systems. Compare those activities with the particular vacancy. Our suggestion is to choose projects that show relevant parts of that work, rather than treating a long technology list as the whole application.",
         "Avoid including several projects that demonstrate exactly the same thing unless their differences matter. One well-explained form, a tested API, and a deployment exercise can show different kinds of work. Use the project selection to complement, rather than repeat, your employment history.",
       ] },
-      { id: "describe-purpose-and-role", heading: "Explain the purpose and your own contribution", paragraphs: [
+      { id: "describe-purpose-and-role", heading: "Explain the purpose and your own contribution", sourceUrls: [sources.mitResume.url], paragraphs: [
         "Give the project a short descriptive name and identify it as personal, academic, volunteer, or professional work. Explain who it was for and what you implemented. If a team built it, distinguish your contribution from the overall application.",
-        "Name the technologies in the context of the task. Built a booking form in React and validated submitted dates explains more than React, JavaScript, HTML, CSS alone. Keep your official job titles and the status of unpaid work accurate.",
+        "MIT recommends explaining how work was performed, including a programming language where relevant, and supports including class or personal projects. Put the technology in the task: built a booking form in React and validated submitted dates. Keep the project setting and official job titles accurate; the examples here are Folio's fictional illustrations.",
       ], example: "Personal project: Appointment booking demo\n\nBuilt a React interface with date validation and an Express API backed by PostgreSQL. Wrote tests for overlapping appointments and documented the local setup. The project uses fictional bookings and has not been used in production.", exampleLabel: "Fictional junior developer project" },
       { id: "show-engineering-decisions", heading: "Include a decision, check, or constraint", paragraphs: [
         "Choose a detail that shows how you approached the work: handling invalid input, testing an edge case, documenting an API, reviewing accessibility, or adapting a layout to small screens. Do not imply that one check proves the entire application is secure, accessible, or production-ready.",
@@ -111,6 +115,7 @@ export const careerBlogGuides: Guide[] = [
   },
   {
     slug: "teacher-cv-personal-statement", title: "How to write a teacher CV personal statement", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.teacherRole, sources.supportingStatement],
     seoTitle: "Teacher CV Personal Statement: Examples and Free Template",
     description: "Write a focused teacher CV profile using your subject, teaching context, and classroom evidence. Includes fictional early-career and experienced examples.",
     category: "CVs by profession",
@@ -122,8 +127,8 @@ export const careerBlogGuides: Guide[] = [
         "Identify the age range, subject, or setting you have actually taught. State a qualification or professional status only if you hold it, and use the terminology appropriate to the vacancy. Requirements vary by employer and location, so check the school's instructions rather than relying on a general CV example.",
         "If you are still training, say so. A completed placement can provide valuable evidence without being described as several years of independent teaching. Keep full qualification names and dates in Education or Certifications rather than crowding the opening paragraph.",
       ] },
-      { id: "choose-classroom-evidence", heading: "Choose a classroom contribution that matters to the role", paragraphs: [
-        "Look at the vacancy and choose a relevant practice you can explain: planning a sequence of lessons, adapting materials, using checks for understanding, or coordinating with colleagues. Describe what you did, not just your belief that education is important.",
+      { id: "choose-classroom-evidence", heading: "Choose a classroom contribution that matters to the role", sourceUrls: [sources.teacherRole.url], paragraphs: [
+        "The National Careers Service's primary teaching profile includes lesson planning, preparing materials, marking work, and discussing progress. Use the vacancy's actual age range and subject to choose your evidence; a primary role profile does not define every teaching job. Describe a practice you carried out and the responsibility you personally held.",
         "Avoid unsupported claims about pupil results. If you mention an outcome, be clear about the group, period, and your contribution. Do not include identifiable pupil information or confidential classroom records to make an example more persuasive.",
       ], example: "Primary teacher with experience planning literacy lessons across a mixed-attainment class. Uses short checks for understanding to adjust follow-up tasks and works with support colleagues to prepare accessible reading materials.", exampleLabel: "Fictional experienced teacher profile" },
       { id: "early-career-profile", heading: "Use placement evidence for an early-career profile", paragraphs: [
@@ -134,8 +139,8 @@ export const careerBlogGuides: Guide[] = [
         "Select one relevant priority from the advert and explain how your practice connects to it. Avoid reproducing the school's values as a string of adjectives. A particular example of adapting a task or contributing to a department is easier to understand.",
         "The [summary builder](/resume-summary-builder/) can give you a first structure, but it uses predefined patterns and cannot evaluate classroom practice. Read its output carefully and remove any sentence that overstates your role, qualifications, or impact.",
       ] },
-      { id: "support-the-profile", heading: "Let the rest of the application carry the detail", paragraphs: [
-        "Use the teaching experience section for duties and evidence, Education for qualifications, and a requested supporting statement for a fuller response to selection criteria. Do not paste a long statement into a short profile and leave the rest of the CV thin.",
+      { id: "support-the-profile", heading: "Answer a supporting statement separately when requested", sourceUrls: [sources.supportingStatement.url], paragraphs: [
+        "Manchester's job-application guidance says to address a person specification and provide examples in a requested supporting statement; an uploaded CV is not a replacement. Use the short CV profile to orient the reader, then answer the school's criteria in the required form and length. Teacher-training admissions statements are another distinct application task.",
         "Start from the [teacher CV example](/cv-examples/teacher/) and review the employer's format instructions before exporting. If a separate letter is needed, use the [cover letter guide](/tips/how-to-write-a-cover-letter/) to connect your evidence to the post without repeating every CV entry.",
       ] },
     ],
@@ -147,6 +152,7 @@ export const careerBlogGuides: Guide[] = [
   },
   {
     slug: "customer-service-resume-skills", title: "Customer service resume skills: show what happened", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.serviceRole, sources.harvardTemplate],
     seoTitle: "Customer Service Resume Skills and Bullet Point Examples",
     description: "Show customer service skills through real query handling, records, tools, and escalation examples. Includes fictional bullets and a free editable resume.",
     category: "CVs by profession",
@@ -154,8 +160,8 @@ export const careerBlogGuides: Guide[] = [
     image: { kind: "example", id: "customer-service", alt: "Customer service CV example with support experience and relevant tools", caption: "Fictional customer service CV in the Modern template." },
     tool: { href: "/cv-examples/customer-service/", label: "Edit a customer service resume", text: "Use a complete example for layout and wording ideas, then replace every detail with your own." },
     sections: [
-      { id: "identify-service-setting", heading: "Describe the service setting", paragraphs: [
-        "Identify whether your work involved a shop, phone support, email, live chat, reception, or another setting. Mention the types of questions or requests you handled. A customer service title can cover very different work, so the setting helps a recruiter interpret the rest of the entry.",
+      { id: "identify-service-setting", heading: "Describe the channel and the customer task", sourceUrls: [sources.serviceRole.url], paragraphs: [
+        "The National Careers Service lists service tasks across phone, email, chat, and in-person channels, including explaining policies, handling feedback, and updating customer information. Select the channel and tasks you actually handled. This makes your evidence more precise than a general customer service label and helps show whether it fits the advertised role.",
         "If your experience came from volunteering or an activity rather than a paid job, keep that context visible. Welcoming visitors at a regular community event can show useful communication skills without being presented as call-centre employment.",
       ] },
       { id: "turn-skills-into-examples", heading: "Explain communication through a specific task", paragraphs: [
@@ -166,9 +172,9 @@ export const careerBlogGuides: Guide[] = [
         "List ticketing, order, booking, payment, or CRM tools you have used, with a task that shows your level. Recording notes and updating a ticket are different from administering the entire system. Name the product only if you actually worked with it.",
         "Explain when you escalated an issue rather than suggesting you had authority you did not hold. A useful example can show that you gathered information, followed a procedure, and passed the issue to the right colleague. That is still a contribution to a clear customer experience.",
       ] },
-      { id: "use-metrics-carefully", heading: "Use service measures only when you understand them", paragraphs: [
+      { id: "use-metrics-carefully", heading: "Use service measures only when you understand them", sourceUrls: [sources.harvardTemplate.url], paragraphs: [
         "If you know your approximate daily query volume or a documented service measure, it can help explain scale. Check the period and whether the figure belongs to you or the team. Do not borrow a team satisfaction result and present it as your individual rating.",
-        "Numbers are optional. A clear description of handling a particular type of issue, keeping accurate notes, or coordinating a follow-up can be useful without a percentage. The [bullet point builder](/resume-bullet-point-generator/) lets you leave the result blank rather than inventing one.",
+        "Harvard's template recommends quantifying where possible; it does not require a percentage in every bullet. If you lack a supportable measure, explain the type of query, record, or follow-up you handled. The [bullet point builder](/resume-bullet-point-generator/) lets you leave the result blank. Do not estimate a service rating just to complete a sentence pattern.",
       ] },
       { id: "tailor-and-review", heading: "Choose the skills that match this vacancy", paragraphs: [
         "Compare the advert with your evidence. A retail service role may emphasise face-to-face explanations and returns, while an email role may require written updates and ticket records. Use the [skills finder](/resume-skills/) for ideas, then keep only the items your experience supports.",
@@ -183,6 +189,7 @@ export const careerBlogGuides: Guide[] = [
   },
   {
     slug: "data-analyst-resume-projects", title: "Data analyst resume projects: explain the question and the result", published: "2026-11-09",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.dataRole, sources.mitResume],
     seoTitle: "Data Analyst Resume Projects: Examples and Free Template",
     description: "Describe data analyst projects with the question, dataset, cleaning, analysis, validation, and limits. Includes a fictional entry and free resume example.",
     category: "CVs by profession",
@@ -194,8 +201,8 @@ export const careerBlogGuides: Guide[] = [
         "Name the problem the project addressed. Comparing demand by day, investigating incomplete records, and summarising survey responses are different tasks even if they use the same software. Explain who the output was intended for, including when it was only a learning exercise.",
         "Choose projects that relate to the vacancy. If the role involves regular reporting, a project with clear definitions and repeatable checks may be more relevant than a visually impressive chart with little explanation. Do not add a project simply to include another tool name.",
       ] },
-      { id: "describe-data-work", heading: "Explain the data preparation you actually performed", paragraphs: [
-        "Mention the data source at an appropriate level and identify your cleaning or transformation work. Did you standardise dates, handle missing values, join tables, or check duplicates? Choose the steps that matter to the reliability of the output rather than listing every command you ran.",
+      { id: "describe-data-work", heading: "Show preparation, checking, and communication", sourceUrls: [sources.dataRole.url], paragraphs: [
+        "The National Careers Service's analyst-statistician profile covers organising data, checking quality, analysing patterns, and presenting findings. That suggests a useful way to review a project entry: can the reader see those stages where you performed them? The profile covers varied roles, so it is context for choosing evidence, not a checklist of mandatory tools.",
         "Keep confidential data out of public portfolios and CV attachments. Use an approved public dataset, synthetic demonstration data, or an appropriate description of private work. Do not publish real employer records simply because a project needs a link.",
       ], example: "Personal project: Library lending analysis\n\nUsed a public practice dataset to compare monthly loans by category. Cleaned date fields, checked duplicate records in SQL, and built a Power BI report with documented filters. Recorded missing-data limits in the README; no operational decisions were made from the demo.", exampleLabel: "Fictional entry-level analyst project" },
       { id: "show-validation", heading: "Include a check on the result", paragraphs: [
@@ -206,8 +213,8 @@ export const careerBlogGuides: Guide[] = [
         "A dashboard, report, query, or documented analysis is an output. A change in sales, time, or cost is an impact that needs evidence and context. If nobody used the learning project to make a business decision, do not assign it a commercial outcome.",
         "For real workplace projects, distinguish your part from the wider team's result. Use a measured figure only when you know its source and can share it. Otherwise, explain the report's audience and purpose, which can still make the work understandable.",
       ] },
-      { id: "fit-the-resume", heading: "Connect projects to skills and work history", paragraphs: [
-        "List a compact set of tools you can use, then show them in project or employment entries. If a portfolio link is included, check it without signing in and ensure the explanation is consistent with the CV. A reviewer should not have to run unfamiliar code to learn what the project was about.",
+      { id: "fit-the-resume", heading: "Connect projects to skills and work history", sourceUrls: [sources.mitResume.url], paragraphs: [
+        "MIT recommends reinforcing named skills by showing them in experience descriptions. For an analyst application, our practical adaptation is to connect a tool to the preparation, analysis, or reporting step you performed. If you add a portfolio link, provide a readable explanation so the reviewer can understand the project without running its code.",
         "Start with the [data analyst CV example](/cv-examples/data-analyst/) and use the [bullet builder](/resume-bullet-point-generator/) to make a line direct. For a graduate application, the [graduate CV checklist](/tips/fresh-graduate-cv-checklist/) helps arrange education and projects around the role.",
       ] },
     ],

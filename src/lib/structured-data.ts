@@ -118,6 +118,7 @@ export function articleSchema(tip: typeof tips[number]) {
     author: person(), publisher: organization(), ...(tip.published ? { datePublished: tip.published } : {}), dateModified: CONTENT_UPDATED, inLanguage: "en",
     mainEntityOfPage: absoluteUrl(`/tips/${tip.slug}/`), image: absoluteUrl(`/social/guides/${tip.slug}.png`),
     articleSection: tip.category, wordCount: tip.words,
+    ...(tip.sources?.length ? { citation: tip.sources.map(source => ({ "@type": "CreativeWork", name: source.title, url: source.url })) } : {}),
   };
 }
 

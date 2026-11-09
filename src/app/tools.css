@@ -194,6 +194,8 @@
 .tool-guide-grid { display: grid; grid-template-columns: 220px minmax(0, 720px); justify-content: center; gap: 72px; align-items: start; }
 .tool-guide-grid .article { max-width: none; margin: 0; padding: 0; }
 .article-faq .faq-list { margin-top: 8px; }
+.article .article-section-sources { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--ink-3); }
+.article-section-sources small { font-size: inherit; }
 .article-faq .faq-list details p { margin: 0; padding-bottom: 20px; font-size: 16.5px; }
 .article .faq-list summary { font-size: 17px; }
 .related-tools { background: var(--ground-2); border-top: 1px solid var(--line); }
