@@ -2,18 +2,19 @@ import { ToolPage } from "@/components/tool-page";
 import { KeywordChecker } from "@/components/keyword-checker";
 import { pageMetadata } from "@/lib/seo";
 import { tool } from "@/lib/tools";
+import { professions } from "@/lib/skills-library";
 
 const page = tool("/resume-keyword-checker/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/resume-keyword-checker.png" });
 
 export default function KeywordCheckerPage() {
-  return <ToolPage path={page.path} heading="Free resume keyword checker."
+  return <ToolPage path={page.path} heading="Free resume keyword checker"
     intro="This free resume keyword matching tool compares your resume or CV with a job description and shows which keywords you already cover and which are missing. It runs entirely in your browser, so your CV and the advert are never uploaded."
     points={["Results as you type", "Reads PDF and DOCX files", "No sign-up", "Nothing uploaded"]}
     featureList={["Keyword and phrase extraction from job descriptions", "Matching and missing keywords with counts", "Share of key terms found", "Reads text from PDF and DOCX files on your device", "Uses the CV open in Folio’s editor"]}
     guide={[
       { id: "how-it-works", heading: "How the keyword checker works", paragraphs: [
-        "The checker reads the job description and picks out its most distinctive terms: skills and tools it recognises from a predefined library covering 22 jobs, phrases the advert repeats, and words that appear several times or look technical, such as SQL, C#, or Node.js. Common words such as “team”, “role”, and “experience” are ignored.",
+        `The checker reads the job description and picks out its most distinctive terms: skills and tools it recognises from a predefined library covering ${professions.length} jobs, phrases the advert repeats, and words that appear several times or look technical, such as SQL, C#, or Node.js. Common words such as “team”, “role”, and “experience” are ignored.`,
         "It then looks for each term in your CV, allowing for simple word endings, so “managing” matches “managed”. The percentage is the share of those key terms that appear somewhere in your CV.",
         "It is a transparent word comparison. It does not understand synonyms, so “customer care” will not match “customer service”, and it cannot tell whether your CV backs a term up with evidence. Use it as a prompt for a careful read, not as a verdict.",
       ] },

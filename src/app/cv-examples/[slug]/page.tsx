@@ -39,7 +39,7 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
       <div className="template-detail-copy">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "CV examples", href: "/cv-examples/" }, { name: example.job }]} />
         <p className="template-detail-kind">{example.category} · Fictional example</p>
-        <h1>{example.job} CV example.</h1>
+        <h1>{example.job} CV example</h1>
         <p className="template-detail-description">A complete {job} CV you can edit and make your own.</p>
         <p>{example.intro}</p>
         <ul className="check-list"><li><Check size={18} />A complete CV in the {template.name} template</li><li><Check size={18} />Three profile examples for different stages</li><li><Check size={18} />Eight bullet points you can adapt</li><li><Check size={18} />Skills and tips specific to the role</li></ul>

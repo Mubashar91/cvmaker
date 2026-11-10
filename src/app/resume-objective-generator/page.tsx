@@ -7,7 +7,7 @@ const page = tool("/resume-objective-generator/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/resume-objective-generator.png" });
 
 export default function ObjectiveGeneratorPage() {
-  return <ToolPage path={page.path} heading="Resume objective generator for students and first jobs."
+  return <ToolPage path={page.path} heading="Resume objective generator for students and first jobs"
     intro="Write a short, specific career objective for an internship, your first job, a career change, or a return to work. Combine your details with clear sentence patterns, then edit the result and add it to your CV."
     points={["Four career situations", "Three editable drafts", "No AI or sign-up", "Adds to your CV in one click"]}
     featureList={["Objective drafts for internships, first jobs, career changes, and returning to work", "Three sentence structures", "Editable drafts with word counts", "Copy to clipboard", "Add to the CV in Folio’s editor"]}

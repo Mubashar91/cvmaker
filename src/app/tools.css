@@ -359,7 +359,7 @@
 .footer-trust svg { flex-shrink: 0; color: var(--marigold); }
 .footer-maintainer { display: inline-block; margin-top: 16px; padding: 6px 0; }
 .footer-column { gap: 4px; min-width: 0; }
-.footer-column h2 { margin-bottom: 10px; }
+.footer-column .footer-heading { margin-bottom: 10px; }
 .footer-column > a { display: inline-flex; align-items: center; min-height: 32px; padding: 3px 0; line-height: 1.35; }
 .footer-column > .footer-more { gap: 6px; margin-top: 6px; color: var(--marigold); font-weight: 600; }
 .footer-column > .footer-more svg { transition: transform .25s var(--ease-out); }

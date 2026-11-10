@@ -7,7 +7,7 @@ const page = tool("/resume-summary-builder/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/resume-summary-builder.png" });
 
 export default function SummaryBuilderPage() {
-  return <ToolPage path={page.path} heading="Resume summary builder: write your CV profile."
+  return <ToolPage path={page.path} heading="Resume summary builder: write your CV profile"
     intro="Enter a few details about your experience and get three professional summary drafts built from your own words. Edit the one you like, copy it, or add it straight to your CV."
     points={["Three editable drafts", "No AI or sign-up", "Adds to your CV in one click", "Works for any job"]}
     featureList={["Summary drafts for experienced candidates, graduates, and career changers", "Three sentence structures", "Editable drafts with word counts", "Copy to clipboard", "Add to the CV in Folio’s editor"]}

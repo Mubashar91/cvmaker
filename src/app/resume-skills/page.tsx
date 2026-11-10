@@ -21,7 +21,7 @@ function SkillsLibrary() {
 }
 
 export default function ResumeSkillsPage() {
-  return <ToolPage path={page.path} heading="Skills to put on a resume: ideas for 22 jobs."
+  return <ToolPage path={page.path} heading={`Skills to put on a resume: ideas for ${professions.length} jobs`}
     intro="Choose a job to see common job skills, tools, and strengths, select the ones you can back up, and add them to your CV in one click. Every list is predefined, and you can browse them all below."
     points={[`${professions.length} jobs covered`, "Job skills, tools, and strengths", "Adds to your CV in one click", "No sign-up"]}
     featureList={[`Skill suggestions for ${professions.length} jobs`, "Job skills, tools, and personal strengths", "Grouped skills lines for the CV editor", "Copy to clipboard", "Add to the CV in Folio’s editor"]}

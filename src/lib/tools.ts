@@ -1,5 +1,6 @@
 // Free browser tools. Each works on the visitor's device with predefined templates and
 // plain JavaScript. None of them call an AI service or a server.
+import { professions } from "./skills-library";
 export const tools = [
   {
     path: "/cover-letter-maker/", name: "Cover letter maker", icon: "mail",
@@ -9,7 +10,7 @@ export const tools = [
   },
   {
     path: "/resume-keyword-checker/", name: "Resume keyword checker", icon: "search",
-    title: "Free Resume Keyword Checker — Compare Your CV to a Job",
+    title: "Free Resume Keyword Checker for Job Descriptions",
     description: "Check your resume against a job description for free. See matching and missing keywords and how to check ATS compatibility. Nothing is uploaded.",
     summary: "Compare your CV with a job description and see which keywords you cover and which are missing.",
   },
@@ -33,9 +34,9 @@ export const tools = [
   },
   {
     path: "/resume-skills/", name: "Skills for your resume", icon: "list",
-    title: "Skills to Put on a Resume — Free Ideas for 22 Jobs",
-    description: "Find skills to put on your resume for 22 jobs, from software developer to nurse. Choose hard skills, tools, and strengths, then add them to your CV for free.",
-    summary: "Browse common skills, tools, and strengths for 22 jobs and add the ones that fit to your CV.",
+    title: `Skills to Put on a Resume — Free Ideas for ${professions.length} Jobs`,
+    description: `Find skills to put on your resume for ${professions.length} jobs, from software developer to nurse. Choose hard skills, tools, and strengths, then add them to your CV for free.`,
+    summary: `Browse common skills, tools, and strengths for ${professions.length} jobs and add the ones that fit to your CV.`,
   },
 ] as const;
 

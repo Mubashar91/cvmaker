@@ -28,7 +28,7 @@ export default function NoExperiencePage() {
     <section className="template-detail-hero"><div className="container template-detail-grid"><div className="template-detail-copy">
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: page.label }]} />
       <p className="template-detail-kind">First jobs · Returning to work · New beginnings</p>
-      <h1>A free resume builder for when you have no experience.</h1>
+      <h1>A free resume builder for when you have no experience</h1>
       <p className="template-detail-description">Your first CV can start with what you have already done.</p>
       <p>You do not need a job history to show how you learn, solve problems, or help others. Create a CV online using projects, education, volunteering, and responsibilities you can explain in an interview.</p>
       <ul className="check-list"><li><Check size={18} />Start with education and projects before employment</li><li><Check size={18} />Empty sections stay out of your PDF</li><li><Check size={18} />Free PDF download, no sign-up or watermark</li></ul>

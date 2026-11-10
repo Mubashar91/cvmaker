@@ -7,7 +7,7 @@ const page = tool("/cover-letter-maker/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/cover-letter-maker.png" });
 
 export default function CoverLetterMakerPage() {
-  return <ToolPage path={page.path} heading="Free cover letter maker with professional templates."
+  return <ToolPage path={page.path} heading="Free cover letter maker with professional templates"
     intro="Create a cover letter online for free. Add your details and the job, choose a professional layout, and get an editable letter written from predefined templates. Copy it, print it, or download it as a PDF. No sign-up."
     points={["No sign-up or watermark", "PDF, print, or copy", "A4 or US Letter", "Runs on your device"]}
     featureList={["Letter templates for experienced candidates, graduates, and career changers", "Classic, Modern, and Minimal layouts", "Live preview", "Edit every line", "Copy to clipboard", "Print", "PDF download in A4 or US Letter", "Optional save in this browser", "Reuse contact details from your CV"]}

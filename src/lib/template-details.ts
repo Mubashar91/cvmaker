@@ -1,5 +1,13 @@
 import type { Template, templates } from "./model";
 
+/**
+ * Template pages to keep out of Google while their content is still being written.
+ * Add a template id here to give its page `noindex, follow` and drop it from the
+ * sitemap; remove the id once the page has enough unique content. Collection pages
+ * and galleries still link to it, so visitors are unaffected.
+ */
+export const noindexTemplates: readonly Template[] = [];
+
 export const templateDetails: Record<Template, {
   category: string; heading: string; description: string; bestFor: string;
   layout: string; features: string[];

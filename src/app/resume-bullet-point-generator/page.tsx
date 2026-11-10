@@ -7,7 +7,7 @@ const page = tool("/resume-bullet-point-generator/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/resume-bullet-point-generator.png" });
 
 export default function BulletPointGeneratorPage() {
-  return <ToolPage path={page.path} heading="Free resume bullet point generator."
+  return <ToolPage path={page.path} heading="Free resume bullet point generator"
     intro="Build a clear CV bullet point from an action, a task, and an optional result. This free builder uses only the facts you enter, with a fixed sentence pattern you can edit before copying. It runs in your browser without AI or sign-up."
     points={["Your facts, your words", "Editable result", "No sign-up or payment", "Nothing uploaded"]}
     featureList={["Action-led bullet point from your own details", "Optional context and results", "Editable output", "Copy to clipboard", "Works for jobs, projects, and volunteering"]}

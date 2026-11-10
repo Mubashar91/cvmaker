@@ -8,6 +8,7 @@ import { collectionPath, templateCollections } from "../src/lib/template-collect
 import { informationPages, siteOperator } from "../src/lib/site-info";
 import { cvExamples } from "../src/lib/cv-examples";
 import { noExperiencePage, studentPage, tools, toolsHub } from "../src/lib/tools";
+import { noindexTemplates } from "../src/lib/template-details";
 
 function decode(value: string) {
   return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
@@ -28,7 +29,7 @@ const routes: { path: string; image: string; schema?: string; noIndex?: boolean 
   { path: toolsHub.path, image: "tools", schema: "CollectionPage" },
   ...tools.map(item => ({ path: item.path, image: `tools/${item.path.slice(1, -1)}`, schema: "WebApplication" })),
   { path: "/templates/", image: "templates", schema: "CollectionPage" },
-  ...templates.map(template => ({ path: `/templates/${template.id}/`, image: template.id, schema: "CreativeWork" })),
+  ...templates.map(template => ({ path: `/templates/${template.id}/`, image: template.id, schema: "CreativeWork", noIndex: noindexTemplates.includes(template.id) })),
   ...templateCollections.map(collection => ({ path: collectionPath(collection.slug), image: `collections/${collection.slug}`, schema: "CollectionPage" })),
   { path: "/cv-examples/", image: "cv-examples", schema: "CollectionPage" },
   ...cvExamples.map(example => ({ path: `/cv-examples/${example.slug}/`, image: `examples/${example.slug}`, schema: "Article" })),

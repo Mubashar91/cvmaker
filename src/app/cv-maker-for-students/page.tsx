@@ -45,7 +45,7 @@ export default function StudentCVMakerPage() {
       <div className="template-detail-copy">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: studentPage.label }]} />
         <p className="template-detail-kind">Students · School leavers · Graduates</p>
-        <h1>Free CV maker for students and graduates.</h1>
+        <h1>Free CV maker for students and graduates</h1>
         <p className="template-detail-description">Make your first CV in minutes, even with no work experience.</p>
         <p>A free CV maker and student resume builder with an education-first layout. Add your projects, part-time jobs, and activities, and download a clean PDF. Built for students, school leavers, and fresh graduates applying for internships, apprenticeships, and first jobs in the UK, US, Canada, or Australia.</p>
         <ul className="check-list"><li><Check size={18} />Education placed first, then projects and experience</li><li><Check size={18} />Writing guidance for every section</li><li><Check size={18} />Free PDF download, no sign-up or watermark</li></ul>

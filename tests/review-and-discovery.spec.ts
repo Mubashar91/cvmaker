@@ -88,7 +88,7 @@ test("review provides direct corrections and downloads visible text", async ({ p
 test("category pages contain their actual collection and useful guidance", async ({ page }) => {
   for (const collection of templateCollections) {
     await page.goto(collectionPath(collection.slug));
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(`${collection.title}.`);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(collection.title);
     await expect(page.locator(".template-tile")).toHaveCount(collection.templates.length);
     await expect(page.getByRole("heading", { name: collection.advice[0].heading, exact: true })).toBeVisible();
   }
