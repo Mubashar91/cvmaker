@@ -66,6 +66,11 @@ async function main() {
         const data = JSON.parse(match[1]); return data["@graph"] ?? [data];
       });
       if ("schema" in route) assert(structured.some(item => item["@type"] === route.schema), `${route.path}: missing ${route.schema} schema`);
+      const guide = tips.find(tip => route.path === `/tips/${tip.slug}/`);
+      if (guide?.sources?.length) {
+        const article = structured.find(item => item["@type"] === "Article");
+        assert.deepEqual(article?.citation?.map((source: { url: string }) => source.url), guide.sources.map(source => source.url), `${route.path}: article citations must match its references`);
+      }
       if (route.path.startsWith("/templates/") && route.path !== "/templates/" || route.path.startsWith("/tips/") || route.path.startsWith("/cv-examples/") || route.path === toolsHub.path || route.path === studentPage.path || route.path === noExperiencePage.path || tools.some(item => item.path === route.path) || informationPages.some(page => page.path === route.path)) {
         assert(structured.some(item => item["@type"] === "BreadcrumbList"), `${route.path}: missing breadcrumbs`);
       }
@@ -103,6 +108,12 @@ async function main() {
       if (!href?.startsWith("/") || href.startsWith("//")) continue;
       const pathname = new URL(href, "https://local.invalid").pathname;
       assert(knownPaths.has(pathname), `${route.path}: internal link points to an unknown page: ${href}`);
+    }
+    const guide = tips.find(tip => route.path === `/tips/${tip.slug}/`);
+    if (guide?.sourcesChecked) {
+      assert(html.includes(`dateTime="${guide.sourcesChecked}"`) || html.includes(`datetime="${guide.sourcesChecked}"`), `${route.path}: missing source-check date`);
+      const links = [...html.matchAll(/<a\b[^>]*>/gi)].map(match => attributes(match[0]).href);
+      for (const source of guide.sources || []) assert(links.includes(source.url), `${route.path}: missing visible source link: ${source.url}`);
     }
   }
   for (const image of new Set(routes.map(route => route.image))) {
