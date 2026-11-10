@@ -196,6 +196,14 @@
 .article-faq .faq-list { margin-top: 8px; }
 .article .article-section-sources { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--ink-3); }
 .article-section-sources small { font-size: inherit; }
+.article-answer { margin: 30px 0; padding: 22px 24px; border: 1px solid var(--line-strong); border-left: 4px solid var(--green); border-radius: 0 14px 14px 0; background: #eef3eb; }
+.article section.article-answer h2 { margin: 0 0 10px; font-size: 1.2rem; letter-spacing: -.02em; }
+.article .article-answer p { margin: 0; font-size: 17px; line-height: 1.65; }
+.article-answer > a { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 14px; font-size: 14px; font-weight: 650; }
+.article-checklist { margin: 34px 0; padding: 22px 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.article .article-checklist h2 { margin: 0 0 14px; font-size: 1.35rem; }
+.article-checklist ul { margin: 0; }
+.article .article-checklist li { font-size: 16px; line-height: 1.6; }
 .article-faq .faq-list details p { margin: 0; padding-bottom: 20px; font-size: 16.5px; }
 .article .faq-list summary { font-size: 17px; }
 .related-tools { background: var(--ground-2); border-top: 1px solid var(--line); }

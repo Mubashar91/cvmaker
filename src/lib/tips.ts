@@ -235,7 +235,7 @@ const coreGuides: Guide[] = [
 ];
 /** Every word a reader sees in the guide body, without link markup. */
 export function guideText(guide: Guide): string {
-  return plainText([guide.intro, ...guide.sections.flatMap(section => [...section.paragraphs, ...(section.bullets || []), section.example || "", ...(section.subsections || []).flatMap(sub => [sub.heading, ...sub.paragraphs, ...(sub.bullets || [])]), ...(section.table ? section.table.rows.flat() : [])]), ...(guide.faqs || []).flatMap(faq => [faq.question, faq.answer]), guide.takeaway].join(" "));
+  return plainText([guide.intro, guide.quickAnswer || "", ...guide.sections.flatMap(section => [section.heading, ...section.paragraphs, ...(section.bullets || []), section.example || "", ...(section.subsections || []).flatMap(sub => [sub.heading, ...sub.paragraphs, ...(sub.bullets || [])]), ...(section.table ? [section.table.caption, ...section.table.head, ...section.table.rows.flat()] : [])]), guide.checklist?.heading || "", ...(guide.checklist?.items || []), ...(guide.faqs || []).flatMap(faq => [faq.question, faq.answer]), guide.takeaway].join(" "));
 }
 const guides = [...coreGuides, ...earlyCareerGuides, ...applicationGuides, ...countryGuides, ...freeToolGuides, ...writingExampleGuides, ...careerBlogGuides, ...countryBlogGuides];
 export const tips = guides.map(guide => {
@@ -254,9 +254,11 @@ export const guideGroups = [
   { id: "countries", heading: "CVs and resumes by country", text: "Local formats and first applications in the UK, US, Canada, and Australia.", slugs: ["resume-vs-cv", "uk-cv-format", "us-resume-format", "canadian-resume-format", "australian-resume-format", ...countryBlogGuides.map(guide => guide.slug)] },
 ] as const;
 
-/** Related reading: the same index group first, then the rest. */
+/** Editorial next steps first, then other guides in the same group. */
 export function relatedGuides(slug: string, count = 3): Tip[] {
+  const current = tips.find(tip => tip.slug === slug);
+  const curated = (current?.relatedSlugs || []).flatMap(related => tips.filter(tip => tip.slug === related && related !== slug));
   const group = guideGroups.find(item => (item.slugs as readonly string[]).includes(slug));
-  const same = tips.filter(tip => tip.slug !== slug && (group?.slugs as readonly string[] | undefined)?.includes(tip.slug));
-  return [...same, ...tips.filter(tip => tip.slug !== slug && !same.includes(tip))].slice(0, count);
+  const same = tips.filter(tip => tip.slug !== slug && !curated.includes(tip) && (group?.slugs as readonly string[] | undefined)?.includes(tip.slug));
+  return [...curated, ...same, ...tips.filter(tip => tip.slug !== slug && !curated.includes(tip) && !same.includes(tip))].slice(0, count);
 }

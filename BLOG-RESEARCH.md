@@ -59,6 +59,12 @@ Each path is under `/tips/`. The full references appear in the article, with lin
 - [City of Toronto: Application tips](https://jobs.toronto.ca/jobsatcity/content/Job-Application-Tips/?locale=en_US)
 - [Study Australia: Student resume guide](https://www.studyaustralia.gov.au/en/tools-and-resources/tips-and-advice-for-students/the-international-student-s-guide-to-writing-a-great-resume--)
 
+## Practical editing pass
+
+The subsequent content pass tightened all 20 introductions and added a direct answer, an original worked example, a completion checklist, and three editorially selected next reads to every post. The additions apply the researched principles to fictional scenarios; they are not quotations, measured hiring outcomes, or additional case studies from the referenced organisations.
+
+Examples now address concrete decisions: keeping a portable draft, distinguishing PDF output from editing data, classifying missing keywords, connecting an activity to a skill, explaining a project's contribution, and adapting a country-specific application. The article template links directly to the example and checklist and avoids repeating the generic editor prompt after a more relevant tool link.
+
 ## Product checks and boundaries
 
 Folio-specific statements were checked against the editor, context, PDF, keyword, and writing-tool implementation. Those statements describe the current local product: manual browser saving, portable JSON drafts, A4 CV PDF output, and deterministic browser tools. External career sources do not establish these product capabilities.

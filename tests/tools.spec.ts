@@ -93,6 +93,8 @@ test("every guide has unique sections and readable text without link markup", ()
     expect(tip.words).toBeGreaterThan(400);
     expect(new Set(tip.sections.map(section => section.id))).not.toContain("faq");
     expect(new Set(tip.sections.map(section => section.id))).not.toContain("sources");
+    expect(new Set(tip.sections.map(section => section.id))).not.toContain("quick-answer");
+    expect(new Set(tip.sections.map(section => section.id))).not.toContain("checklist");
     for (const source of tip.sources || []) expect(new URL(source.url).protocol).toBe("https:");
   }
 });

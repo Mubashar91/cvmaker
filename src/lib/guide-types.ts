@@ -11,6 +11,12 @@ export interface GuideSection {
 export interface Guide {
   slug: string; title: string; seoTitle: string; description: string; category: string;
   intro: string; sections: GuideSection[]; takeaway: string;
+  /** A direct answer to the main question, before the detailed walkthrough. */
+  quickAnswer?: string;
+  /** Concrete completion checks for this article's task. */
+  checklist?: { heading: string; items: string[] };
+  /** Editorially chosen next steps, ahead of category-based related reading. */
+  relatedSlugs?: string[];
   /** A real render from this site: a template thumbnail, a fictional example CV, or a cover letter layout. */
   image?: { kind: "template" | "example" | "letter"; id: string; alt: string; caption: string };
   faqs?: { question: string; answer: string }[];

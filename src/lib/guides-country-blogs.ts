@@ -8,10 +8,17 @@ export const countryBlogGuides: Guide[] = [
     seoTitle: "UK Student CV Format: First-Application Checklist",
     description: "Prepare a UK student CV with accurate qualifications, placements, activities, and a clear profile. Includes a fictional education entry and free CV tools.",
     category: "Applying by country",
-    intro: "A UK student CV should help an employer understand your education and the responsibilities you have taken on so far. You do not need to fill two pages simply because another applicant has more experience. Start with the opportunity, choose evidence that relates to it, and use a clear structure that makes the facts easy to find.",
+    intro: "For a first UK application, the useful question is which evidence belongs near the top. A placement, degree project, or regular activity may explain more than an employment section with nothing in it. Use this checklist to organise those details and handle predicted results and references clearly.",
+    quickAnswer: "Use clear contact details, an optional specific profile, accurate education, and relevant projects or activities. Put the strongest evidence first and label predicted results. Follow the vacancy's length and document instructions; a fixed two-page rule does not suit every student application.",
+    checklist: { heading: "Check your UK student application", items: ["Completed and predicted results are clearly distinguished.", "Your strongest relevant activity appears early enough to find.", "An unpaid activity is labelled accurately.", "You have permission and a separate process for any requested references.", "The CV, form answers, and cover letter agree on dates and responsibilities."] },
+    relatedSlugs: ["uk-cv-format", "resume-summary-examples-for-students", "cover-letter-with-no-experience"],
     image: { kind: "template", id: "student", alt: "Student CV template with education placed prominently below a short introduction", caption: "Student template with fictional demonstration content." },
     tool: { href: "/cv-maker-for-students/", label: "Make your student CV", text: "Start with education first, then add relevant projects and activities in the free editor." },
     sections: [
+      { id: "worked-example", heading: "Worked example: put education and activities in a useful order", paragraphs: [
+        "Imagine a university student applying for a part-time administration role. They maintain a society attendance sheet and have an unfinished degree. Their clearest evidence is the record-keeping task, supported by a simple education entry with an expected completion date. They do not need a paragraph listing every module.",
+        "In Folio, place Education and the relevant activity near the top, then remove empty entries. If your strongest evidence is a placement instead, move that section earlier. Keep the qualification status visible whichever order you choose; a future completion date should not look like an award already received.",
+      ], example: "Education: BSc Geography, Example University, 2024–2027, expected.\n\nRelevant activity: Society committee volunteer, 2025–Present. Maintains an attendance spreadsheet and prepares meeting notes for the committee.\n\nAdditional project: Survey assignment; cleaned response data and prepared charts for the group presentation.", exampleLabel: "Fictional UK student evidence outline" },
       { id: "read-the-application", heading: "Check whether the employer wants a CV or a form", paragraphs: [
         "Read the vacancy's instructions before formatting anything. Some opportunities request a CV and letter; others use an application form with separate questions. Keep a factual working record of your education and activities so you can answer consistently in either format.",
         "Make a short list of the tasks in the role and identify one example for each requirement you can support. For a part-time shop job, visitor-facing volunteering may matter more than a long list of unrelated modules. For an internship, a relevant project may deserve the opening space.",
@@ -36,6 +43,7 @@ export const countryBlogGuides: Guide[] = [
     faqs: [
       { question: "Must I publish my referees' phone numbers on a UK student CV?", answer: "The National Careers Service advises against putting another person's contact details on the CV. Ask permission and provide references separately through the employer's requested process." },
       { question: "Can I include an unfinished degree?", answer: "Yes. State the course and institution and make the expected completion date or current status clear." },
+      { question: "Where should I put a society or volunteer role?", answer: "Use Activities, Volunteering, or a clearly labelled experience entry. Choose a heading that makes the context understandable and describe your own responsibility." },
     ],
     sources: [sources.ukCV, sources.lseCV],
     takeaway: "Show accurate education details and relevant responsibilities, protect private information, and check the exact document the employer will receive.",
@@ -46,10 +54,17 @@ export const countryBlogGuides: Guide[] = [
     seoTitle: "US First-Job Resume Format With No Experience",
     description: "Organise an entry-level US resume using education, projects, activities, and clear evidence. Includes a fictional example and an honest guide to PDF limits.",
     category: "Applying by country",
-    intro: "For a first US job application, make the resume a clear introduction to the work you can do now. Education, projects, volunteer roles, and activities can provide useful evidence when paid experience is limited. Start with the employer's instructions, keep your contribution visible, and choose a format you can review and update for each application.",
+    intro: "A first US resume can be useful without a paid job history. The key is making education, activities, and project work understandable in their actual settings. Start with a concise outline, then check the vacancy's file requirements before investing time in the final layout.",
+    quickAnswer: "Use standard headings and relevant education, projects, volunteering, or activities. Describe your own tasks and dates clearly. Check the employer's requested file type and size: Folio exports A4 PDF CVs, not US Letter CVs or Word files. Use another output workflow when the request requires it.",
+    checklist: { heading: "Check the first-job resume and upload", items: ["Activities are distinguished from paid employment.", "Education status and expected completion dates are accurate.", "Each skill connects to an entry or demonstrable task.", "The employer accepts the file type and paper size you will submit.", "Any fields filled from the upload have been reviewed and corrected."] },
+    relatedSlugs: ["us-resume-format", "high-school-student-resume", "cv-pdf-download-checklist"],
     image: { kind: "template", id: "clarity", alt: "Clarity resume template with a plain single-column layout and standard headings", caption: "Clarity template, fictional example content; Folio CV output is A4." },
     tool: { href: "/cv-with-no-experience/", label: "Start a first-job resume", text: "Create a plain education-first CV and check whether its A4 PDF format fits the employer's request." },
     sections: [
+      { id: "worked-example", heading: "Worked example: build a first-job resume around two activities", paragraphs: [
+        "Suppose an applicant has a school technology project and regular volunteer work at a community event. The vacancy involves answering questions and keeping simple records. The volunteer activity may deserve more space than the technical project, even though the project took longer. Relevance determines the emphasis.",
+        "Use the outline below as a selection guide, not a promise that every employer wants the same sections. Add genuine paid work if you have it. If an application form asks separately about employment, answer that question accurately rather than treating every resume activity as a job.",
+      ], example: "Education: school or college, qualification, current or expected completion.\n\nVolunteer experience: welcomed event visitors and updated a registration list.\n\nProject: built two pages for a demonstration website and documented the setup.\n\nSkills: record keeping, visitor communication, and the specific website tools used.", exampleLabel: "Fictional US first-job resume outline" },
       { id: "confirm-requirements", heading: "Check the requested format and application questions", paragraphs: [
         "Read the document instructions alongside the job description. A resume upload may sit beside questions about availability, qualifications, and work history. Answer each part rather than assuming the attachment replaces the form. Use consistent dates and descriptions across the application.",
         "The existing [US resume guide](/tips/us-resume-format/) covers broader local conventions. For your first draft, try a focused page with clear headings, then adjust to the employer's request and the amount of relevant evidence. A short page is not a reason to invent a job or an achievement.",
@@ -74,6 +89,7 @@ export const countryBlogGuides: Guide[] = [
     faqs: [
       { question: "Can volunteering go on a first US resume?", answer: "Yes. Label the setting accurately and describe the responsibilities that relate to the job. Do not present unpaid activity as paid employment." },
       { question: "Does Folio download US Letter resumes?", answer: "No. CV downloads are A4 PDF. Check the employer's file and paper-size instructions before using that output." },
+      { question: "Should volunteer activity be entered as paid employment in a form?", answer: "No. Follow the form's wording and label the activity accurately. The resume can still include relevant volunteering under an appropriate heading." },
     ],
     sources: [sources.resumeFormat],
     takeaway: "Use relevant education and activities as evidence, keep their context accurate, and follow the application's file-format requirements.",
@@ -84,10 +100,17 @@ export const countryBlogGuides: Guide[] = [
     seoTitle: "Canadian Resume for Newcomers: Overseas Experience Guide",
     description: "Make overseas experience clear in a Canadian resume with accurate job titles, employer context, qualifications, and skills. Includes fictional wording examples.",
     category: "Applying by country",
-    intro: "A newcomer resume should make your experience understandable to someone who may not recognise your previous employers, course names, or job titles. You do not need to erase that background or invent Canadian work. Add enough context to show the work you did, connect it to the vacancy, and keep qualifications and responsibilities accurate.",
+    intro: "An overseas employer or internal job title may be unfamiliar to a Canadian reader. Add enough context to explain your work while preserving the original facts. The examples below show how to clarify a title, describe an employer, and separate experience from credential recognition.",
+    quickAnswer: "Keep relevant overseas experience and explain unfamiliar employers, titles, and terminology. Describe your own contribution using the vacancy's language where it accurately fits. State credential assessments or professional registration only as documented, and follow the particular employer's format instructions.",
+    checklist: { heading: "Check the context around overseas experience", items: ["Employer names and official job titles remain accurate.", "An unfamiliar organisation has a short, useful description.", "Acronyms and internal system names are explained where needed.", "Credential assessment or registration status matches your documents.", "Your format follows this employer's instructions, not a universal length rule."] },
+    relatedSlugs: ["canadian-resume-format", "tailor-resume-to-job-description", "career-change-resume-summary"],
     image: { kind: "template", id: "professional", alt: "Professional resume template with a clear profile, work history, and education", caption: "Professional template with fictional demonstration content." },
     tool: { href: "/editor/", label: "Create your resume", text: "Write clear experience entries and preview an A4 PDF; check any employer-specific format request." },
     sections: [
+      { id: "worked-example", heading: "Worked example: explain a title without upgrading it", paragraphs: [
+        "Imagine a candidate whose official title was Operations Executive at a regional distributor. The word executive may mean different things to different readers. Keep the title and explain the actual duties rather than replacing it with Operations Director. The description should establish the level of responsibility.",
+        "Use a short employer description when the organisation is unlikely to be known. Explain what an internal report contained instead of assuming its acronym is meaningful elsewhere. This makes the experience easier to assess while preserving facts that can be checked in an interview or reference.",
+      ], example: "Before: Operations Executive — managed all operations and MIS.\n\nAfter: Operations Executive, Example Distribution Ltd, 2022–2025. Regional distributor serving independent retailers. Maintained delivery records, coordinated order updates with warehouse colleagues, and prepared a weekly spreadsheet of unresolved queries for the operations manager.", exampleLabel: "Fictional overseas role clarified for an unfamiliar reader" },
       { id: "explain-the-employer", heading: "Give unfamiliar employers a short description", paragraphs: [
         "Keep the organisation's real name, then add a brief description if it helps the reader understand the setting. Regional distributor, university laboratory, and customer support centre each provide context without needing a long company history. Keep confidential commercial information out of the explanation.",
         "Use an accurate job title and explain the work in the description. If a literal title would be unfamiliar, add a plain-language clarification rather than replacing it with a more senior Canadian title. The aim is understanding, not upgrading the role.",
@@ -112,6 +135,7 @@ export const countryBlogGuides: Guide[] = [
     faqs: [
       { question: "Should I remove all overseas work from a Canadian resume?", answer: "No. Explain relevant experience with clear employer context, accurate titles, and specific contributions. Overseas work can still show the skills requested in the vacancy." },
       { question: "Can the keyword checker confirm a qualification's equivalence?", answer: "No. It compares text. Describe any qualification assessment or registration using the actual status provided by the relevant organisation." },
+      { question: "Should I replace an unfamiliar job title with a Canadian one?", answer: "Keep the accurate title and add a plain-language clarification if needed. Do not choose a more senior title or imply a different level of responsibility." },
     ],
     sources: [sources.canadaResume, sources.canadaNewcomers, sources.canadaEmployers, sources.toronto],
     takeaway: "Keep overseas experience visible, add context for unfamiliar details, and describe qualifications and local status without assumptions.",
@@ -122,10 +146,17 @@ export const countryBlogGuides: Guide[] = [
     seoTitle: "Australian Student Resume: Casual and First-Job Guide",
     description: "Write an Australian student resume with clear availability, relevant study, activities, and service experience. Includes fictional examples and a free A4 CV tool.",
     category: "Applying by country",
-    intro: "For a student seeking casual or first-job work in Australia, the resume should make your relevant responsibilities and availability easy to understand. Paid work, volunteering, practical coursework, and regular activities can all provide evidence. Choose the details that fit the vacancy and keep the document accurate enough that you can discuss every line with an employer.",
+    intro: "For casual and first-job applications, a clear statement of what you can do and when you can work is more useful than a crowded page of generic strengths. Build the resume around your actual activities, study commitments, and the advertised duties. The example below shows how to make that information specific.",
+    quickAnswer: "Include relevant education, paid or unpaid experience, practical skills, and genuine availability where it helps with the advertised shifts. Distinguish study periods from breaks when necessary. Keep training and eligibility information accurate and check any current requirements through the appropriate official source.",
+    checklist: { heading: "Check your student or casual-job application", items: ["Available days and hours fit your actual timetable.", "Activities explain your responsibility and level of involvement.", "Required training is listed only with accurate completion status.", "Any eligibility question is answered using your own current information.", "Referees have agreed before their details are provided through the requested process."] },
+    relatedSlugs: ["australian-resume-format", "part-time-job-cv", "cover-letter-with-no-experience"],
     image: { kind: "template", id: "regent", alt: "Regent resume template with a clear single-column layout and contact details", caption: "Regent template with fictional demonstration content." },
     tool: { href: "/cv-maker-for-students/", label: "Create a student resume", text: "Use an education-first layout and download an A4 PDF without signup or payment." },
     sections: [
+      { id: "worked-example", heading: "Worked example: make availability and service evidence specific", paragraphs: [
+        "Suppose a student wants a casual role with evening and weekend shifts. Their draft says fully flexible, but classes prevent them working two evenings. Replace that claim with the availability they can maintain. Then choose a real activity that shows relevant communication or practical work.",
+        "The example separates the timetable from the evidence so an employer can understand both. Update the availability when the semester changes. If the advert requires training you have not completed, do not copy a certificate from a sample resume; explain your actual preparation in the requested application channel.",
+      ], example: "Before: Fully flexible student with excellent customer service skills.\n\nAfter: Available Tuesday and Thursday evenings and Saturdays during semester, with additional weekday availability during university breaks. As a community event volunteer, checked participant names against the list and directed visitors to activities.", exampleLabel: "Fictional student application details; replace with your own timetable and experience" },
       { id: "choose-relevant-work", heading: "Begin with the work the vacancy actually involves", paragraphs: [
         "Read the advert for duties, location, hours, required training, and application instructions. A casual hospitality role and an office internship ask for different evidence, even if both welcome students. Choose your examples for the work rather than using one unchanged resume for every vacancy.",
         "If you have only a small amount of experience, use a focused document with clear headings. The broader [Australian resume guide](/tips/australian-resume-format/) covers local conventions. Here, the aim is to make a first application understandable without padding it with unrelated subjects or interests.",
@@ -150,6 +181,7 @@ export const countryBlogGuides: Guide[] = [
     faqs: [
       { question: "Can I apply for casual work without a paid job history?", answer: "You can describe relevant study, projects, volunteering, and responsibilities honestly. The employer decides whether that evidence meets the vacancy's requirements." },
       { question: "Should I copy visa or certificate details from an example?", answer: "No. Use only your own accurate status and records, and check official or issuing-body information when needed." },
+      { question: "What if my availability changes during exams?", answer: "Keep the information current and state any known change through the employer's requested process. Do not leave an unrestricted availability claim in a document that no longer reflects your timetable." },
     ],
     sources: [sources.australia, sources.firstJob],
     takeaway: "Match the vacancy with real activities and skills, keep availability and training accurate, and review the complete application before sending.",
