@@ -294,20 +294,3 @@ export const templateDetails: Record<Template, {
   },
 };
 
-// Practical notes that follow from each layout's structure, photo support, and style,
-// so every template page explains when that particular design is a good fit.
-export function templateGuidance(template: typeof templates[number]): string[] {
-  const reading = template.columns === 2
-    ? `${template.name} uses two columns, which makes supporting details quick to scan. Some applicant tracking systems read columns in an unexpected order, so if you are uploading to an online portal, compare it with a single-column template such as Clarity or Linear.`
-    : `${template.name} keeps one reading order from top to bottom, so a recruiter and an online application system meet your sections in the same sequence.`;
-  const tone = {
-    Traditional: "Its traditional styling suits conservative fields such as law, finance, the public sector, and academia, where a familiar format is often expected.",
-    Modern: "Its modern styling suits most office, technology, and client-facing roles, where a clear hierarchy matters more than ornament.",
-    Creative: "Its creative styling works best when design sense is part of the job, or when you send your CV directly to a person. For formal sectors, a quieter template may be the safer choice.",
-    Simple: "Its simple styling keeps attention on your content and prints clearly in black and white.",
-  }[template.style];
-  const photo = template.photo
-    ? "The profile photo is optional. CVs for jobs in the UK, Ireland, the US, and Canada usually leave it out, while a photo is more common in parts of continental Europe, the Middle East, and Asia. Follow the employer’s guidance when it is given."
-    : `${template.name} does not show a photo, which matches the usual expectation for CVs in the UK, Ireland, the US, and Canada.`;
-  return [reading, tone, photo];
-}

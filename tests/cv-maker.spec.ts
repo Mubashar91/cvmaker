@@ -21,7 +21,9 @@ async function pdfText(filePath: string) {
 for (const ext of ["pdf", "docx"]) test(`${ext}: upload, correct a detail, switch templates, and download`, async ({ page, baseURL }) => {
   const unexpectedRequests: string[] = [];
   const localOrigin = new URL(baseURL!).origin;
-  page.on("request", request => { if (!request.url().startsWith(localOrigin + "/") && !request.url().startsWith("blob:") && !request.url().startsWith("data:")) unexpectedRequests.push(request.url()); });
+  // Google's advertising script (src/app/layout.tsx) is the one permitted third party; CV processing itself must make no outside requests.
+  const adHost = /(^|\.)(googlesyndication\.com|doubleclick\.net|google\.com|adtrafficquality\.google|googleadservices\.com|gstatic\.com)$/;
+  page.on("request", request => { const url = new URL(request.url()); if (url.origin !== localOrigin && !["blob:", "data:"].includes(url.protocol) && !adHost.test(url.hostname)) unexpectedRequests.push(request.url()); });
   await page.goto("/");
   await expect(page.getByRole("button", { name: "Create a new CV" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Upload my existing CV" })).toBeVisible();
@@ -161,6 +163,8 @@ test("an optional photo is prepared locally, shown, and removable", async ({ pag
 
 test("tips pages work and ad spaces stay hidden", async ({ page }) => {
   for (const route of ["/", "/tips/", "/tips/before-you-send/", "/privacy/", "/editor/"]) {
-    await page.goto(route); await expect(page.locator("main")).toBeVisible(); await expect(page.locator("iframe")).toHaveCount(0); await expect(page.locator(".ad-space")).toHaveCount(0);
+    await page.goto(route); await expect(page.locator("main")).toBeVisible();
+    // Folio's own reserved ad placements stay hidden; Google's script may add its own frames outside <main>.
+    await expect(page.locator("main iframe")).toHaveCount(0); await expect(page.locator(".ad-space")).toHaveCount(0);
   }
 });

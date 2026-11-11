@@ -8,7 +8,7 @@ import { AdSlot } from "@/components/ad-slot";
 import { UseExampleButton } from "@/components/use-example-button";
 import { cvExample, cvExamples, exampleCV, relatedExamples } from "@/lib/cv-examples";
 import { templateById, templates } from "@/lib/model";
-import { templateGuidance } from "@/lib/template-details";
+import { templateDetails } from "@/lib/template-details";
 import { examplePreview } from "@/lib/previews";
 import { tips } from "@/lib/tips";
 import { siteOperator } from "@/lib/site-info";
@@ -52,15 +52,15 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
       <nav className="guide-toc" aria-label="On this page"><h2>On this page</h2>{sections.map(section => <a key={section.id} href={`#${section.id}`}>{section.heading}</a>)}</nav>
       <article className="article">
         <div className="article-meta example-meta"><Link href="/about/" rel="author"><FileText size={15} />By {siteOperator.name}</Link><span><Clock3 size={15} />Updated <time dateTime={CONTENT_UPDATED}>{CONTENT_UPDATED_LABEL}</time></span></div>
-        <section id="profile-examples"><h2>{sections[0].heading}</h2><p>The profile at the top of a {job} CV should tell the reader who you are, what you do well, and what you are looking for, in two to four sentences. The example CV uses the first version below; these alternatives show how the same role reads at different stages.</p>
+        <section id="profile-examples"><h2>{sections[0].heading}</h2><p>The first version is used in the example CV above; the alternatives show how a {job} profile reads at other stages.</p>
           <aside className="article-example"><span>Used in the example CV</span><p>{example.summary}</p></aside>
           {example.profiles.map(profile => <aside className="article-example" key={profile.label}><span>{profile.label}</span><p>{profile.text}</p></aside>)}
         </section>
-        <section id="bullet-points"><h2>{sections[1].heading}</h2><p>Start each point with an action and finish with a result or useful detail. Use these as a model rather than copying them: swap in your own numbers, settings, and tools so every line is true for you.</p><ul>{example.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul><p>Use the <Link href="/resume-bullet-point-generator/">free resume bullet point builder</Link> to structure a line from your own facts.</p></section>
-        <section id="skills"><h2>{sections[2].heading}</h2><p>Choose the skills that match the job advert and that you can back up with an example from your experience.</p><div className="skill-columns">{example.skillGroups.map(group => <div key={group.label}><h3>{group.label}</h3><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>
+        <section id="bullet-points"><h2>{sections[1].heading}</h2><p>Models for a {job} CV, not lines to copy: swap in your own numbers, settings, and tools, or build one from your own facts with the <Link href="/resume-bullet-point-generator/">bullet point builder</Link>.</p><ul>{example.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></section>
+        <section id="skills"><h2>{sections[2].heading}</h2><div className="skill-columns">{example.skillGroups.map(group => <div key={group.label}><h3>{group.label}</h3><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>
         <section id="tips"><h2>{sections[3].heading}</h2>{example.tips.map(tip => <div key={tip.heading}><h3>{tip.heading}</h3><p>{tip.text}</p></div>)}</section>
-        <section id="template"><h2>{sections[4].heading}</h2><p>This example uses the <Link href={`/templates/${template.id}/`}>{template.name} template</Link> ({template.note.toLowerCase().replace(" · ", ", ")}). {templateGuidance(template)[1]} You can switch to any of the {templates.length} templates in the editor without retyping, and change the colour, font, and spacing.</p></section>
-        <aside className="callout"><p>Every person, employer, and figure in this example is fictional. Use it for structure and wording ideas, then make every line accurate for your own experience.</p></aside>
+        <section id="template"><h2>{sections[4].heading}</h2><p>This example uses the <Link href={`/templates/${template.id}/`}>{template.name} template</Link>. {templateDetails[template.id].layout} Any of the {templates.length} templates can take this content without retyping.</p></section>
+        <aside className="callout"><p>Every person, employer, and figure in this {job} example is fictional.</p></aside>
         <div className="article-cta"><span>Start from this example, then make it yours.</span><UseExampleButton cv={exampleCV(example)} className="button dark">Edit the {job} example</UseExampleButton></div>
       </article>
     </div>

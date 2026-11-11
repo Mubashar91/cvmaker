@@ -678,8 +678,13 @@ export const cvExamples: CVExample[] = [
 export function cvExample(slug: string) { return cvExamples.find(example => example.slug === slug); }
 
 /** Related examples: same category first, then the rest in list order. */
+/**
+ * Three related examples: the same category first, then the examples that follow this one in
+ * the list, so each page links to a different set rather than every page repeating the first few.
+ */
 export function relatedExamples(example: CVExample, count = 3) {
-  const others = cvExamples.filter(item => item.slug !== example.slug);
+  const index = cvExamples.findIndex(item => item.slug === example.slug);
+  const others = [...cvExamples.slice(index + 1), ...cvExamples.slice(0, index)];
   return [...others.filter(item => item.category === example.category), ...others.filter(item => item.category !== example.category)].slice(0, count);
 }
 
