@@ -47,7 +47,9 @@ export default async function cvJobMatch(req, res) {
   }
   if (req.headers['sec-fetch-site'] === 'cross-site') return reply(res, 403, { error: 'Please use the CV job match tool on this website.' });
   if (!/^application\/json(?:\s*;|$)/i.test(req.headers['content-type'] || '')) return reply(res, 415, { error: 'Send the CV and job advert as JSON.' });
-  if (!process.env.OPENAI_API_KEY?.trim()) return reply(res, 503, { error: 'The AI job match is not available yet. The keyword checker still works, and you can try again later.' });
+  // The Vercel project stores the key as `oprnaikey`; local .env files use OPENAI_API_KEY.
+  const apiKey = (process.env.OPENAI_API_KEY || process.env.oprnaikey || '').trim();
+  if (!apiKey) return reply(res, 503, { error: 'The AI job match is not available yet. The keyword checker still works, and you can try again later.' });
 
   let body;
   try {
@@ -86,7 +88,7 @@ export default async function cvJobMatch(req, res) {
   try {
     const response = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
-      headers: { 'Authorization': `Bearer ${process.env.OPENAI_API_KEY.trim()}`, 'Content-Type': 'application/json' },
+      headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       signal: AbortSignal.timeout(45_000),
       body: JSON.stringify({
         model: 'gpt-5-mini',

@@ -37,6 +37,19 @@ test('missing key returns a clear error without calling OpenAI', () => fixture(a
   assert.match((await response.json()).error, /not available yet/);
 }, () => assert.fail('OpenAI should not be called'), ''));
 
+test('the key also works under the Vercel project name oprnaikey', async () => {
+  const previous = process.env.oprnaikey;
+  process.env.oprnaikey = 'vercel-key';
+  try {
+    await fixture(async ({ post }) => assert.equal((await post()).status, 200), async (_url, options) => {
+      assert.equal(options.headers.Authorization, 'Bearer vercel-key');
+      return completed(report);
+    }, '');
+  } finally {
+    if (previous === undefined) delete process.env.oprnaikey; else process.env.oprnaikey = previous;
+  }
+});
+
 test('rejects invalid requests before calling OpenAI', () => fixture(async ({ post, url }) => {
   assert.equal((await originalFetch(url)).status, 405);
   assert.equal((await post({}, { 'sec-fetch-site': 'cross-site' })).status, 403);
