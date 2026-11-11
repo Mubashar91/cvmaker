@@ -3,6 +3,8 @@ import next from 'next';
 import nextEnv from '@next/env';
 import improveSummary from '../api/improve-summary.mjs';
 import cvJobMatch from '../api/cv-job-match.mjs';
+import coverLetterDraft from '../api/cover-letter-draft.mjs';
+import improveBullets from '../api/improve-bullets.mjs';
 
 // Use the same server-only environment files as Next's development server.
 nextEnv.loadEnvConfig(process.cwd(), true);
@@ -20,6 +22,8 @@ const server = createServer((req, res) => {
   const pathname = new URL(req.url || '/', 'http://localhost').pathname;
   if (pathname === '/api/improve-summary' || pathname === '/api/improve-summary/') return improveSummary(req, res);
   if (pathname === '/api/cv-job-match' || pathname === '/api/cv-job-match/') return cvJobMatch(req, res);
+  if (pathname === '/api/cover-letter-draft' || pathname === '/api/cover-letter-draft/') return coverLetterDraft(req, res);
+  if (pathname === '/api/improve-bullets' || pathname === '/api/improve-bullets/') return improveBullets(req, res);
   return handle(req, res);
 });
 server.on('upgrade', app.getUpgradeHandler());

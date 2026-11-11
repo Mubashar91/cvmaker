@@ -232,6 +232,48 @@ const coreGuides: Guide[] = [
     ],
     takeaway: "Check the details, open the downloaded file, and keep the version you send. A careful final review is part of a professional application.",
   },
+  {
+    slug: "free-ai-resume-checker", title: "Check your CV against a job with AI, honestly",
+    seoTitle: "Free AI Resume Checker: Check Your CV Against a Job",
+    description: "How to use a free AI resume checker honestly: what AI can verify in your CV, what it gets wrong, and how to apply its suggestions without inventing anything.",
+    category: "Final checks & applications",
+    published: "2026-11-11",
+    tool: { href: "/ai-cv-job-match/", label: "Try the AI CV job match", text: "Paste a job advert and your CV, and get a free report: requirements you demonstrate with evidence, gaps, and honest suggested fixes." },
+    quickAnswer: "An AI checker is useful for one specific job: reading a job advert and your CV together and showing where your evidence is strong, thin, or missing. Use it after you have written a truthful CV, treat every suggestion as a question rather than an instruction, and never add a claim the AI proposed that is not true for you. Folio's [AI CV job match](/ai-cv-job-match/) is free and built around those rules.",
+    faqs: [
+      { question: "Is an AI resume checker free to use?", answer: "Folio's [AI CV job match](/ai-cv-job-match/) is free, with no account and no payment. Because each check makes a real AI request, it is rate-limited to a few checks per day; the [keyword checker](/resume-keyword-checker/) is instant and unlimited in between." },
+      { question: "Will the AI invent experience for me?", answer: "It is instructed not to: matches must quote evidence from your CV, and advice about gaps tells you to add a detail only if it is true for you. AI can still make mistakes, so compare every point with what you actually did before changing your CV." },
+      { question: "Can employers tell if AI helped with my CV?", answer: "Employers care whether the CV is accurate and whether you can discuss it in an interview, and some use AI in their own screening. Using AI to check coverage or tighten wording is normal; submitting AI-invented experience is the problem, because it falls apart the moment someone asks about it." },
+    ],
+    intro: "AI tools now read CVs quickly and cheaply, and that cuts both ways: used carelessly they pad applications with claims you cannot back up, but used carefully they are a sharp second reader that spots exactly where your evidence is thin. This guide shows how to run an honest AI check on your CV against a real job advert, and what to do with the result.",
+    sections: [
+      { id: "what-ai-can-check", heading: "What an AI check can and cannot tell you", paragraphs: [
+        "A good AI checker compares meaning, not just words. Where the [resume keyword checker](/resume-keyword-checker/) can tell you that “stakeholder reporting” appears in the advert but not in your CV, an AI reader can also notice that your line about “presenting weekly figures to store managers” is evidence for it. That gap between what you did and the words an advert uses is where strong applications are lost, and it is exactly what AI reads well.",
+        "What no AI tool can tell you is whether you will pass a specific employer's screening. Companies configure their systems differently, recruiters weigh things the text never shows, and any site that sells a pass or fail “ATS score” is guessing. Treat an AI check as a reading of your evidence, never as a prediction of the outcome.",
+      ] },
+      { id: "run-an-honest-check", heading: "Run the check on a truthful CV", paragraphs: [
+        "Write the CV first, in your own words, and make it true. An AI check sharpens a real document; it cannot repair an empty one, and asking AI to write your experience from nothing produces confident text you cannot defend in an interview.",
+        "Then give the checker both texts in full: the whole job advert, including the responsibilities, and your complete CV text. In [Folio's AI job match](/ai-cv-job-match/) you can use the CV open in the editor, read a PDF or DOCX on your device, or paste the text — and you can remove your name and contact details first, because the report does not need them.",
+      ] },
+      { id: "read-the-report", heading: "Read the report in the right order", paragraphs: [
+        "Start with the gaps, not the matches. A missing requirement that is genuinely true for you is the cheapest improvement available: the evidence exists, it just never made it onto the page. Find the role or project where it happened and add one specific line there.",
+        "Then read the matches and check the evidence against your memory. If the AI matched a requirement using a line you barely remember, that line needs attention before an interviewer finds it. A match you cannot talk about for two minutes is not a match.",
+      ], example: "Gap: “The advert asks for CRM experience.” If you logged every customer case in HubSpot, name the system in that role's bullet points. If you have never used a CRM, leave the CV alone and prepare an honest answer about how quickly you learn new systems instead." },
+      { id: "apply-suggestions-safely", heading: "Apply suggestions without losing the truth", paragraphs: [
+        "Hold every suggested wording change to one test: could you say this sentence to the hiring manager with a straight face? Rewording “helped customers by email” as “resolved written customer enquiries” passes, because it is the same fact. Accepting a suggestion that quietly upgrades “helped with reports” to “led reporting” does not.",
+        "Make the edits yourself in the [editor](/editor/), rather than pasting a whole AI rewrite over your CV. Line-by-line edits keep your judgement in the loop, and the live preview shows how each change reads in the finished document. Our guide to [tailoring your CV to a job description](/tips/tailor-resume-to-job-description/) covers where each kind of evidence belongs.",
+      ] },
+      { id: "where-ai-goes-wrong", heading: "Know the failure modes", paragraphs: [
+        "AI misreads. It can treat a course as work experience, miss evidence written in unusual words, or state a requirement the advert never made. It also flatters: models are trained to be agreeable, and an over-positive reading of your CV is more dangerous than a harsh one, because it stops you fixing real gaps.",
+        "Check the mundane things yourself: dates, spelling, consistent formatting, and the employer's instructions. An AI report says nothing about whether the PDF you attach is the right version. The [pre-send checklist](/tips/before-you-send/) covers that final pass, and [formatting for application systems](/tips/ats-friendly-cv/) covers the layout side.",
+      ] },
+      { id: "keep-your-voice", heading: "Keep your own voice", paragraphs: [
+        "Recruiters read hundreds of applications, and identical AI phrasing is becoming easy to spot — not because AI words are forbidden, but because they are interchangeable. The details only you can supply, such as the real project, the actual number, the specific system, are what make a CV sound like a person.",
+        "A practical rhythm: write it yourself, run one AI check, fix the true gaps, tighten the wording you can stand behind, and stop. Two focused passes beat ten rounds of polishing, and the time saved belongs in preparing for the conversation your better CV is about to earn.",
+      ] },
+    ],
+    takeaway: "Use AI to find thin evidence, not to manufacture it. Every line it touches still has to survive an interview, so the final judgement stays yours.",
+  },
 ];
 /** Every word a reader sees in the guide body, without link markup. */
 export function guideText(guide: Guide): string {
@@ -250,7 +292,7 @@ export const guideGroups = [
   { id: "writing", heading: "Writing your CV", text: "Profiles, summaries, bullet points, projects, skills, and layout.", slugs: ["write-a-clear-profile", "describe-your-experience", "projects-on-a-cv", "keep-it-focused", "choose-your-template", ...writingExampleGuides.map(guide => guide.slug)] },
   { id: "first-jobs", heading: "Students and first jobs", text: "School, university, graduation, part-time work, and internships.", slugs: ["your-first-cv", "part-time-job-cv", "internship-cv", "high-school-student-resume", "fresh-graduate-cv-checklist"] },
   { id: "professions", heading: "Writing for your profession", text: "Focused guidance for software, teaching, customer service, and data analysis.", slugs: ["software-engineer-resume-projects", "teacher-cv-personal-statement", "customer-service-resume-skills", "data-analyst-resume-projects"] },
-  { id: "applying", heading: "Cover letters, ATS, and sending", text: "Everything between a finished CV and a sent application.", slugs: ["how-to-write-a-cover-letter", "ats-friendly-cv", "common-cv-mistakes", "before-you-send"] },
+  { id: "applying", heading: "Cover letters, ATS, and sending", text: "Everything between a finished CV and a sent application.", slugs: ["how-to-write-a-cover-letter", "ats-friendly-cv", "free-ai-resume-checker", "common-cv-mistakes", "before-you-send"] },
   { id: "countries", heading: "CVs and resumes by country", text: "Local formats and first applications in the UK, US, Canada, and Australia.", slugs: ["resume-vs-cv", "uk-cv-format", "us-resume-format", "canadian-resume-format", "australian-resume-format", ...countryBlogGuides.map(guide => guide.slug)] },
 ] as const;
 

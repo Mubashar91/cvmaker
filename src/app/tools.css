@@ -190,6 +190,8 @@
 .keyword-list.is-missing li { background: rgb(243 181 63 / .14); border: 1px solid rgb(243 181 63 / .35); }
 .keyword-list.is-matched li { background: var(--desk-raised); border: 1px solid var(--desk-line); }
 
+.tool-step-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: flex-end; }
+
 /* AI job match report */
 .ai-match-action { margin-top: 14px; max-width: 100%; white-space: normal; }
 .ai-report { display: flex; flex-direction: column; gap: 22px; }

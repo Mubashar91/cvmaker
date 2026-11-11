@@ -3,7 +3,7 @@ import { templates } from "./model";
 import { siteOperator } from "./site-info";
 
 export const SITE_NAME = "Folio";
-export const CONTENT_UPDATED = "2026-11-09";
+export const CONTENT_UPDATED = "2026-11-11";
 const dateLabel = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 /** "9 November 2026" for an ISO date. */
 export function formatDate(iso: string): string { return dateLabel.format(new Date(`${iso}T00:00:00Z`)); }

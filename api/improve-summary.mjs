@@ -40,16 +40,25 @@ export default async function improveSummary(req, res) {
   const summary = body.summary.trim(); const headline = (body.headline || '').trim();
   if (summary.length < 20 || summary.length > 5_000 || headline.length > 200) return reply(res, 400, { error: 'Use a summary between 20 and 5,000 characters and a professional title under 200 characters.' });
 
-  // A small per-instance limit. Hosting-level limits can also apply across instances.
+  // Small per-instance limits per minute and per day. Hosting-level limits can also apply across instances.
   const now = Date.now();
   for (const [key, value] of requests) if (value.expires <= now) requests.delete(key);
   const ip = process.env.VERCEL ? String(req.headers['x-forwarded-for'] || 'unknown').split(',')[0].trim() : req.socket?.remoteAddress || 'local';
-  const bucket = requests.get(ip) || { count: 0, expires: now + 60_000 };
-  if (bucket.count >= 5 || (!requests.has(ip) && requests.size >= 1_000)) {
+  const minute = requests.get(`m:${ip}`) || { count: 0, expires: now + 60_000 };
+  const day = requests.get(`d:${ip}`) || { count: 0, expires: now + 86_400_000 };
+  if (requests.size >= 2_000 && (!requests.has(`m:${ip}`) || !requests.has(`d:${ip}`))) {
     res.setHeader('Retry-After', '60');
     return reply(res, 429, { error: 'Please wait a minute before improving another summary.' });
   }
-  bucket.count++; requests.set(ip, bucket);
+  if (day.count >= 20) {
+    res.setHeader('Retry-After', '3600');
+    return reply(res, 429, { error: 'You have reached today’s free AI improvements. Manual editing is unlimited, and AI resets tomorrow.' });
+  }
+  if (minute.count >= 5) {
+    res.setHeader('Retry-After', '60');
+    return reply(res, 429, { error: 'Please wait a minute before improving another summary.' });
+  }
+  minute.count++; day.count++; requests.set(`m:${ip}`, minute); requests.set(`d:${ip}`, day);
 
   try {
     const response = await fetch('https://api.openai.com/v1/responses', {

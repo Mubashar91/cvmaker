@@ -1,6 +1,7 @@
 "use client";
 import { useDeferredValue, useMemo, useRef, useState } from "react";
-import { CircleAlert, FileUp, Info, LoaderCircle, LockKeyhole, RotateCcw, UserRound } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CircleAlert, FileUp, Info, LoaderCircle, LockKeyhole, RotateCcw, Sparkles, UserRound } from "lucide-react";
 import { useCV } from "./cv-context";
 import { TextInput } from "./tool-fields";
 import { compareKeywords } from "@/lib/keyword-match";
@@ -37,6 +38,7 @@ export function KeywordChecker() {
           <section aria-labelledby="matched-terms"><h3 id="matched-terms">Found in your CV</h3>{result.matched.length ? <ul className="keyword-list is-matched">{result.matched.map(item => <li key={item.key}>{item.term}<span>{item.inCV}× in CV</span></li>)}</ul> : <p className="tool-empty">None of the key terms were found yet.</p>}</section>
         </div>
         <p className="tool-note"><Info size={15} aria-hidden="true" />Add a missing term only where it is true for you, ideally beside an example. This is a word comparison, not a prediction of how any employer’s system will rank your application.</p>
+        <p className="tool-note"><Sparkles size={15} aria-hidden="true" />Want to know whether your CV <em>proves</em> these terms? The <Link href="/ai-cv-job-match/">AI CV job match</Link> reads both texts, shows evidence and gaps, and suggests honest fixes.<ArrowRight size={14} aria-hidden="true" /></p>
       </>}
       <p className="tool-privacy"><LockKeyhole size={14} aria-hidden="true" />Compared in your browser with plain text matching. Nothing is uploaded or stored.</p>
     </div>

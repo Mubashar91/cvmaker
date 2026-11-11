@@ -1,11 +1,11 @@
-// Application tools: classic tools run on the visitor's device; the optional
-// AI job match sends the supplied CV and advert only when explicitly requested.
+// Application tools: classic tools run on the visitor's device; optional AI
+// features send only the text the visitor supplies, and only when they ask.
 import { professions } from "./skills-library";
 export const tools = [
   {
     path: "/cover-letter-maker/", name: "Cover letter maker", icon: "mail",
-    title: "Free Cover Letter Maker — Professional Templates & PDF",
-    description: "Create a cover letter online for free, with no sign-up. Our cover letter builder turns your details into a professional letter to edit and download as a PDF.",
+    title: "Free AI Cover Letter Generator & Maker — No Sign-Up",
+    description: "Create a cover letter online for free: professional templates, an optional AI draft written from your details, and a PDF download with no sign-up or watermark.",
     summary: "Turn your details into a tailored letter, edit every line, then copy, print, or download it as a PDF.",
   },
   {
