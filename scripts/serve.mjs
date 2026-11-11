@@ -2,10 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import nextEnv from '@next/env';
-import improveSummary from '../api/improve-summary.mjs';
-import cvJobMatch from '../api/cv-job-match.mjs';
-import coverLetterDraft from '../api/cover-letter-draft.mjs';
-import improveBullets from '../api/improve-bullets.mjs';
+import { apiHandler } from '../api/_routes.mjs';
 
 nextEnv.loadEnvConfig(process.cwd(), false);
 
@@ -16,10 +13,8 @@ await stat(root).catch(() => { console.error('Build the site first with npm run 
 createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url || '/', 'http://localhost').pathname);
-    if (pathname === '/api/improve-summary' || pathname === '/api/improve-summary/') return await improveSummary(req, res);
-    if (pathname === '/api/cv-job-match' || pathname === '/api/cv-job-match/') return await cvJobMatch(req, res);
-    if (pathname === '/api/cover-letter-draft' || pathname === '/api/cover-letter-draft/') return await coverLetterDraft(req, res);
-    if (pathname === '/api/improve-bullets' || pathname === '/api/improve-bullets/') return await improveBullets(req, res);
+    const api = apiHandler(pathname);
+    if (api) return await api(req, res);
     let file = resolve(root, '.' + pathname);
     if (file !== root && !file.startsWith(root + sep)) { res.writeHead(403); res.end(); return; }
     const info = await stat(file);

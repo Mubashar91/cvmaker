@@ -98,7 +98,6 @@ export interface CV {
   experience: Entry[]; education: Entry[]; projects: Entry[]; certifications: Entry[];
   sectionOrder: Section[]; hiddenSections: Section[];
 }
-export const DRAFT_KEY = "folio-draft-v1";
 const units = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
 const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
 function numberWord(n: number): string {
@@ -164,3 +163,8 @@ export function upgradeCV(value: unknown): unknown {
 /** A validated CV from stored or uploaded JSON, upgrading older drafts; otherwise null. */
 export function parseCV(value: unknown): CV | null { const cv = upgradeCV(value); return isCV(cv) ? cv : null; }
 export function move<T>(items: T[], index: number, direction: number): T[] { const next = [...items]; const target = index + direction; if (target < 0 || target >= next.length) return next; [next[index], next[target]] = [next[target], next[index]]; return next; }
+/** Moves one item to a new position, shifting the items in between. */
+export function moveTo<T>(items: T[], from: number, to: number): T[] {
+  if (from === to || from < 0 || from >= items.length || to < 0 || to >= items.length) return items;
+  const next = [...items]; const [item] = next.splice(from, 1); next.splice(to, 0, item); return next;
+}

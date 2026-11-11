@@ -46,6 +46,10 @@ The self-hosted interface family is **Archivo Variable** (`@fontsource-variable/
 - **Letter sheet** (`.letter-sheet` + `.letter-page`): an HTML page that mirrors the cover letter PDF layouts; the sheet is the size container so margins and type scale with it.
 - **Tool and guide cards**: paper cards with a green icon tile or a real CV render, a category label, and one clear link line. Guide index groups cards by topic under a featured guide.
 - **Skill chips**: pill buttons; pressed = green outline on pale green. Used in the editor and the skills tool.
+- **Editor header actions**: Undo/Redo icon buttons on the desk, then Save draft and Word (`on-dark`), then Download PDF (marigold, the one primary action). Below 1080px Save and Word become icons; below 480px Redo moves to the keyboard only.
+- **Drag handle** (`DragHandle`): a grip before each entry number and section name. The dragged item fades with a dashed green outline; a 3px green line shows where it will land. Pointer-only: the up/down buttons remain the keyboard path.
+- **Saved CVs** (`.draft-tools`): an autosave switch (green track when on), link-style actions, and a bordered list with “Open now” on the CV being edited.
+- **Improved CV panel** (`.tailored-cv`, in the green tool output): keyword coverage before → after (after in marigold), Download PDF (marigold) and Word, a full-width Open in editor, a real PDF preview, then what changed, a collapsible before/after comparison, and an amber “Not added” list for things only the visitor can confirm.
 - The homepage hero keeps one small uppercase line inside the H1 for the primary keywords; no other eyebrow/kicker labels above headings.
 
 ## Motion

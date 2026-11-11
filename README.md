@@ -1,6 +1,6 @@
 # Folio — free CV maker
 
-A mobile-friendly Next.js + TypeScript CV maker. CV import, editing, and PDF generation happen locally in the browser, with no account, analytics, or active advertisements. Optional AI summary improvement uses a server endpoint and an OpenAI API key.
+A mobile-friendly Next.js + TypeScript CV maker. CV import, editing, and PDF and Word generation happen locally in the browser, with no account. Optional AI features use server endpoints and an OpenAI API key. Vercel builds include cookie-free Vercel Web Analytics (see [Analytics](#analytics)).
 
 ## Run locally
 
@@ -24,18 +24,21 @@ The build produces a static website in `out/`. `npm start` serves that output an
 
 ## AI features
 
-There are four optional AI features, all off until `OPENAI_API_KEY` is configured:
+There are five optional AI features, all off until `OPENAI_API_KEY` is configured:
 
 - **Improve summary with AI** — in the editor, open **Profile**, write a summary, and choose **Improve summary with AI**. The suggestion can be edited, applied, or discarded. Applying a suggestion marks the CV as changed; save a draft to keep it. A suggestion cannot overwrite text you changed while the request was running.
 - **AI CV job match** (`/ai-cv-job-match/`) — paste a job description, add CV text (the CV open in the editor, a PDF/DOCX read on the device, or pasted text), and choose **Check my match**. The report lists requirements the CV demonstrates with evidence, missing or unclear requirements, suggested improvements, and optional wording changes to review.
+- **Improved CV for a job** (`/ai-cv-job-match/`, **Improve my CV for this job**) — rewrites the profile, skills order, and experience/project descriptions for one advert and shows the result as a new CV: live preview, keyword coverage before and after, what changed, a before-and-after comparison, things the advert wants that the CV does not show, PDF and Word download, and **Open in editor** (offers to save the open CV first). Only CV content is sent — never the name, contact details, or photo — and the browser merges the answer back, so titles, employers, dates, education, and certifications cannot change. The endpoint (`api/tailor-cv.mjs`) also rejects untrustworthy output: a rewritten profile or entry containing a number the original does not is replaced by the original, and skills the CV never mentions are removed and listed for the visitor. Pasted text without recognisable headings asks the visitor to use the editor CV or a PDF/DOCX instead.
 - **Improve bullet points with AI** — on each work experience entry in the editor. Sends that entry's description and job title only; the suggestion keeps every fact and is applied only when the visitor chooses **Use these points**.
 - **Cover letter draft** (`/cover-letter-maker/`, step 5) — after filling in the job and story fields, choose **Draft with AI** to have the letter body written from those details only (never the visitor's name or contact details). The draft lands in the same editable letter text as the template version, and "Rewrite from my details" restores the template.
 
 To enable real requests locally, create `.env.local` (ignored by Git) and add `OPENAI_API_KEY=your-key`, then restart `npm run dev` or `npm start`. Never use a `NEXT_PUBLIC_` variable for the key or paste it into chat. Without a key, both actions report that AI is not available and leave the visitor's text untouched.
 
-`api/improve-summary.mjs`, `api/improve-bullets.mjs`, `api/cv-job-match.mjs`, and `api/cover-letter-draft.mjs` are Node.js/Vercel serverless endpoints. On Vercel, configure the key in server environment settings and redeploy; the endpoints read `OPENAI_API_KEY` or, as this project's Vercel settings name it, `oprnaikey`. Other static-only hosts need a Node.js service or serverless function serving `/api/improve-summary` and `/api/cv-job-match`; uploading `out/` alone does not enable AI. The local dev wrapper runs the same handlers alongside Next, and the static production server also serves them. No runtime secret is included in the static export.
+`api/improve-summary.mjs`, `api/improve-bullets.mjs`, `api/cv-job-match.mjs`, `api/tailor-cv.mjs`, and `api/cover-letter-draft.mjs` are Node.js/Vercel serverless endpoints. They share request checks, rate limiting, and the OpenAI call in `api/_shared.mjs`; `api/_routes.mjs` maps paths to handlers for the local servers (Vercel does not deploy files starting with `_` as functions). On Vercel, configure the key in server environment settings and redeploy; the endpoints read `OPENAI_API_KEY` or, as this project's Vercel settings name it, `oprnaikey`. Other static-only hosts need a Node.js service or serverless function serving `/api/improve-summary` and `/api/cv-job-match`; uploading `out/` alone does not enable AI. The local dev wrapper runs the same handlers alongside Next, and the static production server also serves them. No runtime secret is included in the static export.
 
-Only the text the visitor chose is sent to OpenAI's [Responses API](https://developers.openai.com/api/docs/guides/text), using `gpt-5-mini`, `store: false`, a bounded response size, and a timeout: the summary and professional title for summary improvement, or the CV text and job advert for the job match (which also uses a strict JSON schema for the report). The prompts instruct AI to preserve facts and never invent qualifications or achievements. Requests are limited per IP per server instance, per minute and per day (summaries and bullet points: 5/minute, 20/day each; match reports: 3/minute, 15/day; letter drafts: 3/minute, 10/day); a production deployment can add hosting-level limits across instances, and an OpenAI spend limit is recommended. These features make billable API requests when enabled. The browser never contacts OpenAI directly. Tests use mocked responses and do not need an API key.
+Only the text the visitor chose is sent to OpenAI's [Responses API](https://developers.openai.com/api/docs/guides/text), using `gpt-5-mini`, `store: false`, a bounded response size, and a timeout: the summary and professional title for summary improvement, or the CV text and job advert for the job match (which also uses a strict JSON schema for the report). The prompts instruct AI to preserve facts and never invent qualifications or achievements. Requests are limited per IP, per minute and per day (summaries and bullet points: 5/minute, 20/day each; match reports: 3/minute, 15/day; improved CVs: 3/minute, 10/day; letter drafts: 3/minute, 10/day), and all AI requests together are capped per day (`AI_DAILY_LIMIT`, default 2,000; `0` turns it off).
+
+**Set up shared rate limits before relying on them in production.** Without a shared store, each serverless instance keeps its own counts in memory and a cold start resets them, so the limits are easy to exceed. Create an Upstash Redis database (or add Vercel's Upstash/KV integration) and set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` (or `KV_REST_API_URL` and `KV_REST_API_TOKEN`) in the hosting environment; optionally set `RATE_LIMIT_SALT` to a private random value. IP addresses are hashed before they are used as keys, and if the store is unreachable the endpoints fall back to per-instance limits. Also set a monthly spend limit in the OpenAI dashboard. These features make billable API requests when enabled. The browser never contacts OpenAI directly. Tests use mocked responses and do not need an API key.
 
 Use `npm run build` so its postbuild step also runs. On Windows, the installed Next.js version exports some route-prefetch files into nested folders while its client requests flat filenames. `scripts/normalize-static-export.mjs` adds the matching flat files without altering the original output, so client navigation works on ordinary static hosts. On platforms where Next already writes flat files, the step makes no changes.
 
@@ -49,9 +52,11 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 - Body typeface (template default, sans, or serif) and document spacing (compact, balanced, airy). Colour, typeface, and spacing are saved with drafts.
 - Section-by-section writing guidance and a Next button that walks through every section, then on to the design. Per-section placeholders, a profile word count, gentle email/phone/link checks after a field is left (never blocking), a language adder with plain proficiency levels, and predefined skill ideas for 22 professions (guessed from the professional title).
 - Live, paginated A4 preview rendered from the generated PDF, including all pages.
-- Add, remove, and reorder entries; reorder or hide sections. Empty sections are automatically excluded.
+- Add, remove, and reorder entries; reorder or hide sections. Entries and sections can be dragged by their handles (mouse, pen, or touch, with auto-scroll; Escape cancels), and the up/down buttons remain for keyboard and screen-reader users. Empty sections are automatically excluded.
+- Undo and redo every CV change with the header buttons, Ctrl/Cmd+Z, and Ctrl+Y or Ctrl/Cmd+Shift+Z (100 steps; typing in one field becomes one step). Imports are undoable; opening a saved CV starts a fresh history.
 - Download a selectable-text PDF without an account, advertisement, or watermark. Long paragraphs flow across pages.
-- Explicitly save one draft in browser local storage, resume it from the home page, or delete it. Download and restore portable JSON drafts.
+- Download an editable Word (.docx) version: one clean column with real headings, bullet lists, and right-aligned dates, following the section order, hidden sections, headings, accent colour, and typeface (`src/lib/docx-export.ts`). Template graphics are PDF-only.
+- Save up to 12 CVs in browser local storage (for example one per job), save a copy, open or delete any of them from the editor, and resume them from the home page. Optional automatic saving, and a browser warning before leaving with unsaved changes. Download and restore portable JSON drafts.
 - Search templates by name, style, or application intent; filter by columns and style; sort by newest or name. Full-size previews support previous/next controls, arrow keys, Escape, and focus restoration.
 - Review CV checks visible content for missing names, malformed contact details, incomplete entries, dates, descriptions, long profiles, and placeholder phrases. Suggestions link directly to the relevant editor fields.
 - Read and download a plain-text CV for application forms. Hidden and empty sections are omitted, and section order is preserved.
@@ -125,9 +130,13 @@ Full sample PDFs are also written to the ignored `.local-review/templates/` dire
 
 ## Privacy and drafts
 
-The editor uses React state in the current tab. It does not automatically persist personal information. Drafts saved before the Languages and Additional information sections existed are upgraded when opened (`upgradeCV` / `parseCV` in `src/lib/model.ts`); both sections start empty. The header shows “Unsaved changes” after edits to a saved draft. `Save draft` writes `folio-draft-v1` to local storage; `Delete saved draft` removes it without clearing the open CV. Browser reloads discard unsaved edits. A downloaded JSON or PDF is a separate local file, and must be deleted using the device's file manager.
+The editor uses React state shared by every page (`src/components/cv-context.tsx`), with an undo history. It does not persist personal information unless the visitor saves or turns on automatic saving. Saved CVs live in local storage under `folio-drafts-v2` (`src/lib/drafts.ts`); a single draft saved by earlier versions under `folio-draft-v1` is moved there on first read. The automatic saving preference is `folio-autosave-v1`, off by default. Drafts saved before the Languages and Additional information sections existed are upgraded when opened (`upgradeCV` / `parseCV` in `src/lib/model.ts`); both sections start empty. The header shows whether the open CV is saved; importing a file, restoring a JSON draft, or opening an improved CV starts a new, unsaved CV, so saving never overwrites the CV it came from. `Delete saved draft` removes the browser copy without clearing the open CV. While there are unsaved changes, the browser asks before a reload or close. A downloaded JSON or PDF is a separate local file, and must be deleted using the device's file manager.
 
-The PDF worker, fonts, and application libraries are served locally. There are no analytics SDKs or third-party requests during ordinary import and download; an end-to-end test monitors this. Choosing an AI feature explicitly sends only the text the visitor provided through the server to OpenAI: the summary and professional title for summary improvement, or the CV text and job advert for the job match. The handlers do not log submitted text. Ordinary hosting request logs may contain IP addresses and asset paths. The privacy page explains the AI exception and provider data practices.
+The PDF worker, fonts, and application libraries are served locally, and CV processing makes no third-party requests; an end-to-end test monitors requests during import and download (it currently also catches the AdSense script loaded in `src/app/layout.tsx`). Choosing an AI feature explicitly sends only the text the visitor provided through the server to OpenAI: the summary and professional title for summary improvement, or the CV text and job advert for the job match. The handlers do not log submitted text. Ordinary hosting request logs may contain IP addresses and asset paths. The privacy page explains the AI exception and provider data practices.
+
+## Analytics
+
+Builds made by Vercel include Vercel Web Analytics (`src/app/layout.tsx`): cookie-free page views, plus a few anonymous events through `trackEvent` in `src/lib/analytics.ts` — `cv_downloaded` (format, template), `cv_imported` (file type), `tailored_cv_created`, and `tailored_cv_opened`. Events never include CV content. To start collecting, enable Web Analytics for the project in the Vercel dashboard and redeploy; custom events need a Vercel plan that includes them, otherwise only page views are counted. Set `NEXT_PUBLIC_ANALYTICS=off` to leave the script out. Local builds and tests never load it. The privacy page describes what is collected.
 
 ## Site information and publisher transparency
 
@@ -205,6 +214,8 @@ Playwright starts the development server automatically when port 3000 is availab
 - Template search/reset, layout filtering, sorting, modal keyboard navigation, and focus restoration.
 - CV review suggestions, direct field correction, hidden-content handling, and plain-text downloads.
 - All six category pages and viewport overflow at 320px, 390px, and 768px.
+- Word download contents, undo/redo with buttons and keys, dragging entries and sections, moving an old single draft into the saved CV list, save as a copy, automatic saving, the leave warning, and the improved CV flow from the job match to the editor (`tests/editor-improvements.spec.ts`).
+- The improved CV endpoint's input checks, privacy, output guards, per-IP and daily caps, and the shared Redis limiter with fallback (`tests/ai-tailor-cv-api.mjs`, part of `npm run test:api`).
 
 Screenshot artifacts are written into `test-results/`. PDF.js may report optional Node.js font warnings while tests extract PDF text; browser preview uses its bundled embedded fonts.
 
@@ -218,7 +229,11 @@ npm test
 ## Main files
 
 - `src/app/page.tsx`: home page and onboarding.
-- `src/app/editor/page.tsx`: editing, imports, drafts, and download controls.
+- `src/app/editor/page.tsx`: the editor shell — header (undo/redo, save, downloads), section navigation, and content forms. Its parts live in `src/components/editor/`: `editor-fields.tsx` (fields and contact checks), `entry-list.tsx` (entries with drag handles), `design-panel.tsx` (colour, typeface, templates, section order), and `draft-panel.tsx` (saved CVs, autosave, JSON drafts).
+- `src/components/cv-context.tsx`: the open CV, undo history, saved-CV state, automatic saving, and the leave warning. `src/lib/drafts.ts`: saved CVs in local storage.
+- `src/components/sortable.tsx`: pointer drag-to-reorder used by entries and sections.
+- `src/lib/docx-export.ts`: the Word export (loads `docx` only when used).
+- `src/lib/tailor.ts`, `src/components/tailored-cv.tsx`: the improved CV request, merge, and result panel in the job match tool.
 - `src/lib/import-cv.ts`: browser file extraction and conservative parsing.
 - `src/lib/photo.ts`: on-device photo crop to a circular PNG.
 - `src/lib/pdf-document.ts`: all 40 PDF layouts, accent colours, typography, entry styling, and pagination.

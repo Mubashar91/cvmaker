@@ -39,7 +39,7 @@ test("first-job landing page starts a blank education-first CV in Clarity", asyn
   await page.getByRole("button", { name: "Create my first CV" }).first().click();
   await expect(page).toHaveURL(/\/editor\/?$/);
   await page.getByRole("button", { name: "Save draft", exact: true }).first().click();
-  const draft = await page.evaluate(() => JSON.parse(localStorage.getItem("folio-draft-v1") || "null"));
+  const draft = await page.evaluate(() => JSON.parse(localStorage.getItem("folio-drafts-v2") || "[]")[0]?.cv);
   expect(draft.template).toBe("clarity");
   expect(draft.personal.name).toBe("");
   expect(draft.sectionOrder.indexOf("education")).toBeLessThan(draft.sectionOrder.indexOf("experience"));

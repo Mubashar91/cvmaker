@@ -32,7 +32,7 @@ test("AI requires a summary and only sends the summary and professional title", 
   await page.getByRole("button", { name: "Use this summary", exact: true }).click();
   await expect(page.getByRole("textbox", { name: "Profile summary", exact: true })).toHaveValue(improved + " Updated.");
   await page.getByRole("button", { name: "Save draft", exact: true }).first().click();
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("folio-draft-v1")!).summary)).toBe(improved + " Updated.");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("folio-drafts-v2") || "[]")[0]?.cv.summary)).toBe(improved + " Updated.");
 });
 
 test("discard keeps the original and a second attempt can be applied", async ({ page }) => {

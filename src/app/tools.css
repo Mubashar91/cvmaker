@@ -407,3 +407,37 @@
 @media (max-width: 360px) {
   .footer-top { grid-template-columns: 1fr; }
 }
+
+/* ---- Improved CV from the job match ---------------------------------------------------- */
+.match-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.match-actions .ai-match-action { margin-top: 0; }
+.tailored-cv { display: flex; flex-direction: column; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid var(--desk-line); }
+.tailored-cv h3 { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 15px; }
+.tailored-cv h3 svg { color: var(--marigold); }
+.tailor-score { display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; background: var(--desk-raised); border: 1px solid var(--desk-line); }
+.tailor-score div { display: flex; flex-direction: column; }
+.tailor-score strong { font-size: 1.6rem; font-weight: 680; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tailor-score .is-after strong { color: var(--marigold); }
+.tailor-score span { font-size: 12.5px; color: var(--on-desk-muted); }
+.tailor-score svg { flex-shrink: 0; color: var(--on-desk-muted); }
+.tailor-actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.tailor-actions .button.dark { grid-column: 1 / -1; }
+.tailor-confirm { padding: 12px 14px; border-radius: 10px; border: 1px solid rgb(243 181 63 / .45); background: rgb(243 181 63 / .12); font-size: 14px; line-height: 1.55; }
+.tailor-confirm > div { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.tailor-preview .pdf-pages { max-width: 100%; }
+.tailor-preview .preview-status { margin: 0 0 10px; }
+.tailor-preview .pdf-page { margin-bottom: 38px; }
+.tailor-compare { padding: 10px 14px; border: 1px solid var(--desk-line); border-radius: 10px; }
+.tailor-compare summary { font-size: 14.5px; font-weight: 620; cursor: pointer; }
+.tailor-edit { padding: 10px 0; border-top: 1px solid var(--desk-line); font-size: 13.5px; line-height: 1.6; white-space: pre-line; overflow-wrap: anywhere; }
+.tailor-edit:first-of-type { margin-top: 10px; }
+.tailor-edit h4 { margin-bottom: 4px; font-size: 13.5px; }
+.tailor-edit p + p { margin-top: 6px; }
+.tailor-loading { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 1px dashed var(--desk-line); border-radius: 12px; font-size: 14px; line-height: 1.55; color: var(--on-desk-muted); }
+.tailor-loading strong { color: var(--on-desk); }
+.tailor-loading svg { flex-shrink: 0; margin-top: 2px; color: var(--marigold); }
+.tailor-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px; border-radius: 12px; background: var(--desk-raised); border: 1px solid var(--desk-line); font-size: 14px; line-height: 1.55; }
+.tailor-kept { flex-direction: column; gap: 4px; margin: 0; padding-left: 18px; }
+@media (max-width: 480px) {
+  .match-actions .ai-match-action { width: 100%; }
+}

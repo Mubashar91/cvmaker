@@ -17,9 +17,19 @@ export const metadata: Metadata = {
   category: "productivity", robots: { index: true, follow: true },
 };
 export const viewport: Viewport = { themeColor: "#10352b", colorScheme: "light" };
+// Cookie-free Vercel Web Analytics: page views plus a few anonymous events (src/lib/analytics.ts).
+// Only included in builds made by Vercel; set NEXT_PUBLIC_ANALYTICS=off to leave it out.
+const analytics = process.env.VERCEL === "1" && process.env.NEXT_PUBLIC_ANALYTICS !== "off";
+const analyticsQueue = "window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};";
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // suppressHydrationWarning: browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes
   // to <html>/<body> before React hydrates. This only ignores attribute differences on these two tags.
   // Plain <script> (not next/script): AdSense rejects the data-nscript attribute next/script adds.
-  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning><head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1973808469256982" crossOrigin="anonymous" /></head><body suppressHydrationWarning><a href="#main-content" className="skip-link">Skip to content</a><CVProvider>{children}</CVProvider></body></html>;
+  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <head>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1973808469256982" crossOrigin="anonymous" />
+      {analytics && <><script dangerouslySetInnerHTML={{ __html: analyticsQueue }} /><script defer src="/_vercel/insights/script.js" /></>}
+    </head>
+    <body suppressHydrationWarning><a href="#main-content" className="skip-link">Skip to content</a><CVProvider>{children}</CVProvider></body>
+  </html>;
 }

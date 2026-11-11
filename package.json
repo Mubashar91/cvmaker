@@ -12,7 +12,7 @@
     "test": "playwright test",
     "test:fixtures": "tsx scripts/create-fixtures.ts",
     "test:pdf": "tsx scripts/check-pdf-output.ts",
-    "test:api": "node --test tests/ai-summary-api.mjs tests/ai-job-match-api.mjs tests/ai-cover-letter-api.mjs tests/ai-bullets-api.mjs",
+    "test:api": "node --test tests/ai-summary-api.mjs tests/ai-job-match-api.mjs tests/ai-cover-letter-api.mjs tests/ai-bullets-api.mjs tests/ai-tailor-cv-api.mjs",
     "templates:preview": "tsx scripts/build-template-previews.ts",
     "examples:preview": "tsx scripts/build-example-previews.ts",
     "letters:preview": "tsx scripts/build-letter-previews.ts",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",
+    "docx": "9.15.3",
     "lucide-react": "0.468.0",
     "mammoth": "1.13.0",
     "next": "16.4.5",
@@ -37,7 +38,6 @@
     "@types/pdfmake": "0.2.13",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "docx": "9.15.3",
     "tsx": "4.23.15",
     "typescript": "5.9.3"
   }

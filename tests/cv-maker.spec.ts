@@ -112,13 +112,13 @@ test("entries reorder, hidden sections are omitted, drafts save, restore and del
   const result = await pdfText((await (await pending).path())!);
   expect(result.text).toContain("Second role"); expect(result.text).not.toContain("First role"); expect(result.text).not.toContain("HIDDEN_SKILL"); expect(result.text).not.toContain("EDUCATION");
   await page.getByRole("button", { name: "Save draft", exact: true }).first().click();
-  expect(await page.evaluate(() => localStorage.getItem("folio-draft-v1"))).toContain("Draft Person");
+  expect(await page.evaluate(() => localStorage.getItem("folio-drafts-v2"))).toContain("Draft Person");
   await page.goto("/"); await page.reload();
   await page.getByRole("button", { name: "Welcome back. Continue your saved draft" }).click();
   await expect(page.getByLabel("Full name", { exact: true })).toHaveValue("Draft Person");
   await page.getByRole("button", { name: "Delete saved draft", exact: true }).click();
   await page.getByRole("dialog").getByRole("button", { name: "Delete saved draft", exact: true }).click();
-  expect(await page.evaluate(() => localStorage.getItem("folio-draft-v1"))).toBeNull();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("folio-drafts-v2") || "[]"))).toEqual([]);
   await expect(page.getByLabel("Full name", { exact: true })).toHaveValue("Draft Person");
   const draftPending = page.waitForEvent("download"); await page.getByRole("button", { name: "Download draft", exact: true }).click();
   const draftPath = await (await draftPending).path();

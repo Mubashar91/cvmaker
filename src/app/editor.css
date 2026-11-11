@@ -471,3 +471,72 @@
 @media (prefers-reduced-motion: reduce) {
   .editor-app *, .editor-app *::before, .editor-app *::after { scroll-behavior: auto; transition: none; }
 }
+
+/* ---- Undo / redo, Word download -------------------------------------------------------- */
+.history-buttons { display: flex; gap: 2px; }
+.history-button { display: grid; place-items: center; width: 36px; height: 42px; border-radius: 8px; color: var(--on-desk); transition: background-color .15s, opacity .15s; }
+.history-button:hover:not(:disabled) { background: rgb(244 243 236 / .1); }
+.history-button:disabled { opacity: .35; cursor: default; }
+
+/* ---- Drag to reorder -------------------------------------------------------------------- */
+.drag-handle { display: inline-grid; place-items: center; flex-shrink: 0; width: 24px; height: 30px; margin: -6px 6px -6px -6px; border-radius: 6px; color: var(--ink-3); cursor: grab; touch-action: none; }
+.drag-handle:hover { background: var(--ground-2); color: var(--ink); }
+body.is-sorting, body.is-sorting * { cursor: grabbing !important; user-select: none; }
+.entry-toolbar > span { display: flex; align-items: center; }
+.entry-number { flex-shrink: 0; }
+.entry-toolbar > span > strong { min-width: 0; }
+.order-row > span { display: flex; align-items: center; }
+.entry-card, .order-row { position: relative; }
+.entry-card.is-dragging, .order-row.is-dragging { opacity: .55; outline: 2px dashed var(--green); outline-offset: 2px; }
+.drop-before::before, .drop-after::after { content: ""; position: absolute; left: 0; right: 0; height: 3px; border-radius: 3px; background: var(--green); pointer-events: none; }
+.entry-card.drop-before::before { top: -10px; }
+.entry-card.drop-after::after { bottom: -10px; }
+.order-row.drop-before::before { top: -2px; }
+.order-row.drop-after::after { bottom: -2px; }
+
+/* ---- Saved CVs and automatic saving ---------------------------------------------------- */
+.autosave-toggle { position: relative; display: flex; align-items: center; gap: 10px; margin: 2px 0 6px; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; }
+.autosave-toggle input { position: absolute; z-index: 1; top: 50%; left: 0; width: 38px; height: 22px; margin: 0; opacity: 0; cursor: pointer; transform: translateY(-50%); }
+.autosave-track { position: relative; flex-shrink: 0; width: 38px; height: 22px; border-radius: 99px; background: var(--line-strong); transition: background-color .2s; }
+.autosave-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .25); transition: transform .2s; }
+.autosave-toggle input:checked + .autosave-track { background: var(--green); }
+.autosave-toggle input:checked + .autosave-track::after { transform: translateX(16px); }
+.autosave-toggle input:focus-visible + .autosave-track { outline: 3px solid var(--focus); outline-offset: 2px; }
+.draft-tools .autosave-note { margin: 0 0 10px; font-size: 12.5px; color: var(--ink-3); }
+.draft-tools > .draft-actions { margin-top: 12px; }
+.draft-tools > .saved-cvs { display: block; margin-top: 20px; }
+.draft-tools button:disabled { opacity: .5; cursor: default; text-decoration: none; }
+.saved-cvs h4 { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-size: 13.5px; font-weight: 650; color: var(--ink-2); }
+.saved-cvs h4 span { font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.saved-cvs ul { margin: 0; padding: 0; list-style: none; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.saved-cvs li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; }
+.saved-cvs li + li { border-top: 1px solid var(--line); }
+.saved-cvs li.is-open { background: rgb(16 53 43 / .05); }
+.saved-cv-name { display: flex; flex-direction: column; min-width: 0; }
+.saved-cv-name strong { font-size: 14px; overflow-wrap: anywhere; }
+.saved-cv-name small { font-size: 12.5px; color: var(--ink-3); overflow-wrap: anywhere; }
+.saved-cv-badge { flex-shrink: 0; padding: 2px 9px; border-radius: 99px; background: var(--green); color: #fff; font-size: 11.5px; font-weight: 650; }
+.saved-cv-actions { display: flex; flex-shrink: 0; gap: 14px; }
+.draft-tools .saved-cv-actions button { padding: 4px 0; }
+
+@media (max-width: 1080px) {
+  .word-button span { display: none; }
+  .editor-header .word-button { width: 42px; padding: 0; }
+}
+@media (max-width: 600px) {
+  .history-button { width: 30px; }
+  .editor-header .back-home { display: none; }
+  .editor-header .editor-divider { display: none; }
+}
+/* Phones: keep Undo (Redo stays on the keyboard and in larger layouts) and narrow the icon buttons. */
+@media (max-width: 480px) {
+  .editor-header .redo-button { display: none; }
+  .editor-header .save-button, .editor-header .word-button { width: 38px; }
+}
+/* The smallest phones: the button keeps its full accessible name, "Download PDF". */
+@media (max-width: 360px) {
+  .editor-header .download-verb { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .autosave-track, .autosave-track::after { transition: none; }
+}

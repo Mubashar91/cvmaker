@@ -435,3 +435,10 @@ details[open] > summary svg { transform: rotate(180deg); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Several saved CVs on the home page */
+.resume-drafts { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 22px; }
+.resume-drafts > p { font-size: 14.5px; color: var(--on-desk-muted); }
+.resume-drafts .resume-draft { margin-top: 0; text-align: left; }
+.resume-draft small { display: block; font-size: 12.5px; font-weight: 500; color: var(--on-desk-muted); }
+.resume-drafts .resume-more { font-size: 13px; }
