@@ -62,10 +62,10 @@ async function main() {
   for (const collection of templateCollections) await socialCard(`collections/${collection.slug}`, collection.title, `${collection.templates.length} designs. Free to make your own.`, collection.templates[0], "Find your CV format");
   await socialCard("cv-examples", "CV examples for real jobs.", "Complete examples you can edit for free.", "public/examples/nurse.webp", "CV examples by job");
   for (const example of cvExamples) await socialCard(`examples/${example.slug}`, `${example.job} CV example.`, "Fictional example · free to edit", `public/examples/${example.slug}.webp`, example.category);
-  await socialCard("tools", "Free CV and resume tools.", "Cover letters, keywords, summaries, and skills.", undefined, "Free tools · No AI · No sign-up");
+  await socialCard("tools", "Free CV and resume tools.", "Cover letters, keywords, AI job matching, and skills.", undefined, "Free tools · No sign-up");
   await socialCard("cv-maker-for-students", "Free CV maker for students.", "Education first. No experience needed.", "public/examples/student.webp", "Students & graduates");
   await socialCard("cv-with-no-experience", "Your first CV starts here.", "Projects, training, and everyday contributions.", "clarity", "Free resume builder · No experience");
-  for (const item of tools) await socialCard(`tools/${item.path.slice(1, -1)}`, `${item.name}.`, "Free, private, and runs in your browser.", item.path === "/cover-letter-maker/" ? "public/cover-letters/classic.webp" : undefined, "Free CV tool");
+  for (const item of tools) await socialCard(`tools/${item.path.slice(1, -1)}`, `${item.name}.`, item.path === "/ai-cv-job-match/" ? "Free AI review, grounded in your real CV." : "Free, private, and runs in your browser.", item.path === "/cover-letter-maker/" ? "public/cover-letters/classic.webp" : undefined, "Free CV tool");
   for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By ${siteOperator.name}`, undefined, tip.category);
   const icon = createCanvas(180, 180), ctx = icon.getContext("2d");
   ctx.fillStyle = GREEN; ctx.fillRect(0, 0, 180, 180);

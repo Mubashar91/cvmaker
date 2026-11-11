@@ -198,7 +198,7 @@ test("languages and a renamed extra section reach the PDF", async ({ page }) => 
 
 test("new pages fit a 320px screen", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
-  for (const route of ["/cover-letter-maker/", "/resume-keyword-checker/", "/resume-summary-builder/", "/resume-skills/", "/tools/", "/cv-maker-for-students/", "/tips/", "/tips/resume-vs-cv/"]) {
+  for (const route of ["/cover-letter-maker/", "/resume-keyword-checker/", "/ai-cv-job-match/", "/resume-summary-builder/", "/resume-skills/", "/tools/", "/cv-maker-for-students/", "/tips/", "/tips/resume-vs-cv/"]) {
     await page.goto(route);
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth), route).toBeLessThanOrEqual(320);

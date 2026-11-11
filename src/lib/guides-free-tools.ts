@@ -147,7 +147,7 @@ export const freeToolGuides: Guide[] = [
     checklist: { heading: "Review any assisted wording", items: ["Every job title, date, qualification, and outcome matches your records.", "No tool has invented a metric or upgraded your responsibility.", "You can explain each sentence naturally in an interview.", "You checked the service's data controls before sharing information.", "The employer's rules permit the help you used."] },
     relatedSlugs: ["tailor-resume-to-job-description", "resume-action-verbs-and-bullet-points", "free-resume-builder-without-payment"],
     image: { kind: "template", id: "minimal", alt: "Minimal CV template with restrained typography and clearly labelled sections", caption: "Minimal template, fictional sample content." },
-    tool: { href: "/tools/", label: "Explore Folio's browser tools", text: "Folio uses fixed templates and local text matching, with no AI service processing your CV." },
+    tool: { href: "/tools/", label: "Explore Folio's browser tools", text: "Folio's classic tools use fixed templates and local text matching; AI features are optional and send only the text you choose." },
     sections: [
       { id: "worked-example", heading: "Worked example: request feedback without inventing an achievement", paragraphs: [
         "Begin with a factual note: you maintained a weekly rota, used a spreadsheet, and highlighted uncovered shifts. A useful request asks what is unclear and which details would help. An unsafe edit would add a time-saving figure that you never measured. The boundary is whether the revision preserves the original facts.",

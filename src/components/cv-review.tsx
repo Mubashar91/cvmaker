@@ -20,6 +20,7 @@ export function CVReview({ cv, onEdit }: { cv: CV; onEdit: (section: ReviewSecti
     </li>)}</ul>
     <div className="review-note"><LockKeyhole size={17} /><p>These checks run on your device. They do not predict an ATS result or an employer’s decision. Check facts, spelling, and the vacancy instructions yourself.</p></div>
     <details className="review-text"><summary><FileText size={17} />Read your CV as plain text</summary><p>Useful for checking wording or pasting into an application form. Hidden and empty sections are left out.</p><pre>{text || "Your CV text will appear here as you add details."}</pre><button className="button outline" disabled={!text.trim()} onClick={() => { const name = cv.personal.name.trim().replace(/[^\p{L}\p{N} _-]/gu, "").slice(0, 100) || "My"; downloadBlob(new Blob([text], { type: "text/plain;charset=utf-8" }), `${name} CV.txt`); }}>Download text version<FileText size={15} /></button></details>
+    <Link className="text-link" href="/ai-cv-job-match/">Match this CV to a job advert with AI<ArrowRight size={15} /></Link>
     <Link className="text-link" href="/tips/before-you-send/" target="_blank" rel="noopener noreferrer">Read the final CV checklist<ArrowRight size={15} /></Link>
   </div>;
 }

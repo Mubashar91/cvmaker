@@ -190,6 +190,22 @@
 .keyword-list.is-missing li { background: rgb(243 181 63 / .14); border: 1px solid rgb(243 181 63 / .35); }
 .keyword-list.is-matched li { background: var(--desk-raised); border: 1px solid var(--desk-line); }
 
+/* AI job match report */
+.ai-match-action { margin-top: 14px; max-width: 100%; white-space: normal; }
+.ai-report { display: flex; flex-direction: column; gap: 22px; }
+.ai-report h3 { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; font-size: 15px; }
+.ai-report h3 svg { color: var(--marigold); }
+.ai-report-list { display: flex; flex-direction: column; gap: 8px; padding: 0; list-style: none; }
+.ai-report-list li { padding: 10px 12px; border-radius: 8px; background: var(--desk-raised); border: 1px solid var(--desk-line); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.ai-report-list li strong { display: block; }
+.ai-report-list li p { margin: 4px 0 0; }
+.ai-report-list.is-gaps li { background: rgb(243 181 63 / .14); border-color: rgb(243 181 63 / .35); }
+.ai-evidence { color: var(--on-desk-muted); font-size: 13.5px; }
+.ai-section-tag { display: inline-block; margin-bottom: 4px; padding: 1px 8px; border-radius: 99px; border: 1px solid var(--desk-line); font-size: 12px; letter-spacing: .02em; color: var(--on-desk-muted); }
+.ai-rewrite-current { color: var(--on-desk-muted); text-decoration: line-through; text-decoration-color: rgb(243 181 63 / .6); text-decoration-thickness: 1px; }
+.ai-rewrite-suggested { font-weight: 600; }
+.ai-report-list .text-button { margin-top: 7px; }
+
 /* Guidance under each tool */
 .tool-guide-grid { display: grid; grid-template-columns: 220px minmax(0, 720px); justify-content: center; gap: 72px; align-items: start; }
 .tool-guide-grid .article { max-width: none; margin: 0; padding: 0; }

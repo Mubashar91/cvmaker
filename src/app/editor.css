@@ -59,6 +59,18 @@
 .field input:focus, .field textarea:focus { border-color: var(--green); background: var(--surface); box-shadow: 0 0 0 3px rgb(16 53 43 / .09); }
 .field input::placeholder, .field textarea::placeholder { color: #6b7770; }
 .field textarea { min-height: 140px; resize: vertical; }
+.ai-summary { margin: 18px 0; }
+.ai-summary-action { max-width: 100%; white-space: normal; }
+.ai-summary-note { margin-top: 10px; font-size: 13px; line-height: 1.65; color: var(--ink-2); }
+.ai-summary-note a { text-decoration: underline; text-underline-offset: 3px; }
+.ai-summary-error { margin-top: 12px; padding: 12px 14px; border: 1px solid currentColor; border-radius: 9px; color: var(--danger); font-size: 14px; line-height: 1.6; }
+.ai-summary-result { margin-top: 16px; padding: 16px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--ground); }
+.ai-summary-result > label { display: block; font-size: 15px; font-weight: 650; }
+.ai-summary-result > p { margin: 6px 0 12px; font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+.ai-summary-result textarea { width: 100%; min-height: 160px; padding: 12px; resize: vertical; border: 1px solid var(--line-strong); border-radius: 9px; background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; line-height: 1.65; }
+.ai-summary-result textarea:focus { outline: 2px solid var(--green); outline-offset: 2px; }
+.ai-summary-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.ai-summary-buttons .button { min-height: 42px; padding: 10px 14px; font-size: 13px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .form-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; margin-top: 24px; padding: 20px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
 .form-bottom > span { display: flex; align-items: center; gap: 8px; max-width: 30ch; line-height: 1.45; }

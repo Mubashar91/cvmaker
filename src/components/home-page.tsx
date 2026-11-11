@@ -11,7 +11,7 @@ import { NewCVButton } from "./start-cv-button";
 import { accentColors, newTemplates, templateCountWord, templates } from "@/lib/model";
 import { faqs } from "@/lib/faqs";
 import { tips } from "@/lib/tips";
-import { studentPage, tools } from "@/lib/tools";
+import { studentPage, toolCardLabel, tools } from "@/lib/tools";
 
 // Server-rendered: only the hero and the template gallery need JavaScript.
 const homeGuides = ["your-first-cv", "ats-friendly-cv", "how-to-write-a-cover-letter", "resume-vs-cv"];
@@ -54,8 +54,8 @@ export function HomePage() {
     </div></section>
 
     <section className="section tools-section" aria-labelledby="free-tools-heading"><div className="container">
-      <div className="section-head"><div><h2 id="free-tools-heading">More than a CV maker.<br /><span className="editorial-type">Free tools for the whole application.</span></h2><p>Each tool runs in your browser with predefined templates and plain text matching. No AI, no account, and nothing uploaded.</p></div><Link href="/tools/" className="text-link">See all free tools <ArrowUpRight size={16} /></Link></div>
-      <ul className="tool-grid">{tools.map(item => <li key={item.path}><Link href={item.path} className="tool-card"><span className="tool-card-icon"><ToolIcon name={item.icon} size={21} /></span><h3>{item.name}</h3><p>{item.summary}</p><span className="tool-card-link">Open the {item.name.toLowerCase()} <ArrowRight size={15} /></span></Link></li>)}
+      <div className="section-head"><div><h2 id="free-tools-heading">More than a CV maker.<br /><span className="editorial-type">Free tools for the whole application.</span></h2><p>The classic tools run in your browser with predefined templates and plain text matching — nothing uploaded. The AI job match is optional and sends only the text you choose. No account for any of them.</p></div><Link href="/tools/" className="text-link">See all free tools <ArrowUpRight size={16} /></Link></div>
+      <ul className="tool-grid">{tools.map(item => <li key={item.path}><Link href={item.path} className="tool-card"><span className="tool-card-icon"><ToolIcon name={item.icon} size={21} /></span><h3>{item.name}</h3><p>{item.summary}</p><span className="tool-card-link">Open the {toolCardLabel(item.name)} <ArrowRight size={15} /></span></Link></li>)}
         <li><Link href="/cv-examples/" className="tool-card"><span className="tool-card-icon"><FileText size={21} aria-hidden="true" /></span><h3>CV examples by job</h3><p>Complete, fictional example CVs with profiles, bullet points, and skills you can adapt and edit for free.</p><span className="tool-card-link">Browse CV examples <ArrowRight size={15} /></span></Link></li>
       </ul>
     </div></section>
@@ -63,7 +63,7 @@ export function HomePage() {
     <AdSlot placement="home" />
 
     <section className="privacy-band"><div className="container privacy-grid">
-      <div className="privacy-copy"><span className="privacy-emblem" aria-hidden="true"><ShieldCheck size={27} strokeWidth={1.4} /></span><h2>Why choose Folio?<br /><span className="editorial-type">Your story stays your business.</span></h2><p>Your CV holds a lot about you. That’s why file imports, editing, previews, and PDF generation all happen right in your browser, with no paywall waiting at the download button.</p><ul className="check-list"><li><Check size={18} />No account, trial, or subscription</li><li><Check size={18} />No server upload, and no AI reading your CV</li><li><Check size={18} />Save a draft only when you choose to</li><li><Check size={18} />No CV data sent to advertising or analytics</li></ul><Link href="/privacy/" className="text-link">Read our privacy promise <ArrowUpRight size={16} /></Link></div>
+      <div className="privacy-copy"><span className="privacy-emblem" aria-hidden="true"><ShieldCheck size={27} strokeWidth={1.4} /></span><h2>Why choose Folio?<br /><span className="editorial-type">Your story stays your business.</span></h2><p>Your CV holds a lot about you. That’s why file imports, editing, previews, and PDF generation all happen right in your browser, with no paywall waiting at the download button.</p><ul className="check-list"><li><Check size={18} />No account, trial, or subscription</li><li><Check size={18} />Editing never uploads your CV; AI help is optional</li><li><Check size={18} />Save a draft only when you choose to</li><li><Check size={18} />No CV data sent to advertising or analytics</li></ul><Link href="/privacy/" className="text-link">Read our privacy promise <ArrowUpRight size={16} /></Link></div>
       <figure className="data-path">
         <div className="path-row">
           <div className="path-node"><FileText size={22} /><strong>Your file</strong><small>PDF or DOCX</small></div>
@@ -72,8 +72,8 @@ export function HomePage() {
           <span className="path-link" aria-hidden="true" />
           <div className="path-node"><FileDown size={22} /><strong>Your PDF</strong><small>Saved on your device</small></div>
         </div>
-        <div className="path-blocked"><span className="path-drop" aria-hidden="true" /><div className="path-node is-off"><ServerOff size={22} /><strong>No upload server</strong><small>Your CV never leaves the tab</small></div></div>
-        <figcaption>Your CV moves from your file, through your browser, to your PDF. It is never sent to a server.</figcaption>
+        <div className="path-blocked"><span className="path-drop" aria-hidden="true" /><div className="path-node is-off"><ServerOff size={22} /><strong>No upload server</strong><small>Editing stays in your browser</small></div></div>
+        <figcaption>Your CV moves from your file, through your browser, to your PDF. Editing never sends it to a server; optional AI help sends only the text you choose.</figcaption>
       </figure>
     </div></section>
 

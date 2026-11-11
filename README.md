@@ -1,6 +1,6 @@
 # Folio — free CV maker
 
-A mobile-friendly Next.js + TypeScript CV maker. All CV processing happens locally in the browser, with no account, backend, paid API, analytics, or active advertisements.
+A mobile-friendly Next.js + TypeScript CV maker. CV import, editing, and PDF generation happen locally in the browser, with no account, analytics, or active advertisements. Optional AI summary improvement uses a server endpoint and an OpenAI API key.
 
 ## Run locally
 
@@ -20,7 +20,20 @@ npm run build
 npm start
 ```
 
-The build produces a static website in `out/`. `npm start` serves that output locally. It can also be hosted by any static hosting service. Keep the self-hosted `pdf.worker.min.mjs` file: it is copied into `public/` by the install script and included in the export.
+The build produces a static website in `out/`. `npm start` serves that output and the optional AI endpoints locally. The website can also be hosted by any static hosting service; the AI features additionally require the server endpoints described below. Keep the self-hosted `pdf.worker.min.mjs` file: it is copied into `public/` by the install script and included in the export.
+
+## AI features
+
+There are two optional AI features, both off until `OPENAI_API_KEY` is configured:
+
+- **Improve summary with AI** — in the editor, open **Profile**, write a summary, and choose **Improve summary with AI**. The suggestion can be edited, applied, or discarded. Applying a suggestion marks the CV as changed; save a draft to keep it. A suggestion cannot overwrite text you changed while the request was running.
+- **AI CV job match** (`/ai-cv-job-match/`) — paste a job description, add CV text (the CV open in the editor, a PDF/DOCX read on the device, or pasted text), and choose **Check my match**. The report lists requirements the CV demonstrates with evidence, missing or unclear requirements, suggested improvements, and optional wording changes to review.
+
+To enable real requests locally, create `.env.local` (ignored by Git) and add `OPENAI_API_KEY=your-key`, then restart `npm run dev` or `npm start`. Never use a `NEXT_PUBLIC_` variable for the key or paste it into chat. Without a key, both actions report that AI is not available and leave the visitor's text untouched.
+
+`api/improve-summary.mjs` and `api/cv-job-match.mjs` are Node.js/Vercel serverless endpoints. On Vercel, configure `OPENAI_API_KEY` in server environment settings and redeploy. Other static-only hosts need a Node.js service or serverless function serving `/api/improve-summary` and `/api/cv-job-match`; uploading `out/` alone does not enable AI. The local dev wrapper runs the same handlers alongside Next, and the static production server also serves them. No runtime secret is included in the static export.
+
+Only the text the visitor chose is sent to OpenAI's [Responses API](https://developers.openai.com/api/docs/guides/text), using `gpt-5-mini`, `store: false`, a bounded response size, and a timeout: the summary and professional title for summary improvement, or the CV text and job advert for the job match (which also uses a strict JSON schema for the report). The prompts instruct AI to preserve facts and never invent qualifications or achievements. Requests are limited per IP per server instance (five per minute for summaries, three per minute for match reports); a production deployment can add hosting-level limits across instances, and an OpenAI spend limit is recommended. These features make billable API requests when enabled. The browser never contacts OpenAI directly. Tests use mocked responses and do not need an API key.
 
 Use `npm run build` so its postbuild step also runs. On Windows, the installed Next.js version exports some route-prefetch files into nested folders while its client requests flat filenames. `scripts/normalize-static-export.mjs` adds the matching flat files without altering the original output, so client navigation works on ordinary static hosts. On platforms where Next already writes flat files, the step makes no changes.
 
@@ -43,7 +56,7 @@ Use `npm run build` so its postbuild step also runs. On Windows, the installed N
 - Six static template collections (ATS-friendly, professional, modern, simple, student, and photo), with original guidance, curated designs, breadcrumbs, social images, and structured data.
 - Thirty-seven CV and resume guides, including 20 keyword-focused blog posts on free tools, writing examples, students and graduates, professions, and country applications. Each has a real-render image, FAQs, related reading, and a relevant tool. All 20 blog posts have researched revisions, section citations, source lists, and reference-check dates; see [BLOG-RESEARCH.md](BLOG-RESEARCH.md).
 - Sixteen job-specific CV examples, including student, data analyst, graphic designer, and frontend developer.
-- Free browser tools (no AI, no server): a cover letter maker (three templates, three layouts, A4 or US Letter PDF, copy, print, optional browser save), a resume keyword checker (job description vs CV, reads PDF/DOCX on the device), a resume summary builder, a resume objective generator, and skills suggestions for 22 jobs. Summary, objective, and skills results can be added to the CV open in the editor.
+- Free browser tools (no AI, no server): a cover letter maker (three templates, three layouts, A4 or US Letter PDF, copy, print, optional browser save), a resume keyword checker (job description vs CV, reads PDF/DOCX on the device), a resume summary builder, a resume objective generator, and skills suggestions for 22 jobs. Summary, objective, and skills results can be added to the CV open in the editor. The separate AI CV job match tool is the one tool that uses the AI endpoint described above.
 - A student landing page (`/cv-maker-for-students/`) that opens the editor with the Student template and an education-first section order.
 - A privacy page, and disabled advertising slots on home/tips pages only.
 
@@ -112,7 +125,7 @@ Full sample PDFs are also written to the ignored `.local-review/templates/` dire
 
 The editor uses React state in the current tab. It does not automatically persist personal information. Drafts saved before the Languages and Additional information sections existed are upgraded when opened (`upgradeCV` / `parseCV` in `src/lib/model.ts`); both sections start empty. The header shows “Unsaved changes” after edits to a saved draft. `Save draft` writes `folio-draft-v1` to local storage; `Delete saved draft` removes it without clearing the open CV. Browser reloads discard unsaved edits. A downloaded JSON or PDF is a separate local file, and must be deleted using the device's file manager.
 
-The PDF worker, fonts, and application libraries are served locally. There are no analytics SDKs or third-party requests in the default app. An end-to-end test monitors requests during import and download. Ordinary hosting request logs may contain IP addresses and asset paths, but never CV content from this app.
+The PDF worker, fonts, and application libraries are served locally. There are no analytics SDKs or third-party requests during ordinary import and download; an end-to-end test monitors this. Choosing an AI feature explicitly sends only the text the visitor provided through the server to OpenAI: the summary and professional title for summary improvement, or the CV text and job advert for the job match. The handlers do not log submitted text. Ordinary hosting request logs may contain IP addresses and asset paths. The privacy page explains the AI exception and provider data practices.
 
 ## Site information and publisher transparency
 
@@ -173,6 +186,7 @@ The audit checks every exported page for unique titles and descriptions, a singl
 npx playwright install chromium
 npm run test:fixtures
 npm test
+node --test tests/ai-summary-api.mjs
 npm run test:pdf
 npm run typecheck
 npm run build

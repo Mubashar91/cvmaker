@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
     "build": "next build",
     "postbuild": "node scripts/normalize-static-export.mjs",
     "start": "node scripts/serve.mjs",
@@ -12,6 +12,7 @@
     "test": "playwright test",
     "test:fixtures": "tsx scripts/create-fixtures.ts",
     "test:pdf": "tsx scripts/check-pdf-output.ts",
+    "test:api": "node --test tests/ai-summary-api.mjs tests/ai-job-match-api.mjs",
     "templates:preview": "tsx scripts/build-template-previews.ts",
     "examples:preview": "tsx scripts/build-example-previews.ts",
     "letters:preview": "tsx scripts/build-letter-previews.ts",

@@ -1,6 +1,11 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
+import nextEnv from '@next/env';
+import improveSummary from '../api/improve-summary.mjs';
+import cvJobMatch from '../api/cv-job-match.mjs';
+
+nextEnv.loadEnvConfig(process.cwd(), false);
 
 const root = resolve('out');
 const port = Number(process.env.PORT || 3000);
@@ -9,6 +14,8 @@ await stat(root).catch(() => { console.error('Build the site first with npm run 
 createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url || '/', 'http://localhost').pathname);
+    if (pathname === '/api/improve-summary' || pathname === '/api/improve-summary/') return await improveSummary(req, res);
+    if (pathname === '/api/cv-job-match' || pathname === '/api/cv-job-match/') return await cvJobMatch(req, res);
     let file = resolve(root, '.' + pathname);
     if (file !== root && !file.startsWith(root + sep)) { res.writeHead(403); res.end(); return; }
     const info = await stat(file);

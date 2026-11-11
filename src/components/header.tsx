@@ -8,7 +8,7 @@ import { Logo } from "./logo";
 export function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const links = [{ href: "/templates/", label: "Templates" }, { href: "/cv-examples/", label: "CV examples" }, { href: "/cover-letter-maker/", label: "Cover letter" }, { href: "/tools/", label: "Free tools" }, { href: "/tips/", label: "CV guides" }, { href: "/about/", label: "About us" }, { href: "/contact/", label: "Contact" }];
+  const links = [{ href: "/templates/", label: "Templates" }, { href: "/cv-examples/", label: "CV examples" }, { href: "/ai-cv-job-match/", label: "Match job to CV" }, { href: "/cover-letter-maker/", label: "Cover letter" }, { href: "/tools/", label: "Free tools" }, { href: "/tips/", label: "CV guides" }, { href: "/about/", label: "About us" }, { href: "/contact/", label: "Contact" }];
   const mobileOnly = [{ href: "/privacy/", label: "Privacy" }];
   // Tool pages sit at the top level; keep "Free tools" marked while on any of them.
   const toolPaths = ["/resume-keyword-checker/", "/resume-summary-builder/", "/resume-objective-generator/", "/resume-bullet-point-generator/", "/resume-skills/"];

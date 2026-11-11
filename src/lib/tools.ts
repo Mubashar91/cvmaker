@@ -1,5 +1,5 @@
-// Free browser tools. Each works on the visitor's device with predefined templates and
-// plain JavaScript. None of them call an AI service or a server.
+// Application tools: classic tools run on the visitor's device; the optional
+// AI job match sends the supplied CV and advert only when explicitly requested.
 import { professions } from "./skills-library";
 export const tools = [
   {
@@ -13,6 +13,12 @@ export const tools = [
     title: "Free Resume Keyword Checker for Job Descriptions",
     description: "Check your resume against a job description for free. See matching and missing keywords and how to check ATS compatibility. Nothing is uploaded.",
     summary: "Compare your CV with a job description and see which keywords you cover and which are missing.",
+  },
+  {
+    path: "/ai-cv-job-match/", name: "AI CV job match", icon: "sparkles",
+    title: "Free AI CV Checker — Match Your CV to a Job",
+    description: "Check your CV against a job description with free AI help: see which requirements you meet with evidence, what is missing, and what to improve.",
+    summary: "Paste a job advert and get an AI report on your CV: met requirements, gaps, and honest improvements.",
   },
   {
     path: "/resume-summary-builder/", name: "Resume summary builder", icon: "wand",
@@ -42,6 +48,10 @@ export const tools = [
 
 export type ToolPath = typeof tools[number]["path"];
 export function tool(path: ToolPath) { return tools.find(item => item.path === path)!; }
+/** A tool name for mid-sentence use: lowercased, keeping acronyms such as AI and CV. */
+export function toolCardLabel(name: string): string {
+  return name.split(" ").map(word => (word === word.toUpperCase() ? word : word.toLowerCase())).join(" ");
+}
 
 export const toolsHub = {
   path: "/tools/", label: "Free tools",

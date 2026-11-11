@@ -21,6 +21,7 @@ const footerColumns = [
   { heading: "Free tools", links: [
     { href: "/cover-letter-maker/", label: "Cover letter maker" },
     { href: "/resume-keyword-checker/", label: "Keyword checker" },
+    { href: "/ai-cv-job-match/", label: "AI CV job match" },
     { href: "/resume-summary-builder/", label: "Summary builder" },
     { href: "/resume-objective-generator/", label: "Objective generator" },
     { href: "/resume-bullet-point-generator/", label: "Bullet point builder" },
@@ -42,7 +43,7 @@ const footerColumns = [
 export function Footer() {
   return <footer className="site-footer"><div className="container footer-top">
     <div className="footer-brand"><Logo /><p>A professional CV for your next chapter. Free to create, private by design.</p>
-      <ul className="footer-trust"><li><ShieldCheck size={16} aria-hidden="true" />Your CV stays on your device</li><li><Check size={16} aria-hidden="true" />Free PDF download, no watermark</li><li><Check size={16} aria-hidden="true" />No account or sign-up</li></ul>
+      <ul className="footer-trust"><li><ShieldCheck size={16} aria-hidden="true" />CV files processed on your device</li><li><Check size={16} aria-hidden="true" />Free PDF download, no watermark</li><li><Check size={16} aria-hidden="true" />No account or sign-up</li></ul>
       <Link href="/about/" className="footer-maintainer">Maintained by {siteOperator.name}</Link></div>
     {footerColumns.map(column => <nav className="footer-column" key={column.heading} aria-label={column.heading}><p className="footer-heading">{column.heading}</p>{column.links.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}{column.more && <Link href={column.more.href} className="footer-more">{column.more.label}<ArrowRight size={14} aria-hidden="true" /></Link>}</nav>)}
   </div><div className="container footer-bottom"><nav className="footer-information" aria-label="About and policies">{informationPages.map(page => <Link key={page.path} href={page.path}>{page.label}</Link>)}</nav><span>© {new Date().getFullYear()} Folio Free CV Maker</span></div></footer>;
