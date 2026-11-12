@@ -21,8 +21,8 @@ test("each blog offers a direct answer, practical example, checklist, and valid 
   }
 });
 
-test("all 20 blogs have dated research and references tied to their sections", () => {
-  expect(blogs).toHaveLength(20);
+test("all 21 blogs have dated research and references tied to their sections", () => {
+  expect(blogs).toHaveLength(21);
   for (const blog of blogs) {
     expect(blog.sourcesChecked, blog.slug).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     const urls = blog.sources?.map(source => source.url) || [];
@@ -34,8 +34,8 @@ test("all 20 blogs have dated research and references tied to their sections", (
   }
 });
 
-test("guide index exposes all 20 new blogs", async ({ page }) => {
-  expect(blogs).toHaveLength(20);
+test("guide index exposes all 21 new blogs", async ({ page }) => {
+  expect(blogs).toHaveLength(21);
   await page.goto("/tips/");
   for (const blog of blogs) {
     await expect(page.getByRole("link").filter({ has: page.getByRole("heading", { name: blog.title, exact: true }) })).toHaveAttribute("href", `/tips/${blog.slug}/`);

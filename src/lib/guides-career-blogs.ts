@@ -18,6 +18,7 @@ export const careerBlogGuides: Guide[] = [
       { id: "worked-example", heading: "Worked example: organise a resume without a paid job", paragraphs: [
         "Imagine a school leaver applying for weekend shop work. Their evidence is a library activity, a group presentation, and basic spreadsheet use. The section order below keeps that evidence visible instead of leading with an empty Employment heading. Adapt qualification terminology to your own country and school.",
         "Choose one or two activities you can describe clearly. A useful entry names the setting, dates, and responsibility. Do not add every hobby to fill space. If a genuine activity provides no connection to this vacancy, keep it in your working notes for a different application.",
+        "For a finished version, read the complete [high school resume example](/templates/category/student/#high-school-resume-example) on the student templates page. It uses volunteering, a class project, and availability in place of paid work, and you can open it in the editor to replace every detail.",
       ], example: "Contact: name, email, phone, town or city.\n\nEducation: current school, qualification, expected completion.\n\nActivities: library volunteer, weekly sessions; prepared displays and recorded returned books.\n\nProject: group presentation; prepared two slides and checked references.\n\nSkills: spreadsheet records, clear visitor directions, and any relevant languages.", exampleLabel: "Fictional first-resume outline, not a finished document to copy" },
       { id: "choose-your-evidence", heading: "Use evidence from school, placements, and activities", sourceUrls: [sources.schoolResume.url], paragraphs: [
         "Victoria's Youth Central publishes a school-leaver resume specifically for applicants without paid work. It includes volunteer activity and placements, illustrating that no paid experience does not mean no experience. Use that principle while adapting qualification names and conventions to your own country; the example is not a universal school-resume format.",
@@ -37,7 +38,7 @@ export const careerBlogGuides: Guide[] = [
       ] },
       { id: "review-first-resume", heading: "Check the finished document with someone you trust", paragraphs: [
         "Aim for a focused page when your content is short, with readable text and clear headings. Ask a teacher, careers adviser, or trusted adult to check the wording and whether the contact details work. Follow the employer's instructions about documents and the application process.",
-        "The [student CV maker](/cv-maker-for-students/) starts with education and lets you hide unused sections. Its CV download is A4 PDF, so check any specific paper-size or file-format request. Save an editable draft before closing the tab and keep the submitted PDF for your records.",
+        "The [student CV maker](/cv-maker-for-students/) starts with education and lets you hide unused sections. It downloads an A4 PDF or an editable Word file, so check any specific paper-size or file-format request. Save an editable draft before closing the tab and keep the submitted PDF for your records.",
       ] },
     ],
     faqs: [

@@ -1,10 +1,78 @@
-import { templates, type Template } from "./model";
+import { emptyCV, templates, type CV, type Entry, type Section, type Template } from "./model";
+
+type EntryData = Omit<Entry, "id">;
+const entry = (title: string, organization: string, dates: string, lines: string[] = []): EntryData => ({ title, organization, dates, description: lines.join("\n") });
+
+/**
+ * A complete, fictional sample document shown in full on a collection page and openable in the
+ * editor. Names, schools, and organisations are invented; the phone number is in the 555-01xx
+ * range reserved for fiction and the email uses the reserved example.com domain.
+ */
+export interface CollectionExample {
+  id: string; heading: string; intro: string; template: Template;
+  person: { name: string; headline: string; location: string; phone: string; email: string };
+  sectionOrder: Section[];
+  summary: string; education: EntryData[]; experience: EntryData[]; projects: EntryData[];
+  skills: string; languages: string; additional: { title: string; text: string };
+  omit: { heading: string; items: string[] };
+  downloadNote: string;
+  links: { href: string; label: string }[];
+}
 
 interface TemplateCollection {
   slug: string; name: string; title: string; description: string; intro: string;
   templates: readonly Template[];
   advice: { heading: string; text: string }[];
   checklist: string[];
+  example?: CollectionExample;
+}
+
+const highSchoolExample: CollectionExample = {
+  id: "high-school-resume-example", template: "student",
+  heading: "High school resume example for a first job",
+  intro: "Jordan is a fictional high school junior applying for a first part-time job in retail or food service. There is no paid work to list, so the resume leads with school, then uses volunteering, a class project, and clear availability as evidence. Read it in full here, or open it in the editor and replace every detail with your own.",
+  person: { name: "Jordan Reyes", headline: "High School Student", location: "Columbus, OH", phone: "(614) 555-0148", email: "jordan.reyes@example.com" },
+  sectionOrder: ["summary", "education", "experience", "projects", "skills", "languages", "additional", "certifications"],
+  summary: "High school junior looking for a part-time job in retail or food service on weekday evenings and weekends. Experienced in serving customers and handling cash as a concession stand volunteer, and helps run a Saturday food pantry shift. Reliable, punctual, and quick to learn a new routine.",
+  education: [entry("High School Diploma (expected June 2028)", "Westbrook High School, Columbus, OH", "2024 – 2028", ["GPA 3.6; honor roll for three semesters.", "Relevant classes: Business Applications, Algebra II, Spanish II."])],
+  experience: [
+    entry("Food Pantry Volunteer", "Eastside Community Pantry", "Sep 2025 – Present", ["Help run a Saturday distribution shift for about 60 households: restocking shelves, checking visitors in, and carrying orders to cars.", "Trained two new student volunteers on the check-in sheet and food-safety rules."]),
+    entry("Concession Stand Volunteer", "Westbrook High Athletic Boosters", "Fall 2025 – Present", ["Take orders and handle cash and card payments at home football games, keeping the line moving at halftime.", "Count and balance the cash box with an adult supervisor after each game."]),
+  ],
+  projects: [entry("School store inventory tracker", "Business Applications class project", "Spring 2026", ["Built a Google Sheets tracker for the school store’s 40 products with three classmates.", "Used two months of sales to suggest which snacks to reorder; the store adviser used the list for the next order."])],
+  skills: "Skills: Customer service, cash handling, teamwork, time management\nTools: Google Sheets, Google Docs, Canva",
+  languages: "English: Native\nSpanish: Conversational",
+  additional: { title: "Activities and availability", text: "Junior varsity soccer: fall season, 2024 – present\nAvailability: weekday evenings from 4 p.m. (from 6 p.m. during soccer season), weekends, and full time in summer" },
+  omit: {
+    heading: "What to leave out without work experience",
+    items: [
+      "A job you didn’t have. Label volunteering and school roles as what they are, as this example does.",
+      "An empty Work experience heading. Folio leaves empty sections out of the PDF and Word download.",
+      "Your date of birth, a photo, your full street address, or your Social Security number. A US employer asks for what it needs later.",
+      "A references list or “References available on request”. Have two names ready if you’re asked.",
+      "Middle school activities and any skill you can’t point to an example for.",
+    ],
+  },
+  downloadNote: "Opens in the Student template with every line editable. Download a PDF or an editable Word file; both use A4 paper, so if an employer asks for US Letter, change the page size in Word or Google Docs before sending.",
+  links: [
+    { href: "/tips/high-school-student-resume/", label: "How to write a high school resume" },
+    { href: "/cv-with-no-experience/", label: "Writing a CV with no experience" },
+    { href: "/cv-maker-for-students/", label: "The free CV maker for students" },
+    { href: "/tips/improve-cv-bullet-points-with-ai/", label: "Improving bullet points with AI, safely" },
+  ],
+};
+
+/** The collection example as an editable CV. Ids are stable so server and client render identically. */
+export function collectionExampleCV(example: CollectionExample): CV {
+  const cv = emptyCV();
+  cv.template = example.template;
+  cv.personal = { ...cv.personal, ...example.person };
+  cv.summary = example.summary; cv.skills = example.skills; cv.languages = example.languages;
+  cv.additional = example.additional.text; cv.additionalTitle = example.additional.title;
+  cv.sectionOrder = [...example.sectionOrder];
+  const withIds = (section: string, entries: EntryData[]) => entries.map((item, index) => ({ id: `${example.id}-${section}-${index + 1}`, ...item }));
+  cv.education = withIds("education", example.education); cv.experience = withIds("experience", example.experience); cv.projects = withIds("projects", example.projects);
+  return cv;
 }
 
 export const templateCollections: readonly TemplateCollection[] = [
@@ -57,9 +125,10 @@ export const templateCollections: readonly TemplateCollection[] = [
     checklist: ["Remove repeated or irrelevant information.", "Use a familiar heading for each section.", "Check that the body text remains comfortable to read.", "Leave enough space to distinguish one role from the next."],
   },
   {
-    slug: "student", name: "Student & first job", title: "Free Student & Graduate CV Templates",
-    description: "Simple, free student CV templates for school leavers and fresh graduates. Put education, projects, and volunteering first, even without paid experience.",
-    intro: "You can write a useful first CV before your first paid role. Start with your education and the things you have made, learned, organised, or supported. These templates give early-career applicants a clear structure without pretending to have a longer work history.",
+    slug: "student", name: "Student & first job", title: "Free Student CV & High School Resume Templates",
+    description: "Free student CV and high school resume templates, with a complete first-job example to edit. Lead with school, projects, and volunteering.",
+    intro: "You can write a useful first CV or resume before your first paid role, whether you are in high school, college, or university. Start with your education and the things you have made, learned, organised, or supported. These templates give early-career applicants a clear structure without pretending to have a longer work history.",
+    example: highSchoolExample,
     templates: ["student", "linear", "clarity", "academic", "compact", "aurora"],
     advice: [
       { heading: "Put your strongest evidence near the top", text: "If your education is most relevant, move it above work experience in the layout settings. Include the qualification, institution, dates, and selected modules or coursework that relate to the application. Leave out grades if they do not help or are not requested." },

@@ -19,7 +19,8 @@
     "letters:preview": "tsx scripts/build-letter-previews.ts",
     "seo:assets": "tsx scripts/build-seo-assets.ts",
     "seo:check": "tsx scripts/check-seo.ts",
-    "seo:indexnow": "node scripts/indexnow-ping.mjs"
+    "seo:indexnow": "node scripts/indexnow-ping.mjs",
+    "guides:screenshots": "tsx scripts/capture-guide-screenshots.ts"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

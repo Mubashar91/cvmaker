@@ -171,6 +171,7 @@ export const writingExampleGuides: Guide[] = [
       { id: "test-final-line", heading: "Check the finished line before using it", paragraphs: [
         "Ask whether someone unfamiliar with your workplace would understand the sentence. Explain internal project names or replace them with a description. Remove unnecessary introductions, unexplained abbreviations, and claims that belong to the wider team rather than to you.",
         "Use the [free bullet point builder](/resume-bullet-point-generator/) to assemble your own facts, then edit the punctuation and wording. Copy the result into the appropriate experience, project, education, or volunteering entry and check it in the final PDF layout.",
+        "If you would rather have AI reword lines you have already written, follow the [tutorial on improving CV bullet points with AI](/tips/improve-cv-bullet-points-with-ai/). Its three examples show how to spot an upgraded verb or an invented result before you accept a suggestion.",
       ] },
     ],
     faqs: [

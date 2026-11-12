@@ -145,7 +145,7 @@ export const freeToolGuides: Guide[] = [
     intro: "Do you need better wording, a clean layout, or a free downloadable file? Those are different problems, and an AI label does not tell you which one a product solves. Use the comparison below to choose a writing workflow and check the result against your own experience.",
     quickAnswer: "Use a layout builder to arrange the document, fixed prompts to structure your own facts, and AI feedback when you want help analysing wording. Verify every new claim and check the employer's rules. Folio provides layouts and fixed browser helpers; it also offers optional AI rewriting that you review before applying.",
     checklist: { heading: "Review any assisted wording", items: ["Every job title, date, qualification, and outcome matches your records.", "No tool has invented a metric or upgraded your responsibility.", "You can explain each sentence naturally in an interview.", "You checked the service's data controls before sharing information.", "The employer's rules permit the help you used."] },
-    relatedSlugs: ["tailor-resume-to-job-description", "resume-action-verbs-and-bullet-points", "free-resume-builder-without-payment"],
+    relatedSlugs: ["improve-cv-bullet-points-with-ai", "tailor-resume-to-job-description", "resume-action-verbs-and-bullet-points"],
     image: { kind: "template", id: "minimal", alt: "Minimal CV template with restrained typography and clearly labelled sections", caption: "Minimal template, fictional sample content." },
     tool: { href: "/tools/", label: "Explore Folio's browser tools", text: "Folio's classic tools use fixed templates and local text matching; AI features are optional and send only the text you choose." },
     sections: [
@@ -167,7 +167,7 @@ export const freeToolGuides: Guide[] = [
       ] },
       { id: "check-product-limits", heading: "Check downloads, data handling, and limits", paragraphs: [
         "Before entering a full CV, find the export format, free-use limits, signup requirements, and explanation of data handling. Do not assume all products using the same label follow the same practices. A small fictional test document lets you inspect the workflow before adding personal details.",
-        "Folio offers optional AI summary and bullet improvement, job matching, CV tailoring, and cover letter drafting. Its [summary builder](/resume-summary-builder/) and [cover letter maker](/cover-letter-maker/) combine supplied details with predefined patterns; its [keyword checker](/resume-keyword-checker/) compares text locally. These tools provide a starting structure, rather than an independent assessment of your experience.",
+        "Folio offers optional AI summary and bullet improvement, an [AI CV job match](/ai-cv-job-match/), CV tailoring, and cover letter drafting; the [AI bullet point tutorial](/tips/improve-cv-bullet-points-with-ai/) shows how to review its suggestions. Its [summary builder](/resume-summary-builder/) and [cover letter maker](/cover-letter-maker/) combine supplied details with predefined patterns; its [keyword checker](/resume-keyword-checker/) compares text locally. These tools provide a starting structure, rather than an independent assessment of your experience.",
       ] },
       { id: "choose-next-step", heading: "Choose the smallest amount of help that solves the task", paragraphs: [
         "If you need one stronger line, try the [bullet point builder](/resume-bullet-point-generator/) and edit the result. If you need a document layout, choose a [CV template](/templates/). If you need a first-job structure, begin with the [no-experience CV page](/cv-with-no-experience/).",
@@ -225,5 +225,83 @@ export const freeToolGuides: Guide[] = [
       { question: "What if I do not have an essential requirement?", answer: "Do not claim that you do. Read the advert carefully and decide whether your actual background fits; explain related experience accurately where relevant." },
     ],
     takeaway: "Match requirements to evidence first, use keyword comparison to check wording, and keep every change accurate enough to explain at interview.",
+  },
+  {
+    slug: "improve-cv-bullet-points-with-ai", title: "How to improve CV bullet points with AI without inventing anything", published: "2026-11-12",
+    sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.aiResume, sources.aiRisk, sources.harvardTemplate],
+    seoTitle: "How to Improve CV Bullet Points with AI: Before & After",
+    description: "Improve CV and resume bullet points with AI while keeping every fact true. Three before-and-after examples, what gets sent, and how to spot invented claims.",
+    category: "Free CV tools",
+    intro: "An AI rewrite can make a vague bullet point clearer in seconds. It can also quietly turn “helped with” into “managed”, or add a result nobody measured. This tutorial walks through Folio's Improve bullet points with AI button using three fictional entries: a weekend retail job, a teaching placement, and a student placement project. For each one, you will see what to keep, what to fix, and what to delete before you apply the suggestion.",
+    quickAnswer: "Write the real facts into the description first: what you did, for whom, how often, with which tools, and any result you can prove. Then ask for a rewrite, compare every suggested line with those facts, and delete anything the AI added or upgraded. In Folio, only that entry's job title and description are sent, and nothing in your CV changes until you choose Use these points.",
+    checklist: { heading: "Before you choose Use these points", items: ["Every line matches a fact you supplied.", "No verb claims more responsibility than you had.", "No result appears that you did not measure or cannot explain.", "Work you shared with others still says so.", "The tense matches whether you still do the job.", "No pupil, customer, client, or colleague can be identified."] },
+    relatedSlugs: ["resume-action-verbs-and-bullet-points", "ai-cv-maker-vs-template-builder", "tailor-resume-to-job-description"],
+    tool: { href: "/editor/", label: "Open the CV editor", text: "Add a Work experience entry, write your facts in the description, and choose Improve bullet points with AI. Nothing changes until you apply the suggestion." },
+    sections: [
+      { id: "what-gets-sent", heading: "What the AI button sends, and what it is told to do", sourceUrls: [sources.aiRisk.url], paragraphs: [
+        "In the Folio editor, every Work experience entry has an Improve bullet points with AI button under its description. It becomes available once the description has at least 30 characters. When you select it, the entry's job title and description go through Folio's server to OpenAI. Your name, contact details, photo, company name, dates, other entries, and uploaded files are not sent. Anything you typed inside the description is included, so take out details you would not want to share. Folio's server does not save or log the text; the [privacy page](/privacy/#ai) explains what OpenAI may retain.",
+        "The model is instructed to keep every fact exactly as supplied, never to invent achievements, figures, responsibilities, tools, or skills, to return the same number of lines or fewer, and to start each line with an action word. Instructions reduce invented content, but they do not remove the need to check. NIST's generative AI risk profile lists confidently incorrect output as a known risk, which is why the suggestion arrives in an editable box rather than replacing your text.",
+      ], figure: { src: "/guides/improve-cv-bullet-points-with-ai/entry.webp", alt: "A Work experience entry in the Folio editor with the job title Sales Assistant (weekend), three factual description lines, and the Improve bullet points with AI button below them", caption: "A Work experience entry in the Folio editor, filled in with this guide's fictional retail example.", width: 964, height: 1000 } },
+      { id: "write-the-facts", heading: "Before you press the button, write the facts down", sourceUrls: [sources.aiResume.url, sources.harvardTemplate.url], paragraphs: [
+        "The AI can only rearrange what you give it. A rough description that contains real details produces a better suggestion than a polished one that contains none. Replace a vague first draft with one line per task, using the checklist below. Keep it nearby: it is what you will check the suggestion against.",
+        "MIT's careers guidance suggests using AI to analyse weak bullets and wording gaps, while checking that edits preserve your experience and voice. Harvard's bullet point template is a useful reminder of the parts a strong line combines: an action, the task, and the context or result.",
+      ], bullets: [
+        "What you did, with a verb you could defend at interview.",
+        "Who it was for, or where it happened.",
+        "How often or how many: shifts per week, pupils in a group, items per delivery.",
+        "The tools, systems, or procedures you used.",
+        "A result only if someone measured it, and only if it was yours.",
+      ] },
+      { id: "worked-example", heading: "Example 1: a weekend retail job", paragraphs: [
+        "Sam, a fictional sixth-form student, works Saturdays at a garden centre. The first draft is three vague phrases. Sam rewrites it with the real details, then asks for a suggestion. The suggestions in these examples are illustrative, written for this guide to show the problems worth checking for; real suggestions vary, and Folio's instructions tell the model not to add facts, so you may see fewer problems. The check is the same either way.",
+        "Two lines in the suggestion go beyond the facts. Helping to unload a delivery became managing it, and an increase in add-on sales appeared from nowhere. The suggestion also switched to the past tense, although Sam still works there.",
+      ], table: { caption: "Retail example: from first draft to final bullet points", head: ["Stage", "Text"], rows: [
+        ["First draft", "Worked on the tills. Helped with deliveries. Answered customer questions."],
+        ["Facts supplied to the AI", "Work the tills on Saturday shifts, taking card and cash payments and processing refunds.\nHelp unload the Saturday morning delivery, usually around 30 trolleys of plants.\nAnswer customer questions about plant care and show them where products are."],
+        ["AI suggestion", "Processed card and cash payments and refunds at the tills on Saturday shifts.\nManaged the Saturday morning delivery, unloading around 30 trolleys of plants.\nAdvised customers on plant care and guided them to products, increasing add-on sales."],
+        ["Remove or fix", "“Managed” claims responsibility for the delivery; Sam helps with it.\n“Increasing add-on sales” is a result nobody measured.\nPast tense describes a job Sam has left; switch to the present tense."],
+        ["Final bullet points", "Process card and cash payments and refunds at the tills on Saturday shifts.\nHelp unload the Saturday morning delivery of around 30 plant trolleys.\nAdvise customers on plant care and guide them to the products they need."],
+      ] } },
+      { id: "teaching-example", heading: "Example 2: a teaching placement", paragraphs: [
+        "Priya, a fictional PGCE trainee, is writing up a second school placement for an early career teacher application. Placements belong in Work experience, so the AI button is available. The facts include the timetable share, because that tells a head teacher how much responsibility Priya actually took.",
+        "The suggestion keeps most facts but adds an outcome, improved reading ages, that Priya never measured. It also turns supervising a trip into organising one. If a school has assessment data showing progress, you could describe it with permission and without identifying any pupil; without that evidence, describe the work itself.",
+      ], table: { caption: "Teaching placement example: from first draft to final bullet points", head: ["Stage", "Text"], rows: [
+        ["First draft", "Taught Year 4. Planned lessons with my mentor. Did a reading group. Went on the school trip."],
+        ["Facts supplied to the AI", "Taught maths and English to a Year 4 class on my second PGCE placement (8 weeks), building up to 60% of the timetable.\nCo-planned lessons with my class mentor each week.\nRan a reading fluency group for five pupils three mornings a week.\nOne of four adults supervising a class trip to the city museum."],
+        ["AI suggestion", "Taught maths and English to a Year 4 class over an eight-week PGCE placement, building up to 60% of the timetable.\nCo-planned weekly lessons with the class mentor.\nLed a reading fluency intervention for five pupils three mornings a week, improving their reading ages.\nHelped organise and supervise a class trip to the city museum."],
+        ["Remove or fix", "“Improving their reading ages” is an outcome Priya did not measure.\n“Helped organise” adds planning work Priya did not do; the facts say supervised."],
+        ["Final bullet points", "Taught maths and English to a Year 4 class over an eight-week PGCE placement, building up to 60% of the timetable.\nCo-planned weekly lessons with my class mentor.\nRan a reading fluency group for five pupils three mornings a week.\nSupervised pupils as one of four adults on a class trip to the city museum."],
+      ] } },
+      { id: "student-project-example", heading: "Example 3: a student placement project", paragraphs: [
+        "Alex, a fictional computing student, built a small Python tool during a ten-week summer placement with another placement student. Shared work is where AI rewrites most often go wrong: a tidy sentence about a joint project can quietly credit one person with everything.",
+        "The suggestion gives Alex the email summary that the other student built, drops the fact that the script was a joint project, and adds a time saving nobody recorded. The final version keeps Alex's own part clear and still says what changed for the team.",
+        "The AI button appears on Work experience entries only. A placement belongs there. A class or personal project belongs under Projects, where you can build the same fact-based lines with the [bullet point builder](/resume-bullet-point-generator/) and check them the same way.",
+      ], table: { caption: "Student placement example: from first draft to final bullet points", head: ["Stage", "Text"], rows: [
+        ["First draft", "Did a summer placement in the operations team. Worked on a Python project. Learned a lot about data."],
+        ["Facts supplied to the AI", "Wrote a Python script with one other placement student that checks the weekly stock spreadsheet for missing product codes.\nI wrote the validation checks and the setup guide; the other student built the email summary.\nThe team now runs the script every Monday instead of checking the spreadsheet by hand."],
+        ["AI suggestion", "Developed a Python automation tool that validates the weekly stock spreadsheet for missing product codes, saving hours of manual work.\nWrote the validation logic and documentation, and built automated email summaries.\nReplaced manual weekly checks with an automated process adopted by the team."],
+        ["Remove or fix", "“Saving hours of manual work”: nobody measured the time.\n“Built automated email summaries”: the other student built them.\n“Developed a … tool” on its own hides that it was a joint project."],
+        ["Final bullet points", "Wrote the validation checks for a Python script, built with another placement student, that flags missing product codes in the weekly stock spreadsheet.\nWrote the setup guide for the operations team.\nThe team now runs the script every Monday in place of a manual spreadsheet check."],
+      ] } },
+      { id: "review-the-suggestion", heading: "Review the suggestion line by line", paragraphs: [
+        "The suggestion appears below your description in an editable box. Your original text stays exactly as it was until you choose Use these points, and Discard removes the suggestion without changing anything. If you edit the description while a suggestion is open, Folio will not apply the old suggestion; ask again for one that matches your latest text.",
+        "Read each suggested line against your facts and look for the same four problems the examples show. Fix them inside the box before applying, or discard the suggestion and edit by hand. For choosing accurate verbs and tenses without AI, see [resume action verbs and bullet points](/tips/resume-action-verbs-and-bullet-points/).",
+      ], bullets: [
+        "Upgraded responsibility: helped becomes managed, supported becomes led, supervised becomes organised.",
+        "Unmeasured results: improved, increased, or saved, with no figure you could explain.",
+        "Merged credit: work shared with a team or another student now reads as yours alone.",
+        "Lost context: a number, frequency, or setting from your facts has disappeared.",
+      ], figure: { src: "/guides/improve-cv-bullet-points-with-ai/review.webp", alt: "The Suggested bullet points box in the Folio editor, showing the retail example's suggestion, a note that only the description and job title were sent, and the buttons Use these points and Discard", caption: "The review step in the Folio editor. The suggestion shown is this guide's illustrative retail example, including the two claims that need fixing.", width: 896, height: 684 } },
+      { id: "limits-and-privacy", heading: "Free limits, privacy, and when to skip AI", paragraphs: [
+        "AI bullet improvement is free within a daily allowance: up to 20 requests per visitor per day, and no more than five a minute. A site-wide daily cap can pause AI help for everyone until the next day. Manual editing, downloads, and the rest of the editor keep working without AI.",
+        "Leave out names of pupils, patients, customers, or clients, and anything your employer treats as confidential, before sending a description. Some application forms ask whether you used AI or require the content to be your own work; follow those instructions. If an entry is already clear and accurate, it does not need a rewrite.",
+      ] },
+    ],
+    faqs: [
+      { question: "Does the AI see my whole CV?", answer: "No. Improve bullet points with AI sends only the job title and description of the entry you choose. The [AI CV job match](/ai-cv-job-match/) tool sends more, and the [privacy page](/privacy/#ai) lists exactly what each AI feature sends." },
+      { question: "What if the suggestion is worse than my original?", answer: "Choose Discard. Your original description stays exactly as it was, and you can keep editing it by hand or ask for another suggestion later." },
+      { question: "Is it acceptable to use AI for CV bullet points?", answer: "Many employers accept help with wording, but some applications ask you to confirm the content is your own work or restrict AI use. Follow the employer's instructions, and only submit lines you can explain in an interview." },
+    ],
+    takeaway: "Give the AI facts, not hopes. Then read its suggestion line by line against those facts, and delete anything you could not explain in an interview.",
   },
 ];

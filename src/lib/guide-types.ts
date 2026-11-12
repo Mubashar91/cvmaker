@@ -5,6 +5,8 @@ export interface GuideSection {
   example?: string; exampleLabel?: string;
   subsections?: GuideSubsection[];
   table?: { caption: string; head: string[]; rows: string[][] };
+  /** A real screenshot of the site's own interface, shown after the section text. */
+  figure?: { src: string; alt: string; caption: string; width: number; height: number };
   /** URLs from the article's source list supporting this section. */
   sourceUrls?: string[];
 }
