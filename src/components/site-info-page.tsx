@@ -1,3 +1,5 @@
+import { contentModified } from "@/lib/content-dates";
+import { formatDate } from "@/lib/seo";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Header, Footer } from "./site-chrome";
@@ -12,7 +14,7 @@ export function SiteInfoPage({ path, heading, summary, children }: { path: Infor
   return <><Header /><main id="main-content">
     <StructuredData data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: page.label, path }])} />
     <StructuredData data={informationPageSchema(path)} />
-    <section className="page-hero information-hero"><div className="container"><Breadcrumbs items={[{ name: "Home", href: "/" }, { name: page.label }]} /><h1>{heading}</h1><p>{summary ?? page.description}</p><time dateTime={CONTENT_UPDATED}>Updated {CONTENT_UPDATED_LABEL}</time></div></section>
+    <section className="page-hero information-hero"><div className="container"><Breadcrumbs items={[{ name: "Home", href: "/" }, { name: page.label }]} /><h1>{heading}</h1><p>{summary ?? page.description}</p><time dateTime={contentModified(path)}>Updated {formatDate(contentModified(path))}</time></div></section>
     <nav className="information-navigation" aria-label="About Folio and site policies"><div className="container">{informationPages.map(item => <Link key={item.path} href={item.path} aria-current={item.path === path ? "page" : undefined}>{item.label}</Link>)}</div></nav>
     {children}
   </main><Footer /></>;

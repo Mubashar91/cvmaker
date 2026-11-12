@@ -1,12 +1,13 @@
 "use client";
 import { Check, ArrowRight } from "lucide-react";
 import { newTemplates, templates, type Template } from "@/lib/model";
-import { templatePreview } from "@/lib/previews";
+import { templatePreview, previewSrcSet } from "@/lib/previews";
 
 export function MiniCV({ template, large = false, alt = "" }: { template: Template; large?: boolean; alt?: string }) {
   return <img
     className={`template-sample${large ? " is-large" : ""}`}
     src={templatePreview(template)}
+    srcSet={previewSrcSet(templatePreview(template))} sizes={large ? "(max-width: 640px) 280px, 380px" : "(max-width: 640px) 160px, 300px"}
     width={953} height={1348}
     alt={alt} aria-hidden={alt ? undefined : true} decoding="async" loading={large ? "eager" : "lazy"} fetchPriority={large ? "high" : "auto"}
   />;

@@ -6,12 +6,12 @@ The supplied keyword list is a set of research candidates. Search volume, diffic
 
 | Supplied target | Canonical content destination | Current coverage |
 | --- | --- | --- |
-| Free AI CV Maker | `/` | Targets free CV maker, online CV builder, and free resume maker. AI wording is deferred until an AI feature exists. |
+| Free AI CV Maker | `/` | Targets free CV maker, online CV builder, and free resume maker. Optional AI summary/bullet improvement and CV tailoring now exist. |
 | Free CV Maker Without Signup | `/` | Homepage copy, pricing and signup FAQs, and working editor and download flow. |
-| Free AI Resume Builder | `/` | Shares homepage intent. AI wording is deferred. |
+| Free AI Resume Builder | `/` | Shares homepage intent. Describe the optional AI feature accurately alongside the local template workflow. |
 | Free Resume Builder Without Payment | `/` | Free editing and PDF download, no card, subscription, or watermark. |
-| Free AI Resume Summary Generator | `/resume-summary-builder/` | Free resume summary and CV personal statement builder using fixed patterns. AI wording is deferred. |
-| Free AI Cover Letter Generator | `/cover-letter-maker/` | Free, editable cover letter templates with PDF download. AI wording is deferred. |
+| Free AI Resume Summary Generator | `/resume-summary-builder/` | Free resume summary and CV personal statement builder using fixed patterns. Describe the optional AI feature accurately alongside the local template workflow. |
+| Free AI Cover Letter Generator | `/cover-letter-maker/` | Free, editable cover letter templates with PDF download. Describe the optional AI feature accurately alongside the local template workflow. |
 | Free Resume Bullet Point Generator | `/resume-bullet-point-generator/` | Working browser tool that combines an action, task, context, and optional result; editable and copyable. |
 | Free CV Maker for Students | `/cv-maker-for-students/` | Education-first editor setup, templates, fictional example, and student guidance. |
 | Free Resume Builder for Fresh Graduates | `/cv-maker-for-students/` | Same audience and intent as the student page; do not split into a competing graduate page. |
@@ -27,7 +27,7 @@ The supplied keyword list is a set of research candidates. Search volume, diffic
 - **Templates:** `/templates/` and its existing category pages cover ATS-friendly, professional, modern, simple, student, and photo layouts. No template guarantees compatibility with every application system.
 - **Professions:** use `/cv-examples/software-developer/`, `/cv-examples/frontend-developer/`, `/cv-examples/accountant/`, `/cv-examples/teacher/`, `/cv-examples/customer-service/`, `/cv-examples/graphic-designer/`, `/cv-examples/project-manager/`, `/cv-examples/nurse/`, `/cv-examples/marketing-executive/`, `/cv-examples/data-analyst/`, and `/cv-examples/administrator/`. Software engineer and web developer intent can use the software and frontend examples; there is no separate web developer page. Do not create a second set of near-identical top-level pages.
 - **First applications:** connect `/cv-with-no-experience/`, `/cv-maker-for-students/`, `/tips/your-first-cv/`, `/tips/part-time-job-cv/`, `/tips/internship-cv/`, and `/tips/projects-on-a-cv/`. The landing pages start the task; the guides explain it in detail.
-- **Writing tools:** summary, objective, bullet point, cover letter, and skills tools support their own distinct tasks. Describe fixed sentence patterns honestly. LinkedIn summaries, application emails, and AI rewriting are not implemented.
+- **Writing tools:** summary, objective, bullet point, cover letter, and skills tools support their own distinct tasks. Describe fixed sentence patterns honestly. AI rewriting is available in the editor; LinkedIn summaries and application emails remain unimplemented.
 - **Country intent:** use the UK, US, Canadian, and Australian format guides under `/tips/`. They already contain local terminology, free-template links, beginner advice, and editor limitations. CV output is A4; do not promise US Letter CV downloads.
 
 ## Delivery and measurement
@@ -76,6 +76,6 @@ The production origin is configured by the project. Deploy the reviewed local ch
 
 Before expanding a cluster, validate candidates in Keyword Planner and compare regional interest in Google Trends. Use Search Console query and page data to record impressions, clicks, CTR, and average position by country. Check whether the intended page receives relevant queries and whether visitors can complete the intended task. Compare equivalent periods after indexing; do not treat a ranking change as proof that one copy edit caused it.
 
-AI-specific queries should remain a feature backlog until an actual AI integration, cost model, data handling, and accurate user-facing explanation exist. ATS score queries need a defined, tested assessment before making scoring claims. The supplied content allocation ends at 40% AI tools and 25% student content; it is incomplete and is not used as a publishing quota.
+AI-specific coverage can now describe the implemented summary, bullet, cover letter, matching, and tailoring features. Keep each target aligned with the page that actually provides it. ATS score queries need a defined, tested assessment before making scoring claims. The supplied content allocation ends at 40% AI tools and 25% student content; it is incomplete and is not used as a publishing quota.
 
 This approach follows [Google's guidance on useful, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) and the [SEO starter guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide): provide a useful destination for each intent and describe it clearly.

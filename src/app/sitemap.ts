@@ -1,3 +1,4 @@
+import { contentModified } from "@/lib/content-dates";
 import type { MetadataRoute } from "next";
 import { templates } from "@/lib/model";
 import { tips } from "@/lib/tips";
@@ -11,7 +12,7 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!SITE_URL) return [];
   const paths = ["/", studentPage.path, noExperiencePage.path, toolsHub.path, ...tools.map(item => item.path), "/templates/", ...templates.filter(t => !noindexTemplates.includes(t.id)).map(t => `/templates/${t.id}/`), ...templateCollections.map(collection => collectionPath(collection.slug)), "/cv-examples/", ...cvExamples.map(e => `/cv-examples/${e.slug}/`), "/tips/", ...tips.map(t => `/tips/${t.slug}/`), ...informationPages.map(page => page.path)];
-  return paths.map(path => ({ url: absoluteUrl(path)!, lastModified: CONTENT_UPDATED,
+  return paths.map(path => ({ url: absoluteUrl(path)!, lastModified: contentModified(path),
     ...(templates.some(template => path === `/templates/${template.id}/`) ? { images: [absoluteUrl(`/templates/${path.split("/")[2]}.webp`)!] } : {}),
     ...(cvExamples.some(example => path === `/cv-examples/${example.slug}/`) ? { images: [absoluteUrl(`/examples/${path.split("/")[2]}.webp`)!] } : {}),
   }));

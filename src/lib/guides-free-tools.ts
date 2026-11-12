@@ -54,7 +54,7 @@ export const freeToolGuides: Guide[] = [
     description: "Check PDF downloads, watermarks, template access, subscriptions, and editable backups before choosing a free resume builder. Includes Folio's actual limits.",
     category: "Free CV tools",
     intro: "Free to edit does not tell you whether the final download is included. Test the complete task before entering your career history: choose a layout, create a small draft, download it, and find out how to revise it later. Here is what to check at each step.",
-    quickAnswer: "Check the finished download, watermark, required file type, and any trial terms before choosing a builder. Folio currently provides free A4 CV PDFs and portable editing drafts without signup or payment. It imports DOCX but does not export Word CVs.",
+    quickAnswer: "Check the finished download, watermark, required file type, and any trial terms before choosing a builder. Folio currently provides free A4 CV PDFs and portable editing drafts without signup or payment. It imports PDF and DOCX and exports PDF or editable Word CVs.",
     checklist: { heading: "Decide before entering your full CV", items: ["Download a small test CV in the required format.", "Inspect the file for watermarks and missing content.", "Confirm whether the layout and writing features you need are included.", "Check signup, renewal, and cancellation terms if a service offers a trial.", "Find a reliable way to keep and revise the editable source."] },
     relatedSlugs: ["free-cv-maker-without-signup", "ai-cv-maker-vs-template-builder", "cv-pdf-download-checklist"],
     image: { kind: "template", id: "professional", alt: "Professional CV layout with a traditional single-column structure", caption: "Professional template, fictional sample content." },
@@ -66,11 +66,11 @@ export const freeToolGuides: Guide[] = [
       ], table: { caption: "Your requirement and the check that answers it", head: ["You need", "Check", "Decision"], rows: [["A free finished PDF", "Open a test download", "Inspect the actual file and any payment step"], ["An editable Word file", "Look for DOCX export", "PDF-only output does not meet this requirement"], ["A reusable CV", "Save and reopen an editable draft", "Confirm how you will revise it later"]] } },
       { id: "test-the-download", heading: "Check the finished download first", paragraphs: [
         "Start with a small test document rather than your complete CV. Add a name and one entry, view the preview, and find the download action. Confirm the offered file type and whether the finished file needs payment, registration, or a subscription. Judge the workflow you can actually complete.",
-        "In Folio, editing and A4 PDF downloads are free. The downloaded CV has selectable text and no watermark. The editor imports PDF and DOCX files, but it does not export an editable Word document. That distinction matters if a particular application asks for DOCX.",
+        "In Folio, editing and A4 PDF downloads are free. The downloaded CV has selectable text and no watermark. The editor imports PDF and DOCX files, and it exports an editable Word document as well as PDF. That distinction matters if a particular application asks for DOCX.",
       ] },
       { id: "read-the-access-details", heading: "Separate a free download from a free trial", sourceUrls: [sources.trials.url], paragraphs: [
         "The US Federal Trade Commission advises checking a trial's length, cancellation process, and terms before signing up. Apply that checklist when a resume service requests a card: identify whether you are buying one download, starting a trial, or accepting recurring access. This is a general checking method, not a claim about a particular competing builder.",
-        "All Folio layouts and the existing browser tools are free. Its summary, objective, cover letter, and bullet helpers use predefined patterns or your own words. They do not call an AI service. If you specifically need AI rewriting, read [AI CV makers versus template builders](/tips/ai-cv-maker-vs-template-builder/) before choosing a workflow.",
+        "All Folio layouts and the existing browser tools are free. Its summary, objective, cover letter, and bullet helpers use predefined patterns or your own words. Optional AI helpers send selected text only when you request them. If you specifically need AI rewriting, read [AI CV makers versus template builders](/tips/ai-cv-maker-vs-template-builder/) before choosing a workflow.",
       ] },
       { id: "look-beyond-price", heading: "Check how your information is handled", paragraphs: [
         "A zero price does not explain where information goes or how long it remains available. Look for an explanation of imports, drafts, account storage, and third-party processing. Use a fictional test entry while exploring an unfamiliar tool, then decide whether its data handling fits your needs.",
@@ -87,7 +87,7 @@ export const freeToolGuides: Guide[] = [
     ],
     faqs: [
       { question: "Does Folio require a credit card?", answer: "No. Its editor, templates, browser writing tools, and PDF downloads do not require payment or a subscription." },
-      { question: "Does a free PDF download include Word export?", answer: "No. Folio imports DOCX but exports CVs as A4 PDF. Follow the employer's requested format." },
+      { question: "Does a free PDF download include Word export?", answer: "Folio offers both A4 PDF and editable Word CV downloads. Follow the employer's requested format." },
       { question: "Is this a comparison of current resume-builder prices?", answer: "No. It is a workflow checklist and an explanation of Folio's current features. It does not rank competing products or claim that their prices and limits have been checked." },
     ],
     takeaway: "Check the complete download and editing workflow before investing time, then choose a tool that fits the application's requirements.",
@@ -111,7 +111,7 @@ export const freeToolGuides: Guide[] = [
       ], example: "File check: the PDF says 2024–Present, but the application form has filled an end date of 2024.\n\nAction: confirm the correct dates in your CV and correct the form field before submitting. Do not assume the attached PDF silently repairs the form.", exampleLabel: "Fictional upload-check scenario" },
       { id: "check-format-request", heading: "Read the file instructions before exporting", paragraphs: [
         "Find the employer's file type, size limit, and naming instructions. If the application asks for DOCX or answers entered directly into a form, a PDF is not a substitute. Keep a note of the requirements beside the advert rather than relying on what you used for a previous application.",
-        "Folio's CV download is an A4 PDF. Importing a Word document does not create a Word-export option. If a specific paper size is required, check that requirement before submitting; the separate cover letter tool offers A4 and US Letter, but the CV editor uses A4.",
+        "Folio's CV download is an A4 PDF. An editable Word download is also available; it uses a clean single-column layout rather than reproducing every PDF design. If a specific paper size is required, check that requirement before submitting; the separate cover letter tool offers A4 and US Letter, but the CV editor uses A4.",
       ] },
       { id: "inspect-page-breaks", heading: "Review every page, including the last one", paragraphs: [
         "Scroll through the full preview at a readable size. Look for a short final page, an unusually dense paragraph, or a heading that seems separated from its explanation. Check that hidden sections really should be hidden and that imported entries have not been put in the wrong section.",
@@ -143,7 +143,7 @@ export const freeToolGuides: Guide[] = [
     description: "Understand AI writing, fixed sentence patterns, and CV layout tools. Check factual accuracy, privacy, downloads, and employer instructions before choosing.",
     category: "Free CV tools",
     intro: "Do you need better wording, a clean layout, or a free downloadable file? Those are different problems, and an AI label does not tell you which one a product solves. Use the comparison below to choose a writing workflow and check the result against your own experience.",
-    quickAnswer: "Use a layout builder to arrange the document, fixed prompts to structure your own facts, and AI feedback when you want help analysing wording. Verify every new claim and check the employer's rules. Folio provides layouts and fixed browser helpers; it does not provide AI rewriting.",
+    quickAnswer: "Use a layout builder to arrange the document, fixed prompts to structure your own facts, and AI feedback when you want help analysing wording. Verify every new claim and check the employer's rules. Folio provides layouts and fixed browser helpers; it also offers optional AI rewriting that you review before applying.",
     checklist: { heading: "Review any assisted wording", items: ["Every job title, date, qualification, and outcome matches your records.", "No tool has invented a metric or upgraded your responsibility.", "You can explain each sentence naturally in an interview.", "You checked the service's data controls before sharing information.", "The employer's rules permit the help you used."] },
     relatedSlugs: ["tailor-resume-to-job-description", "resume-action-verbs-and-bullet-points", "free-resume-builder-without-payment"],
     image: { kind: "template", id: "minimal", alt: "Minimal CV template with restrained typography and clearly labelled sections", caption: "Minimal template, fictional sample content." },
@@ -167,7 +167,7 @@ export const freeToolGuides: Guide[] = [
       ] },
       { id: "check-product-limits", heading: "Check downloads, data handling, and limits", paragraphs: [
         "Before entering a full CV, find the export format, free-use limits, signup requirements, and explanation of data handling. Do not assume all products using the same label follow the same practices. A small fictional test document lets you inspect the workflow before adding personal details.",
-        "Folio does not use AI. Its [summary builder](/resume-summary-builder/) and [cover letter maker](/cover-letter-maker/) combine supplied details with predefined patterns; its [keyword checker](/resume-keyword-checker/) compares text locally. These tools provide a starting structure, rather than an independent assessment of your experience.",
+        "Folio offers optional AI summary and bullet improvement, job matching, CV tailoring, and cover letter drafting. Its [summary builder](/resume-summary-builder/) and [cover letter maker](/cover-letter-maker/) combine supplied details with predefined patterns; its [keyword checker](/resume-keyword-checker/) compares text locally. These tools provide a starting structure, rather than an independent assessment of your experience.",
       ] },
       { id: "choose-next-step", heading: "Choose the smallest amount of help that solves the task", paragraphs: [
         "If you need one stronger line, try the [bullet point builder](/resume-bullet-point-generator/) and edit the result. If you need a document layout, choose a [CV template](/templates/). If you need a first-job structure, begin with the [no-experience CV page](/cv-with-no-experience/).",
@@ -175,7 +175,7 @@ export const freeToolGuides: Guide[] = [
       ] },
     ],
     faqs: [
-      { question: "Is Folio an AI resume builder?", answer: "No. It is a free browser CV editor with predefined writing patterns and local text tools. It does not call an AI service." },
+      { question: "Is Folio an AI resume builder?", answer: "Folio is a free browser CV editor with local tools and optional AI assistance. AI sends selected text only when you ask, and you review the result." },
       { question: "Can a generated summary be used without editing?", answer: "Review it first. Confirm the facts, remove generic or exaggerated wording, and follow the employer's instructions about assistance." },
     ],
     sources: [sources.aiRisk, sources.aiResume],

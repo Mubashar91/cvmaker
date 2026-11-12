@@ -56,7 +56,7 @@ export const countryGuides: Guide[] = [
     takeaway: "Follow the word the employer uses, and keep the document focused on the job. Only academic and research roles usually need a longer, complete CV.",
   },
   {
-    slug: "uk-cv-format", title: "How to write a CV for jobs in the UK", published: "2026-11-09",
+    slug: "uk-cv-format", relatedSlugs: ["uk-student-cv-checklist"], title: "How to write a CV for jobs in the UK", published: "2026-11-09",
     seoTitle: "UK CV Format: How to Write a CV for Jobs in the UK",
     description: "Write a CV for UK jobs: the standard British CV format and a free template, what to leave out, length, right to work, and student CVs with GCSEs and A levels.",
     category: "Applying by country",
@@ -195,7 +195,7 @@ export const countryGuides: Guide[] = [
         "English and French are both official languages, and some roles, including many in the federal public service and in Quebec, require bilingual skills. List each language with an honest level, for example “French: professional working proficiency”. If you have taken a recognised language test, or hold a public service language rating, include the result.",
         "Folio has a dedicated Languages section. Add each language with its level, and two-column templates place it beside your skills.",
       ] },
-      { id: "newcomers", heading: "Tips for newcomers to Canada", paragraphs: ["Moving your career to Canada usually means translating your experience for a new reader."], subsections: [
+      { id: "newcomers", heading: "Tips for newcomers to Canada", paragraphs: ["Moving your career to Canada usually means translating your experience for a new reader. See the [Canadian newcomer resume guide](/tips/canadian-newcomer-resume/) for examples."], subsections: [
         { heading: "Explain your international experience", paragraphs: ["Employers may not recognise overseas companies or job titles. Add a short description of the organisation, such as its industry or size, and use a title a Canadian reader will understand while staying accurate to the role you held."] },
         { heading: "Translate your qualifications", paragraphs: ["If you have had your education assessed, for example through an educational credential assessment, give the Canadian equivalent next to your qualification. For regulated professions such as nursing, engineering, or teaching, state where you are in the provincial licensing process."] },
         { heading: "Show local connections where you have them", paragraphs: ["Canadian volunteering, courses, and bridging programs all help an employer picture you in the role. If you have an open work permit or permanent residence, you can mention it briefly in your summary or contact details."] },
@@ -218,7 +218,7 @@ export const countryGuides: Guide[] = [
     takeaway: "Keep a Canadian resume to one or two pages, leave out personal details, and give international experience the context a Canadian reader needs.",
   },
   {
-    slug: "australian-resume-format", title: "How to create an Australian resume", published: "2026-11-09",
+    slug: "australian-resume-format", relatedSlugs: ["australian-student-resume"], title: "How to create an Australian resume", published: "2026-11-09",
     seoTitle: "Australian Resume Format & Writing Guide",
     description: "Write a resume for Australian jobs: the standard format and a free template, length, referees, work rights, selection criteria, licences, and tips for students.",
     category: "Applying by country",

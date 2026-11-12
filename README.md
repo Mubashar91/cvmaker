@@ -1,6 +1,6 @@
 # Folio — free CV maker
 
-A mobile-friendly Next.js + TypeScript CV maker. CV import, editing, and PDF and Word generation happen locally in the browser, with no account. Optional AI features use server endpoints and an OpenAI API key. Vercel builds include cookie-free Vercel Web Analytics (see [Analytics](#analytics)).
+A mobile-friendly Next.js + TypeScript CV maker. CV import, editing, and PDF and Word generation happen locally in the browser, with no account. Optional AI features use server endpoints and an OpenAI API key. Vercel builds can opt into cookie-free Vercel Web Analytics (see [Analytics](#analytics)).
 
 ## Run locally
 
@@ -136,7 +136,7 @@ The PDF worker, fonts, and application libraries are served locally, and CV proc
 
 ## Analytics
 
-Builds made by Vercel include Vercel Web Analytics (`src/app/layout.tsx`): cookie-free page views, plus a few anonymous events through `trackEvent` in `src/lib/analytics.ts` — `cv_downloaded` (format, template), `cv_imported` (file type), `tailored_cv_created`, and `tailored_cv_opened`. Events never include CV content. To start collecting, enable Web Analytics for the project in the Vercel dashboard and redeploy; custom events need a Vercel plan that includes them, otherwise only page views are counted. Set `NEXT_PUBLIC_ANALYTICS=off` to leave the script out. Local builds and tests never load it. The privacy page describes what is collected.
+Builds made by Vercel with NEXT_PUBLIC_ANALYTICS=on include Vercel Web Analytics (`src/app/layout.tsx`): cookie-free page views, plus a few anonymous events through `trackEvent` in `src/lib/analytics.ts` — `cv_downloaded` (format, template), `cv_imported` (file type), `tailored_cv_created`, and `tailored_cv_opened`. Events never include CV content. To start collecting, enable Web Analytics for the project in the Vercel dashboard, verify its script endpoint returns HTTP 200, set NEXT_PUBLIC_ANALYTICS=on, and redeploy; custom events need a Vercel plan that includes them, otherwise only page views are counted. Set `NEXT_PUBLIC_ANALYTICS=off` to leave the script out. Local builds and tests never load it. The privacy page describes what is collected.
 
 ## Site information and publisher transparency
 

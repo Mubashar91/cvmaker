@@ -1,3 +1,4 @@
+import { contentModified } from "./content-dates";
 import { templates, type Template } from "./model";
 import { templateDetails } from "./template-details";
 import { collectionPath, type templateCollections } from "./template-collections";
@@ -45,7 +46,7 @@ export function informationPageSchema(path: InformationPath) {
   const page = informationPage(path);
   const base = { "@context": "https://schema.org", "@type": path === "/about/" ? "AboutPage" : path === "/contact/" ? "ContactPage" : "WebPage",
     "@id": absoluteUrl(`${path}#page`), url: absoluteUrl(path), name: page.title, description: page.description,
-    inLanguage: "en", dateModified: CONTENT_UPDATED, isPartOf: { "@id": absoluteUrl("/#website") }, publisher: organization() };
+    inLanguage: "en", dateModified: contentModified(path), isPartOf: { "@id": absoluteUrl("/#website") }, publisher: organization() };
   if (path === "/about/") return { "@context": "https://schema.org", "@graph": [
     { ...base, mainEntity: { "@id": absoluteUrl("/about/#maintainer") }, about: { "@id": absoluteUrl("/#organization") } },
     { ...person(), description: "Frontend developer based in Pakistan, maintainer of Folio CV Maker, and author of its CV writing guides.",
@@ -115,7 +116,7 @@ export function articleSchema(tip: typeof tips[number]) {
   return {
     "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`/tips/${tip.slug}/#article`),
     headline: tip.title, description: tip.description, url: absoluteUrl(`/tips/${tip.slug}/`),
-    author: person(), publisher: organization(), ...(tip.published ? { datePublished: tip.published } : {}), dateModified: CONTENT_UPDATED, inLanguage: "en",
+    author: person(), publisher: organization(), ...(tip.published ? { datePublished: tip.published } : {}), dateModified: tip.updated, inLanguage: "en",
     mainEntityOfPage: absoluteUrl(`/tips/${tip.slug}/`), image: absoluteUrl(`/social/guides/${tip.slug}.png`),
     articleSection: tip.category, wordCount: tip.words,
     ...(tip.sources?.length ? { citation: tip.sources.map(source => ({ "@type": "CreativeWork", name: source.title, url: source.url })) } : {}),

@@ -1,3 +1,4 @@
+import { contentModified } from "./content-dates";
 import type { Guide } from "./guide-types";
 import { countryGuides } from "./guides-country";
 import { applicationGuides } from "./guides-applications";
@@ -198,7 +199,7 @@ const coreGuides: Guide[] = [
     takeaway: "Keep the length that serves your application. Remove repetition and leave room for clear, relevant evidence.",
   },
   {
-    slug: "before-you-send", title: "CV checklist: one last look before you send",
+    slug: "before-you-send", relatedSlugs: ["common-cv-mistakes"], title: "CV checklist: one last look before you send",
     seoTitle: "CV Checklist — What to Check Before Applying",
     description: "Use this final CV checklist to review contact details, dates, spelling, links, page breaks, and the PDF you send to an employer.",
     category: "Final checks & applications",
@@ -282,7 +283,7 @@ export function guideText(guide: Guide): string {
 const guides = [...coreGuides, ...earlyCareerGuides, ...applicationGuides, ...countryGuides, ...freeToolGuides, ...writingExampleGuides, ...careerBlogGuides, ...countryBlogGuides];
 export const tips = guides.map(guide => {
   const words = guideText(guide).split(/\s+/).filter(Boolean).length;
-  return { ...guide, words, readTime: Math.max(2, Math.ceil(words / 200)) };
+  return { ...guide, updated: contentModified(`/tips/${guide.slug}/`), words, readTime: Math.max(2, Math.ceil(words / 200)) };
 });
 export type Tip = typeof tips[number];
 

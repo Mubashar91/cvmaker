@@ -24,7 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CVExamplePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const example = cvExample(slug); if (!example) notFound();
   const template = templateById(example.template); const job = example.job.toLowerCase();
-  const guides = example.guides.map(guideSlug => tips.find(tip => tip.slug === guideSlug)!);
+  const guideSlugs = [...new Set([...example.guides, ...(slug === "teacher" ? ["teacher-cv-personal-statement"] : [])])];
+  const guides = guideSlugs.map(guideSlug => tips.find(tip => tip.slug === guideSlug)!);
   const sections = [
     { id: "profile-examples", heading: `${example.job} CV profile examples` },
     { id: "bullet-points", heading: `${example.job} CV bullet points` },

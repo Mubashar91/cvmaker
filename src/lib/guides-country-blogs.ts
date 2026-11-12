@@ -55,7 +55,7 @@ export const countryBlogGuides: Guide[] = [
     description: "Organise an entry-level US resume using education, projects, activities, and clear evidence. Includes a fictional example and an honest guide to PDF limits.",
     category: "Applying by country",
     intro: "A first US resume can be useful without a paid job history. The key is making education, activities, and project work understandable in their actual settings. Start with a concise outline, then check the vacancy's file requirements before investing time in the final layout.",
-    quickAnswer: "Use standard headings and relevant education, projects, volunteering, or activities. Describe your own tasks and dates clearly. Check the employer's requested file type and size: Folio exports A4 PDF CVs, not US Letter CVs or Word files. Use another output workflow when the request requires it.",
+    quickAnswer: "Use standard headings and relevant education, projects, volunteering, or activities. Describe your own tasks and dates clearly. Check the employer's requested file type and size: Folio exports A4 PDF CVs, alongside editable Word files; US Letter CV output is not offered. Use another output workflow when the request requires it.",
     checklist: { heading: "Check the first-job resume and upload", items: ["Activities are distinguished from paid employment.", "Education status and expected completion dates are accurate.", "Each skill connects to an entry or demonstrable task.", "The employer accepts the file type and paper size you will submit.", "Any fields filled from the upload have been reviewed and corrected."] },
     relatedSlugs: ["us-resume-format", "high-school-student-resume", "cv-pdf-download-checklist"],
     image: { kind: "template", id: "clarity", alt: "Clarity resume template with a plain single-column layout and standard headings", caption: "Clarity template, fictional example content; Folio CV output is A4." },
@@ -78,7 +78,7 @@ export const countryBlogGuides: Guide[] = [
         "Use the [first-job skills guide](/tips/skills-for-a-first-job-resume/) to find evidence from classes, clubs, and volunteering. Select the relevant points, not every possible item. Keep a genuine interest separate from a skill you have already practised.",
       ] },
       { id: "handle-file-format", heading: "Plan for the file format before downloading", sourceUrls: [sources.resumeFormat.url], paragraphs: [
-        "Folio exports CVs as A4 PDF. It does not offer US Letter CV output or editable Word export. If the employer requires a particular size or DOCX, prepare the requested format instead of assuming a PDF satisfies it. A4 can be viewed on screen, but that does not override an explicit instruction.",
+        "Folio exports CVs as A4 PDF. Editable Word export is available in a clean single-column layout; US Letter CV output is not offered. If the employer requires a particular size or DOCX, prepare the requested format instead of assuming a PDF satisfies it. A4 can be viewed on screen, but that does not override an explicit instruction.",
         "CareerOneStop suggests PDF when no other format is specified and a filename that identifies you. That is a default, not permission to ignore a DOCX request. When PDF is accepted, open the downloaded file, check links and page breaks, and use the [PDF checking guide](/tips/cv-pdf-download-checklist/) to inspect it before submitting.",
       ] },
       { id: "save-and-tailor", heading: "Save one clear version for each application", paragraphs: [

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { contentModified } from "./content-dates";
 import { templates } from "./model";
 import { siteOperator } from "./site-info";
 
@@ -39,7 +40,7 @@ export function pageMetadata({ title, description, path, image = "/social/folio.
       type: article ? "article" : "website", title: pageTitle, description,
       siteName: "Folio Free CV Maker", locale: "en_GB", url: canonical,
       images: socialImage ? [{ url: socialImage, width: 1200, height: 630, type: "image/png", alt: `${title} — Folio free CV maker` }] : [],
-      ...(article ? { modifiedTime: CONTENT_UPDATED, authors: [siteOperator.name] } : {}),
+      ...(article ? { modifiedTime: contentModified(path), authors: [siteOperator.name] } : {}),
     },
     twitter: { card: "summary_large_image", title: pageTitle, description, images: socialImage ? [socialImage] : [] },
   };

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/dev.mjs",
+    "prebuild": "node scripts/build-responsive-previews.mjs",
     "build": "next build",
     "postbuild": "node scripts/normalize-static-export.mjs",
     "start": "node scripts/serve.mjs",
