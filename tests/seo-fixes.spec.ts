@@ -32,3 +32,14 @@ test("guide dates agree with their sitemap and structured data", async ({ reques
   expect(html).not.toContain("Folio does not use AI.");
   expect(html).not.toContain("it does not provide AI rewriting.");
 });
+
+test("crawlers skip the API and the 404 page is consistently noindex", async ({ request }) => {
+  expect(await (await request.get("/robots.txt")).text()).toMatch(/Disallow: \/api\//);
+  const response = await request.get("/this-page-does-not-exist/");
+  expect(response.status()).toBe(404);
+  const html = await response.text();
+  const robots = [...html.matchAll(/<meta name="robots" content="([^"]+)"/g)].map(match => match[1]);
+  expect(robots.length).toBeGreaterThan(0);
+  for (const value of robots) expect(value).toContain("noindex");
+  expect(html).toContain("<title>Page not found | Folio</title>");
+});
