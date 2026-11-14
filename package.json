@@ -19,6 +19,7 @@
     "letters:preview": "tsx scripts/build-letter-previews.ts",
     "seo:assets": "tsx scripts/build-seo-assets.ts",
     "word:templates": "tsx scripts/build-word-templates.ts",
+    "ats:sample": "tsx scripts/build-ats-sample.ts",
     "seo:check": "tsx scripts/check-seo.ts",
     "seo:indexnow": "node scripts/indexnow-ping.mjs",
     "guides:screenshots": "tsx scripts/capture-guide-screenshots.ts"

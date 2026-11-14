@@ -3,6 +3,10 @@ import { scheduledPage } from "./scheduled-pages";
 // Baseline reflects the last recorded editorial release, not the current build date.
 const baseline = "2026-11-11";
 const changes: Record<string, string> = {
+  "/ai-cv-job-match/": "2026-11-14",
+  "/cv-examples/retail-assistant/": "2026-11-14",
+  "/tips/us-resume-format/": "2026-11-14",
+  "/templates/category/simple/": "2026-11-14",
   "/cv-examples/accountant/": "2026-11-14",
   "/cv-examples/receptionist/": "2026-11-14",
   "/cv-examples/customer-service/": "2026-11-14",
@@ -30,12 +34,17 @@ const changes: Record<string, string> = {
   "/tips/us-first-job-resume/": "2026-11-12",
   "/tips/canadian-resume-format/": "2026-11-12",
   "/tips/australian-resume-format/": "2026-11-12",
-  "/cv-examples/teacher/": "2026-11-12",
+  "/cv-examples/teacher/": "2026-11-14",
   "/privacy/": "2026-11-12",
 };
+// Every template page gained its jobs, ATS verdict, and extra question on this date.
+const templatePagesUpdated = "2026-11-14";
+const isTemplatePage = (path: string) => /^\/templates\/[a-z-]+\/$/.test(path);
+
 /** Last substantive change. A scheduled page is never dated before it goes live. */
 export function contentModified(path: string): string {
-  const changed = changes[path] || baseline;
+  const recorded = changes[path] || baseline;
+  const changed = isTemplatePage(path) && templatePagesUpdated > recorded ? templatePagesUpdated : recorded;
   const published = scheduledPage(path)?.publishAt;
   return published && published > changed ? published : changed;
 }

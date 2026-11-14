@@ -18,13 +18,13 @@ Update this table as work ships. When a page changes substantively, also add its
 | A | `/templates/category/student/` | Week 2 (23–29 Nov) | Shipped 12 Nov (early) | Links to E added |
 | E | `/tips/improve-cv-bullet-points-with-ai/` (new) | Week 3 (30 Nov–6 Dec) | Shipped 12 Nov (early) | Third example is a student *placement* project: the AI button exists only on Work experience entries. Screenshots: `npm run guides:screenshots` (needs a running site) |
 | J | `/tips/ai-cv-maker-vs-template-builder/` | Week 4 (7–13 Dec) | Done 12 Nov | Correction done; now links to E and I |
-| B | `/templates/category/simple/` | Week 5 (14–20 Dec) | Not started | Responsive previews already shipped |
-| C | `/tips/us-resume-format/` | Week 6 (21–27 Dec) | Not started | |
-| D | `/templates/category/ats-friendly/` | Week 7 (28 Dec–3 Jan) | Not started | |
-| F | `/cv-examples/teacher/` | Week 9 (11–17 Jan) | Not started | Needs a UK-teaching reviewer |
-| G | `/cv-examples/retail-assistant/` | Week 10 (18–24 Jan) | Not started | |
-| H | `/cv-examples/computer-science-co-op/` (new) | Week 11 (25–31 Jan) | Not started | Check overlap first (see below) |
-| I | `/ai-cv-job-match/` | Week 13 (8–14 Feb) | Not started | |
+| B | `/templates/category/simple/` | Week 5 (14–20 Dec) | Shipped 14 Nov (early) | Full basic resume example (Outline template) with PDF and Word export notes; links to the ATS collection and the US format guide |
+| C | `/tips/us-resume-format/` | Week 6 (21–27 Dec) | Shipped 14 Nov (early) | Complete reverse-chronological example, editable via "Edit this resume"; student reordering explained |
+| D | `/templates/category/ats-friendly/` | Week 7 (28 Dec–3 Jan) | Shipped 14 Nov (early) | Full example plus its text extracted from the real PDF (`npm run ats:sample`); links to the ATS guide and job match. Clarity is the single-template ATS page (CSV plan) |
+| F | `/cv-examples/teacher/` | Week 9 (11–17 Jan) | Drafted 14 Nov; review pending | Second full example: primary ECT in England with two PGCE placements; links to the UK format guide and E. **Still needs a UK-teaching reviewer** |
+| G | `/cv-examples/retail-assistant/` | Week 10 (18–24 Jan) | Shipped 14 Nov (early) | Year 12 (NSW) casual retail example with availability, peer support, op shop volunteering, and referees; links to the Australian guides and student templates |
+| H | `/cv-examples/computer-science-co-op/` (new) | Week 11 (25–31 Jan) | Built 14 Nov; goes live 28 Jan 2027 | Overlap checked: no existing page covers a Canadian CS co-op resume from class projects. Scheduled in `scheduled-pages.ts` |
+| I | `/ai-cv-job-match/` | Week 13 (8–14 Feb) | Shipped 14 Nov (early) | Exact free allowance (15 checks, 10 improved CVs a day, 3 a minute) and a worked fictional advert with a shortened evidence report |
 
 ### Codebase check, 12 November 2026
 

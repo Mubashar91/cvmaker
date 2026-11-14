@@ -52,6 +52,8 @@ export const scheduledPages: readonly ScheduledPage[] = [
     "An electrician CV example with NVQ Level 3, 18th Edition, and an ECS card, plus site experience and skills for UK jobs. Edit free and download a PDF."),
   example("apprentice", "2026-12-14", "Apprentice CV Example — Free Template & Writing Tips",
     "An apprentice CV example for school leavers: GCSEs, work experience, and practical skills that suit apprenticeship applications. Edit free, download a PDF."),
+  example("computer-science-co-op", "2027-01-28", "Computer Science Co-op Resume Example (Canada)",
+    "A computer science co-op resume example for Canada: class projects with your own part in them, courses, skills, and the work term you want. Edit it free."),
 ];
 
 const KARACHI_OFFSET = "+05:00";

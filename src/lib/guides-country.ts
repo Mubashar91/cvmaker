@@ -1,4 +1,5 @@
 import type { Guide } from "./guide-types";
+import { entry } from "./sample-cv";
 
 // Country conventions are general guidance. Employers' own instructions always come first.
 export const countryGuides: Guide[] = [
@@ -129,6 +130,24 @@ export const countryGuides: Guide[] = [
         "Education: degree, school, and graduation year.",
         "Skills: technical skills, tools, certifications, and languages.",
       ] },
+      { id: "reverse-chronological-example", heading: "A reverse chronological resume example", paragraphs: [
+        "Here is a complete reverse chronological resume for a fictional marketing coordinator with about three years of experience. Every section runs newest first: the current job, then the one before it, then the internship, and finally the degree with its graduation date.",
+        "Still a student? Change one thing: move Education above Experience, add your GPA if it's 3.5 or higher, and list one or two class projects with what you built and the result. The order inside each section stays newest first.",
+      ], sample: {
+        caption: "Fictional person and employers · Clarity template · open it in the editor to use it as your starting template",
+        data: {
+          id: "us-reverse-chronological", template: "clarity",
+          person: { name: "Ethan Brooks", headline: "Marketing Coordinator", location: "Austin, TX", phone: "(512) 555-0138", email: "ethan.brooks@example.com" },
+          summary: "Marketing coordinator with three years of experience running email, social, and event campaigns for B2B software companies. Manage a $120,000 annual campaign budget, built a lead-nurture program that lifted demo requests by 22%, and report results weekly in HubSpot and Google Analytics. Looking to grow into a marketing manager role.",
+          experience: [
+            entry("Marketing Coordinator", "Fieldstone Software, Austin, TX", "Jun 2024 – Present", ["Plan and launch six to eight email campaigns a month to a list of 40,000 contacts", "Built a five-email lead-nurture program that raised demo requests by 22% in two quarters", "Coordinate four trade-show appearances a year, from booth booking to follow-up", "Report weekly campaign results to the sales team from HubSpot and Google Analytics"]),
+            entry("Marketing Assistant", "Cedar Park Analytics, Austin, TX", "Jul 2023 – May 2024", ["Scheduled social posts across three channels and grew LinkedIn followers from 2,100 to 5,600", "Wrote and updated website landing pages with the product team"]),
+            entry("Marketing Intern", "Hill Country Credit Union, San Marcos, TX", "Summer 2022", ["Designed posters and social graphics for a student account campaign that opened 300 new accounts"]),
+          ],
+          education: [entry("B.B.A. in Marketing", "Lakeview State University, San Marcos, TX", "May 2023")],
+          skills: "Marketing: email campaigns, lead nurturing, event marketing, content writing\nTools: HubSpot, Google Analytics 4, Canva, Salesforce, Excel",
+        },
+      } },
       { id: "length", heading: "How long should a US resume be?", paragraphs: [
         "One page is the usual expectation for students, recent graduates, and people with a few years of experience. Two pages are common for experienced professionals. Federal government jobs advertised on USAJOBS have their own resume requirements, including what each role must show, so follow the job announcement exactly.",
         "The standard paper size in the US is Letter (8.5 × 11 inches) rather than A4. Folio currently downloads CVs as A4 PDFs. Most resumes are read on screen, where the difference is rarely noticeable, but if an employer asks for Letter size or you plan to print, check the layout first.",

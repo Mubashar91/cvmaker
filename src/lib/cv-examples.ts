@@ -1,5 +1,6 @@
 import { emptyCV, type CV, type Entry, type Section, type Template } from "./model";
 import { isVisible, scheduled } from "./scheduled-pages";
+import type { SampleCVData } from "./sample-cv";
 
 // Job-specific CV examples. Every person, employer, school, and figure in these CVs is fictional
 // and exists only to show how a strong CV for the role can read. Phone numbers use Ofcom's
@@ -23,6 +24,8 @@ export interface CVExample {
   guides: string[];
   /** Job-specific questions, shown as a FAQ section with FAQPage markup. Written fresh for each job. */
   faqs?: { question: string; answer: string }[];
+  /** An optional second full example on the page, for a closely related search (written for this page only). */
+  extraExample?: { id: string; heading: string; intro: string; cv: SampleCVData; notes: string[] };
   /** Optional heading and opening paragraph for the template section, written for this job. */
   templateSection?: { heading: string; text: string };
 }
@@ -110,7 +113,29 @@ export const allCVExamples: CVExample[] = [
       { heading: "Include responsibilities beyond the classroom", text: "Subject leadership, clubs, trips, mentoring trainees, and pastoral roles show what you add to a school community. One clear line for each is enough." },
       { heading: "Check how the school wants you to apply", text: "Many schools in England ask for their own application form and a supporting statement rather than a CV, partly for safeguarding reasons. Use your CV to prepare the details, then follow the school's process." },
     ],
-    guides: ["write-a-clear-profile", "describe-your-experience"],
+    guides: ["write-a-clear-profile", "describe-your-experience", "uk-cv-format", "improve-cv-bullet-points-with-ai"],
+    extraExample: {
+      id: "ect-example", heading: "Early career teacher CV example with two placements",
+      intro: "Applying for your first post after a PGCE? Your placements are your teaching experience, so give them proper entries. Amira's CV, for a primary ECT post in England, shows how. The [UK CV format guide](/tips/uk-cv-format/) covers the wider conventions, and the guide to [improving CV bullet points with AI](/tips/improve-cv-bullet-points-with-ai/) shows how to sharpen placement bullets without inventing results.",
+      cv: {
+        id: "ect", template: "classic",
+        person: { name: "Amira Hassan", headline: "Early Career Teacher, Primary (QTS)", location: "Leeds, United Kingdom", phone: "+44 7700 900186", email: "amira.hassan@example.com" },
+        summary: "Early career teacher with Qualified Teacher Status, starting the two-year ECT induction after a primary PGCE with placements in Year 1 and Year 5. Plans phonics-led lessons, uses assessment for learning to adapt teaching, and builds calm, routine-based classrooms. Particularly interested in early reading and in supporting pupils who speak English as an additional language.",
+        experience: [
+          entry("Class Teacher (Year 3), Early Career Teacher", "Oakwood Primary School, Leeds", "Sep 2026 – Present", ["Teach a class of 28 pupils across the primary curriculum, supported by an ECT mentor", "Run daily phonics catch-up groups for six pupils who did not meet the expected standard in the Year 1 phonics check"]),
+          entry("PGCE Placement 2: Year 5", "Brookfield Primary School, Bradford", "Feb – May 2026", ["Taught up to 80% of the timetable, planning six-week maths and English units", "Introduced daily vocabulary routines in a class where half the pupils speak English as an additional language", "Marked and moderated writing assessments alongside the class teacher"]),
+          entry("PGCE Placement 1: Year 1", "Meadowbank Infant School, Leeds", "Oct – Dec 2025", ["Taught phonics and early reading using the school's systematic synthetic phonics programme", "Planned practical maths sessions and tracked number progress with the class's assessment grids"]),
+        ],
+        education: [entry("PGCE Primary (5–11) with QTS", "University of Kirkstall", "2025 – 2026"), entry("BA (Hons) Childhood Studies, 2:1", "University of Kirkstall", "2022 – 2025")],
+        certifications: [entry("Safeguarding and Child Protection, Level 2", "Local authority training", "2026")],
+        skills: "Teaching: systematic synthetic phonics, adaptive teaching, assessment for learning, behaviour routines\nCurriculum: early reading, EAL support, primary maths\nTools: Google Classroom, interactive whiteboards, pupil tracking software",
+      },
+      notes: [
+        "Each placement is written like a job: the year group, how much of the timetable was taught, and what changed for pupils.",
+        "QTS and the ECT induction appear in the headline and profile, the two things a head teacher checks first.",
+        "Safeguarding training has its own line, because schools check it as part of safer recruitment.",
+      ],
+    },
   },
   {
     slug: "software-developer", job: "Software developer", category: "Technology", template: "tech",
@@ -234,7 +259,29 @@ export const allCVExamples: CVExample[] = [
       { heading: "Say when you can work", text: "Flexibility matters in retail. A short line about your availability, such as weekends, evenings, or school holidays, makes your CV more useful to a busy manager." },
       { heading: "Use school and volunteering experience", text: "If this is your first job, include volunteering, school events, or helping in a family business. Serving customers and handling money count wherever you learned them." },
     ],
-    guides: ["your-first-cv", "keep-it-focused"],
+    guides: ["your-first-cv", "keep-it-focused", "australian-student-resume"],
+    extraExample: {
+      id: "year-12-example", heading: "Year 12 retail resume example (Australia)",
+      intro: "Australian employers hiring casual staff want to know when you can work. Chloe's resume is written the Australian way: availability in the first lines, school responsibilities and volunteering as experience, and referees at the end. The [Australian resume format guide](/tips/australian-resume-format/) explains the conventions, and the [student CV templates](/templates/category/student/) suit a first resume like this.",
+      cv: {
+        id: "year-12", template: "student",
+        person: { name: "Chloe Nguyen", headline: "Year 12 student seeking casual retail work", location: "Parramatta NSW", phone: "0491 570 156", email: "chloe.nguyen@example.com" },
+        summary: "Year 12 student looking for casual retail work on weekends and during school holidays. Organised and friendly: I have volunteered at a community op shop every second Saturday for a year and am a peer support leader for Year 7 students. Available Saturdays and Sundays, plus full days in the school holidays.",
+        sectionOrder: ["summary", "education", "experience", "skills", "additional", "projects", "languages", "certifications"],
+        education: [entry("Higher School Certificate (HSC), expected 2027", "Westmead Hills High School, Parramatta NSW", "2022 – 2027", ["Subjects: English Advanced, Mathematics Standard, Business Studies, Legal Studies, Visual Arts"])],
+        experience: [
+          entry("Volunteer Shop Assistant", "Parramatta Community Op Shop", "Feb 2026 – Present", ["Sort, price, and display donated clothing every second Saturday", "Serve customers at the register, handling cash and EFTPOS payments"]),
+          entry("Peer Support Leader", "Westmead Hills High School", "2026", ["Mentor a group of eight Year 7 students through their first term of high school"]),
+        ],
+        skills: "Customer service: friendly with customers, cash and EFTPOS, keeping displays tidy\nPractical: sorting and pricing stock, following store procedures\nLanguages: English, Vietnamese (conversational)",
+        additional: { title: "Referees", text: "Joanne Ellis, Op Shop Coordinator, 0491 570 157\nDavid Tran, Year 7 Coordinator, Westmead Hills High School, 0491 570 158" },
+      },
+      notes: [
+        "Availability is in the profile, because casual rosters are built around it.",
+        "Australian terms throughout: Year 12, HSC, op shop, EFTPOS, and referees with phone numbers.",
+        "A school responsibility counts as experience; peer support shows maturity and reliability.",
+      ],
+    },
   },
   {
     slug: "care-assistant", job: "Care assistant", category: "Healthcare", template: "linear",
@@ -887,6 +934,54 @@ export const allCVExamples: CVExample[] = [
       { question: "What should I put on a CV for an apprenticeship?", answer: "Your GCSE or other results, any work experience placement or part-time job, school or personal projects, and the practical skills you've used. Name the apprenticeship and level you want in your profile." },
       { question: "Do I need work experience to get an apprenticeship?", answer: "No. Apprenticeships are designed for people starting out, and employers expect to train you. A school placement, a weekend job, or a practical hobby still helps show you're ready." },
       { question: "Should I include predicted or actual GCSE grades?", answer: "Give your actual grades once you have them, especially English and Maths, which many apprenticeships ask for at grade 4 or above. If you're still at school, give predicted grades and label them clearly." },
+    ],
+  },
+  {
+    slug: "computer-science-co-op", job: "Computer science co-op", category: "Technology", template: "compact",
+    seoTitle: scheduled("/cv-examples/computer-science-co-op/").title,
+    description: scheduled("/cv-examples/computer-science-co-op/").description,
+    intro: "Co-op employers in Canada hire students for a specific four-month work term, and they read resumes for evidence that you can contribute from week one. This example shows a second-year student whose strongest material is class and personal projects, with each project naming the applicant's own part.",
+    person: { name: "Arjun Mehta", headline: "Computer Science student seeking a Summer 2027 co-op term", location: "Toronto, ON", phone: "(416) 555-0164" },
+    summary: "Second-year Computer Science student looking for a four-month co-op term from May to August 2027 in software development. Built the conflict checker for a course-planning web app used by about 300 classmates and a Python data pipeline for a transit dashboard. Comfortable with Java, Python, TypeScript, and Git, and used to delivering in teams on graded sprints.",
+    sectionOrder: ["summary", "education", "projects", "experience", "skills", "additional", "languages", "certifications"],
+    education: [entry("Bachelor of Computer Science (Co-op), Year 2", "Lakeshore Polytechnic University, Toronto, ON", "Sep 2025 – Apr 2029 (expected)", ["Cumulative GPA 3.7/4.0; Dean's Honour List, 2025–26.", "Relevant courses: Data Structures and Algorithms, Software Design, Databases, Computer Networks."])],
+    projects: [
+      entry("Course planner web app (team of four)", "Software Design course project", "Jan – Apr 2026", ["Built the timetable conflict checker in TypeScript and React, my part of a four-person project.", "Wrote integration tests that caught a time-zone bug before the class demo.", "About 300 classmates used the app to plan their fall term."]),
+      entry("Transit delay dashboard", "Personal project", "Summer 2025", ["Pulled public transit open data with a Python pipeline and charted weekly delays in a small Flask app.", "Documented setup in a README so a classmate could run it in under ten minutes."]),
+      entry("Library seat finder", "24-hour hackathon", "Nov 2025", ["Built the Android front end in Kotlin with two teammates; placed third of 40 teams."]),
+    ],
+    experience: [entry("IT Help Desk Assistant (part-time)", "Lakeshore Polytechnic University Library", "Sep 2025 – Present", ["Resolve 15 to 25 student laptop, Wi-Fi, and printing issues a shift.", "Wrote three how-to guides that reduced repeat printing questions."])],
+    skills: "Languages: Java, Python, TypeScript, SQL, Kotlin\nTools: Git, React, Flask, PostgreSQL, Linux command line\nPractices: unit and integration testing, code review, Agile sprints",
+    additional: { title: "Co-op availability", text: "Available for a four-month work term from May to August 2027, in person or hybrid in the Greater Toronto Area" },
+    profiles: [
+      { label: "First co-op term", text: "First-year Computer Science student looking for a first co-op term in software or IT. Strong Java foundation from courses, plus two small Python projects and a personal website on GitHub. Keen to learn professional practices such as code review, testing, and working from tickets." },
+      { label: "Second or third work term", text: "Third-year Software Engineering co-op student with two previous work terms, in QA automation and back-end development. Wrote Pytest and Selenium suites that ran on every pull request, and shipped two small API features to production. Looking for a fall back-end term with ownership of a service." },
+      { label: "International student in co-op", text: "International Computer Science student in a co-op program, authorized to work during co-op terms on a co-op work permit. Built a full-stack expense tracker and contributed bug fixes to an open-source library. Available for a Winter 2028 term anywhere in Ontario." },
+    ],
+    bullets: [
+      "Designed the conflict-checking logic for a course planner used by about 300 students.",
+      "Wrote 40 integration tests and set up GitHub Actions so every pull request ran them.",
+      "Refactored a Python data pipeline from scripts into modules, halving the time to add a data source.",
+      "Reviewed teammates' pull requests weekly and kept the project README and setup steps current.",
+      "Placed third of 40 teams at a 24-hour hackathon with an Android seat-finder app.",
+      "Resolved 15 to 25 help desk tickets a shift, escalating network outages with clear notes.",
+      "Presented a course project demo to 120 classmates and two industry judges.",
+      "Tutored first-year students in Java during weekly peer study sessions.",
+    ],
+    skillGroups: [
+      { label: "Technical skills", items: ["Java and Python", "TypeScript and React", "SQL and PostgreSQL", "Git and code review", "Unit and integration testing", "Linux command line"] },
+      { label: "Workplace skills", items: ["Working in Agile teams", "Clear written documentation", "Explaining technical problems simply", "Managing time across courses and projects"] },
+    ],
+    tips: [
+      { heading: "Lead with the work term you want", text: "Co-op employers hire for a specific term. Put the term and its dates in your profile or a short availability line, so a recruiter can match you to the right posting at a glance." },
+      { heading: "Show your part in team projects", text: "Most class projects are team efforts. Say which piece you built or led and what the project achieved, so a reviewer can see your own contribution rather than the group's." },
+      { heading: "Follow your co-op office's rules first", text: "Many universities ask students to use the co-op office's resume format, or to have resumes reviewed before applying through their job board. Check those rules first; this example's structure fits most of them." },
+    ],
+    guides: ["software-engineer-resume-projects", "canadian-resume-format"],
+    faqs: [
+      { question: "What should a co-op resume include?", answer: "Your program and year, the work term you're applying for, relevant courses, two or three projects with your own contribution, any job or volunteer role, and grouped technical skills. One page is standard for co-op applications." },
+      { question: "Should I include my GPA on a co-op resume?", answer: "Include it when it's strong, usually 3.0 out of 4.0 or higher, or when a posting asks for it. Some university co-op offices have their own guidance, so check that first." },
+      { question: "How do I write a co-op resume with no work experience?", answer: "Lead with projects and coursework: what you built, the tools you used, and the result. A part-time job or volunteer role still shows reliability, even when it isn't technical." },
     ],
   },
 ];

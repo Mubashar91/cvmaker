@@ -1,4 +1,5 @@
 // Text fields may contain internal links written as [descriptive text](/path/).
+import type { SampleCVData } from "./sample-cv";
 export interface GuideSubsection { heading: string; paragraphs: string[]; bullets?: string[] }
 export interface GuideSection {
   id: string; heading: string; paragraphs: string[]; bullets?: string[];
@@ -9,6 +10,8 @@ export interface GuideSection {
   figure?: { src: string; alt: string; caption: string; width: number; height: number };
   /** URLs from the article's source list supporting this section. */
   sourceUrls?: string[];
+  /** A complete fictional CV shown in full, with a button that opens it in the editor. */
+  sample?: { data: SampleCVData; caption: string };
 }
 export interface Guide {
   slug: string; title: string; seoTitle: string; description: string; category: string;

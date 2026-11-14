@@ -263,3 +263,14 @@
 .hub-examples .article ol { padding-left: 24px; }
 .template-extra .article { padding-left: 0; padding-right: 0; margin-left: 0; }
 .template-extra .article h2 { margin-top: 0; }
+/* Jobs that suit a template, beside its ATS verdict. */
+.template-fit { padding-top: 0; }
+.fit-jobs { display: grid; gap: 12px; margin: 18px 0 0; padding: 0; list-style: none; }
+.fit-jobs li { padding-left: 16px; border-left: 3px solid var(--line-strong); font-size: 16.5px; line-height: 1.6; color: var(--ink-2); }
+.fit-jobs strong { color: var(--ink); font-weight: 650; }
+/* The ATS example's text as extracted from its real PDF. */
+.extracted { margin-top: 28px; }
+.extracted h3 { font-size: 20px; }
+.collection-guidance .extracted p { margin-top: 8px; color: var(--ink-2); }
+.extracted-text { margin-top: 14px; max-height: 420px; overflow: auto; padding: 18px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--ground-2); font: 13px/1.6 ui-monospace, "SFMono-Regular", Consolas, monospace; white-space: pre-wrap; color: var(--ink); }
+.article .guide-sample .button { margin-top: 18px; }

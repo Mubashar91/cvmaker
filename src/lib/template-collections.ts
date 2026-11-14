@@ -1,4 +1,5 @@
 import { emptyCV, templates, type CV, type Entry, type Section, type Template } from "./model";
+import { atsSampleText } from "./generated/ats-sample-text";
 
 type EntryData = Omit<Entry, "id">;
 const entry = (title: string, organization: string, dates: string, lines: string[] = []): EntryData => ({ title, organization, dates, description: lines.join("\n") });
@@ -17,6 +18,8 @@ export interface CollectionExample {
   omit: { heading: string; items: string[] };
   downloadNote: string;
   links: { href: string; label: string }[];
+  /** Text extracted from this example's real PDF export, in reading order (scripts/build-ats-sample.ts). */
+  extracted?: string;
 }
 
 interface TemplateCollection {
@@ -62,6 +65,62 @@ const highSchoolExample: CollectionExample = {
   ],
 };
 
+// Morgan, Lone Star Supply, Trinity Home Goods, and North Dallas Community College are fictional.
+const atsExample: CollectionExample = {
+  id: "ats-resume-example", template: "clarity",
+  heading: "An ATS-friendly resume example, and the text a parser reads",
+  intro: "Morgan's resume uses the Clarity template: one column, standard headings, and nothing but text. Underneath it is the text extracted from the downloaded PDF, line by line, so you can see the reading order an applicant tracking system actually receives.",
+  person: { name: "Morgan Lee", headline: "Logistics Coordinator", location: "Dallas, TX", phone: "(214) 555-0119", email: "morgan.lee@example.com" },
+  sectionOrder: ["summary", "experience", "education", "skills", "languages", "additional", "projects", "certifications"],
+  summary: "Logistics coordinator with five years of experience scheduling inbound and outbound freight for a regional distributor. Track 120 to 150 shipments a week in SAP and carrier portals, resolve delivery exceptions before they reach customers, and keep on-time delivery above 97%. Looking for a senior coordinator or transportation planner role.",
+  experience: [
+    entry("Logistics Coordinator", "Lone Star Supply Co., Dallas, TX", "Mar 2022 – Present", ["Schedule 120 to 150 inbound and outbound shipments a week across eight regional carriers", "Kept on-time delivery above 97% for two years by rebooking at-risk loads before cut-off", "Resolve damaged or short deliveries with carriers and file freight claims, recovering $18,000 in 2025", "Maintain shipment records in SAP and send a daily exceptions report to the warehouse manager"]),
+    entry("Shipping Clerk", "Lone Star Supply Co., Dallas, TX", "Jun 2020 – Feb 2022", ["Prepared bills of lading and packing lists for 40 to 60 orders a day"]),
+    entry("Warehouse Associate", "Trinity Home Goods, Irving, TX", "Aug 2018 – May 2020", ["Picked, packed, and loaded orders and trained new starters on handheld scanners"]),
+  ],
+  education: [entry("Associate of Applied Science, Logistics and Supply Chain", "North Dallas Community College", "2016 – 2018")],
+  projects: [],
+  skills: "Logistics: freight scheduling, carrier management, freight claims, bills of lading\nSystems: SAP, carrier portals, Microsoft Excel (VLOOKUP, pivot tables)\nSafety: OSHA 10-Hour General Industry, forklift certified",
+  languages: "English\nSpanish (conversational)",
+  additional: { title: "Additional information", text: "Available for occasional weekend cover during peak season" },
+  omit: { heading: "What this resume leaves out on purpose", items: ["Tables, text boxes, and side columns", "Contact details hidden in a page header or footer", "Skill bars, icons, and charts", "Creative section names such as \"My journey\"", "A photo, or any image that contains text"] },
+  downloadNote: "Opens in the Clarity template with every line editable. Download a PDF with selectable text, or an editable Word file when an employer asks for one. Both use A4; for a US application, switch the Word file to Letter size before sending.",
+  links: [
+    { href: "/tips/ats-friendly-cv/", label: "How to make a CV ATS-friendly" },
+    { href: "/ai-cv-job-match/", label: "Check your CV against a job advert" },
+    { href: "/resume-keyword-checker/", label: "Free resume keyword checker" },
+    { href: "/templates/clarity/", label: "Why Clarity suits applicant tracking systems" },
+  ],
+  extracted: atsSampleText,
+};
+
+// Rosa and the employers below are fictional.
+const simpleExample: CollectionExample = {
+  id: "simple-resume-example", template: "outline",
+  heading: "A basic resume example in a simple template",
+  intro: "Rosa's resume shows what a simple layout does best: nothing competes with the content. It's a basic resume template filled in for a bookkeeper with seven years of experience, kept to one page by choosing what to leave out.",
+  person: { name: "Rosa Delgado", headline: "Full-Charge Bookkeeper", location: "Phoenix, AZ", phone: "(602) 555-0177", email: "rosa.delgado@example.com" },
+  sectionOrder: ["summary", "experience", "education", "skills", "languages", "additional", "projects", "certifications"],
+  summary: "Full-charge bookkeeper with seven years of experience keeping the books for construction and property businesses. Close the month within five working days, reconcile 11 bank and credit card accounts, and prepare clean files for the outside CPA. Looking for a senior bookkeeper or accounting coordinator role.",
+  experience: [
+    entry("Full-Charge Bookkeeper", "Desert Ridge Builders, Phoenix, AZ", "Apr 2021 – Present", ["Run accounts payable and receivable for a contractor with $14m annual revenue", "Close the month within five working days and prepare job-cost reports for project managers", "Reconcile 11 bank and credit card accounts in QuickBooks Online every month", "Cut overdue receivables by 40% by sending statements weekly instead of monthly"]),
+    entry("Accounts Assistant", "Saguaro Property Management, Tempe, AZ", "Jan 2018 – Mar 2021", ["Processed rent receipts and vendor bills for 600 rental units", "Prepared 1099 forms for about 90 contractors each January"]),
+  ],
+  education: [entry("Certificate in Accounting", "Valley Community College", "2016 – 2017")],
+  projects: [],
+  skills: "Bookkeeping: accounts payable and receivable, bank reconciliations, month-end close, job costing\nSoftware: QuickBooks Online, Bill.com, Microsoft Excel\nCertification: Certified Bookkeeper (AIPB)",
+  languages: "English\nSpanish (fluent)",
+  additional: { title: "Additional information", text: "" },
+  omit: { heading: "What a simple resume skips", items: ["A photo, unless an employer asks", "Decorative icons and skill-level bars", "Bullets longer than two lines", "An objective that repeats the summary", "Jobs older than about 15 years"] },
+  downloadNote: "Opens in the Outline template with every line editable. Download a PDF to keep this exact layout, or an editable Word file, which keeps the same headings and order in one clean column. Both use A4; switch the Word file to Letter for US employers.",
+  links: [
+    { href: "/templates/category/ats-friendly/", label: "ATS-friendly resume templates" },
+    { href: "/tips/us-resume-format/", label: "US resume format guide" },
+    { href: "/templates/linear/", label: "The Linear template" },
+    { href: "/resume-template-word/", label: "Microsoft Word resume template" },
+  ],
+};
+
 /** The collection example as an editable CV. Ids are stable so server and client render identically. */
 export function collectionExampleCV(example: CollectionExample): CV {
   const cv = emptyCV();
@@ -81,6 +140,7 @@ export const templateCollections: readonly TemplateCollection[] = [
     description: "Choose a plain, single-column CV for online applications. Compare free templates with standard headings and selectable PDF text, then edit and download.",
     intro: "When an employer uses an applicant tracking system, a straightforward document is a sensible starting point. These templates keep your contact details and experience in one reading order, use familiar headings, and export real, selectable text.",
     templates: ["linear", "clarity", "compact", "professional", "classic", "student"],
+    example: atsExample,
     advice: [
       { heading: "Keep the reading order straightforward", text: "Start with [Linear](/templates/linear/) or [Clarity](/templates/clarity/) when an application asks for a simple CV. Both avoid side columns and decorative text containers; the Clarity page explains, line by line, why its layout suits applicant tracking systems. Put your job title, employer, and dates together, and use familiar labels such as Work experience, Education, and Skills." },
       { heading: "Check the employer’s instructions first", text: "Application systems differ. A template cannot guarantee a successful parse or a shortlist. If the employer requests DOCX, use that format rather than uploading a PDF. For a PDF application, select and copy text from your downloaded file to check its order, then review any fields the application fills automatically." },
@@ -117,6 +177,7 @@ export const templateCollections: readonly TemplateCollection[] = [
     description: "Create a clean CV with free simple templates. Compare minimal layouts, clear headings, and compact spacing. Edit online and download without a watermark.",
     intro: "A simple CV leaves room for the work itself. This collection keeps decoration restrained, so names, roles, qualifications, and skills are easy to locate. Choose a plain structure or a quiet typographic detail that suits your information.",
     templates: ["linear", "clarity", "minimal", "compact", "tech", "outline", "swiss", "student"],
+    example: simpleExample,
     advice: [
       { heading: "Simple layouts still have different reading orders", text: "Linear and Clarity use a conventional single column. Minimal places short section labels to the left, while Swiss uses a stronger grid. If your priority is a plain online application, start with Linear; if a person will read the PDF directly, compare the quieter visual alternatives too." },
       { heading: "Edit the content before shrinking the type", text: "Remove repeated statements and shorten older, less relevant roles before choosing compact spacing. A CV does not need every task you have ever done. Keep the examples that help the reader understand why you fit this particular opportunity." },

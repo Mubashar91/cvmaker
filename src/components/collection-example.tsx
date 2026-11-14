@@ -3,6 +3,7 @@ import { ArrowRight, X } from "lucide-react";
 import { UseExampleButton } from "./use-example-button";
 import { collectionExampleCV, type CollectionExample } from "@/lib/template-collections";
 import { isTextSection, sectionHasContent, sectionTitle, type CV, type Section } from "@/lib/model";
+import { isVisible } from "@/lib/scheduled-pages";
 
 const lines = (text: string) => text.split("\n").map(line => line.trim()).filter(Boolean);
 
@@ -41,6 +42,7 @@ export function CollectionExampleSection({ example }: { example: CollectionExamp
       <h2 id={`${example.id}-heading`}>{example.heading}</h2>
       <p>{example.intro}</p>
       <SampleDocument cv={cv} label={`Fictional resume for ${example.person.name}`} />
+      {example.extracted && <div className="extracted"><h3>The text a parser reads from the PDF</h3><p>This is every line of text in the downloaded PDF of the resume above, extracted in reading order, the same way an applicant tracking system reads it. Nothing is missing, and each job title sits next to its employer and dates.</p><pre className="extracted-text">{example.extracted}</pre></div>}
       <p className="sample-caption">Every person, school, and organization in this example is fictional.</p>
     </div>
     <aside className="collection-checklist">
@@ -48,7 +50,7 @@ export function CollectionExampleSection({ example }: { example: CollectionExamp
       <ul className="check-list omit-list">{example.omit.items.map(item => <li key={item}><X size={17} aria-hidden="true" />{item}</li>)}</ul>
       <UseExampleButton cv={cv} className="button dark">Edit this resume</UseExampleButton>
       <p className="sample-download-note">{example.downloadNote}</p>
-      <ul className="sample-links">{example.links.map(link => <li key={link.href}><Link className="text-link" href={link.href}>{link.label}<ArrowRight size={15} /></Link></li>)}</ul>
+      <ul className="sample-links">{example.links.filter(link => isVisible(link.href)).map(link => <li key={link.href}><Link className="text-link" href={link.href}>{link.label}<ArrowRight size={15} /></Link></li>)}</ul>
     </aside>
   </div></section>;
 }

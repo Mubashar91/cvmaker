@@ -1,0 +1,19 @@
+# Disavow file for freecvmaker.online (upload in Search Console's Disavow Links tool,
+# for the domain property sc-domain:freecvmaker.online). Prepared 14 November 2026.
+#
+# These domains link to spam pages on aroza.freecvmaker.online/20xx/..., a subdomain
+# this site has never used; it returns 404 and should be removed from DNS. Google
+# ignores most such links on its own, so this file is a precaution, not a fix.
+#
+# Only the domains named in the November 2026 audit are listed. The audit counted
+# 317 spam domains; export the full list from a backlink tool and add each one as
+# a "domain:" line before uploading. Never add domains you want to keep.
+domain:protatic.com.br
+domain:energytotrade.co.uk
+domain:shalawstaffing.co
+domain:aitechmarketing.com
+domain:masrynews.com
+domain:shazhealth.com
+domain:digeroo.online
+domain:shelaiskincare.com
+domain:nexsell.top

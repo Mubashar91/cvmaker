@@ -10,6 +10,9 @@ import { AdSlot } from "@/components/ad-slot";
 import { FaqList } from "@/components/faq-list";
 import { RichText } from "@/components/rich-text";
 import { GuideImage } from "@/components/guide-image";
+import { SampleDocument } from "@/components/collection-example";
+import { UseExampleButton } from "@/components/use-example-button";
+import { sampleCV } from "@/lib/sample-cv";
 import { relatedGuides, tips } from "@/lib/tips";
 import { siteOperator } from "@/lib/site-info";
 import { breadcrumbSchema, CONTENT_UPDATED, CONTENT_UPDATED_LABEL, formatDate, pageMetadata } from "@/lib/seo";
@@ -36,6 +39,7 @@ export default async function Tip({ params }: { params: Promise<{ slug: string }
         {section.subsections?.map(sub => <div className="article-subsection" key={sub.heading}><h3>{sub.heading}</h3>{sub.paragraphs.map(paragraph => <p key={paragraph}><RichText text={paragraph} /></p>)}{sub.bullets && <ul>{sub.bullets.map(point => <li key={point}><RichText text={point} /></li>)}</ul>}</div>)}
         {section.example && <aside className="article-example"><span>{section.exampleLabel ?? "Illustrative example"}</span>{section.example.split(/\n{2,}/).map(paragraph => <p key={paragraph}>{paragraph}</p>)}</aside>}
         {section.bullets && <ul>{section.bullets.map(point => <li key={point}><RichText text={point} /></li>)}</ul>}
+        {section.sample && <div className="guide-sample"><SampleDocument cv={sampleCV(section.sample.data)} label={`Fictional example resume for ${section.sample.data.person.name}`} /><p className="sample-caption">{section.sample.caption}</p><UseExampleButton cv={sampleCV(section.sample.data)} className="button dark">Edit this resume as your template</UseExampleButton></div>}
         {section.sourceUrls?.length ? <p className="article-section-sources"><small>Sources: {section.sourceUrls.map((url, index) => {
           const source = tip.sources?.find(item => item.url === url);
           return source ? <Fragment key={url}>{index > 0 && "; "}<a href={source.url}>{source.title}</a></Fragment> : null;

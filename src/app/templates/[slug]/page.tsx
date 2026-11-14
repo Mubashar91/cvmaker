@@ -10,6 +10,7 @@ import { StructuredData } from "@/components/structured-data";
 import { templates } from "@/lib/model";
 import { noindexTemplates, templateDetails } from "@/lib/template-details";
 import { templateContent } from "@/lib/template-content";
+import { templateFit } from "@/lib/template-fit";
 import { collectionPath, templateCollections } from "@/lib/template-collections";
 import { DETAIL_PREVIEW_SIZES, previewSrcSet, templatePreview } from "@/lib/previews";
 import { templateSchema } from "@/lib/structured-data";
@@ -30,7 +31,7 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
   const template = templates.find(t => t.id === slug);
   if (!template) notFound();
   const details = templateDetails[template.id];
-  const content = templateContent[template.id];
+  const content = templateContent[template.id]; const fit = templateFit[template.id];
   const relatedCollections = templateCollections.filter(collection => collection.templates.includes(template.id));
   const examplesHere = cvExamples.filter(example => example.template === template.id);
   const similarity = (other: typeof templates[number]) => Number(other.style === template.style) * 4 + Number(other.columns === template.columns) * 2 + Number(other.photo === template.photo);
@@ -59,6 +60,11 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
       <article><h2>Is {template.name} right for you?</h2><p>{content.choose}</p></article>
     </div></section>
 
+    <section className="section template-detail-information template-fit"><div className="container info-grid">
+      <article><h2>Jobs that suit {template.name}</h2><ul className="fit-jobs">{fit.jobs.map(([role, why]) => <li key={role}><strong>{role}.</strong> {why}</li>)}</ul></article>
+      {fit.ats && <article><h2>Is {template.name} ATS-friendly?</h2><p>{fit.ats}</p></article>}
+    </div></section>
+
     {content.extra && <section className="section template-extra" id={content.extra.id}><div className="container"><div className="article"><h2>{content.extra.heading}</h2>{content.extra.paragraphs.map((text, index) => <p key={index}><RichText text={text} /></p>)}{content.extra.bullets && <ul>{content.extra.bullets.map(point => <li key={point}>{point}</li>)}</ul>}</div></div></section>}
 
     <section className="section template-writing"><div className="container">
@@ -68,7 +74,7 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
 
     <section className="section template-faq"><div className="container faq-grid">
       <div><h2>Questions about {template.name}.</h2><p>Specific to this layout. The <Link href="/templates/">template catalogue</Link> answers the general ones.</p></div>
-      <FaqList faqs={content.faqs} />
+      <FaqList faqs={[...content.faqs, fit.faq]} />
     </div></section>
 
     <section className="section related-templates"><div className="container">

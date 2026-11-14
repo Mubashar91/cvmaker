@@ -470,3 +470,6 @@
 .letter-example-note { margin: 8px 0 14px; color: var(--ink-2); font-size: 15.5px; }
 .letter-example-grid .article-example p { font-size: 16px; line-height: 1.65; }
 @media (max-width: 900px) { .letter-layout-grid, .letter-example-grid { grid-template-columns: 1fr; } .letter-layout-grid .template-sheet { max-width: 320px; } }
+/* Long, specific button labels wrap on narrow screens instead of widening the page. */
+.summary-template-grid li { min-width: 0; }
+.summary-template-grid .button, .landing-actions .button { max-width: 100%; white-space: normal; text-align: left; }

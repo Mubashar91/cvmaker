@@ -13,6 +13,9 @@ import { DETAIL_PREVIEW_SIZES, examplePreview, previewSrcSet } from "@/lib/previ
 import { tips } from "@/lib/tips";
 import { siteOperator } from "@/lib/site-info";
 import { FaqList } from "@/components/faq-list";
+import { RichText } from "@/components/rich-text";
+import { SampleDocument } from "@/components/collection-example";
+import { sampleCV } from "@/lib/sample-cv";
 import { ScheduledBanner } from "@/components/scheduled-banner";
 import { contentModified } from "@/lib/content-dates";
 import { isEarlyPreview } from "@/lib/scheduled-pages";
@@ -41,6 +44,9 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
     { id: "template", heading: example.templateSection?.heading ?? "The template in this example" },
     ...(example.faqs?.length ? [{ id: "faq", heading: `${example.job} CV questions` }] : []),
   ];
+  // The optional second example sits after the bullet points; sections[] keeps its fixed positions.
+  const extra = example.extraExample;
+  const toc = extra ? [...sections.slice(0, 2), { id: extra.id, heading: extra.heading }, ...sections.slice(2)] : sections;
   return <><Header /><main id="main-content">
     <StructuredData data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "CV examples", path: "/cv-examples/" }, { name: `${example.job} CV example`, path: `/cv-examples/${slug}/` }])} />
     <StructuredData data={cvExampleSchema(example)} />
@@ -60,7 +66,7 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
       <figure className="template-detail-example"><img src={examplePreview(slug)} srcSet={previewSrcSet(examplePreview(slug))} sizes={DETAIL_PREVIEW_SIZES} alt={`${example.job} CV example in the ${template.name} template, showing a profile, work experience, education, and skills`} width={953} height={1348} fetchPriority="high" /><figcaption>Fictional person and employers · A4 PDF</figcaption></figure>
     </div></section>
     <div className="guide-layout container section">
-      <nav className="guide-toc" aria-label="On this page"><h2>On this page</h2>{sections.map(section => <a key={section.id} href={`#${section.id}`}>{section.heading}</a>)}</nav>
+      <nav className="guide-toc" aria-label="On this page"><h2>On this page</h2>{toc.map(section => <a key={section.id} href={`#${section.id}`}>{section.heading}</a>)}</nav>
       <article className="article">
         <div className="article-meta example-meta"><Link href="/about/" rel="author"><FileText size={15} />By {siteOperator.name}</Link><span><Clock3 size={15} />Updated <time dateTime={updated}>{formatDate(updated)}</time></span></div>
         <section id="profile-examples"><h2>{sections[0].heading}</h2><p>The first version is used in the example CV above; the alternatives show how a {job} profile reads at other stages.</p>
@@ -68,6 +74,7 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
           {example.profiles.map(profile => <aside className="article-example" key={profile.label}><span>{profile.label}</span><p>{profile.text}</p></aside>)}
         </section>
         <section id="bullet-points"><h2>{sections[1].heading}</h2><p>Models for a {job} CV, not lines to copy: swap in your own numbers, settings, and tools, or build one from your own facts with the <Link href="/resume-bullet-point-generator/">bullet point builder</Link>.</p><ul>{example.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></section>
+        {extra && <section id={extra.id}><h2>{extra.heading}</h2><p><RichText text={extra.intro} /></p><SampleDocument cv={sampleCV(extra.cv)} label={`Fictional CV for ${extra.cv.person.name}`} /><h3>Why this example works</h3><ul>{extra.notes.map((note, index) => <li key={index}>{note}</li>)}</ul><div className="landing-actions"><UseExampleButton cv={sampleCV(extra.cv)} className="button dark">Edit this example free</UseExampleButton></div></section>}
         <section id="skills"><h2>{sections[2].heading}</h2><div className="skill-columns">{example.skillGroups.map(group => <div key={group.label}><h3>{group.label}</h3><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>
         <section id="tips"><h2>{sections[3].heading}</h2>{example.tips.map(tip => <div key={tip.heading}><h3>{tip.heading}</h3><p>{tip.text}</p></div>)}</section>
         <section id="template"><h2>{sections[4].heading}</h2>{example.templateSection && <p>{example.templateSection.text}</p>}<p>This example uses the <Link href={`/templates/${template.id}/`}>{template.name} template</Link>. {templateDetails[template.id].layout} Any of the {templates.length} templates can take this content without retyping.</p></section>
