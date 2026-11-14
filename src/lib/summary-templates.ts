@@ -1,0 +1,24 @@
+// Copy-and-adapt summaries for /resume-summary-builder/ only. Every figure and employer detail is
+// invented: they show the shape of a strong summary, and readers replace each detail with their own.
+
+export interface SummaryTemplate { label: string; text: string }
+
+/** Resume summary templates by career stage. */
+export const summaryByStage: SummaryTemplate[] = [
+  { label: "Entry level", text: "Recent Marketing graduate with hands-on experience running social media for a 400-member student society and a summer internship at a regional events company. Comfortable with Canva, Meta Business Suite, and basic Google Analytics reporting. Looking for a junior marketing role where I can learn campaign planning from an experienced team." },
+  { label: "Career change", text: "Former primary school teacher moving into learning and development after eight years designing lessons, assessing progress, and training new colleagues. Experienced in turning complex material into short, practical sessions and checking whether they worked. Recently completed a CIPD Level 3 Certificate in Learning and Development." },
+  { label: "Returning to work", text: "Logistics coordinator returning after a three-year career break, with six years' experience booking freight, tracking deliveries, and sorting customs paperwork for an import business. Kept my skills current with a Level 3 award in international trade and part-time admin for a family firm. Available full time from January." },
+  { label: "Mid-career specialist", text: "Payroll specialist with seven years' experience running monthly payroll for up to 1,200 employees across three companies, including pension auto-enrolment and statutory pay. Reduced payroll queries by 30% by rewriting the payslip guidance staff receive. Looking for a payroll team leader role with more responsibility for controls." },
+  { label: "Manager", text: "Hospitality general manager with 10 years in branded restaurants, now running a 140-cover site with £2.1m annual turnover and a team of 35. Raised the site's food hygiene rating from 3 to 5 and kept staff turnover below the group average for three years running. Ready for a multi-site operations role." },
+  { label: "Freelancer moving in-house", text: "Freelance copywriter with six years' experience writing websites, email campaigns, and product pages for software and e-commerce clients across the UK and Europe. Used to owning a brief from first interview to final draft and working to style guides and SEO briefs. Looking to bring that range into an in-house content team." },
+];
+
+/** UK CV personal profile examples by job. */
+export const profileByJob: SummaryTemplate[] = [
+  { label: "Barista", text: "Barista with two years' experience in a busy independent coffee shop serving up to 300 customers a day. Trained in espresso preparation, milk texturing, and latte art, and trusted to open the shop three mornings a week. Friendly and quick under pressure, and looking for a supervisor role with responsibility for stock and rotas." },
+  { label: "Delivery driver", text: "Delivery driver with a clean full UK licence and four years' multi-drop experience, completing 90 to 120 drops a day across Greater Manchester with a 99% on-time record. Confident with handheld scanners, route apps, and daily vehicle checks, and polite with customers at the door. Looking for a permanent role with regular routes." },
+  { label: "HR assistant", text: "HR assistant with two years' experience supporting a 250-person business with recruitment admin, contracts, and starter and leaver paperwork. Careful with personal data under UK GDPR and comfortable in BreatheHR and Excel. Studying for the CIPD Level 3 Certificate in People Practice and keen to grow into an HR advisor role." },
+  { label: "Dental nurse", text: "GDC-registered dental nurse with three years' experience in a mixed NHS and private practice, assisting with general, restorative, and children's treatment. Skilled in decontamination, chairside support, and calming anxious patients. Holds a post-registration certificate in dental radiography and looking for a practice that supports further training." },
+  { label: "Social media manager", text: "Social media manager with five years' experience growing accounts for fashion and beauty retailers, most recently taking a TikTok account from 8,000 to 95,000 followers in 18 months. Plans monthly content calendars, briefs creators, and reports results in plain language to senior teams. Seeking a role leading a small social team." },
+  { label: "Quantity surveyor", text: "Chartered quantity surveyor (MRICS) with nine years' experience on commercial and residential schemes worth up to £40m, from cost planning to final accounts. Experienced with NEC4 and JCT contracts and comfortable presenting cost reports to clients. Looking for a senior role with a main contractor in the South West." },
+];

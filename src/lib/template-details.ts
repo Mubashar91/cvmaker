@@ -224,7 +224,7 @@ export const templateDetails: Record<Template, {
   },
   clarity: {
     category: "Plain & dependable", heading: "Nothing between your experience and the reader.",
-    description: "Use the free Clarity CV template: one column, standard section names, and no graphics or side panels. A dependable choice for online application systems.",
+    description: "Use the free Clarity ATS-friendly CV template: one column, standard section names, and no graphics or side panels, built for online application systems.",
     bestFor: "Online applications, recruitment portals, and conservative industries, or anyone who wants the most straightforward possible structure.",
     layout: "A plain name, title, and contact line sit above a single rule. Sections use familiar names — Professional summary, Work experience, Education — in one column, with no tables, icons, photos, or side panels. Text stays selectable in reading order.",
     features: ["Single column, top to bottom", "Standard section names", "No graphics, panels, or photos", "Selectable text in reading order"],

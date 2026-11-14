@@ -2,12 +2,18 @@ import { ToolPage } from "@/components/tool-page";
 import { SummaryBuilder } from "@/components/statement-builder";
 import { pageMetadata } from "@/lib/seo";
 import { tool } from "@/lib/tools";
+import { CopyButton } from "@/components/tool-fields";
+import { profileByJob, summaryByStage, type SummaryTemplate } from "@/lib/summary-templates";
+
+function TemplateCards({ items }: { items: SummaryTemplate[] }) {
+  return <ul className="summary-template-grid">{items.map(item => <li key={item.label}><h3>{item.label}</h3><p>{item.text}</p><CopyButton text={item.text} label={`Copy the ${item.label.toLowerCase()} example`} className="button outline small" /></li>)}</ul>;
+}
 
 const page = tool("/resume-summary-builder/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/resume-summary-builder.png" });
 
 export default function SummaryBuilderPage() {
-  return <ToolPage path={page.path} heading="Resume summary builder: write your CV profile"
+  return <ToolPage path={page.path} heading="Resume summary templates and a free builder"
     intro="Enter a few details about your experience and get three professional summary drafts built from your own words. Edit the one you like, copy it, or add it straight to your CV."
     points={["Three editable drafts", "No AI or sign-up", "Adds to your CV in one click", "Works for any job"]}
     featureList={["Summary drafts for experienced candidates, graduates, and career changers", "Three sentence structures", "Editable drafts with word counts", "Copy to clipboard", "Add to the CV in Folio’s editor"]}
@@ -36,7 +42,13 @@ export default function SummaryBuilderPage() {
       { question: "How long should a resume summary be?", answer: "Two to four sentences, or roughly 40 to 90 words. If it runs longer, move the detail into your experience section." },
       { question: "Does the summary builder use AI?", answer: "No. It fits your own details into predefined sentence patterns in your browser. Sentences are left out when you have not given the details they need, so nothing is invented." },
       { question: "How do I add the summary to my CV?", answer: "Choose “Use as my CV profile”. The draft is added to the Profile section of the CV open in this tab, and the [CV editor](/editor/) opens on that section." },
-    ]}>
+    ]}
+    extra={<section className="section summary-templates"><div className="container">
+      <div className="section-head"><div><h2 id="summary-templates">Resume summary templates by career stage.</h2><p>Six complete summaries to copy into your CV and then rewrite. Keep the structure, replace every detail with your own, and delete any claim you can't back up in an interview.</p></div></div>
+      <TemplateCards items={summaryByStage} />
+      <div className="section-head summary-templates-second"><div><h2 id="profile-examples">CV personal profile examples by job.</h2><p>In the UK the same paragraph is called a personal profile or personal statement. These six use British job titles, qualifications, and spelling, and each one names a role the writer wants next.</p></div></div>
+      <TemplateCards items={profileByJob} />
+    </div></section>}>
     <SummaryBuilder />
   </ToolPage>;
 }

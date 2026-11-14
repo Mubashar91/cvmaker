@@ -450,3 +450,23 @@
 @media (max-width: 480px) {
   .match-actions .ai-match-action { width: 100%; }
 }
+
+/* Copy-and-adapt summary examples on the resume summary builder page. */
+.summary-template-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 32px 0 0; padding: 0; list-style: none; }
+.summary-template-grid li { display: flex; flex-direction: column; gap: 12px; padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.summary-template-grid h3 { font-size: 18px; }
+.summary-template-grid p { flex: 1; color: var(--ink-2); font-size: 16px; line-height: 1.65; }
+.summary-template-grid .button { align-self: flex-start; }
+.summary-templates-second { margin-top: 64px; }
+@media (max-width: 760px) { .summary-template-grid { grid-template-columns: 1fr; } }
+
+/* Cover letter templates and examples on the cover letter maker page. */
+.letter-layout-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin: 32px 0 0; padding: 0; list-style: none; }
+.letter-layout-grid h3 { margin-top: 18px; font-size: 19px; }
+.letter-layout-grid p { margin-top: 8px; color: var(--ink-2); font-size: 16px; line-height: 1.6; }
+.letter-examples-head { margin-top: 64px; }
+.letter-example-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 32px; }
+.letter-example-grid h3 { font-size: 19px; }
+.letter-example-note { margin: 8px 0 14px; color: var(--ink-2); font-size: 15.5px; }
+.letter-example-grid .article-example p { font-size: 16px; line-height: 1.65; }
+@media (max-width: 900px) { .letter-layout-grid, .letter-example-grid { grid-template-columns: 1fr; } .letter-layout-grid .template-sheet { max-width: 320px; } }

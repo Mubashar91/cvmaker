@@ -33,7 +33,7 @@ export function HomePage() {
     <section className="section collection-section"><div className="container"><div className="section-head"><div><h2>A starting point<br /><span className="editorial-type">for every next step.</span></h2><p>Your first job, a new direction, or a more senior role. Find the format that fits.</p></div><Link href={studentPage.path} className="text-link"><GraduationCap size={17} />Making your first CV as a student? <ArrowUpRight size={16} /></Link></div><TemplateCollections /></div></section>
 
     <section className="how-section" id="how-it-works"><div className="container">
-      <div className="section-head"><div><h2>How it works.<br /><span className="editorial-type">Three simple steps.</span></h2><p>From a blank page to a finished PDF, with guidance in every section, so it works for beginners too. No account, no payment, and nothing to install.</p></div><span className="section-aside">Your experience. Beautifully put together.</span></div>
+      <div className="section-head"><div><h2>How the free CV builder works.<br /><span className="editorial-type">Three simple steps.</span></h2><p>From a blank page to a finished PDF, with guidance in every section, so it works for beginners too. No account, no payment, and nothing to install.</p></div><span className="section-aside">Your experience. Beautifully put together.</span></div>
       <ol className="steps">
         <li className="step">
           <div className="step-vignette" aria-hidden="true"><div className="vig-drop"><FileUp size={22} /><strong>my-cv.pdf</strong><span>Read on this device</span></div><div className="vig-found"><Check size={14} />Name, experience, education and skills found</div></div>

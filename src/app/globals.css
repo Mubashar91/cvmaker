@@ -454,3 +454,16 @@ details[open] > summary svg { transform: rotate(180deg); }
 .resume-drafts .resume-draft { margin-top: 0; text-align: left; }
 .resume-draft small { display: block; font-size: 12.5px; font-weight: 500; color: var(--on-desk-muted); }
 .resume-drafts .resume-more { font-size: 13px; }
+
+/* Preview builds only: a scheduled page shown before its go-live date. */
+.scheduled-banner { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0; padding: 10px 16px; background: var(--marigold-soft); color: var(--ink); font-size: 14px; font-weight: 560; text-align: center; }
+.landing-intro { max-width: 46rem; margin-top: 22px; font-size: 19px; line-height: 1.6; color: var(--on-desk-muted, inherit); }
+.landing-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.article .landing-actions { margin: 26px 0 8px; }
+.landing-note { margin-top: 16px; font-size: 14px; opacity: .85; }
+.landing-download-note { display: flex; gap: 8px; align-items: flex-start; }
+.article .landing-download-note { font-size: 15px; color: var(--ink-3); }
+.landing-download-note svg { flex-shrink: 0; margin-top: 6px; }
+.landing-related { margin-top: 44px; padding-top: 8px; border-top: 1px solid var(--line); }
+.article .landing-related ul { display: grid; gap: 4px; padding: 0; list-style: none; }
+.article .landing-related a { display: inline-flex; align-items: center; gap: 6px; }

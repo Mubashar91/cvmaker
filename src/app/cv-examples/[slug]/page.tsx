@@ -12,17 +12,24 @@ import { templateDetails } from "@/lib/template-details";
 import { DETAIL_PREVIEW_SIZES, examplePreview, previewSrcSet } from "@/lib/previews";
 import { tips } from "@/lib/tips";
 import { siteOperator } from "@/lib/site-info";
-import { breadcrumbSchema, CONTENT_UPDATED, CONTENT_UPDATED_LABEL, pageMetadata } from "@/lib/seo";
-import { cvExampleSchema } from "@/lib/structured-data";
+import { FaqList } from "@/components/faq-list";
+import { ScheduledBanner } from "@/components/scheduled-banner";
+import { contentModified } from "@/lib/content-dates";
+import { isEarlyPreview } from "@/lib/scheduled-pages";
+import { breadcrumbSchema, formatDate, pageMetadata } from "@/lib/seo";
+import { cvExampleSchema, faqSchema } from "@/lib/structured-data";
 
+// Only published examples are built (see scheduled-pages.ts); any other slug is a real 404.
+export const dynamicParams = false;
 export function generateStaticParams() { return cvExamples.map(example => ({ slug: example.slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const example = cvExample(slug); if (!example) return {};
-  return pageMetadata({ title: example.seoTitle, description: example.description, path: `/cv-examples/${slug}/`, image: `/social/examples/${slug}.png`, article: true });
+  return pageMetadata({ title: example.seoTitle, description: example.description, path: `/cv-examples/${slug}/`, image: `/social/examples/${slug}.png`, article: true, noIndex: isEarlyPreview(`/cv-examples/${slug}/`) });
 }
 
 export default async function CVExamplePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const example = cvExample(slug); if (!example) notFound();
+  const path = `/cv-examples/${slug}/`; const updated = contentModified(path);
   const template = templateById(example.template); const job = example.job.toLowerCase();
   const guideSlugs = [...new Set([...example.guides, ...(slug === "teacher" ? ["teacher-cv-personal-statement"] : [])])];
   const guides = guideSlugs.map(guideSlug => tips.find(tip => tip.slug === guideSlug)!);
@@ -31,11 +38,14 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
     { id: "bullet-points", heading: `${example.job} CV bullet points` },
     { id: "skills", heading: `Skills for a ${job} CV` },
     { id: "tips", heading: `Tips for writing a ${job} CV` },
-    { id: "template", heading: "The template in this example" },
+    { id: "template", heading: example.templateSection?.heading ?? "The template in this example" },
+    ...(example.faqs?.length ? [{ id: "faq", heading: `${example.job} CV questions` }] : []),
   ];
   return <><Header /><main id="main-content">
     <StructuredData data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "CV examples", path: "/cv-examples/" }, { name: `${example.job} CV example`, path: `/cv-examples/${slug}/` }])} />
     <StructuredData data={cvExampleSchema(example)} />
+    {example.faqs?.length ? <StructuredData data={faqSchema(example.faqs)} /> : null}
+    <ScheduledBanner path={path} />
     <section className="template-detail-hero"><div className="container template-detail-grid">
       <div className="template-detail-copy">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "CV examples", href: "/cv-examples/" }, { name: example.job }]} />
@@ -52,7 +62,7 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
     <div className="guide-layout container section">
       <nav className="guide-toc" aria-label="On this page"><h2>On this page</h2>{sections.map(section => <a key={section.id} href={`#${section.id}`}>{section.heading}</a>)}</nav>
       <article className="article">
-        <div className="article-meta example-meta"><Link href="/about/" rel="author"><FileText size={15} />By {siteOperator.name}</Link><span><Clock3 size={15} />Updated <time dateTime={CONTENT_UPDATED}>{CONTENT_UPDATED_LABEL}</time></span></div>
+        <div className="article-meta example-meta"><Link href="/about/" rel="author"><FileText size={15} />By {siteOperator.name}</Link><span><Clock3 size={15} />Updated <time dateTime={updated}>{formatDate(updated)}</time></span></div>
         <section id="profile-examples"><h2>{sections[0].heading}</h2><p>The first version is used in the example CV above; the alternatives show how a {job} profile reads at other stages.</p>
           <aside className="article-example"><span>Used in the example CV</span><p>{example.summary}</p></aside>
           {example.profiles.map(profile => <aside className="article-example" key={profile.label}><span>{profile.label}</span><p>{profile.text}</p></aside>)}
@@ -60,7 +70,8 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
         <section id="bullet-points"><h2>{sections[1].heading}</h2><p>Models for a {job} CV, not lines to copy: swap in your own numbers, settings, and tools, or build one from your own facts with the <Link href="/resume-bullet-point-generator/">bullet point builder</Link>.</p><ul>{example.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></section>
         <section id="skills"><h2>{sections[2].heading}</h2><div className="skill-columns">{example.skillGroups.map(group => <div key={group.label}><h3>{group.label}</h3><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>
         <section id="tips"><h2>{sections[3].heading}</h2>{example.tips.map(tip => <div key={tip.heading}><h3>{tip.heading}</h3><p>{tip.text}</p></div>)}</section>
-        <section id="template"><h2>{sections[4].heading}</h2><p>This example uses the <Link href={`/templates/${template.id}/`}>{template.name} template</Link>. {templateDetails[template.id].layout} Any of the {templates.length} templates can take this content without retyping.</p></section>
+        <section id="template"><h2>{sections[4].heading}</h2>{example.templateSection && <p>{example.templateSection.text}</p>}<p>This example uses the <Link href={`/templates/${template.id}/`}>{template.name} template</Link>. {templateDetails[template.id].layout} Any of the {templates.length} templates can take this content without retyping.</p></section>
+        {example.faqs?.length ? <section id="faq" className="article-faq"><h2>{example.job} CV questions</h2><FaqList faqs={example.faqs} /></section> : null}
         <aside className="callout"><p>Every person, employer, and figure in this {job} example is fictional.</p></aside>
         <div className="article-cta"><span>Start from this example, then make it yours.</span><UseExampleButton cv={exampleCV(example)} className="button dark">Edit the {job} example</UseExampleButton></div>
       </article>

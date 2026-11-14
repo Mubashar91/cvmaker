@@ -1,4 +1,5 @@
 import { emptyCV, type CV, type Entry, type Section, type Template } from "./model";
+import { isVisible, scheduled } from "./scheduled-pages";
 
 // Job-specific CV examples. Every person, employer, school, and figure in these CVs is fictional
 // and exists only to show how a strong CV for the role can read. Phone numbers use Ofcom's
@@ -20,12 +21,18 @@ export interface CVExample {
   skillGroups: { label: string; items: string[] }[];
   tips: { heading: string; text: string }[];
   guides: string[];
+  /** Job-specific questions, shown as a FAQ section with FAQPage markup. Written fresh for each job. */
+  faqs?: { question: string; answer: string }[];
+  /** Optional heading and opening paragraph for the template section, written for this job. */
+  templateSection?: { heading: string; text: string };
 }
 
-export const cvExamples: CVExample[] = [
+/** Every example, including scheduled ones (for preview images and social cards). */
+export const allCVExamples: CVExample[] = [
   {
     slug: "nurse", job: "Nurse", category: "Healthcare", template: "professional",
     seoTitle: "Nurse CV Example — Free Template & Writing Tips",
+    templateSection: { heading: "Use this nurse CV as a resume template", text: "Applying to a US hospital or an international agency? The same content works as a nurse resume template: rename the profile to Summary, put your registration in the headline (an NMC PIN in the UK, a state licence in the US), and keep the clinical experience exactly as it is. The Word download changes to US Letter in two clicks." },
     description: "See a complete nurse CV example with a profile, clinical experience, and skills. Adapt the bullet points, edit it free, and download your PDF.",
     intro: "Nursing CVs are read by people who need to see quickly that you are registered, safe, and suited to the ward or setting. This example puts registration, clinical experience, and patient-focused results where a nurse manager will look first.",
     person: { name: "Priya Shah", headline: "Registered Nurse (Adult)", location: "Leeds, United Kingdom", phone: "+44 7700 900101" },
@@ -149,6 +156,11 @@ export const cvExamples: CVExample[] = [
   {
     slug: "customer-service", job: "Customer service", category: "Customer service", template: "modern",
     seoTitle: "Customer Service CV Example & Resume Template",
+    faqs: [
+      { question: "What skills should a customer service CV highlight?", answer: "Problem-solving, calm communication, and accuracy with systems, each backed by a result such as satisfaction scores, first-contact resolution, or fewer complaints. Name the CRM or ticketing tools you use." },
+      { question: "How do I describe call centre targets on a CV?", answer: "Give the measure and your result against it, for example 60 calls a day with an 88% satisfaction score. Recruiters understand contact-centre metrics, so plain numbers work better than adjectives." },
+      { question: "Does retail or hospitality experience count for customer service jobs?", answer: "Yes. Serving customers, handling complaints, and working at speed are the same core skills. Describe them by the customer outcome rather than the shop-floor task." },
+    ],
     description: "A customer service CV example with achievement-led bullets and key skills. Edit it in the free resume builder for call centre, retail, or support roles.",
     intro: "Customer service managers look for evidence that you stay patient, solve problems, and meet service targets. This example uses specific measures, such as satisfaction scores and resolution rates, to turn everyday tasks into achievements.",
     person: { name: "Chloe Bennett", headline: "Customer Service Advisor", location: "Glasgow, United Kingdom", phone: "+44 7700 900104" },
@@ -267,6 +279,11 @@ export const cvExamples: CVExample[] = [
   {
     slug: "administrator", job: "Administrator", category: "Office & admin", template: "ledger",
     seoTitle: "Administrative Assistant & Administrator CV Example",
+    faqs: [
+      { question: "What should an administrator put on a CV?", answer: "The systems you use and the size of your workload: the software you rely on daily, how many people you support, and volumes such as invoices or bookings each month. Add one or two improvements you made, such as a new tracker or filing system." },
+      { question: "Is a Level 3 Business Administration qualification worth listing?", answer: "Yes. It shows formal training in office processes, and some adverts ask for Level 2 or 3. List it under education with the college and the year you completed it." },
+      { question: "How do I show Excel skills on an admin CV?", answer: "Say what you can do rather than writing \"Microsoft Office\": pivot tables, lookups, conditional formatting, or building trackers. Then prove it with a bullet, such as the renewals tracker you set up." },
+    ],
     description: "An administrative assistant and administrator CV example with an organised profile, office experience, and in-demand skills. Edit it free as a template.",
     intro: "Administrators keep an organisation running, so hiring managers look for organisation, accuracy, and confidence with systems. This example shows the range of tasks you handle and how you made processes faster or more reliable.",
     person: { name: "Hannah Kowalski", headline: "Office Administrator", location: "Nottingham, United Kingdom", phone: "+44 7700 900107" },
@@ -307,6 +324,11 @@ export const cvExamples: CVExample[] = [
   {
     slug: "accountant", job: "Accountant", category: "Finance", template: "regent",
     seoTitle: "Accountant CV Example — Free Template & Tips",
+    faqs: [
+      { question: "Should I list ACCA or ACA exams I have not finished?", answer: "Yes. Write the qualification and your progress, for example \"ACCA: 9 of 13 exams passed, completing 2027\". Employers often support part-qualified accountants and want to know where you are." },
+      { question: "What software should an accountant put on a CV?", answer: "The ledgers and tools you actually use, such as Sage, Xero, SAP, or Oracle, plus Excel functions like pivot tables and XLOOKUP. Specific names help recruiters and applicant tracking systems alike." },
+      { question: "How do I show results on an accountant CV?", answer: "Quantify what changed: a faster month-end close, fewer reconciliation errors, savings found, or audit points cleared. Even routine process work has outcomes you can measure." },
+    ],
     description: "An accountant CV example with a professional profile, finance experience, and technical skills. Show qualifications and results, then download a PDF.",
     intro: "Finance managers want to see your qualification status, the size and type of organisations you have worked for, and your technical depth. This example puts qualifications first and describes month-end, reporting, and improvement work in measurable terms.",
     person: { name: "Imran Qureshi", headline: "Chartered Management Accountant", location: "London, United Kingdom", phone: "+44 7700 900108" },
@@ -347,6 +369,11 @@ export const cvExamples: CVExample[] = [
   {
     slug: "project-manager", job: "Project manager", category: "Business & management", template: "edge",
     seoTitle: "Project Manager CV Example — Free Template",
+    faqs: [
+      { question: "Should I include budgets on a project manager CV?", answer: "Yes, when you can. Budget, team size, and timescale help a reader understand the scale of what you managed. Use rounded figures or ranges if the exact numbers are confidential." },
+      { question: "Do I need PRINCE2 or PMP for a project manager CV?", answer: "Many UK adverts ask for PRINCE2 Foundation or Practitioner, and PMP is common with international employers. If you hold either, put it near the top; if not, show the same discipline through how you ran your projects." },
+      { question: "How do I show agile experience on my CV?", answer: "Name the framework and your part in it, such as running sprint planning or acting as Scrum Master, and give a delivery result. A recognised agile certificate supports the claim." },
+    ],
     description: "A project manager CV example with delivery results, methods, and certifications. See how to describe budgets, teams, and outcomes, then edit it for free.",
     intro: "Hiring managers want to know what you delivered, how big it was, and how you kept people and risks under control. This example describes each project by scope, budget, and outcome, and lists methods and certifications without filling the page with jargon.",
     person: { name: "Rachel Lee", headline: "Project Manager", location: "Edinburgh, United Kingdom", phone: "+44 7700 900109" },
@@ -468,6 +495,11 @@ export const cvExamples: CVExample[] = [
   {
     slug: "receptionist", job: "Receptionist", category: "Office & admin", template: "outline",
     seoTitle: "Receptionist CV Example — Free Template & Tips",
+    faqs: [
+      { question: "What should a receptionist CV include?", answer: "The setting you work in, the volume you handle in calls, visitors, or bookings, the systems you use, and how you keep a front desk organised. Mention confidentiality if you deal with patient, client, or legal information." },
+      { question: "How do I make a receptionist CV stand out?", answer: "Show a moment where you improved the visitor experience or saved colleagues time, such as a new sign-in process or fewer missed appointments. That turns a routine role into evidence." },
+      { question: "Is a receptionist CV different for a GP surgery or dental practice?", answer: "It needs more about appointment systems, patient confidentiality, and calm handling of worried callers. Name the patient record software you have used, because practices often train new staff on the same system." },
+    ],
     description: "A receptionist CV example with a warm profile, front-desk experience, and organisational skills. Adapt it for office, salon, hotel, or medical reception.",
     intro: "A receptionist is often the first person visitors meet, so employers look for a professional manner, good organisation, and confidence with phones and booking systems. This example shows those skills through busy, real-world front-desk tasks.",
     person: { name: "Aisha Rahman", headline: "Receptionist", location: "Leicester, United Kingdom", phone: "+44 7700 900112" },
@@ -673,7 +705,195 @@ export const cvExamples: CVExample[] = [
     ],
     guides: ["describe-your-experience", "ats-friendly-cv"],
   },
+  {
+    slug: "teaching-assistant", job: "Teaching assistant", category: "Education", template: "swiss",
+    seoTitle: scheduled("/cv-examples/teaching-assistant/").title,
+    description: scheduled("/cv-examples/teaching-assistant/").description,
+    intro: "Schools hiring teaching assistants want to know how you support learning, how you keep children safe, and whether you can follow a teacher's plan while adapting it for each child. This example puts SEND experience, safeguarding training, and the progress pupils made where a head teacher or SENCo will look first.",
+    person: { name: "Megan Price", headline: "Teaching Assistant (SEND)", location: "Bristol, United Kingdom", phone: "+44 7700 900141" },
+    summary: "Teaching assistant with four years in a two-form-entry primary school, supporting Key Stage 2 pupils with special educational needs, including autism and dyslexia. Runs daily phonics and reading interventions in small groups, adapts resources to each child's EHCP targets, and keeps clear notes for the class teacher and SENCo. Holds a Level 3 Certificate for Teaching Assistants and current safeguarding training.",
+    experience: [
+      entry("Teaching Assistant (SEND)", "Hollybrook Primary School, Bristol", "2022 – Present", ["Support a Year 5 class of 30, working one to one with two pupils who have education, health and care plans.", "Deliver daily phonics and reading interventions to groups of four to six pupils.", "Adapt worksheets and visual timetables so pupils with autism can follow lessons independently.", "Record progress against EHCP targets and contribute to termly reviews with parents and the SENCo."]),
+      entry("Midday Supervisor", "Hollybrook Primary School, Bristol", "2021 – 2022", ["Supervised lunch and play for Key Stage 1, encouraging cooperative games and settling disagreements calmly."]),
+    ],
+    education: [entry("Level 3 Certificate for Teaching Assistants", "Avonside Community College", "2021 – 2022"), entry("GCSEs including English Language (6) and Maths (5)", "Harbourside Academy, Bristol", "2014 – 2019")],
+    certifications: [entry("Safeguarding and Child Protection, Level 2", "Local authority training", "2025"), entry("Paediatric First Aid", "Approved training provider", "2024")],
+    skills: "Learning support: Phonics and reading interventions, SEND support, Small-group teaching, Behaviour support\nPractical: Visual timetables, Adapted resources, Progress notes, Makaton (basic)\nSafeguarding: Level 2 safeguarding, Paediatric first aid",
+    profiles: [
+      { label: "First teaching assistant role", text: "Caring and patient candidate looking for a first teaching assistant role after volunteering two mornings a week in a Year 1 classroom. Experienced in listening to readers, preparing resources, and supporting children at play. Studying for a Level 2 Certificate in Supporting Teaching and Learning." },
+      { label: "Higher level teaching assistant", text: "HLTA-status teaching assistant with eight years in primary schools, covering planned lessons for whole classes and leading the school's reading intervention programme. Trains new support staff and works closely with the SENCo on provision maps." },
+      { label: "Secondary school", text: "Teaching assistant in an 11 to 16 academy, supporting maths and science lessons for Key Stage 3 and 4 students with additional needs. Experienced as a reader and scribe for exam access arrangements, and at keeping students on task in practical lessons." },
+    ],
+    bullets: [
+      "Raised the reading age of six Year 4 pupils by an average of 14 months over two terms through daily guided reading.",
+      "Helped a pupil with autism move from part-time to full-time attendance by introducing a visual timetable and a calm space.",
+      "Delivered phonics sessions to small groups and tracked progress on the school's assessment sheets.",
+      "Adapted maths resources with concrete objects so pupils working below year-group expectations could join whole-class lessons.",
+      "Acted as a reader and scribe for Key Stage 2 SATs access arrangements.",
+      "Ran a lunchtime social skills club for eight pupils, building turn-taking and conversation.",
+      "Wrote clear daily notes in home-school diaries for pupils with communication needs.",
+      "Followed safeguarding procedures and reported every concern to the designated safeguarding lead the same day.",
+    ],
+    skillGroups: [
+      { label: "Practical skills", items: ["Phonics and reading interventions", "Supporting pupils with SEND", "Adapting resources", "Behaviour support strategies", "Recording progress against targets", "Exam access arrangements"] },
+      { label: "Personal strengths", items: ["Patience and calm", "Clear communication with children and parents", "Working closely with teachers", "Reliability", "Discretion with sensitive information"] },
+    ],
+    tips: [
+      { heading: "Name the needs you have supported", text: "SEND covers a wide range. Saying you have supported pupils with autism, dyslexia, or speech and language needs tells a SENCo far more than \"experience with SEND\"." },
+      { heading: "Put safeguarding where it's seen", text: "Schools must recruit safely, so list your safeguarding training and the year in its own section, and say whether you hold an enhanced DBS check or are willing to get one." },
+      { heading: "Show progress, not just support", text: "A bullet about reading ages, attendance, or confidence shows the difference you made. Use the measures your school already tracks." },
+    ],
+    guides: ["teacher-cv-personal-statement", "write-a-clear-profile"],
+    faqs: [
+      { question: "Do I need a qualification to be a teaching assistant?", answer: "Not always. Many schools take on teaching assistants without one, especially with volunteering or childcare experience, but a Level 2 or 3 teaching assistant certificate strengthens an application and is often listed as desirable." },
+      { question: "Should a teaching assistant CV mention the DBS check?", answer: "Yes. Say whether you hold a current enhanced DBS certificate or are on the Update Service. Schools run their own checks, but it shows you understand safer recruitment." },
+      { question: "How long should a teaching assistant CV be?", answer: "Two pages at most, and one page is fine for a first role. Many schools also use an application form, so keep the CV consistent with what you write there." },
+    ],
+  },
+  {
+    slug: "chef", job: "Chef", category: "Retail & hospitality", template: "summit",
+    seoTitle: scheduled("/cv-examples/chef/").title,
+    description: scheduled("/cv-examples/chef/").description,
+    intro: "Head chefs and restaurant owners reading a chef CV want to know what kind of kitchen you've worked in, how many covers you can handle, and whether you keep food safe and costs under control. This example answers all of that in the first half of the page.",
+    person: { name: "Daniel Okoye", headline: "Sous Chef", location: "Manchester, United Kingdom", phone: "+44 7700 900152" },
+    summary: "Sous chef with seven years in busy brasseries and hotel kitchens, currently running the pass for up to 220 covers on a Saturday. Develops seasonal specials with the head chef, manages a brigade of six, and keeps food gross profit at 70% through careful ordering and portion control. Holds Level 3 Food Safety in Catering, and the kitchen scored a 5 hygiene rating at its last two inspections.",
+    experience: [
+      entry("Sous Chef", "The Linden Brasserie, Manchester", "2022 – Present", ["Run the pass for up to 220 covers on Saturdays and lead the kitchen on the head chef's days off.", "Manage a brigade of six, including two apprentices, and write the weekly rota.", "Develop four seasonal specials a month and cost every dish before it reaches the menu.", "Keep food gross profit at 70% by tightening ordering and introducing portion guides."]),
+      entry("Chef de Partie", "Grand Mercer Hotel, Leeds", "2019 – 2022", ["Ran the sauce and grill sections for the hotel restaurant and banquets of up to 300 guests.", "Trained commis chefs in knife skills, allergen procedures, and section prep."]),
+      entry("Commis Chef", "Bramble & Rye, Leeds", "2017 – 2019", ["Prepared vegetables, sauces, and desserts and kept the larder section clean and organised."]),
+    ],
+    education: [entry("Level 3 Diploma in Professional Cookery", "Aire Valley College", "2015 – 2017")],
+    certifications: [entry("Level 3 Award in Food Safety in Catering", "Accredited training provider", "2024"), entry("Allergen awareness training", "Food Standards Agency online course", "2025")],
+    skills: "Kitchen: Running the pass, Menu development, Dish costing, Ordering and stock control\nFood safety: HACCP, Allergen management, Temperature logs, Hygiene inspections\nLeadership: Rotas, Training apprentices, Brigade management",
+    profiles: [
+      { label: "Commis chef", text: "Commis chef with a Level 2 Diploma in Professional Cookery and a year in a busy pub kitchen, preparing starters and desserts for up to 150 covers. Quick, tidy, and keen to learn every section under an experienced head chef." },
+      { label: "Head chef", text: "Head chef with 12 years in independent restaurants, responsible for menus, a team of 10, and a £400,000 annual food budget. Built a seasonal, locally sourced menu that won a regional food award while keeping gross profit above 72%." },
+      { label: "Moving into contract catering", text: "Chef de partie moving from restaurants into contract catering, with large-batch cooking experience from banqueting and a strong record on allergens and food safety. Looking for regular daytime hours in a school or workplace kitchen." },
+    ],
+    bullets: [
+      "Ran the pass for 220 covers on a Saturday with average ticket times under 15 minutes.",
+      "Cut food waste by around a fifth by introducing daily prep sheets based on bookings.",
+      "Costed every new dish and kept food gross profit at 70% across two menu changes.",
+      "Created a vegan tasting menu that became a regular Friday feature.",
+      "Led the kitchen through two environmental health inspections, both rated 5.",
+      "Trained two apprentices who went on to pass their Level 2 cookery qualification.",
+      "Set up allergen matrices for every menu and briefed front of house before each service.",
+      "Switched to a new produce supplier, saving about £300 a month without lowering quality.",
+    ],
+    skillGroups: [
+      { label: "Kitchen skills", items: ["Running the pass", "Sauce and grill sections", "Menu planning and costing", "Butchery and fish preparation", "Pastry basics", "Large-batch and banqueting cooking"] },
+      { label: "Food safety and management", items: ["HACCP and temperature control", "Allergen management", "Ordering and stock rotation", "Rota planning", "Training junior chefs"] },
+    ],
+    tips: [
+      { heading: "Describe the kitchen as well as the role", text: "A sous chef in a 40-cover bistro and one in a 300-cover hotel do very different jobs. Give covers, cuisine, and style so the reader can picture where you've worked." },
+      { heading: "Show you understand the money", text: "Gross profit, waste, and supplier costs matter to every owner. One bullet on costing or waste shows you think beyond the plate." },
+      { heading: "Make food safety visible", text: "List your food hygiene level and allergen training, and mention inspection results you contributed to. Head chefs often check these first." },
+    ],
+    guides: ["describe-your-experience", "resume-action-verbs-and-bullet-points"],
+    faqs: [
+      { question: "What should a chef put on a CV?", answer: "The kitchens you've worked in and their size, your section or level, food safety and allergen training, and results such as gross profit, waste reduction, or inspection ratings. A line on your cuisine strengths helps a head chef see the fit." },
+      { question: "Should a chef CV include photos of dishes?", answer: "Not on the CV itself. Add a link to an online portfolio in your contact line if it shows your own professional work, and bring photos to a trial shift." },
+      { question: "Do I need a food hygiene certificate to apply for chef jobs?", answer: "Most kitchens expect at least Level 2 Food Safety and Hygiene for Catering, and senior chefs often hold Level 3. Put the level and year in a certifications section." },
+    ],
+  },
+  {
+    slug: "electrician", job: "Electrician", category: "Logistics & trades", template: "tide",
+    seoTitle: scheduled("/cv-examples/electrician/").title,
+    description: scheduled("/cv-examples/electrician/").description,
+    intro: "Electrical contractors and facilities managers read a CV for proof that you're qualified, safe, and productive on site. This example puts NVQ Level 3, the 18th Edition, the AM2, and the ECS card in plain view, then backs them up with the jobs and systems you've worked on.",
+    person: { name: "Liam Hughes", headline: "Approved Electrician (ECS Gold Card)", location: "Sheffield, United Kingdom", phone: "+44 7700 900163" },
+    summary: "Qualified electrician with eight years in domestic and commercial installation, six of them since completing NVQ Level 3 and the AM2. Installs, tests, and certifies circuits to BS 7671, from full house rewires to distribution boards in offices and shops. Holds an ECS Gold Card, the 18th Edition, and 2391 Inspection and Testing, and runs small jobs from survey to sign-off.",
+    experience: [
+      entry("Approved Electrician", "Brightline Electrical Contractors, Sheffield", "2021 – Present", ["Lead installations on commercial fit-outs of up to 1,500 square metres, working with a mate and an apprentice.", "Test, inspect, and certify new installations, issuing Electrical Installation Certificates.", "Carry out around 15 EICRs a month on rented homes and small businesses.", "Install EV chargers and consumer unit upgrades to current regulations."]),
+      entry("Electrician", "Ridgeway Domestic Electrical, Rotherham", "2018 – 2021", ["Completed full and partial rewires, kitchen and bathroom circuits, and fault finding for domestic customers."]),
+      entry("Apprentice Electrician", "Ridgeway Domestic Electrical, Rotherham", "2014 – 2018", ["Completed a four-year apprenticeship while working on new-build housing sites."]),
+    ],
+    education: [entry("NVQ Level 3 Diploma in Installing Electrotechnical Systems and Equipment", "Completed through apprenticeship", "2018"), entry("AM2 assessment", "National Electrotechnical Training", "2018")],
+    certifications: [entry("18th Edition Wiring Regulations (BS 7671)", "City & Guilds 2382", "2023"), entry("Inspection and Testing (2391-52)", "City & Guilds", "2022"), entry("ECS Gold Card, Approved Electrician", "JIB", "Valid to 2027")],
+    skills: "Installation: Domestic and commercial wiring, Consumer units and distribution boards, Containment and trunking, EV charger installation\nTesting: Initial verification, Periodic inspection (EICR), Fault finding, Certification software\nSafety: Safe isolation, Risk assessments and method statements, Working at height",
+    profiles: [
+      { label: "Electrical apprentice", text: "Second-year electrical apprentice working towards NVQ Level 3, with experience on new-build housing sites first-fixing cables and fitting accessories under supervision. Reliable, safety-conscious, and keen to complete the AM2 and qualify." },
+      { label: "Maintenance electrician", text: "Maintenance electrician with ten years in food manufacturing, keeping production lines running through planned maintenance and fast fault finding on three-phase motors, PLC-controlled equipment, and lighting. Holds the 18th Edition and an ECS card." },
+      { label: "Self-employed, moving in-house", text: "Self-employed domestic electrician for six years, registered with a competent person scheme and handling everything from quotes to certification. Looking for an employed role with a contractor that offers commercial work and larger projects." },
+    ],
+    bullets: [
+      "Led the electrical installation for a 1,500 square metre office fit-out, finishing a week ahead of programme.",
+      "Carried out around 15 EICRs a month, reporting C1 and C2 defects clearly for landlords.",
+      "Installed and commissioned more than 60 home EV chargers to the current IET Code of Practice.",
+      "Traced an intermittent fault in a shop's lighting circuit that two previous contractors had missed.",
+      "Mentored two apprentices through their NVQ portfolios and site assessments.",
+      "Completed every job with full certification and no workmanship call-backs in the last year.",
+      "Wrote risk assessments and method statements for work on occupied commercial sites.",
+      "Kept van stock and test equipment calibration records up to date for company audits.",
+    ],
+    skillGroups: [
+      { label: "Technical skills", items: ["Domestic and commercial installation", "Consumer unit and board changes", "Testing and certification", "Fault finding", "EV charger installation", "Containment and cable management"] },
+      { label: "Site and safety", items: ["Safe isolation procedures", "Writing RAMS", "Working at height", "Reading drawings and specifications", "Mentoring apprentices"] },
+    ],
+    tips: [
+      { heading: "Put your cards and tickets near the top", text: "Contractors filter on qualifications first. List NVQ Level 3, the AM2, the 18th Edition, 2391, and your ECS card with dates, so nobody has to search for them." },
+      { heading: "Say what kind of work you do", text: "Domestic, commercial, industrial, and maintenance roles need different experience. Name the sites and systems you know, such as three-phase supplies, fire alarms, or EV chargers." },
+      { heading: "Show you finish jobs properly", text: "Certification, tidy work, and no call-backs matter to every employer. A bullet about quality sets you apart from candidates who only list tasks." },
+    ],
+    guides: ["describe-your-experience", "keep-it-focused"],
+    faqs: [
+      { question: "What qualifications should an electrician list on a CV?", answer: "Your NVQ Level 3 or equivalent, the AM2, the current 18th Edition certificate, any inspection and testing qualification such as 2391, and your ECS card with its expiry date." },
+      { question: "Should I include my driving licence on an electrician CV?", answer: "Yes. Most electrical jobs involve driving between sites, so a full UK licence is often essential. Mention it in your skills or a short additional information line." },
+      { question: "How do I write an electrician CV as an apprentice?", answer: "Lead with your apprenticeship, the college and qualification you're working towards, and the sites you've worked on. List the tasks you're trusted with, such as first fix or testing under supervision." },
+    ],
+  },
+  {
+    slug: "apprentice", job: "Apprentice", category: "Students & graduates", template: "compact",
+    seoTitle: scheduled("/cv-examples/apprentice/").title,
+    description: scheduled("/cv-examples/apprentice/").description,
+    intro: "Employers reading an apprentice CV know you're at the start of your career. They're looking for signs that you're reliable, practical, and genuinely interested in the work. This example shows how a school leaver fills a page with GCSEs, a work experience placement, a project, and a weekend job.",
+    person: { name: "Kian Patel", headline: "School leaver seeking an engineering apprenticeship", location: "Coventry, United Kingdom", phone: "+44 7700 900174" },
+    summary: "Motivated school leaver with nine GCSEs, including Maths (7), Engineering (6), and Physics (6), looking for a Level 3 engineering apprenticeship. Spent a week's work experience at a precision engineering firm checking machined parts, and built a working remote-controlled buggy for GCSE Engineering. Reliable, careful with detail, and keen to learn on the job.",
+    sectionOrder: ["summary", "education", "experience", "projects", "skills", "additional", "languages", "certifications"],
+    experience: [
+      entry("Stock Assistant (part-time)", "Bridgeway DIY, Coventry", "Sep 2026 – Present", ["Unload deliveries and restock the tools and fixings aisles on weekend shifts.", "Help customers find the right fixings and explain how products work."]),
+      entry("Work Experience Placement", "Midlands Precision Components, Coventry", "Jul 2025 (one week)", ["Measured and checked machined parts with callipers and micrometers under supervision.", "Shadowed CNC machinists to learn how drawings, tolerances, and quality checks fit together.", "Completed the site health and safety induction, including PPE and machine guarding."]),
+    ],
+    education: [entry("GCSEs: Maths 7, Engineering 6, Physics 6, Chemistry 6, English Language 5, and four more at grades 4 to 6", "Whitley Park Academy, Coventry", "2021 – 2026")],
+    projects: [entry("Remote-controlled buggy, GCSE Engineering project", "Whitley Park Academy", "2025 – 2026", ["Designed the chassis in CAD, cut and assembled the parts, and wired the motor controller.", "Tested and adjusted the steering until the buggy finished the course without stalling."])],
+    skills: "Practical: Hand tools, Measuring with callipers and micrometers, Basic CAD (Fusion 360), Soldering\nWorkplace: Following safety procedures, Teamwork, Timekeeping\nDigital: Microsoft Word and Excel, Google Workspace",
+    additional: { title: "Achievements", text: "F1 in Schools team member; our car reached the regional final in 2025" },
+    profiles: [
+      { label: "Construction apprenticeship", text: "Hard-working school leaver with GCSEs in Maths and English at grade 5, looking for a carpentry apprenticeship. Built a garden shed with a relative over the summer and completed a construction taster course at college, so I know what site work involves and enjoy it." },
+      { label: "Business administration apprenticeship", text: "Organised school leaver with eight GCSEs, including English 6 and Maths 6, looking for a Level 3 business administration apprenticeship. Treasurer of the school charity committee, recording £1,200 raised in a year, and confident with Excel and email." },
+      { label: "Digital apprenticeship", text: "Curious, practical school leaver applying for a Level 3 IT support or software apprenticeship. Built two simple websites and a Python game in my spare time, and help family and neighbours set up phones, laptops, and Wi-Fi." },
+    ],
+    bullets: [
+      "Measured and recorded the dimensions of 40 machined parts during a week of engineering work experience.",
+      "Designed and built a remote-controlled buggy for GCSE Engineering, from CAD drawing to final test.",
+      "Kept the fixings aisle stocked and tidy across busy weekend shifts at a DIY store.",
+      "Helped customers choose the right screws, wall plugs, and tools for their projects.",
+      "Completed a full health and safety induction, including PPE and machine guarding rules.",
+      "Worked in a team of four to design and race a model car in the F1 in Schools competition.",
+      "Repaired donated bikes with friends and sold them at a school charity stall.",
+      "Hasn't missed or been late for a shift in the first three months of a weekend job.",
+    ],
+    skillGroups: [
+      { label: "Practical skills", items: ["Using hand and power tools safely", "Measuring and checking parts", "Basic CAD", "Following technical drawings", "Soldering and simple wiring"] },
+      { label: "Personal strengths", items: ["Reliability and good timekeeping", "Willingness to learn", "Attention to detail", "Teamwork", "Following instructions"] },
+    ],
+    tips: [
+      { heading: "Lead with the apprenticeship you want", text: "Name the type and level of apprenticeship in your profile, such as a Level 3 engineering apprenticeship. Employers often recruit for several schemes at once." },
+      { heading: "Use school projects as evidence", text: "A practical project shows the skills an employer will build on. Describe what you made, the tools you used, and a problem you solved along the way." },
+      { heading: "Show you're dependable", text: "Reliability matters as much as grades to most apprenticeship employers. A weekend job, a sports commitment, or strong attendance is worth a line." },
+    ],
+    guides: ["your-first-cv", "skills-for-a-first-job-resume"],
+    faqs: [
+      { question: "What should I put on a CV for an apprenticeship?", answer: "Your GCSE or other results, any work experience placement or part-time job, school or personal projects, and the practical skills you've used. Name the apprenticeship and level you want in your profile." },
+      { question: "Do I need work experience to get an apprenticeship?", answer: "No. Apprenticeships are designed for people starting out, and employers expect to train you. A school placement, a weekend job, or a practical hobby still helps show you're ready." },
+      { question: "Should I include predicted or actual GCSE grades?", answer: "Give your actual grades once you have them, especially English and Maths, which many apprenticeships ask for at grade 4 or above. If you're still at school, give predicted grades and label them clearly." },
+    ],
+  },
 ];
+
+export const examplePath = (slug: string) => `/cv-examples/${slug}/`;
+/** The examples this build publishes: everything live, plus scheduled ones in a preview build (see scheduled-pages.ts). */
+export const cvExamples: CVExample[] = allCVExamples.filter(example => isVisible(examplePath(example.slug)));
 
 export function cvExample(slug: string) { return cvExamples.find(example => example.slug === slug); }
 

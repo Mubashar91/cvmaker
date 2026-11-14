@@ -24,6 +24,15 @@ function DocumentSection({ cv, section }: { cv: CV; section: Section }) {
   </div>)}</section>;
 }
 
+/** A complete fictional CV as readable page text. Place it under an h2: the name is an h3, sections h4. */
+export function SampleDocument({ cv, label }: { cv: CV; label: string }) {
+  const contact = [cv.personal.location, cv.personal.phone, cv.personal.email, cv.personal.website].filter(Boolean);
+  return <article className="sample-document" aria-label={label}>
+    <header><h3>{cv.personal.name}</h3><p className="sample-headline">{cv.personal.headline}</p><p className="sample-contact">{contact.join(" · ")}</p></header>
+    {cv.sectionOrder.filter(section => !cv.hiddenSections.includes(section)).map(section => <DocumentSection key={section} cv={cv} section={section} />)}
+  </article>;
+}
+
 /** A complete fictional sample, readable on the page and openable in the editor. */
 export function CollectionExampleSection({ example }: { example: CollectionExample }) {
   const cv = collectionExampleCV(example);
@@ -31,10 +40,7 @@ export function CollectionExampleSection({ example }: { example: CollectionExamp
     <div>
       <h2 id={`${example.id}-heading`}>{example.heading}</h2>
       <p>{example.intro}</p>
-      <article className="sample-document" aria-label={`Fictional resume for ${example.person.name}`}>
-        <header><h3>{cv.personal.name}</h3><p className="sample-headline">{cv.personal.headline}</p><p className="sample-contact">{[cv.personal.location, cv.personal.phone, cv.personal.email].join(" · ")}</p></header>
-        {cv.sectionOrder.map(section => <DocumentSection key={section} cv={cv} section={section} />)}
-      </article>
+      <SampleDocument cv={cv} label={`Fictional resume for ${example.person.name}`} />
       <p className="sample-caption">Every person, school, and organization in this example is fictional.</p>
     </div>
     <aside className="collection-checklist">

@@ -13,6 +13,10 @@ export interface TemplateContent {
   /** When this template is the right choice, and a named alternative when it is not. */
   choose: string;
   faqs: FAQ[];
+  /** Optional title (without " | Folio") and heading when the page targets a specific search, e.g. ATS. */
+  seoTitle?: string; h1?: string;
+  /** Optional extra section for a template that answers a distinct question (written for that page only). */
+  extra?: { id: string; heading: string; paragraphs: string[]; bullets?: string[] };
 }
 
 export const templateContent: Record<Template, TemplateContent> = {
@@ -238,6 +242,13 @@ export const templateContent: Record<Template, TemplateContent> = {
     ],
   },
   student: {
+    extra: {
+      id: "first-cv", heading: "Writing your first CV as a student?",
+      paragraphs: [
+        "This page is about the Student layout itself. For the whole process, from what to put first to how to describe a society role or a weekend job, use the [free student CV maker](/cv-maker-for-students/): it opens this template with education already at the top and includes a complete student CV example to edit.",
+        "No jobs to list yet? The [CV with no experience](/cv-with-no-experience/) page shows a full example built only from school, volunteering, and projects.",
+      ],
+    },
     writing: [
       { heading: "Put education where it belongs", text: "Student is built for a CV where education and projects carry more weight than jobs. Open the editor from the student page and the section order starts with education; otherwise move it up under Templates & layout. Under each degree or course, use the description for relevant modules, grades, or a dissertation title — the academic bands make these details easy to find." },
       { heading: "Treat projects and part-time work as experience", text: "A group project, a dissertation, a volunteering role, or a weekend job all belong in this CV. Give each its own entry with a title, the organisation or course, dates, and two or three bullets that say what you did and what came of it. Numbers help even here: people helped, pages written, events run." },
@@ -262,6 +273,14 @@ export const templateContent: Record<Template, TemplateContent> = {
       { question: "Why do the institutions appear in bold instead of my role?", answer: "Academic CVs conventionally lead with the institution. If you would rather lead with the role or job title, Regent and Professional keep a formal serif style with the title first." },
       { question: "Does Academic support a photo or colour?", answer: "It has no photo placement. The accent colour recolours the headings and rules; the default dark green keeps it traditional, and charcoal makes it effectively black and white." },
     ],
+    extra: {
+      id: "harvard-style", heading: "Academic CV vs Harvard-style CV",
+      paragraphs: [
+        "People who search for a Harvard CV template usually mean the plain, one-column résumé format popularised by Harvard's career services guidance: education first, a serif typeface, bold institution names, and dates on the right. It is a convention rather than a design, and Academic is the closest of these templates to it.",
+        "The real difference is length and purpose. A Harvard-style résumé is normally one page for a job or internship, so research gets a line or two at most. An academic CV has no page limit and lists publications, conference papers, teaching, grants, and referees in full, because a hiring committee wants the complete record.",
+        "For a lectureship, a postdoc, or a PhD place, keep the full academic CV in this template. For a graduate scheme, a consultancy, or a job outside universities, cut it to one page in the [Harvard-style CV template](/harvard-cv-template/), which walks through a complete one-page example.",
+      ],
+    },
   },
   monogram: {
     writing: [
@@ -368,6 +387,20 @@ export const templateContent: Record<Template, TemplateContent> = {
     ],
   },
   clarity: {
+    seoTitle: "Clarity: ATS-Friendly CV Template — Free, One Column", h1: "Free Clarity ATS-friendly CV template",
+    extra: {
+      id: "why-ats", heading: "Why Clarity works as an ATS-friendly CV template",
+      paragraphs: [
+        "An applicant tracking system reads your CV before a recruiter does. It pulls the text out of the file, sorts it into fields such as job title, employer, dates, and skills, and lets the recruiter search and filter the results. Text inside a graphic, two columns that read across each other, or headings the system doesn't recognise can all leave gaps in your record.",
+        "Clarity avoids each of those by design. Every word is real, selectable text in a single column, so a parser reads it top to bottom in the same order you do. Sections use the names most systems look for, dates sit in the same place on every entry, and there are no tables, text boxes, icons, or photo to skip over.",
+        "That makes Clarity a sound ATS resume template and a safe ATS CV format, but no layout can promise a result: each employer configures its system differently, and what gets you shortlisted is still the match between your experience and the advert. Check that match with the [resume keyword checker](/resume-keyword-checker/) or the [AI CV job match](/ai-cv-job-match/), and compare Clarity with the other plain layouts in the [ATS-friendly templates collection](/templates/category/ats-friendly/).",
+      ],
+      bullets: [
+        "Copy the text out of your downloaded PDF and paste it into a plain text editor. If it reads in the right order there, a parser will read it in that order too.",
+        "Name the file plainly, for example Firstname-Lastname-CV.pdf, so it stays recognisable in a recruiter's downloads.",
+        "Use the advert's own job title in your profile when it accurately describes you; many recruiters search by title first.",
+      ],
+    },
     writing: [
       { heading: "Use the standard headings as they are", text: "Clarity names sections the way application systems expect — Professional summary, Work experience, Education, Skills — in one column with no panels, icons, or photo. The additional section can still be renamed; keep its heading conventional too, such as “Volunteering” or “Awards”, so a parser can file it." },
       { heading: "Write for a machine and a person", text: "Put the job title, employer, and dates in their own fields rather than combining them in the title, so each lands in the right place when a portal extracts them. Then write bullets for the person who reads the result: a strong verb, the task, and a measurable outcome, with the advert’s own terms where they are true of you." },

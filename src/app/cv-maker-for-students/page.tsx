@@ -45,9 +45,9 @@ export default function StudentCVMakerPage() {
       <div className="template-detail-copy">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: studentPage.label }]} />
         <p className="template-detail-kind">Students · School leavers · Graduates</p>
-        <h1>Free CV maker for students and graduates</h1>
+        <h1>Free student CV template and CV maker</h1>
         <p className="template-detail-description">Make your first CV in minutes, even with no work experience.</p>
-        <p>A free CV maker and student resume builder with an education-first layout. Add your projects, part-time jobs, and activities, and download a clean PDF. Built for students, school leavers, and fresh graduates applying for internships, apprenticeships, and first jobs in the UK, US, Canada, or Australia.</p>
+        <p>Start from a student CV template with education first, or open the full student CV example and replace each detail with your own. Add your projects, part-time jobs, and activities, and download a clean PDF. Built for students, school leavers, and fresh graduates applying for internships, apprenticeships, and first jobs in the UK, US, Canada, or Australia.</p>
         <ul className="check-list"><li><Check size={18} />Education placed first, then projects and experience</li><li><Check size={18} />Writing guidance for every section</li><li><Check size={18} />Free PDF download, no sign-up or watermark</li></ul>
         <NewCVButton template="student" sectionOrder={STUDENT_ORDER} className="button accent large">Start my student CV</NewCVButton>
         <span className="template-detail-privacy"><LockKeyhole size={14} />Your details stay on your device.</span>
@@ -55,8 +55,8 @@ export default function StudentCVMakerPage() {
       <figure className="template-detail-example"><img src={examplePreview("student")} srcSet={previewSrcSet(examplePreview("student"))} sizes={DETAIL_PREVIEW_SIZES} alt="Student CV example with education first, a part-time sales job, a society treasurer role, a university project, skills, and languages" width={953} height={1348} fetchPriority="high" /><figcaption>Fictional student CV · Student template · A4 PDF</figcaption></figure>
     </div></section>
 
-    <section className="section student-structure"><div className="container advice-grid"><h2>The best CV format for students with no experience.</h2><div>
-      <p>Use a reverse-chronological CV with your education near the top. Employers reading a student CV look for evidence of how you work, and your course, projects, and activities are where that evidence lives. Once you have a relevant job or placement, it can move above education.</p>
+    <section className="section student-structure"><div className="container advice-grid"><h2>A CV template for students with no experience.</h2><div>
+      <p>The best format is a reverse-chronological CV with your education near the top. Employers reading a student CV look for evidence of how you work, and your course, projects, and activities are where that evidence lives. Once you have a relevant job or placement, it can move above education.</p>
       <ol className="student-order">{["Name and contact details", "A short profile or objective", "Education", "Projects", "Work experience, including part-time and volunteering", "Skills and languages", "Certificates, awards, or interests"].map((item, index) => <li key={item}><span className="step-number">{index + 1}</span>{item}</li>)}</ol>
       <p>Keep it to one page and use a simple layout with standard headings. See how it comes together in the <Link href={`/cv-examples/${example.slug}/`}>student CV example</Link>. Not currently studying? Use the <Link href="/cv-with-no-experience/">first-job CV builder</Link> to start with projects, training, and other responsibilities.</p>
     </div></div></section>
@@ -65,7 +65,7 @@ export default function StudentCVMakerPage() {
       <ul className="evidence-grid">{evidence.map(item => <li key={item.title}><item.icon size={22} aria-hidden="true" /><h3>{item.title}</h3><p>{item.text}</p></li>)}</ul>
     </div></section>
 
-    <section className="section templates-catalog" aria-labelledby="student-templates"><div className="container"><div className="section-head"><div><h2 id="student-templates">Simple student CV templates.</h2><p>{studentTemplates.templates.length} clear layouts that suit a first CV. Switch at any time without retyping.</p></div><Link href={collectionPath("student")} className="text-link">About these templates <ArrowUpRight size={16} /></Link></div><TemplateGallery templateIds={studentTemplates.templates} /></div></section>
+    <section className="section templates-catalog" aria-labelledby="student-templates"><div className="container"><div className="section-head"><div><h2 id="student-templates">Student and graduate CV templates.</h2><p>{studentTemplates.templates.length} clear layouts that suit a first CV, and a graduate CV template for scheme and internship applications once your degree leads the page. Switch at any time without retyping.</p></div><Link href={collectionPath("student")} className="text-link">About these templates <ArrowUpRight size={16} /></Link></div><TemplateGallery templateIds={studentTemplates.templates} /></div></section>
 
     <section className="section student-countries"><div className="container"><h2>Student CVs in different countries.</h2><div className="country-grid">
       <article><h3>United Kingdom</h3><p>Call it a CV. List A levels or equivalent with grades, summarise GCSEs on one line, and give your degree classification or predicted grade. <Link href="/tips/uk-cv-format/">UK CV format</Link></p></article>

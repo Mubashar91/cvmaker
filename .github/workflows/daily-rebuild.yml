@@ -1,0 +1,31 @@
+# Rebuilds production every day at 00:30 Asia/Karachi (19:30 UTC the day before), so pages in
+# src/lib/scheduled-pages.ts go live on their date. The site is a static export, so a page, its
+# sitemap entry, and links to it only appear in a build made on or after its go-live date.
+#
+# Setup (once): in Vercel, Project → Settings → Git → Deploy Hooks, create a hook for the
+# production branch (main). In GitHub, Settings → Secrets and variables → Actions, add it as
+# VERCEL_DEPLOY_HOOK_URL. Run this workflow by hand ("Run workflow") to test it.
+name: Daily rebuild for scheduled pages
+
+on:
+  schedule:
+    - cron: "30 19 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger a Vercel production build
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::Add the VERCEL_DEPLOY_HOOK_URL secret (see the comment at the top of this file)."
+            exit 1
+          fi
+          curl --fail --silent --show-error --max-time 30 -X POST "$HOOK"
+          echo "Vercel production build requested at $(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M %Z')."

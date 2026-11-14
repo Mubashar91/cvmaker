@@ -56,25 +56,32 @@
 .sample-document { margin-top: 28px; padding: 40px 44px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; box-shadow: var(--shadow-sheet); font-size: 15px; line-height: 1.5; }
 .sample-document header { padding-bottom: 16px; border-bottom: 2px solid var(--green); }
 .sample-document h3 { font-size: 28px; font-weight: 680; letter-spacing: -.02em; line-height: 1.15; }
-.collection-guidance .sample-document p { margin-top: 4px; color: var(--ink-2); }
-.collection-guidance .sample-document .sample-headline { font-weight: 620; color: var(--green); }
-.collection-guidance .sample-document .sample-contact { font-size: 14px; color: var(--ink-3); }
+.sample-document p { margin-top: 4px; color: var(--ink-2); }
+.sample-document .sample-headline { font-weight: 620; color: var(--green); }
+.sample-document .sample-contact { font-size: 14px; color: var(--ink-3); }
 .sample-document section { margin-top: 22px; }
 .sample-document h4 { margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
 .sample-entry + .sample-entry { margin-top: 14px; }
-.collection-guidance .sample-document .sample-entry-head { display: flex; justify-content: space-between; gap: 16px; margin-top: 0; color: var(--ink); }
+.sample-document .sample-entry-head { display: flex; justify-content: space-between; gap: 16px; margin-top: 0; color: var(--ink); }
 .sample-entry-head span { flex-shrink: 0; font-size: 14px; color: var(--ink-3); }
-.collection-guidance .sample-document .sample-entry-org { margin-top: 0; font-style: italic; }
+.sample-document .sample-entry-org { margin-top: 0; font-style: italic; }
 .sample-entry ul { margin-top: 6px; padding-left: 20px; color: var(--ink-2); }
 .sample-entry li + li { margin-top: 4px; }
-.collection-guidance .sample-caption { font-size: 14px; color: var(--ink-3); }
+.sample-caption { font-size: 14px; color: var(--ink-3); }
+/* Inside a guide article, keep the sample's own CV-like type instead of article body text. */
+.article .sample-document p, .article .sample-document li { margin: 4px 0 0; font-size: inherit; line-height: inherit; color: var(--ink-2); }
+.article .sample-document h3 { margin: 0; }
+.article .sample-document h4 { margin: 0 0 10px; }
+.article .sample-document .sample-entry-head, .article .sample-document .sample-entry-org { margin-top: 0; }
+.article .sample-document .sample-entry-head { color: var(--ink); }
+.article .sample-caption { margin-top: 10px; font-size: 14px; color: var(--ink-3); }
 .omit-list svg { flex-shrink: 0; color: var(--danger); }
 .collection-guidance .sample-download-note { font-size: 14px; }
 .sample-links { display: grid; gap: 10px; margin-top: 20px; padding: 0; list-style: none; }
 .sample-links .text-link { font-size: 14px; }
 @media (max-width: 760px) {
   .sample-document { padding: 24px 20px; }
-  .collection-guidance .sample-document .sample-entry-head { flex-direction: column; gap: 0; }
+  .sample-document .sample-entry-head { flex-direction: column; gap: 0; }
 }
 @media (max-width: 760px) {
   .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -246,3 +253,13 @@
   .related-template-grid.example-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skill-columns { grid-template-columns: 1fr; }
 }
+.template-choose-more { max-width: 46rem; margin-top: 28px; color: var(--ink-2); }
+.template-choose-more a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.writing-grid.is-pairs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.writing-grid a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) { .writing-grid.is-pairs { grid-template-columns: 1fr; } }
+.hub-examples .article h2 { margin-top: 56px; }
+.hub-examples .article section:first-child h2 { margin-top: 0; }
+.hub-examples .article ol { padding-left: 24px; }
+.template-extra .article { padding-left: 0; padding-right: 0; margin-left: 0; }
+.template-extra .article h2 { margin-top: 0; }

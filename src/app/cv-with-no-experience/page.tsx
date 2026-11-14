@@ -9,6 +9,12 @@ import { DETAIL_PREVIEW_SIZES, examplePreview, previewSrcSet } from "@/lib/previ
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { faqSchema } from "@/lib/structured-data";
 import { noExperiencePage as page } from "@/lib/tools";
+import { SampleDocument } from "@/components/collection-example";
+import { UseExampleButton } from "@/components/use-example-button";
+import { noExperienceExample } from "@/lib/no-experience-example";
+import { sampleCV } from "@/lib/sample-cv";
+
+const exampleCV = sampleCV(noExperienceExample.cv);
 import type { Section } from "@/lib/model";
 
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/cv-with-no-experience.png" });
@@ -28,9 +34,9 @@ export default function NoExperiencePage() {
     <section className="template-detail-hero"><div className="container template-detail-grid"><div className="template-detail-copy">
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: page.label }]} />
       <p className="template-detail-kind">First jobs · Returning to work · New beginnings</p>
-      <h1>A free resume builder for when you have no experience</h1>
+      <h1>CV example with no experience</h1>
       <p className="template-detail-description">Your first CV can start with what you have already done.</p>
-      <p>You do not need a job history to show how you learn, solve problems, or help others. Create a CV online using projects, education, volunteering, and responsibilities you can explain in an interview.</p>
+      <p>You do not need a job history to show how you learn, solve problems, or help others. Below is a complete CV example with no paid work in it at all, plus a free resume builder that starts you on the same structure: projects, education, volunteering, and responsibilities you can explain in an interview.</p>
       <ul className="check-list"><li><Check size={18} />Start with education and projects before employment</li><li><Check size={18} />Empty sections stay out of your PDF</li><li><Check size={18} />Free PDF download, no sign-up or watermark</li></ul>
       <NewCVButton template="clarity" sectionOrder={firstCVOrder} className="button accent large">Create my first CV</NewCVButton>
       <span className="template-detail-privacy"><LockKeyhole size={14} />Your CV details stay on your device.</span>
@@ -40,6 +46,15 @@ export default function NoExperiencePage() {
       <p>Choose evidence that relates to the role you want. A practical project can show problem solving; regular volunteering can show reliability. Explain your part, rather than listing personal qualities without examples.</p>
       <ol className="student-order">{["Contact details: a name, professional email, phone, and location.", "A short objective: the role you want and one relevant strength.", "Education or training: relevant courses, modules, and accurate completion dates.", "Projects: what you made, researched, fixed, or organised.", "Volunteering and responsibilities: your contribution and how often you helped.", "Skills and languages: tools you can use and honest proficiency levels."].map((item, index) => <li key={item}><span className="step-number">{index + 1}</span>{item}</li>)}</ol>
       <p>If you are not studying, move your strongest project or relevant activity above education. Add volunteer work as an experience entry, or rename the additional section to Volunteering. Leave unused sections empty or hide them.</p>
+    </div></div></section>
+
+    <section className="section hub-examples" id="worked-example"><div className="container"><div className="article">
+      <h2>A full CV example with no work experience</h2>
+      <p>Leah is 17 and has never had a paid job. Her CV still fills a page, because everything on it is something she did regularly and can talk about. Read it as a model of structure, then open it in the editor and replace every line with your own.</p>
+      <SampleDocument cv={exampleCV} label="Fictional CV for Leah Carter, a student with no work experience" />
+      <p className="sample-caption">Fictional student, school, and community run · Clarity template</p>
+      <h3>Why this CV works without a job</h3><ul>{noExperienceExample.why.map(point => <li key={point}>{point}</li>)}</ul>
+      <div className="landing-actions"><UseExampleButton cv={exampleCV} className="button dark">Edit this example free</UseExampleButton></div>
     </div></div></section>
 
     <section className="section student-evidence"><div className="container"><div className="section-head"><div><h2>Turn a responsibility into evidence.</h2><p>These examples are fictional. Replace them with details that are true for you.</p></div></div><div className="country-grid">

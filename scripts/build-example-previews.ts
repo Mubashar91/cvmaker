@@ -3,7 +3,7 @@ import { createRequire } from "node:module";
 import { createCanvas } from "@napi-rs/canvas";
 import { buildDocument } from "../src/lib/pdf-document";
 import { PDF_FONTS, SERIF_FONT_FILES } from "../src/lib/pdf-fonts";
-import { cvExamples, exampleCV } from "../src/lib/cv-examples";
+import { allCVExamples as cvExamples, exampleCV } from "../src/lib/cv-examples";
 
 // Renders page one of each job-specific example CV through the real PDF pipeline,
 // so the image on /cv-examples/<slug>/ is exactly what the editor will produce.

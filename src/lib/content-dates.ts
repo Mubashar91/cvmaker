@@ -1,7 +1,24 @@
+import { scheduledPage } from "./scheduled-pages";
+
 // Baseline reflects the last recorded editorial release, not the current build date.
 const baseline = "2026-11-11";
 const changes: Record<string, string> = {
-  "/": "2026-11-12",
+  "/cv-examples/accountant/": "2026-11-14",
+  "/cv-examples/receptionist/": "2026-11-14",
+  "/cv-examples/customer-service/": "2026-11-14",
+  "/cv-examples/project-manager/": "2026-11-14",
+  "/cv-examples/administrator/": "2026-11-14",
+  "/cv-with-no-experience/": "2026-11-14",
+  "/cv-examples/nurse/": "2026-11-14",
+  "/cover-letter-maker/": "2026-11-14",
+  "/resume-summary-builder/": "2026-11-14",
+  "/cv-maker-for-students/": "2026-11-14",
+  "/templates/category/ats-friendly/": "2026-11-14",
+  "/templates/student/": "2026-11-14",
+  "/templates/academic/": "2026-11-14",
+  "/templates/clarity/": "2026-11-14",
+  "/cv-examples/": "2026-11-14",
+  "/": "2026-11-14",
   "/templates/": "2026-11-14",
   "/templates/category/student/": "2026-11-12",
   "/tips/uk-cv-format/": "2026-11-12",
@@ -16,4 +33,9 @@ const changes: Record<string, string> = {
   "/cv-examples/teacher/": "2026-11-12",
   "/privacy/": "2026-11-12",
 };
-export function contentModified(path: string): string { return changes[path] || baseline; }
+/** Last substantive change. A scheduled page is never dated before it goes live. */
+export function contentModified(path: string): string {
+  const changed = changes[path] || baseline;
+  const published = scheduledPage(path)?.publishAt;
+  return published && published > changed ? published : changed;
+}

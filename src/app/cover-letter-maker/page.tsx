@@ -2,12 +2,15 @@ import { ToolPage } from "@/components/tool-page";
 import { CoverLetterMaker } from "@/components/cover-letter-maker";
 import { pageMetadata } from "@/lib/seo";
 import { tool } from "@/lib/tools";
+import { letterLayouts } from "@/lib/cover-letter";
+import { letterPreview, previewSrcSet } from "@/lib/previews";
+import { exampleLetters, layoutAdvice } from "@/lib/cover-letter-templates";
 
 const page = tool("/cover-letter-maker/");
 export const metadata = pageMetadata({ title: page.title, description: page.description, path: page.path, image: "/social/tools/cover-letter-maker.png" });
 
 export default function CoverLetterMakerPage() {
-  return <ToolPage path={page.path} heading="Free cover letter maker with professional templates"
+  return <ToolPage path={page.path} heading="Free cover letter templates and maker"
     intro="Create a cover letter online for free. Add your details and the job, choose a professional layout, and get an editable letter written from predefined templates. Copy it, print it, or download it as a PDF. No sign-up."
     points={["No sign-up or watermark", "PDF, print, or copy", "A4 or US Letter", "Runs on your device"]}
     featureList={["Letter templates for experienced candidates, graduates, and career changers", "Optional AI draft written only from your own details", "Classic, Modern, and Minimal layouts", "Live preview", "Edit every line", "Copy to clipboard", "Print", "PDF download in A4 or US Letter", "Optional save in this browser", "Reuse contact details from your CV"]}
@@ -53,7 +56,13 @@ export default function CoverLetterMakerPage() {
       { question: "Can I write a cover letter for my first job?", answer: "Yes. Choose the “Student or graduate” template: it frames your studies, projects, and part-time work as the start of your career. Our guide explains [how to write a cover letter with no experience](/tips/how-to-write-a-cover-letter/#no-experience)." },
       { question: "Which sign-off should I use?", answer: "“Kind regards” is accepted almost everywhere. In British English, “Yours sincerely” follows a named greeting and “Yours faithfully” follows “Dear Sir or Madam”. In the US and Canada, “Sincerely” is standard." },
       { question: "Can I use the same details as my CV?", answer: "Yes. If you have a CV open in [Folio’s editor](/editor/) in this tab, choose “Use details from my CV” to copy your name, contact details, and skills into the letter." },
-    ]}>
+    ]}
+    extra={<section className="section letter-templates"><div className="container">
+      <div className="section-head"><div><h2 id="cover-letter-templates">Cover letter templates for UK applications.</h2><p>Three free cover letter templates, each on A4 by default (switch to US Letter in the maker). Pick a layout in the maker above; the wording comes from your details, so you can change layout at any time without retyping.</p></div></div>
+      <ul className="letter-layout-grid">{letterLayouts.map(layout => <li key={layout.id}><span className="template-sheet"><img src={letterPreview(layout.id)} srcSet={previewSrcSet(letterPreview(layout.id))} sizes="(max-width: 900px) min(320px, 90vw), 380px" alt={`${layout.name} cover letter template preview`} width={953} height={1348} loading="lazy" decoding="async" /></span><h3>{layout.name}</h3><p>{layoutAdvice[layout.id]}</p></li>)}</ul>
+      <div className="section-head letter-examples-head"><div><h2 id="cover-letter-examples">Two full cover letter examples.</h2><p>Fictional letters, each written in the maker and then edited by hand. Notice how each one gives evidence rather than adjectives.</p></div></div>
+      <div className="letter-example-grid">{exampleLetters.map(letter => <article key={letter.id} id={letter.id}><h3>{letter.heading}</h3><p className="letter-example-note"><strong>{letter.layout}.</strong> {letter.note}</p><div className="article-example">{letter.text.split(/\n{2,}/).map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></article>)}</div>
+    </div></section>}>
     <CoverLetterMaker />
   </ToolPage>;
 }

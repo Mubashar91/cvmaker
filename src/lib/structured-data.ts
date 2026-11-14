@@ -6,6 +6,7 @@ import { informationPage, siteOperator, type InformationPath } from "./site-info
 import { absoluteUrl, CONTENT_UPDATED, DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./seo";
 import type { tips } from "./tips";
 import type { CVExample } from "./cv-examples";
+import { publishedISO, scheduledPage } from "./scheduled-pages";
 import { plainText } from "./rich-text";
 
 /** Only for questions and answers that are visible on the same page. */
@@ -123,11 +124,11 @@ export function articleSchema(tip: typeof tips[number]) {
   };
 }
 
-export function cvExamplesCollectionSchema(examples: CVExample[]) {
+export function cvExamplesCollectionSchema(examples: CVExample[], description = CV_EXAMPLES_DESCRIPTION) {
   if (!SITE_URL) return undefined;
   return {
     "@context": "https://schema.org", "@type": "CollectionPage", "@id": absoluteUrl("/cv-examples/#page"),
-    name: "CV examples by job", url: absoluteUrl("/cv-examples/"), description: CV_EXAMPLES_DESCRIPTION,
+    name: "CV examples by job", url: absoluteUrl("/cv-examples/"), description,
     isPartOf: { "@id": absoluteUrl("/#website") }, inLanguage: "en", dateModified: CONTENT_UPDATED,
     mainEntity: { "@type": "ItemList", name: "CV examples by job", numberOfItems: examples.length,
       itemListElement: examples.map((example, index) => ({ "@type": "ListItem", position: index + 1,
@@ -143,8 +144,22 @@ export function cvExampleSchema(example: CVExample) {
   return {
     "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`${path}#article`),
     headline: `${example.job} CV example`, description: example.description, url: absoluteUrl(path),
-    author: person(), publisher: organization(), dateModified: CONTENT_UPDATED, inLanguage: "en",
+    author: person(), publisher: organization(), inLanguage: "en",
+    // A scheduled example is dated from the moment it goes live, never earlier.
+    ...(scheduledPage(path) ? { datePublished: publishedISO(scheduledPage(path)!.publishAt) } : {}), dateModified: contentModified(path),
     mainEntityOfPage: absoluteUrl(path), image: absoluteUrl(`/examples/${example.slug}.webp`),
     articleSection: "CV examples", about: { "@type": "Occupation", name: example.job },
+  };
+}
+
+/** A scheduled guide-style page. datePublished is its real go-live moment (Asia/Karachi), never earlier. */
+export function landingSchema({ path, headline, description, publishAt, slug }: { path: string; headline: string; description: string; publishAt: string; slug: string }) {
+  if (!SITE_URL) return undefined;
+  return {
+    "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`${path}#article`),
+    headline, description, url: absoluteUrl(path), mainEntityOfPage: absoluteUrl(path),
+    author: person(), publisher: organization(), inLanguage: "en",
+    datePublished: publishedISO(publishAt), dateModified: contentModified(path),
+    image: absoluteUrl(`/social/pages/${slug}.png`), isPartOf: { "@id": absoluteUrl("/#website") },
   };
 }

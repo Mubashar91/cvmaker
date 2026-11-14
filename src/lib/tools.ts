@@ -4,8 +4,8 @@ import { professions } from "./skills-library";
 export const tools = [
   {
     path: "/cover-letter-maker/", name: "Cover letter maker", icon: "mail",
-    title: "Free AI Cover Letter Generator & Maker — No Sign-Up",
-    description: "Create a cover letter online for free: professional templates, an optional AI draft written from your details, and a PDF download. No sign-up or watermark.",
+    title: "Cover Letter Templates UK — Free Maker & Examples",
+    description: "Free cover letter templates for UK jobs: three layouts, two full example letters, and a maker that fills in your details. Download a PDF, no sign-up.",
     summary: "Turn your details into a tailored letter, edit every line, then copy, print, or download it as a PDF.",
   },
   {
@@ -22,8 +22,8 @@ export const tools = [
   },
   {
     path: "/resume-summary-builder/", name: "Resume summary builder", icon: "wand",
-    title: "Resume Summary Builder — Free CV Profile Generator",
-    description: "Build a professional resume summary or CV profile from your own details. Get three editable versions and add your favourite to your CV. Free, no sign-up.",
+    title: "Resume Summary Templates: 12 Examples & Free Builder",
+    description: "12 resume summary templates and CV personal profile examples to copy, plus a free builder that turns your own details into three editable drafts.",
     summary: "Combine your own details into three professional summary drafts, then add one to your CV.",
   },
   {
@@ -61,12 +61,12 @@ export const toolsHub = {
 
 export const studentPage = {
   path: "/cv-maker-for-students/", label: "CV maker for students",
-  title: "Free CV Maker for Students & Graduates",
-  description: "A free student resume builder and CV maker: start from an education-first layout, follow clear guidance, and download a PDF, even with no work experience.",
+  title: "Student CV Template & Example — Free CV Maker",
+  description: "A free student CV template and example: start from an education-first layout, follow clear guidance, and download a PDF, even with no work experience.",
 };
 
 export const noExperiencePage = {
   path: "/cv-with-no-experience/", label: "CV with no experience",
-  title: "Free No-Experience Resume Builder — First Job CV",
-  description: "Create a CV with no work experience for free. Use projects, volunteering, and responsibilities to show your skills, then download a PDF without sign-up.",
+  title: "CV Example With No Experience — Free CV Builder",
+  description: "A full CV example with no work experience: a student's CV built from school, volunteering, and projects. Edit it free and download a PDF, no sign-up.",
 };

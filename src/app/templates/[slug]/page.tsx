@@ -4,6 +4,7 @@ import { ArrowUpRight, Check, LockKeyhole } from "lucide-react";
 import { Header, Footer } from "@/components/site-chrome";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { FaqList } from "@/components/faq-list";
+import { RichText } from "@/components/rich-text";
 import { StartCVButton } from "@/components/start-cv-button";
 import { StructuredData } from "@/components/structured-data";
 import { templates } from "@/lib/model";
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const template = templates.find(t => t.id === slug);
   if (!template) return {};
-  return pageMetadata({ title: `Free ${template.name} CV Template — Edit & Download PDF`, description: templateDetails[template.id].description, path: `/templates/${slug}/`, image: `/social/${slug}.png`, noIndex: noindexTemplates.includes(template.id) });
+  return pageMetadata({ title: templateContent[template.id].seoTitle ?? `Free ${template.name} CV Template — Edit & Download PDF`, description: templateDetails[template.id].description, path: `/templates/${slug}/`, image: `/social/${slug}.png`, noIndex: noindexTemplates.includes(template.id) });
 }
 
 export default async function TemplatePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -43,7 +44,7 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
       <div className="template-detail-copy">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "CV templates", href: "/templates/" }, { name: template.name }]} />
         <p className="template-detail-kind">{details.category} · {template.style}</p>
-        <h1>Free {template.name} CV template</h1>
+        <h1>{content.h1 ?? `Free ${template.name} CV template`}</h1>
         <p className="template-detail-description">{details.heading}</p>
         <p>{details.layout}</p>
         <ul className="check-list">{details.features.map(feature => <li key={feature}><Check size={18} />{feature}</li>)}</ul>
@@ -57,6 +58,8 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
       <article><h2>Who it suits</h2><p>{details.bestFor}</p></article>
       <article><h2>Is {template.name} right for you?</h2><p>{content.choose}</p></article>
     </div></section>
+
+    {content.extra && <section className="section template-extra" id={content.extra.id}><div className="container"><div className="article"><h2>{content.extra.heading}</h2>{content.extra.paragraphs.map((text, index) => <p key={index}><RichText text={text} /></p>)}{content.extra.bullets && <ul>{content.extra.bullets.map(point => <li key={point}>{point}</li>)}</ul>}</div></div></section>}
 
     <section className="section template-writing"><div className="container">
       <div className="section-head"><div><h2>Writing for the {template.name} layout.</h2><p>Practical notes that follow from how this template places your name, sections, and dates.</p></div></div>

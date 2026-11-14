@@ -48,6 +48,18 @@ These facts came from the repository and the live site. They adjust parts of the
   - G vs `/tips/australian-student-resume/` and `/tips/part-time-job-cv/`. Link both from G.
   - H vs `/cv-examples/software-developer/`, `/cv-examples/frontend-developer/`, `/tips/software-engineer-resume-projects/`, `/tips/internship-cv/` and `/tips/canadian-resume-format/`. Create H only if none of these already satisfies "CS co-op resume". Otherwise expand the closest one.
 
+### Keyword targeting plan (CSV), 14 November 2026
+
+The owner added `freecvmaker.online — Keyword Targeting Plan - Keyword Plan.csv`, which shifts weight toward UK and Pakistan searches. Rows marked Existing were applied on 14 Nov. New pages and job examples go live on their CSV dates through `src/lib/scheduled-pages.ts`, with a daily rebuild at 00:30 Asia/Karachi (`.github/workflows/daily-rebuild.yml`).
+
+**Owner action:** the rebuild needs the `VERCEL_DEPLOY_HOOK_URL` GitHub secret before 16 Nov.
+
+Overlaps with this plan:
+- **D vs `/templates/clarity/`.** The CSV makes Clarity the single "ATS-friendly CV template" page. D keeps `/templates/category/ats-friendly/` as the collection page. The two link to each other.
+- **F vs `/teacher-cv-format/` (live 30 Nov).** That page targets schools in Pakistan. F stays the UK ECT example. The two link to each other.
+- **`/canadian-cv-format/` (live 26 Nov) vs the two Canada guides.** The new page is for applicants from Pakistan and India, and links to both guides.
+- **`/templates/`.** It now targets "CV template UK" and "free CV template". `/cv-template-word/` (live 19 Nov) owns the "CV template Word" queries.
+
 ---
 
 ## Keywords and monthly traffic scenarios

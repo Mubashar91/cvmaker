@@ -6,7 +6,7 @@
     "dev": "node scripts/dev.mjs",
     "prebuild": "node scripts/build-responsive-previews.mjs",
     "build": "next build",
-    "postbuild": "node scripts/normalize-static-export.mjs",
+    "postbuild": "node scripts/prune-unpublished.mjs && node scripts/normalize-static-export.mjs",
     "start": "node scripts/serve.mjs",
     "postinstall": "node scripts/copy-pdf-worker.mjs",
     "typecheck": "tsc --noEmit",
@@ -18,6 +18,7 @@
     "examples:preview": "tsx scripts/build-example-previews.ts",
     "letters:preview": "tsx scripts/build-letter-previews.ts",
     "seo:assets": "tsx scripts/build-seo-assets.ts",
+    "word:templates": "tsx scripts/build-word-templates.ts",
     "seo:check": "tsx scripts/check-seo.ts",
     "seo:indexnow": "node scripts/indexnow-ping.mjs",
     "guides:screenshots": "tsx scripts/capture-guide-screenshots.ts"

@@ -4,14 +4,19 @@ import { templates } from "../src/lib/model";
 import { tips } from "../src/lib/tips";
 import { templateCollections } from "../src/lib/template-collections";
 import { informationPages, siteOperator } from "../src/lib/site-info";
-import { cvExamples } from "../src/lib/cv-examples";
+import { allCVExamples as cvExamples } from "../src/lib/cv-examples";
 import { tools } from "../src/lib/tools";
+import { allLandingPages } from "../src/lib/landing-pages";
+
+// `npm run seo:assets -- --only=pages/,examples/chef` regenerates just those cards instead of all of them.
+const only = process.argv.find(arg => arg.startsWith("--only="))?.slice(7).split(",").filter(Boolean);
 
 const GREEN = "#10352b", GOLD = "#f3b53f", PAPER = "#f8f7f2";
 GlobalFonts.registerFromPath("public/fonts/tinos/Tinos-Italic.ttf", "Folio Serif");
 GlobalFonts.registerFromPath("node_modules/@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2", "Folio Sans");
 
 async function socialCard(file: string, title: string, subtitle: string, template?: string, category = "Free CV maker") {
+  if (only && !only.some(prefix => file.startsWith(prefix))) return;
   const canvas = createCanvas(1200, 630), ctx = canvas.getContext("2d");
   ctx.fillStyle = GREEN; ctx.fillRect(0, 0, 1200, 630);
   ctx.strokeStyle = "#2b5649"; ctx.lineWidth = 1;
@@ -50,6 +55,7 @@ async function main() {
   await mkdir("public/social/collections", { recursive: true });
   await mkdir("public/social/examples", { recursive: true });
   await mkdir("public/social/tools", { recursive: true });
+  await mkdir("public/social/pages", { recursive: true });
   await socialCard("folio", "Create a professional CV for free.", `${templates.length} templates. Free PDF download.`, "monogram");
   await socialCard("templates", `${templates.length} free CV templates.`, "Find a first impression that feels like you.", "horizon", "CV templates & resume layouts");
   await socialCard("tips", "A little guidance for your next chapter.", "Practical CV advice, from start to send.", undefined, "CV writing guides");
@@ -66,7 +72,9 @@ async function main() {
   await socialCard("cv-maker-for-students", "Free CV maker for students.", "Education first. No experience needed.", "public/examples/student.webp", "Students & graduates");
   await socialCard("cv-with-no-experience", "Your first CV starts here.", "Projects, training, and everyday contributions.", "clarity", "Free resume builder · No experience");
   for (const item of tools) await socialCard(`tools/${item.path.slice(1, -1)}`, `${item.name}.`, item.path === "/ai-cv-job-match/" ? "Free AI review, grounded in your real CV." : "Free, private, and runs in your browser.", item.path === "/cover-letter-maker/" ? "public/cover-letters/classic.webp" : undefined, "Free CV tool");
+  for (const page of allLandingPages) await socialCard(`pages/${page.slug}`, `${page.h1}.`, "A full worked example · free to edit", page.example.cv.template, page.kicker);
   for (const tip of tips) await socialCard(`guides/${tip.slug}`, tip.title, `${tip.readTime} minute guide · By ${siteOperator.name}`, undefined, tip.category);
+  if (only) { console.log(`Generated the social cards matching ${only.join(", ")}.`); return; }
   const icon = createCanvas(180, 180), ctx = icon.getContext("2d");
   ctx.fillStyle = GREEN; ctx.fillRect(0, 0, 180, 180);
   ctx.fillStyle = GOLD; ctx.beginPath(); ctx.moveTo(53, 34); ctx.lineTo(104, 34); ctx.lineTo(129, 60); ctx.lineTo(129, 146); ctx.lineTo(53, 146); ctx.closePath(); ctx.fill();

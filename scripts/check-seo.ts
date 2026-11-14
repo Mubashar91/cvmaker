@@ -7,6 +7,7 @@ import { tips } from "../src/lib/tips";
 import { collectionPath, templateCollections } from "../src/lib/template-collections";
 import { informationPages, siteOperator } from "../src/lib/site-info";
 import { cvExamples } from "../src/lib/cv-examples";
+import { landingPages } from "../src/lib/landing-pages";
 import { noExperiencePage, studentPage, tools, toolsHub } from "../src/lib/tools";
 import { noindexTemplates } from "../src/lib/template-details";
 
@@ -33,6 +34,7 @@ const routes: { path: string; image: string; schema?: string; noIndex?: boolean 
   ...templateCollections.map(collection => ({ path: collectionPath(collection.slug), image: `collections/${collection.slug}`, schema: "CollectionPage" })),
   { path: "/cv-examples/", image: "cv-examples", schema: "CollectionPage" },
   ...cvExamples.map(example => ({ path: `/cv-examples/${example.slug}/`, image: `examples/${example.slug}`, schema: "Article" })),
+  ...landingPages.map(page => ({ path: `/${page.slug}/`, image: `pages/${page.slug}`, schema: "Article" })),
   { path: "/tips/", image: "tips" },
   ...tips.map(tip => ({ path: `/tips/${tip.slug}/`, image: `guides/${tip.slug}`, schema: "Article" })),
   ...informationPages.map(page => ({ path: page.path, image: page.path.slice(1, -1), schema: page.path === "/about/" ? "AboutPage" : page.path === "/contact/" ? "ContactPage" : "WebPage" })),
