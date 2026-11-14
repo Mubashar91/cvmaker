@@ -236,7 +236,7 @@ const coreGuides: Guide[] = [
   {
     slug: "free-ai-resume-checker", title: "Check your CV against a job with AI, honestly",
     seoTitle: "Free AI Resume Checker: Check Your CV Against a Job",
-    description: "How to use a free AI resume checker honestly: what AI can verify in your CV, what it gets wrong, and how to apply its suggestions without inventing anything.",
+    description: "Use a free AI resume checker honestly: what AI can verify in your CV, what it gets wrong, and how to apply its suggestions without inventing anything.",
     category: "Final checks & applications",
     published: "2026-11-11",
     tool: { href: "/ai-cv-job-match/", label: "Try the AI CV job match", text: "Paste a job advert and your CV, and get a free report: requirements you demonstrate with evidence, gaps, and honest suggested fixes." },

@@ -114,7 +114,7 @@ export const templateCollections: readonly TemplateCollection[] = [
   },
   {
     slug: "simple", name: "Simple", title: "Free Simple CV Templates",
-    description: "Create a clean CV with free simple templates. Compare minimal layouts, clear headings, and compact spacing, then edit online and download without a watermark.",
+    description: "Create a clean CV with free simple templates. Compare minimal layouts, clear headings, and compact spacing. Edit online and download without a watermark.",
     intro: "A simple CV leaves room for the work itself. This collection keeps decoration restrained, so names, roles, qualifications, and skills are easy to locate. Choose a plain structure or a quiet typographic detail that suits your information.",
     templates: ["linear", "clarity", "minimal", "compact", "tech", "outline", "swiss", "student"],
     advice: [
@@ -139,7 +139,7 @@ export const templateCollections: readonly TemplateCollection[] = [
   },
   {
     slug: "with-photo", name: "With a photo", title: "Free CV Templates with a Photo",
-    description: "Explore free CV templates with an optional profile photo. Crop your image privately in your browser, choose a layout, and download a PDF without a watermark.",
+    description: "Free CV templates with an optional profile photo. Crop your image privately in your browser, choose a layout, and download a PDF without a watermark.",
     intro: "If a photo is appropriate for your application, choose a template with a deliberate place for it. Every design here supports an optional circular portrait, prepared locally in your browser and included in your downloaded PDF.",
     templates: templates.filter(template => template.photo).map(template => template.id),
     advice: [

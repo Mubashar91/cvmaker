@@ -58,7 +58,7 @@ export const countryGuides: Guide[] = [
   {
     slug: "uk-cv-format", relatedSlugs: ["uk-student-cv-checklist"], title: "How to write a CV for jobs in the UK", published: "2026-11-09",
     seoTitle: "UK CV Format: How to Write a CV for Jobs in the UK",
-    description: "Write a CV for UK jobs: the standard British CV format and a free template, what to leave out, length, right to work, and student CVs with GCSEs and A levels.",
+    description: "Write a CV for UK jobs: the standard British CV format, a free template, what to leave out, length, right to work, and student CVs with GCSEs and A levels.",
     category: "Applying by country",
     intro: "A UK CV is a short, factual document, usually two A4 pages, that introduces your experience and makes it easy for an employer to shortlist you. British conventions are simple once you know them: no photo, no personal details beyond how to contact you, and a clear focus on evidence.",
     image: { kind: "example", id: "teacher", alt: "UK teacher CV example with QTS in the professional title, a short personal statement, and teaching roles listed most recent first", caption: "A fictional UK teacher CV from our CV examples, in the Classic template." },
@@ -113,7 +113,7 @@ export const countryGuides: Guide[] = [
   {
     slug: "us-resume-format", title: "How to write an American resume", published: "2026-11-09",
     seoTitle: "US Resume Format: How to Write an American Resume",
-    description: "How to write a resume for US jobs: the American resume format and a free template, length, what to leave out, and tips for students and international applicants.",
+    description: "How to write a resume for US jobs: the American format and a free template, length, what to leave out, and tips for students and international applicants.",
     category: "Applying by country",
     intro: "An American resume is a concise, achievement-focused summary of your experience, usually one page early in your career and up to two pages for most experienced candidates. US recruiters expect quick evidence of results, a clean reverse-chronological layout, and no personal details beyond how to reach you.",
     image: { kind: "template", id: "clarity", alt: "Clarity CV template: a plain single-column layout with standard headings and no graphics, suited to US resume conventions", caption: "Clarity template, fictional sample content. Plain structure, no graphics, standard headings." },
@@ -168,7 +168,7 @@ export const countryGuides: Guide[] = [
   },
   {
     slug: "canadian-resume-format", title: "How to write a Canadian resume", published: "2026-11-09",
-    seoTitle: "Canadian Resume Format: How to Write a Resume for Canada",
+    seoTitle: "Canadian Resume Format: How to Write a Resume",
     description: "Write a resume for jobs in Canada: the Canadian resume format, length, and a free template, what to leave out, bilingual skills, and advice for newcomers.",
     category: "Applying by country",
     intro: "A Canadian resume is a focused, one- or two-page document that shows your experience and results in reverse chronological order. Its conventions are close to the American resume, with a few Canadian details: no personal information such as age or a photo, consistent Canadian spelling, and room for language skills and volunteer work.",
@@ -220,7 +220,7 @@ export const countryGuides: Guide[] = [
   {
     slug: "australian-resume-format", relatedSlugs: ["australian-student-resume"], title: "How to create an Australian resume", published: "2026-11-09",
     seoTitle: "Australian Resume Format & Writing Guide",
-    description: "Write a resume for Australian jobs: the standard format and a free template, length, referees, work rights, selection criteria, licences, and tips for students.",
+    description: "Write a resume for Australian jobs: the standard format, a free template, length, referees, work rights, selection criteria, licences, and student tips.",
     category: "Applying by country",
     intro: "Australian resumes tend to be a little longer and more detailed than American ones. Two to three pages is common, referees often appear at the end, and employers appreciate a clear statement of your work rights. The essentials are the same everywhere: relevant experience, clear results, and a layout that is easy to scan.",
     image: { kind: "template", id: "regent", alt: "Regent CV template: a single-column layout with a serif nameplate and a framed contact line", caption: "Regent template, fictional sample content." },

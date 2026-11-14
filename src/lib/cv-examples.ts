@@ -149,7 +149,7 @@ export const cvExamples: CVExample[] = [
   {
     slug: "customer-service", job: "Customer service", category: "Customer service", template: "modern",
     seoTitle: "Customer Service CV Example & Resume Template",
-    description: "A customer service CV example with achievement-led bullet points and key skills. Edit it in the free resume builder for call centre, retail, or support roles.",
+    description: "A customer service CV example with achievement-led bullets and key skills. Edit it in the free resume builder for call centre, retail, or support roles.",
     intro: "Customer service managers look for evidence that you stay patient, solve problems, and meet service targets. This example uses specific measures, such as satisfaction scores and resolution rates, to turn everyday tasks into achievements.",
     person: { name: "Chloe Bennett", headline: "Customer Service Advisor", location: "Glasgow, United Kingdom", phone: "+44 7700 900104" },
     summary: "Customer service advisor with four years of experience in contact centre and live chat support. Resolves billing and account queries on first contact, stays calm with frustrated customers, and consistently meets quality and response targets. Looking to move into a team leader role.",
@@ -188,7 +188,7 @@ export const cvExamples: CVExample[] = [
   {
     slug: "retail-assistant", job: "Retail assistant", category: "Retail & hospitality", template: "minimal",
     seoTitle: "Retail Assistant CV Example — Free Template",
-    description: "A retail assistant CV example with a short profile, shop-floor experience, and skills. Ideal for first jobs and part-time roles. Edit free and download a PDF.",
+    description: "A retail assistant CV example with a short profile, shop-floor experience, and skills. Suits first jobs and part-time roles. Edit free and download a PDF.",
     intro: "Store managers hiring for retail roles want reliable people who are good with customers, handle money accurately, and work well in a team. This example shows those qualities through specific shop-floor tasks and stays short enough for a quick read.",
     person: { name: "Jordan Price", headline: "Retail Assistant", location: "Bristol, United Kingdom", phone: "+44 7700 900105" },
     summary: "Retail assistant with two years of experience in a busy high street fashion store. Comfortable on the till, helping customers find the right size or style, and keeping the shop floor tidy and well stocked. Available for flexible shifts, including weekends and evenings.",
@@ -307,7 +307,7 @@ export const cvExamples: CVExample[] = [
   {
     slug: "accountant", job: "Accountant", category: "Finance", template: "regent",
     seoTitle: "Accountant CV Example — Free Template & Tips",
-    description: "An accountant CV example with a professional profile, finance experience, and technical skills. Show qualifications and results clearly, then download a PDF.",
+    description: "An accountant CV example with a professional profile, finance experience, and technical skills. Show qualifications and results, then download a PDF.",
     intro: "Finance managers want to see your qualification status, the size and type of organisations you have worked for, and your technical depth. This example puts qualifications first and describes month-end, reporting, and improvement work in measurable terms.",
     person: { name: "Imran Qureshi", headline: "Chartered Management Accountant", location: "London, United Kingdom", phone: "+44 7700 900108" },
     summary: "CIMA-qualified management accountant with six years of experience in retail and manufacturing. Leads month-end close, budgeting, and variance analysis, and turns financial data into clear insight for operational managers. Experienced with Sage, Power BI, and advanced Excel.",

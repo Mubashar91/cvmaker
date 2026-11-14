@@ -4,7 +4,7 @@ import type { Guide } from "./guide-types";
 export const earlyCareerGuides: Guide[] = [
   {
     slug: "part-time-job-cv", title: "How to write a CV for a part-time job", published: "2026-11-09",
-    seoTitle: "How to Write a CV for a Part-Time Job (With Examples)",
+    seoTitle: "How to Write a Part-Time Job CV (With Examples)",
     description: "Write a CV for a part-time job in retail, hospitality, care, or tutoring: what to include, how to show your availability, and profile examples.",
     category: "Students & first applications",
     intro: "A part-time CV does the same job as any other CV, but the reader is often a busy shop, café, or care manager trying to fill shifts. They want to know three things quickly: can you do the work, can they rely on you, and when are you available. A clear one-page CV that answers those questions will stand out.",

@@ -56,7 +56,7 @@ export const templateDetails: Record<Template, {
   },
   minimal: {
     category: "Quiet & considered", heading: "Less decoration. More room for your story.",
-    description: "Create a clean CV with the free Minimal template. Quiet typography, generous spacing, and a left-hand section rail put your information first. Export to PDF.",
+    description: "Create a clean CV with the free Minimal template. Quiet typography, generous spacing, and a left section rail put your information first. Export to PDF.",
     bestFor: "Applicants who want a restrained design, clear hierarchy, and a document focused on the substance of their work.",
     layout: "An understated heading leads into a two-part section structure: small labels on the left, your details on the right. A neutral palette and fine header rule keep the document calm and easy to follow.",
     features: ["Distinctive left-hand section labels", "Neutral black and grey palette", "Restrained sans-serif type", "Open spacing between sections"],
@@ -70,7 +70,7 @@ export const templateDetails: Record<Template, {
   },
   creative: {
     category: "Editorial & expressive", heading: "A little personality. Plenty of clarity.",
-    description: "Make a distinctive CV with the free Creative template. Editorial serif headings, warm accents, and numbered sections add personality without crowding the page.",
+    description: "Make a distinctive CV with the free Creative template. Serif headings, warm accents, and numbered sections add personality without crowding the page.",
     bestFor: "Applicants who want an editorial feel for design, communications, content, or other creative work while keeping the document readable.",
     layout: "A larger serif name and a short warm-toned rule lead into numbered, italic section headings. The body remains a clear single column, with concise entry headings and indented bullets.",
     features: ["Expressive serif heading", "Warm, restrained colour accents", "Numbered editorial section titles", "Clear single-column body"],
@@ -126,7 +126,7 @@ export const templateDetails: Record<Template, {
   },
   duo: {
     category: "Two-tone & modern", heading: "A header that does the introductions.",
-    description: "Make a CV with the free Duo template: a two-tone header splits your name from your contact details, with an optional photo. Pick a colour and download a PDF.",
+    description: "Make a CV with the free Duo template: a two-tone header separates your name and contact details, with an optional photo. Pick a colour and download a PDF.",
     bestFor: "Applicants who want a contemporary, confident first impression with a clean single-column body that stays easy to read.",
     layout: "A full-width header is split in two: your name, title, and optional photo on a solid colour block, your contact details on a lighter tint beside it. Below, sections open with a small colour square and a fine rule.",
     features: ["Two-tone split header", "Optional round photo", "Square section markers", "Clean single-column body"],
@@ -140,7 +140,7 @@ export const templateDetails: Record<Template, {
   },
   tech: {
     category: "Skills-forward", heading: "Let your skills be seen at a glance.",
-    description: "Use the free Tech CV template: skills as clear tags, crisp entries, and accent-coloured employers. Ideal for developers and technical roles. Download a PDF.",
+    description: "Use the free Tech CV template: skills as clear tags, crisp entries, and accent-coloured employers. Suits developers and technical roles. Download a PDF.",
     bestFor: "Developers, engineers, analysts, and other technical applicants whose tools and skills are a key part of the story.",
     layout: "A compact header leads into sections with small uppercase titles. Each skill becomes its own tag, grouped by category when you write “Category: skill, skill”. Entries show the title, an accent-coloured organisation, and dates on the right.",
     features: ["Skills shown as tags", "Category labels for skill groups", "Accent-coloured organisations", "Compact, scannable sections"],
@@ -154,7 +154,7 @@ export const templateDetails: Record<Template, {
   },
   corner: {
     category: "Geometric & fresh", heading: "A bold corner, a calm page.",
-    description: "Make a memorable CV with the free Corner template: geometric colour in the page corners and an airy single-column layout. Choose your colour and download a PDF.",
+    description: "Make a memorable CV with the free Corner template: geometric colour in the page corners and an airy single-column layout. Pick a colour, download a PDF.",
     bestFor: "Applicants in creative, marketing, hospitality, or startup roles who want a modern touch of colour without sacrificing readability.",
     layout: "Two overlapping colour triangles crown the top-right corner, with a smaller one at the bottom of the first page. A large name and coloured title lead into sections marked by short, thick accent rules.",
     features: ["Geometric colour corners", "Large name with coloured title", "Short accent rule under each title", "Airy single-column body"],
@@ -210,7 +210,7 @@ export const templateDetails: Record<Template, {
   },
   compass: {
     category: "Clear & navigable", heading: "Help every reader find their way.",
-    description: "Use the free Compass CV template: each section opens with a small icon, and contact details sit in a tidy icon grid beside an optional photo. Download a PDF.",
+    description: "Use the free Compass CV template: each section opens with a small icon, and contact details sit in an icon grid beside an optional photo. Download a PDF.",
     bestFor: "Applicants who want a friendly, modern CV that is quick to scan, especially for client-facing, technology, operations, and early-career roles.",
     layout: "Your name and title sit beside an optional round photo, with email, phone, location, and website in a two-column icon grid. Each section begins with a coloured circle holding a simple icon — a briefcase for experience, a cap for education — followed by a fine rule.",
     features: ["Icons for every section", "Two-column icon contact grid", "Optional round photo", "Clean single-column body"],
@@ -238,21 +238,21 @@ export const templateDetails: Record<Template, {
   },
   gazette: {
     category: "Editorial & distinctive", heading: "Front-page news: you.",
-    description: "Make a CV with the free Gazette template: a newspaper-style masthead, an italic lede for your profile, and two columns divided by a fine rule. Download a PDF.",
+    description: "Make a CV with the free Gazette template: a newspaper masthead, an italic lede for your profile, and two columns divided by a fine rule. Download a PDF.",
     bestFor: "Writers, journalists, editors, communications and media professionals, and anyone who wants a confident typographic CV with personality.",
     layout: "Your name is set large in serif type between heavy and fine rules, with your contact details in a dateline below. Your profile opens as an italic lede across the page. Experience and projects run in the wide left column; education, skills, and certifications sit to the right of a fine vertical rule.",
     features: ["Newspaper-style masthead", "Italic lede for your profile", "Two columns with a vertical rule", "Classic serif typography"],
   },
   heritage: {
     category: "Classic & distinguished", heading: "Timeless, with a finely drawn frame.",
-    description: "Create a CV with the free Heritage template: a double-ruled frame on every page, engraved-style serif capitals, and small diamond ornaments. Download your PDF.",
+    description: "Create a CV with the free Heritage template: a double-ruled frame on every page, engraved-style serif capitals, and diamond ornaments. Download a PDF.",
     bestFor: "Applicants in law, finance, academia, hospitality, and the arts who want a traditional document with a distinguished, crafted finish.",
     layout: "A fine double frame borders every page. Your name is set in widely spaced serif capitals above a small diamond ornament, with an italic title and centred contact line. Section titles are centred above a matching ornament, and employers and institutions lead each entry.",
     features: ["Double-ruled page frame", "Spaced serif capitals", "Diamond ornaments", "Employer and institution first"],
   },
   ledger: {
     category: "Orderly & European", heading: "Every detail in its proper column.",
-    description: "Use the free Ledger CV template: right-aligned section labels beside one continuous vertical rule, in the orderly style common across Europe. Download a PDF.",
+    description: "Use the free Ledger CV template: right-aligned section labels beside a single vertical rule, in the orderly style common across Europe. Download a PDF.",
     bestFor: "Applicants in Europe and international organisations, and anyone who likes a clear, form-like structure that is easy to compare and scan.",
     layout: "One fine vertical rule runs from your name to your final entry. Section labels sit right-aligned to its left; your introduction, labelled contact details, and every entry align to its right. Dates stay on the right edge of each entry.",
     features: ["Continuous vertical rule", "Right-aligned section labels", "Labelled contact details", "Clean sans-serif typography"],
@@ -287,7 +287,7 @@ export const templateDetails: Record<Template, {
   },
   student: {
     category: "Academic & approachable", heading: "Your potential belongs on the page.",
-    description: "Create your first CV with the free Student template. Clear section bands, a centered header, and space for education and projects make a strong starting point.",
+    description: "Create your first CV with the free Student template. Clear section bands, a centered header, and space for education and projects make a strong start.",
     bestFor: "Students, graduates, and early-career applicants who want to highlight education, projects, skills, volunteering, or part-time work.",
     layout: "A centered serif heading is paired with a clear sans-serif body. Pale academic section bands make the document easy to scan. Move education or projects higher in the editor when they are your most relevant experience.",
     features: ["Clear academic section bands", "Centered heading and contact details", "Readable sans-serif body", "Flexible education and project placement"],

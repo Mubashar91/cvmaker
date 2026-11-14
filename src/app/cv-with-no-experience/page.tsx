@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { StructuredData } from "@/components/structured-data";
 import { FaqList } from "@/components/faq-list";
 import { NewCVButton, StartCVButton } from "@/components/start-cv-button";
-import { examplePreview } from "@/lib/previews";
+import { DETAIL_PREVIEW_SIZES, examplePreview, previewSrcSet } from "@/lib/previews";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { faqSchema } from "@/lib/structured-data";
 import { noExperiencePage as page } from "@/lib/tools";
@@ -34,7 +34,7 @@ export default function NoExperiencePage() {
       <ul className="check-list"><li><Check size={18} />Start with education and projects before employment</li><li><Check size={18} />Empty sections stay out of your PDF</li><li><Check size={18} />Free PDF download, no sign-up or watermark</li></ul>
       <NewCVButton template="clarity" sectionOrder={firstCVOrder} className="button accent large">Create my first CV</NewCVButton>
       <span className="template-detail-privacy"><LockKeyhole size={14} />Your CV details stay on your device.</span>
-    </div><figure className="template-detail-example"><img src={examplePreview("student")} width={953} height={1348} fetchPriority="high" alt="Fictional student CV showing education, a university project, activities, skills, and part-time work" /><figcaption>A fictional student example with part-time experience. Use only the sections that fit your background.</figcaption></figure></div></section>
+    </div><figure className="template-detail-example"><img src={examplePreview("student")} srcSet={previewSrcSet(examplePreview("student"))} sizes={DETAIL_PREVIEW_SIZES} width={953} height={1348} fetchPriority="high" alt="Fictional student CV showing education, a university project, activities, skills, and part-time work" /><figcaption>A fictional student example with part-time experience. Use only the sections that fit your background.</figcaption></figure></div></section>
 
     <section className="section student-structure"><div className="container advice-grid"><h2>What to put on a CV instead of work experience.</h2><div>
       <p>Choose evidence that relates to the role you want. A practical project can show problem solving; regular volunteering can show reliability. Explain your part, rather than listing personal qualities without examples.</p>

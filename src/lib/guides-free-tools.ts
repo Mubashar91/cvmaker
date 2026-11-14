@@ -5,7 +5,7 @@ export const freeToolGuides: Guide[] = [
   {
     slug: "free-cv-maker-without-signup", title: "How to make a CV for free without signing up", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.storage, sources.ukCV],
-    seoTitle: "Free CV Maker Without Signup: Create and Save Your CV",
+    seoTitle: "Free CV Maker Without Signup: Create & Save Your CV",
     description: "Create a CV without registration, keep an editable copy, and download a free PDF. A practical walkthrough of templates, local drafts, and final checks.",
     category: "Free CV tools",
     intro: "You have finished typing your CV, closed the tab, and now need to change a date. Without an account, the question is where you saved the editable version. Here is a complete workflow for creating, keeping, and updating a CV without registering.",
@@ -50,8 +50,8 @@ export const freeToolGuides: Guide[] = [
   {
     slug: "free-resume-builder-without-payment", title: "What to check in a free resume builder before you start", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.trials, sources.storage],
-    seoTitle: "Free Resume Builder Without Payment: A Practical Checklist",
-    description: "Check PDF downloads, watermarks, template access, subscriptions, and editable backups before choosing a free resume builder. Includes Folio's actual limits.",
+    seoTitle: "Free Resume Builder Without Payment: A Checklist",
+    description: "Check PDF downloads, watermarks, template access, subscriptions, and editable backups before choosing a free resume builder. Includes Folio's real limits.",
     category: "Free CV tools",
     intro: "Free to edit does not tell you whether the final download is included. Test the complete task before entering your career history: choose a layout, create a small draft, download it, and find out how to revise it later. Here is what to check at each step.",
     quickAnswer: "Check the finished download, watermark, required file type, and any trial terms before choosing a builder. Folio currently provides free A4 CV PDFs and portable editing drafts without signup or payment. It imports PDF and DOCX and exports PDF or editable Word CVs.",
@@ -184,7 +184,7 @@ export const freeToolGuides: Guide[] = [
   {
     slug: "tailor-resume-to-job-description", title: "How to match your resume to a job description honestly", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.parsing, sources.mitResume],
-    seoTitle: "Resume Keyword Matching: Tailor Your CV to a Job Description",
+    seoTitle: "How to Tailor Your Resume to a Job Description",
     description: "Compare a resume with a job description, separate requirements from keywords, and edit your profile and bullets without copying or inventing experience.",
     category: "Free CV tools",
     intro: "A missing keyword may be a wording gap, an experience gap, or an irrelevant extraction. Work out which before changing your CV. This walkthrough turns a job advert into an evidence map so you can make useful edits without chasing a percentage.",
@@ -229,8 +229,8 @@ export const freeToolGuides: Guide[] = [
   {
     slug: "improve-cv-bullet-points-with-ai", title: "How to improve CV bullet points with AI without inventing anything", published: "2026-11-12",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.aiResume, sources.aiRisk, sources.harvardTemplate],
-    seoTitle: "How to Improve CV Bullet Points with AI: Before & After",
-    description: "Improve CV and resume bullet points with AI while keeping every fact true. Three before-and-after examples, what gets sent, and how to spot invented claims.",
+    seoTitle: "How to Improve CV Bullet Points With AI (Examples)",
+    description: "Improve CV and resume bullet points with AI and keep every fact true. Three before-and-after examples, what gets sent, and how to spot invented claims.",
     category: "Free CV tools",
     intro: "An AI rewrite can make a vague bullet point clearer in seconds. It can also quietly turn “helped with” into “managed”, or add a result nobody measured. This tutorial walks through Folio's Improve bullet points with AI button using three fictional entries: a weekend retail job, a teaching placement, and a student placement project. For each one, you will see what to keep, what to fix, and what to delete before you apply the suggestion.",
     quickAnswer: "Write the real facts into the description first: what you did, for whom, how often, with which tools, and any result you can prove. Then ask for a rewrite, compare every suggested line with those facts, and delete anything the AI added or upgraded. In Folio, only that entry's job title and description are sent, and nothing in your CV changes until you choose Use these points.",

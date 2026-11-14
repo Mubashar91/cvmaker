@@ -9,7 +9,7 @@ import { NewCVButton } from "@/components/start-cv-button";
 import { UseExampleButton } from "@/components/use-example-button";
 import { cvExample, exampleCV } from "@/lib/cv-examples";
 import type { Section } from "@/lib/model";
-import { examplePreview } from "@/lib/previews";
+import { DETAIL_PREVIEW_SIZES, examplePreview, previewSrcSet } from "@/lib/previews";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { faqSchema } from "@/lib/structured-data";
 import { collectionPath, templateCollections } from "@/lib/template-collections";
@@ -52,7 +52,7 @@ export default function StudentCVMakerPage() {
         <NewCVButton template="student" sectionOrder={STUDENT_ORDER} className="button accent large">Start my student CV</NewCVButton>
         <span className="template-detail-privacy"><LockKeyhole size={14} />Your details stay on your device.</span>
       </div>
-      <figure className="template-detail-example"><img src={examplePreview("student")} alt="Student CV example with education first, a part-time sales job, a society treasurer role, a university project, skills, and languages" width={953} height={1348} fetchPriority="high" /><figcaption>Fictional student CV · Student template · A4 PDF</figcaption></figure>
+      <figure className="template-detail-example"><img src={examplePreview("student")} srcSet={previewSrcSet(examplePreview("student"))} sizes={DETAIL_PREVIEW_SIZES} alt="Student CV example with education first, a part-time sales job, a society treasurer role, a university project, skills, and languages" width={953} height={1348} fetchPriority="high" /><figcaption>Fictional student CV · Student template · A4 PDF</figcaption></figure>
     </div></section>
 
     <section className="section student-structure"><div className="container advice-grid"><h2>The best CV format for students with no experience.</h2><div>
@@ -76,7 +76,7 @@ export default function StudentCVMakerPage() {
 
     <section className="section student-example"><div className="container student-example-grid">
       <div><h2>Start from a student CV example.</h2><p>{example.intro}</p><UseExampleButton cv={exampleCV(example)} className="button dark">Edit the student example</UseExampleButton><p className="student-tools">Need a first line? Try the free <Link href="/resume-objective-generator/">resume objective generator</Link>, find <Link href="/resume-skills/">skills to put on your resume</Link>, or write a <Link href="/cover-letter-maker/">cover letter</Link> to go with it. Applying for something specific? Read how to write a CV for a <Link href="/tips/part-time-job-cv/">part-time job</Link> or an <Link href="/tips/internship-cv/">internship</Link>, and how to <Link href="/tips/projects-on-a-cv/">describe projects on a CV</Link>.</p></div>
-      <Link href={`/cv-examples/${example.slug}/`} className="related-template"><span className="template-sheet"><img src={examplePreview("student")} alt="" width={953} height={1348} loading="lazy" /></span><span className="related-name">Student CV example <ArrowRight size={17} /></span><span className="template-note">Profiles, bullet points, and tips</span></Link>
+      <Link href={`/cv-examples/${example.slug}/`} className="related-template"><span className="template-sheet"><img src={examplePreview("student")} srcSet={previewSrcSet(examplePreview("student"))} sizes="(max-width: 640px) 45vw, 380px" alt="Student CV example preview" width={953} height={1348} loading="lazy" decoding="async" /></span><span className="related-name">Student CV example <ArrowRight size={17} /></span><span className="template-note">Profiles, bullet points, and tips</span></Link>
     </div></section>
 
     <section className="section faq-section student-faq"><div className="container faq-grid"><div><h2>Student CV questions.</h2><p>Quick answers for your first applications.</p></div><FaqList faqs={faqs} /></div></section>

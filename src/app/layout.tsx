@@ -2,7 +2,7 @@
 import { SiteScripts } from "@/components/site-scripts";
 import { CVProvider } from "@/components/cv-context";
 import { DEFAULT_DESCRIPTION, SITE_URL } from "@/lib/seo";
-import "@fontsource-variable/archivo/wdth.css";
+import { archivo } from "./fonts";
 import "./globals.css";
 import "./templates.css";
 import "./editor.css";
@@ -24,7 +24,7 @@ const analytics = process.env.VERCEL === "1" && process.env.NEXT_PUBLIC_ANALYTIC
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // suppressHydrationWarning: browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes
   // to <html>/<body> before React hydrates. This only ignores attribute differences on these two tags.
-  return <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+  return <html lang="en" className={archivo.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
     <body suppressHydrationWarning><a href="#main-content" className="skip-link">Skip to content</a><CVProvider>{children}<SiteScripts analytics={analytics} /></CVProvider></body>
   </html>;
 }

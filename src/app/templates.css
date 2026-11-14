@@ -14,6 +14,7 @@
 .template-quick-preview:hover { background: var(--ground-2); border-color: var(--green); }
 .template-empty { display: grid; justify-items: center; gap: 14px; padding: 70px 20px; border: 1px dashed var(--line-strong); border-radius: 12px; text-align: center; }
 .template-empty p { color: var(--ink-3); }
+.template-empty-title { font-size: 1.2rem; font-stretch: 100%; line-height: 1.35; font-weight: 650; letter-spacing: -0.01em; }
 .template-preview-dialog { position: fixed; width: min(1080px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--ground); color: var(--ink); box-shadow: 0 24px 100px #0005; overflow: auto; }
 .template-preview-dialog::backdrop { background: rgb(9 28 23 / .78); backdrop-filter: blur(5px); }
 .template-preview-top { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; border-bottom: 1px solid var(--line); background: var(--ground); font-size: 14px; font-weight: 600; }
@@ -108,15 +109,17 @@
 .home-templates .template-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 26px; }
 .template-tile { display: flex; flex-direction: column; min-width: 0; }
 .template-card { min-width: 0; }
+/* The badges and the "Use template" pill are siblings of the button, so its accessible name is only its label. */
+.template-choice-wrap { position: relative; display: block; }
 .template-choice { position: relative; display: block; width: 100%; padding: 30px 25px 24px; text-align: left; border: 1px solid #dfe2d8; border-radius: 12px; background: var(--ground-2); background: color-mix(in srgb, var(--template-color) 7%, var(--ground)); transition: border-color .2s; }
 .template-choice:hover, .template-choice:focus-visible { border-color: var(--line-strong); }
-.template-free { position: absolute; top: 10px; right: 10px; z-index: 1; padding: 3px 8px; border: 1px solid rgb(16 53 43 / .13); border-radius: 5px; background: var(--ground); color: var(--green); font-size: 12.5px; font-weight: 550; line-height: 1.4; }
-.template-new { position: absolute; top: 10px; left: 10px; z-index: 1; padding: 4px 8px; border-radius: 5px; background: var(--desk); color: var(--marigold); font-size: 12.5px; font-weight: 550; line-height: 1.4; }
+.template-free { position: absolute; top: 10px; right: 10px; z-index: 1; pointer-events: none; padding: 3px 8px; border: 1px solid rgb(16 53 43 / .13); border-radius: 5px; background: var(--ground); color: var(--green); font-size: 12.5px; font-weight: 550; line-height: 1.4; }
+.template-new { position: absolute; top: 10px; left: 10px; z-index: 1; pointer-events: none; padding: 4px 8px; border-radius: 5px; background: var(--desk); color: var(--marigold); font-size: 12.5px; font-weight: 550; line-height: 1.4; }
 .template-sheet { display: block; aspect-ratio: 210 / 297; overflow: hidden; border-radius: 4px; background: #fff; box-shadow: var(--shadow-sheet); outline: 1px solid rgb(11 40 32 / .06); transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out); }
 .template-sample { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; background: #fff; }
 .template-choice:hover .template-sheet, .template-choice:focus-visible .template-sheet { transform: translateY(-6px); box-shadow: var(--shadow-sheet-lift); }
 .template-use { position: absolute; left: 50%; bottom: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 14px; font-weight: 620; white-space: nowrap; opacity: 0; transform: translate(-50%, 8px); transition: opacity .25s, transform .4s var(--ease-out); pointer-events: none; }
-.template-choice:hover .template-use, .template-choice:focus-visible .template-use { opacity: 1; transform: translate(-50%, -6px); }
+.template-choice:hover ~ .template-use, .template-choice:focus-visible ~ .template-use { opacity: 1; transform: translate(-50%, -6px); }
 .template-card.selected .template-sheet { outline: 3px solid var(--green); outline-offset: 4px; }
 .template-card.selected .template-use { opacity: 1; transform: translate(-50%, 0); background: var(--green); }
 .template-meta { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 5px 10px; margin-top: 18px; }

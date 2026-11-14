@@ -7,7 +7,7 @@ for (const directory of ['templates', 'examples', 'cover-letters']) {
     if (!name.endsWith('.webp')) continue;
     const source = `public/${directory}/${name}`;
     const sourceInfo = await stat(source);
-    for (const width of [320, 640]) {
+    for (const width of [320, 480, 640]) {
       const file = `${target}/${name.slice(0, -5)}-${width}.webp`;
       const existing = await stat(file).catch(() => null);
       if (existing && existing.mtimeMs >= sourceInfo.mtimeMs) continue;
@@ -18,4 +18,4 @@ for (const directory of ['templates', 'examples', 'cover-letters']) {
     }
   }
 }
-console.log('Responsive CV previews ready (320px and 640px).');
+console.log('Responsive CV previews ready (320, 480 and 640px).');

@@ -17,7 +17,7 @@ export const siteOperator = {
 export const informationPages = [
   { path: "/about/", label: "About us", title: "About Folio & Its Developer", description: "Meet Muhammad Mubashar Shahzad, the frontend developer behind Folio. Learn about his experience, education, and the principles behind this free CV maker." },
   { path: "/contact/", label: "Contact", title: "Contact Folio — Support & Feedback", description: "Contact Folio’s maintainer for help with the CV maker, bug reports, writing-guide corrections, privacy questions, or feedback about the website." },
-  { path: "/editorial-policy/", label: "Editorial standards", title: "Editorial Standards & Corrections", description: "Learn how Folio approaches CV writing guides, fictional examples, sources, corrections, software assistance, and the separation of advertising from content." },
+  { path: "/editorial-policy/", label: "Editorial standards", title: "Editorial Standards & Corrections", description: "How Folio approaches CV writing guides, fictional examples, sources, corrections, software assistance, and the separation of advertising from content." },
   { path: "/privacy/", label: "Privacy", title: "Privacy — How Folio Handles Your CV", description: "Understand Folio’s on-device CV processing, optional browser drafts, contact emails, hosting requests, and current advertising and cookie practices." },
   { path: "/terms/", label: "Terms of use", title: "Terms of Use — Folio CV Maker", description: "Read the terms for using Folio’s free CV maker, templates, downloads, and writing guides, including your responsibilities and the limits of the service." },
 ] as const;

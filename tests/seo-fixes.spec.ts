@@ -16,7 +16,7 @@ test("mobile template cards load smaller responsive previews", async ({ page }) 
   await page.goto("/templates/");
   const image = page.locator(".template-sheet img").first();
   await image.scrollIntoViewIfNeeded();
-  await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/\/responsive\/.+-(320|640)\.webp/);
+  await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/\/responsive\/.+-(320|480|640)\.webp/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
 });
 

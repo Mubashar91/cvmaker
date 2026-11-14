@@ -50,7 +50,7 @@ export function HomeHero() {
         <div className="template-stamp" aria-hidden="true"><span>{templates.length}</span>ways to<br />tell your story<ArrowUpRight size={20} /></div>
         <div className={`sheet-fan${dealt ? " is-dealt" : ""}`}>
           {FAN.map((id, index) => { const s = slot(index); return <button key={id} className="fan-sheet" data-front={s === 0 || undefined} aria-label={`Preview ${templateById(id).name} template`} aria-pressed={s === 0} style={{ "--slot": s, "--depth": Math.abs(s) } as CSSProperties} onClick={() => setFront(id)}>
-            <MiniCV template={id} large={s === 0} alt={s === 0 ? `Example CV in the ${templateById(id).name} template` : ""} />
+            <MiniCV template={id} large={s === 0} alt={`Example CV in the ${templateById(id).name} template`} decorative sizes="(max-width: 640px) min(232px, 56vw), (max-width: 980px) min(286px, 44vw), min(286px, 24vw)" />
           </button>; })}
         </div>
         <div className="desk-assurance"><span className="assurance-icon"><ShieldCheck size={21} strokeWidth={1.6} /></span><span><strong>All yours. Always free.</strong><small>No watermark. No compromises.</small></span><Check size={16} /></div>

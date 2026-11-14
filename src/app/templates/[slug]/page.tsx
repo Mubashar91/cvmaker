@@ -10,7 +10,7 @@ import { templates } from "@/lib/model";
 import { noindexTemplates, templateDetails } from "@/lib/template-details";
 import { templateContent } from "@/lib/template-content";
 import { collectionPath, templateCollections } from "@/lib/template-collections";
-import { templatePreview } from "@/lib/previews";
+import { DETAIL_PREVIEW_SIZES, previewSrcSet, templatePreview } from "@/lib/previews";
 import { templateSchema } from "@/lib/structured-data";
 import { cvExamples } from "@/lib/cv-examples";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
@@ -50,7 +50,7 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
         <StartCVButton template={template.id} className="button accent large">Use the {template.name} template</StartCVButton>
         <span className="template-detail-privacy"><LockKeyhole size={14} />Free PDF and Word download. No sign-up.</span>
       </div>
-      <figure className="template-detail-example"><img src={templatePreview(template.id)} alt={`${template.name} CV template example with ${details.features[0].toLowerCase()}`} width={953} height={1348} fetchPriority="high" /><figcaption>Fictional example · A4 PDF · your CV starts blank</figcaption></figure>
+      <figure className="template-detail-example"><img src={templatePreview(template.id)} srcSet={previewSrcSet(templatePreview(template.id))} sizes={DETAIL_PREVIEW_SIZES} alt={`${template.name} CV template example with ${details.features[0].toLowerCase()}`} width={953} height={1348} fetchPriority="high" /><figcaption>Fictional example · A4 PDF · your CV starts blank</figcaption></figure>
     </div></section>
 
     <section className="section template-detail-information"><div className="container info-grid">
@@ -70,7 +70,7 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
 
     <section className="section related-templates"><div className="container">
       <div className="section-head"><div><h2>Compare a few more styles.</h2></div><Link className="text-link" href="/templates/">View all {templates.length} templates <ArrowUpRight size={15} /></Link></div>
-      <div className="related-template-grid">{other.map(t => <Link key={t.id} href={`/templates/${t.id}/`} className="related-template"><span className="template-sheet"><img src={templatePreview(t.id)} alt="" width={953} height={1348} loading="lazy" /></span><span className="related-name">{t.name} <ArrowUpRight size={17} /></span><span className="template-note">{t.note}</span></Link>)}</div>
+      <div className="related-template-grid">{other.map(t => <Link key={t.id} href={`/templates/${t.id}/`} className="related-template"><span className="template-sheet"><img src={templatePreview(t.id)} srcSet={previewSrcSet(templatePreview(t.id))} sizes="(max-width: 640px) 45vw, 380px" alt={`${t.name} CV template preview`} width={953} height={1348} loading="lazy" decoding="async" /></span><span className="related-name">{t.name} <ArrowUpRight size={17} /></span><span className="template-note">{t.note}</span></Link>)}</div>
     </div></section>
 
     {relatedCollections.length + examplesHere.length > 0 && <section className="section collection-section"><div className="container">

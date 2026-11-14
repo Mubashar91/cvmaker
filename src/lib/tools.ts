@@ -5,7 +5,7 @@ export const tools = [
   {
     path: "/cover-letter-maker/", name: "Cover letter maker", icon: "mail",
     title: "Free AI Cover Letter Generator & Maker — No Sign-Up",
-    description: "Create a cover letter online for free: professional templates, an optional AI draft written from your details, and a PDF download with no sign-up or watermark.",
+    description: "Create a cover letter online for free: professional templates, an optional AI draft written from your details, and a PDF download. No sign-up or watermark.",
     summary: "Turn your details into a tailored letter, edit every line, then copy, print, or download it as a PDF.",
   },
   {
@@ -28,20 +28,20 @@ export const tools = [
   },
   {
     path: "/resume-objective-generator/", name: "Resume objective generator", icon: "target",
-    title: "Free Resume Objective Generator for Students & First Jobs",
+    title: "Free Resume Objective Generator for Students",
     description: "Write a resume objective for an internship, first job, or career change. Combine your details with clear sentence patterns, then edit the result. Free.",
     summary: "Write a short career objective for an internship, a first job, or a change of direction.",
   },
   {
     path: "/resume-bullet-point-generator/", name: "Resume bullet point builder", icon: "list",
     title: "Free Resume Bullet Point Generator — No Sign-Up",
-    description: "Build resume bullet points from your own actions, tasks, and results. Edit and copy each line for work, projects, or volunteering. Free, with no sign-up or AI.",
+    description: "Build resume bullet points from your own actions, tasks, and results. Edit and copy each line for work, projects, or volunteering. Free, no sign-up or AI.",
     summary: "Turn an action, a task, and an optional result into an editable CV bullet point using your own facts.",
   },
   {
     path: "/resume-skills/", name: "Skills for your resume", icon: "list",
     title: `Skills to Put on a Resume — Free Ideas for ${professions.length} Jobs`,
-    description: `Find skills to put on your resume for ${professions.length} jobs, from software developer to nurse. Choose hard skills, tools, and strengths, then add them to your CV for free.`,
+    description: `Find skills to put on your resume for ${professions.length} jobs, from software developer to nurse. Pick hard skills, tools, and strengths and add them to your CV for free.`,
     summary: `Browse common skills, tools, and strengths for ${professions.length} jobs and add the ones that fit to your CV.`,
   },
 ] as const;
@@ -67,6 +67,6 @@ export const studentPage = {
 
 export const noExperiencePage = {
   path: "/cv-with-no-experience/", label: "CV with no experience",
-  title: "Free Resume Builder With No Experience — First Job CV",
-  description: "Create a CV with no work experience for free. Use projects, volunteering, and everyday responsibilities to show your skills, then download a PDF without sign-up.",
+  title: "Free No-Experience Resume Builder — First Job CV",
+  description: "Create a CV with no work experience for free. Use projects, volunteering, and responsibilities to show your skills, then download a PDF without sign-up.",
 };

@@ -2,7 +2,7 @@
 const baseline = "2026-11-11";
 const changes: Record<string, string> = {
   "/": "2026-11-12",
-  "/templates/": "2026-11-12",
+  "/templates/": "2026-11-14",
   "/templates/category/student/": "2026-11-12",
   "/tips/uk-cv-format/": "2026-11-12",
   "/tips/common-cv-mistakes/": "2026-11-12",

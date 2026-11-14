@@ -9,7 +9,7 @@ import { UseExampleButton } from "@/components/use-example-button";
 import { cvExample, cvExamples, exampleCV, relatedExamples } from "@/lib/cv-examples";
 import { templateById, templates } from "@/lib/model";
 import { templateDetails } from "@/lib/template-details";
-import { examplePreview } from "@/lib/previews";
+import { DETAIL_PREVIEW_SIZES, examplePreview, previewSrcSet } from "@/lib/previews";
 import { tips } from "@/lib/tips";
 import { siteOperator } from "@/lib/site-info";
 import { breadcrumbSchema, CONTENT_UPDATED, CONTENT_UPDATED_LABEL, pageMetadata } from "@/lib/seo";
@@ -47,7 +47,7 @@ export default async function CVExamplePage({ params }: { params: Promise<{ slug
         <UseExampleButton cv={exampleCV(example)}>Edit this example</UseExampleButton>
         <span className="template-detail-privacy"><LockKeyhole size={14} />Opens in the free editor. Replace every detail with your own.</span>
       </div>
-      <figure className="template-detail-example"><img src={examplePreview(slug)} alt={`${example.job} CV example in the ${template.name} template, showing a profile, work experience, education, and skills`} width={953} height={1348} fetchPriority="high" /><figcaption>Fictional person and employers · A4 PDF</figcaption></figure>
+      <figure className="template-detail-example"><img src={examplePreview(slug)} srcSet={previewSrcSet(examplePreview(slug))} sizes={DETAIL_PREVIEW_SIZES} alt={`${example.job} CV example in the ${template.name} template, showing a profile, work experience, education, and skills`} width={953} height={1348} fetchPriority="high" /><figcaption>Fictional person and employers · A4 PDF</figcaption></figure>
     </div></section>
     <div className="guide-layout container section">
       <nav className="guide-toc" aria-label="On this page"><h2>On this page</h2>{sections.map(section => <a key={section.id} href={`#${section.id}`}>{section.heading}</a>)}</nav>

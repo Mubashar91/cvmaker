@@ -5,7 +5,7 @@ export const careerBlogGuides: Guide[] = [
   {
     slug: "high-school-student-resume", title: "A first resume for high school students: what to include", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.schoolResume, sources.skills],
-    seoTitle: "High School Student Resume With No Experience: Free Guide",
+    seoTitle: "High School Student Resume With No Experience",
     description: "Build a high school student resume using education, activities, volunteering, and practical skills. Includes a fictional entry and free template guidance.",
     category: "Students & first applications",
     intro: "An empty work-history section is a layout problem, not proof that you have nothing to write. Build your first school resume around education and a few responsibilities you can explain. This guide shows a realistic section order and how to turn one activity into an entry.",
@@ -51,7 +51,7 @@ export const careerBlogGuides: Guide[] = [
     slug: "fresh-graduate-cv-checklist", title: "A fresh graduate CV checklist: turn your degree into evidence", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.harvardTemplate, sources.lseCV],
     seoTitle: "Fresh Graduate CV Format and Application Checklist",
-    description: "Organise a fresh graduate CV around your degree, dissertation, placements, projects, and practical skills. Includes a fictional project entry and review checklist.",
+    description: "Organise a fresh graduate CV around your degree, dissertation, placements, projects, and skills. Includes a fictional project entry and a review checklist.",
     category: "Students & first applications",
     intro: "Two graduates with the same degree can bring very different experience. Use your CV to show the project, placement, or responsibility that makes you relevant to this vacancy. The selection exercise below helps you choose what deserves space and what can stay in your working notes.",
     quickAnswer: "Put the strongest relevant evidence first: usually education and projects for a new graduate, or a directly relevant placement when you have one. Select modules, explain your own project contribution, and keep completion status accurate. Use part-time work where it adds evidence rather than treating a different job title as irrelevant.",
@@ -94,7 +94,7 @@ export const careerBlogGuides: Guide[] = [
   {
     slug: "software-engineer-resume-projects", title: "How to describe projects on a software engineer resume", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.softwareRole, sources.mitResume],
-    seoTitle: "Software Engineer Resume Projects: Examples and Free Template",
+    seoTitle: "Software Engineer Resume Projects: Examples",
     description: "Write software project entries that explain your contribution, technical choices, testing, and limits. Includes fictional examples and a free editable CV.",
     category: "CVs by profession",
     intro: "React, Node.js, and PostgreSQL tell a reader which tools you named, not what you built. A useful software project entry explains the problem, your implementation, and a check or trade-off you can discuss. Use the worked revision below to move beyond a stack list.",
@@ -138,7 +138,7 @@ export const careerBlogGuides: Guide[] = [
   {
     slug: "teacher-cv-personal-statement", title: "How to write a teacher CV personal statement", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.teacherRole, sources.supportingStatement],
-    seoTitle: "Teacher CV Personal Statement: Examples and Free Template",
+    seoTitle: "Teacher CV Personal Statement: Examples & Template",
     description: "Write a focused teacher CV profile using your subject, teaching context, and classroom evidence. Includes fictional early-career and experienced examples.",
     category: "CVs by profession",
     intro: "Passionate about teaching gives a school little evidence of your classroom work. A short teacher CV profile can do more by naming your teaching context and one specific practice. Use it to introduce the application, then answer any requested supporting statement separately.",
@@ -182,7 +182,7 @@ export const careerBlogGuides: Guide[] = [
   {
     slug: "customer-service-resume-skills", title: "Customer service resume skills: show what happened", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.serviceRole, sources.harvardTemplate],
-    seoTitle: "Customer Service Resume Skills and Bullet Point Examples",
+    seoTitle: "Customer Service Resume Skills and Bullet Examples",
     description: "Show customer service skills through real query handling, records, tools, and escalation examples. Includes fictional bullets and a free editable resume.",
     category: "CVs by profession",
     intro: "A customer service CV should show how you handled a query, recorded the next step, or passed a problem to the right person. A list of patience and communication cannot show that on its own. Use the examples below to describe your service work without disclosing customer details.",
@@ -226,7 +226,7 @@ export const careerBlogGuides: Guide[] = [
   {
     slug: "data-analyst-resume-projects", title: "Data analyst resume projects: explain the question and the result", published: "2026-11-09",
     sourcesChecked: BLOG_SOURCES_CHECKED, sources: [sources.dataRole, sources.mitResume],
-    seoTitle: "Data Analyst Resume Projects: Examples and Free Template",
+    seoTitle: "Data Analyst Resume Projects: Examples & Template",
     description: "Describe data analyst projects with the question, dataset, cleaning, analysis, validation, and limits. Includes a fictional entry and free resume example.",
     category: "CVs by profession",
     intro: "A dashboard screenshot cannot explain whether an analysis is trustworthy. A useful project entry names the question, the data preparation, and a check on the result. The worked example below shows how to describe an analytical contribution without inventing business impact.",
